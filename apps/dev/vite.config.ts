@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-const coreSrc = resolve(import.meta.dirname, "../../packages/core/src");
+const coreSrc = resolve(import.meta.dirname, "../../packages/dotmatrix/src");
 
 export default defineConfig({
   plugins: [react()],
@@ -10,9 +10,9 @@ export default defineConfig({
     alias: {
       // Point at source, not dist: the sandbox gets HMR straight from the
       // library without a rebuild step in between.
-      "@dotmatrix/core": resolve(coreSrc, "index.ts"),
-      "@dotmatrix/styles": resolve(coreSrc, "styles"),
-      "@dotmatrix/tokens": resolve(coreSrc, "tokens"),
+      "@nmmty/dotmatrix": resolve(coreSrc, "index.ts"),
+      "@nmmty/styles": resolve(coreSrc, "styles"),
+      "@nmmty/tokens": resolve(coreSrc, "tokens"),
     },
   },
   css: {

@@ -4,6 +4,6 @@
 // Explicit (unused) namespaces — Sass derives a default namespace from the
 // filename, and both partials happen to be named index.scss, which collides
 // without this.
-@use "@dotmatrix/tokens/index.scss" as tokens;
-@use "@dotmatrix/styles/global.scss" as global;
-@use "@dotmatrix/styles/index.scss" as utilities;
+@use "@nmmty/tokens/index.scss" as tokens;
+@use "@nmmty/styles/global.scss" as global;
+@use "@nmmty/styles/index.scss" as utilities;

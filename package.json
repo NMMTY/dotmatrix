@@ -7,8 +7,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "pnpm --filter @dotmatrix/dev dev",
-    "build": "pnpm --filter @dotmatrix/core build",
+    "dev": "pnpm --filter @nmmty/dev dev",
+    "build": "pnpm --filter @nmmty/dotmatrix build",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "lint": "biome check .",

@@ -2,6 +2,7 @@ node_modules/
 dist/
 .next/
 out/
+.generated/
 coverage/
 *.tsbuildinfo
 .DS_Store
@@ -10,3 +11,4 @@ test-results/
 playwright-report/
 .env
 .env.local
+.idea

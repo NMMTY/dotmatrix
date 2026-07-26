@@ -6,9 +6,16 @@
     "baseUrl": ".",
     "paths": {
       // Mirrors the source alias in vite.config.ts: the sandbox type-checks
-      // and hot-reloads against @dotmatrix/core's source directly, not dist/.
-      "@dotmatrix/core": ["../../packages/core/src/index.ts"]
+      // and hot-reloads against @nmmty/dotmatrix's source directly, not dist/.
+      "@nmmty/dotmatrix": ["../../packages/dotmatrix/src/index.ts"]
     }
   },
-  "include": ["src", "vite.config.ts"]
+  "include": [
+    "src",
+    "vite.config.ts",
+    // Ambient module declarations aren't pulled in through the path-alias
+    // import graph the way real types are — TS only loads a global-script
+    // .d.ts (no import/export of its own) if it's directly `include`d.
+    "../../packages/dotmatrix/src/components/CodeBlock/prismjs-components.d.ts"
+  ]
 }

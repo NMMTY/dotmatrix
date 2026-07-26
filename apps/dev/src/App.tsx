@@ -8,6 +8,7 @@ import {
   Card,
   Checkbox,
   Chip,
+  CodeBlock,
   ColorInput,
   Column,
   ContextMenu,
@@ -65,7 +66,7 @@ import {
   Tooltip,
   useTheme,
   useToast,
-} from "@dotmatrix/core";
+} from "@nmmty/dotmatrix";
 import { useState } from "react";
 
 // A self-contained SVG data URI (no network fetch, deterministic) used to
@@ -101,7 +102,24 @@ function ThemeControls() {
         size="s"
         variant="outline"
         onClick={() => {
-          const order: Palette[] = ["mono", "orange", "blue", "green", "purple", "red"];
+          const order: Palette[] = [
+            "mono",
+            "orange",
+            "orange-dark",
+            "orange-light",
+            "blue",
+            "blue-dark",
+            "blue-light",
+            "green",
+            "green-dark",
+            "green-light",
+            "purple",
+            "purple-dark",
+            "purple-light",
+            "red",
+            "red-dark",
+            "red-light",
+          ];
           setPalette(order[(order.indexOf(palette) + 1) % order.length]!);
         }}
       >
@@ -293,6 +311,7 @@ function BudgetCard() {
       <Text fontSize="s" color="weak">
         You're getting close to your limit. Consider slowing down spending.
       </Text>
+      <Meter value={spent} max={limit} segments={60} variant="led" label="Budget spent (LED)" />
     </Card>
   );
 }
@@ -374,11 +393,15 @@ function FormsShowcase() {
           description="This won't be shown if there's an error."
         />
         <Textarea label="Bio" description="A couple of sentences about you." rows={3} />
-        <Select label="Country" defaultValue="fr">
-          <option value="us">United States</option>
-          <option value="fr">France</option>
-          <option value="jp">Japan</option>
-        </Select>
+        <Select
+          label="Country"
+          defaultValue="fr"
+          options={[
+            { value: "us", label: "United States" },
+            { value: "fr", label: "France" },
+            { value: "jp", label: "Japan" },
+          ]}
+        />
         <SearchInput
           label="Search"
           placeholder="Find a component…"
@@ -576,7 +599,7 @@ function OverlaysShowcase() {
           Accordion
         </Text>
         <Accordion defaultValue="a">
-          <AccordionItem value="a" title="What is @dotmatrix?">
+          <AccordionItem value="a" title="What is dotmatrix?">
             <Text fontSize="s" color="weak">
               A monochrome bitmap design system.
             </Text>
@@ -768,7 +791,7 @@ function App() {
         >
           <Row justifyContent="between" alignItems="center" wrap="wrap" gap="16">
             <Heading as="h1" displaySize="s">
-              @dotmatrix
+              dotmatrix
             </Heading>
             <ThemeControls />
           </Row>
@@ -827,6 +850,43 @@ function App() {
 
           <Section title="Components">
             <ComponentsShowcase />
+          </Section>
+
+          <Section title="Code block">
+            <Column gap="24">
+              <CodeBlock
+                copyButton
+                lineNumbers
+                fullscreenButton
+                preview={
+                  <Button variant="solid" icon="download">
+                    Download
+                  </Button>
+                }
+                codes={[
+                  {
+                    label: "Button.tsx",
+                    language: "tsx",
+                    code: '<Button variant="solid" icon="download">\n  Download\n</Button>',
+                  },
+                  {
+                    label: "install",
+                    language: "bash",
+                    code: "npm install @nmmty/dotmatrix",
+                  },
+                ]}
+              />
+              <CodeBlock
+                isCollapsible
+                maxLines={4}
+                codes={[
+                  {
+                    language: "json",
+                    code: '{\n  "name": "@nmmty/dotmatrix",\n  "version": "0.0.0",\n  "license": "MIT",\n  "type": "module"\n}',
+                  },
+                ]}
+              />
+            </Column>
           </Section>
 
           <Section title="Bitmap graphics">
