@@ -1,0 +1,38 @@
+@use "../_order";
+@use "../_overlay-surface" as overlay;
+
+@layer dm.components {
+  .menu {
+    @include overlay.surface;
+    z-index: var(--dm-z-overlay);
+    min-width: 160px;
+    padding: var(--dm-space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--dm-space-2);
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: var(--dm-space-8);
+    height: var(--dm-control-height-m);
+    padding-inline: var(--dm-space-8);
+    border-radius: var(--dm-radius-control);
+    background: transparent;
+    color: var(--dm-on-background-strong);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    text-align: left;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  .active:not(:disabled) {
+    background: var(--dm-surface-raised);
+  }
+}

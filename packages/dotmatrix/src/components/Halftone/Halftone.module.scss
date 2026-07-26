@@ -1,0 +1,14 @@
+@use "../_order";
+
+@layer dm.components {
+  .canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  .fallback {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

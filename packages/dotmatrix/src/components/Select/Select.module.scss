@@ -1,0 +1,52 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+
+@layer dm.components {
+  .trigger {
+    @include surface.surface;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--dm-space-8);
+    cursor: pointer;
+    text-align: left;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .s {
+    height: var(--dm-control-height-s);
+    padding-inline: var(--dm-space-8);
+    font-size: var(--dm-font-size-2xs);
+  }
+  .m {
+    height: var(--dm-control-height-m);
+    padding-inline: var(--dm-control-padding-x);
+  }
+  .l {
+    height: var(--dm-control-height-l);
+    padding-inline: var(--dm-space-16);
+    font-size: var(--dm-font-size-m);
+  }
+
+  .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .placeholder {
+    color: var(--dm-on-background-weak);
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    color: var(--dm-on-background-weak);
+  }
+
+  .checkmark {
+    flex-shrink: 0;
+  }
+}

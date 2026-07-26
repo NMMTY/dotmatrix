@@ -1,0 +1,16 @@
+@use "../_order";
+
+@layer dm.components {
+  .tooltip {
+    z-index: var(--dm-z-overlay);
+    max-width: 240px;
+    padding: var(--dm-space-4) var(--dm-space-8);
+    border-radius: var(--dm-radius-control);
+    background: var(--dm-solid-background);
+    color: var(--dm-on-solid-strong);
+    box-shadow: var(--dm-shadow-s);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-xs);
+    pointer-events: none;
+  }
+}

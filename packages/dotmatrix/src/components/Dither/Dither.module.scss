@@ -1,0 +1,19 @@
+@use "../_order";
+
+@layer dm.components {
+  .canvas {
+    display: block;
+    max-width: 100%;
+    // The canvas's actual pixel buffer is drawn at the downsampled
+    // (post-pixelSize) resolution and stretched up via CSS width/height —
+    // `pixelated` is what turns that stretch into hard blocky edges instead
+    // of a blurry smoothed scale.
+    image-rendering: pixelated;
+  }
+
+  .fallback {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

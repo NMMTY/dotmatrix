@@ -1,0 +1,6 @@
+// Declares the cascade order once, up front — this is what lets a prop beat
+// a component's own stylesheet regardless of bundler file-injection order
+// (dev and prod otherwise resolve conflicts differently). Anything a
+// consumer writes outside these layers wins automatically, no specificity
+// tricks needed.
+@layer dm.tokens, dm.global, dm.components, dm.utilities;

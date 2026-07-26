@@ -1,0 +1,12 @@
+@use "../_order";
+
+// dm.components sits below dm.utilities in the cascade (tokens/_layers.scss),
+// so an explicit `display` prop always beats this default regardless of
+// source order — unlike a bare utility class, which would depend on load
+// order and could lose to this rule by accident.
+@layer dm.components {
+  .text {
+    display: inline;
+    min-width: 0;
+  }
+}

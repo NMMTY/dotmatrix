@@ -1,0 +1,171 @@
+// Raw color. The gray ramp (from scale.$gray) has no semantic meaning on
+// its own — theme.scss maps it onto roles. The accent ramp below is the
+// same story one level up: `mono` (the default — accent ramp = gray ramp,
+// so components can reference --dm-accent-* unconditionally and stay
+// monochrome) plus five chromatic hues, each with a vivid base plus a
+// deeper `-dark` and a softer, pastel `-light` variant, selectable via
+// `data-palette` globally (ThemeProvider) or on any single element (a
+// component's own `palette` prop).
+@use "scale";
+
+@layer dm.tokens {
+  :root {
+    @each $key, $value in scale.$gray {
+      --dm-gray-#{$key}: #{$value};
+    }
+  }
+
+  // Zero specificity so a bare `[data-palette="..."]` below always wins,
+  // whether that attribute lands on `<html>` (global) or some inner element
+  // (local) — see theme.scss's matching comment on the same trick.
+  :where(:root) {
+    --dm-accent-100: var(--dm-gray-100);
+    --dm-accent-300: var(--dm-gray-300);
+    --dm-accent-500: var(--dm-gray-500);
+    --dm-accent-700: var(--dm-gray-700);
+    --dm-accent-900: var(--dm-gray-900);
+    --dm-on-accent-strong: var(--dm-on-background-strong);
+  }
+
+  [data-palette="orange"] {
+    --dm-accent-100: #1a0f00;
+    --dm-accent-300: #4d2b00;
+    --dm-accent-500: #ff6a00;
+    --dm-accent-700: #ff9d4d;
+    --dm-accent-900: #ffd9b3;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="blue"] {
+    --dm-accent-100: #0a1128;
+    --dm-accent-300: #1e3a8a;
+    --dm-accent-500: #3b82f6;
+    --dm-accent-700: #93c5fd;
+    --dm-accent-900: #dbeafe;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="green"] {
+    --dm-accent-100: #06210f;
+    --dm-accent-300: #14532d;
+    --dm-accent-500: #22c55e;
+    --dm-accent-700: #86efac;
+    --dm-accent-900: #dcfce7;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="purple"] {
+    --dm-accent-100: #1e0a2e;
+    --dm-accent-300: #6b21a8;
+    --dm-accent-500: #a855f7;
+    --dm-accent-700: #d8b4fe;
+    --dm-accent-900: #f3e8ff;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="red"] {
+    --dm-accent-100: #2a0a0a;
+    --dm-accent-300: #7f1d1d;
+    --dm-accent-500: #ef4444;
+    --dm-accent-700: #fca5a5;
+    --dm-accent-900: #fee2e2;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  // -dark: same hue, lower lightness/saturation throughout — a deeper,
+  // moodier accent. 500 stays dark enough that white text on it (the
+  // `-on-accent-strong` used for solid buttons/checked controls) holds
+  // contrast.
+  [data-palette="orange-dark"] {
+    --dm-accent-100: #1d0d02;
+    --dm-accent-300: #4e2304;
+    --dm-accent-500: #914108;
+    --dm-accent-700: #cb5b0b;
+    --dm-accent-900: #f48434;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="blue-dark"] {
+    --dm-accent-100: #030c1c;
+    --dm-accent-300: #07214a;
+    --dm-accent-500: #0e3e8b;
+    --dm-accent-700: #1357c3;
+    --dm-accent-900: #3c7fec;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="green-dark"] {
+    --dm-accent-100: #06190d;
+    --dm-accent-300: #0f4322;
+    --dm-accent-500: #1c7d3f;
+    --dm-accent-700: #27b059;
+    --dm-accent-900: #4fd882;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="purple-dark"] {
+    --dm-accent-100: #10031c;
+    --dm-accent-300: #2a074a;
+    --dm-accent-500: #4f0e8b;
+    --dm-accent-700: #6e13c3;
+    --dm-accent-900: #973cec;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  [data-palette="red-dark"] {
+    --dm-accent-100: #1b0404;
+    --dm-accent-300: #480a0a;
+    --dm-accent-500: #861313;
+    --dm-accent-700: #bc1a1a;
+    --dm-accent-900: #e54343;
+    --dm-on-accent-strong: #ffffff;
+  }
+
+  // -light: same hue, desaturated and lifted toward white — a pastel
+  // accent. 500 is light enough that white text loses contrast, so these
+  // flip `-on-accent-strong` to a dark neutral instead.
+  [data-palette="orange-light"] {
+    --dm-accent-100: #54331c;
+    --dm-accent-300: #915930;
+    --dm-accent-500: #d4a17d;
+    --dm-accent-700: #e8cdba;
+    --dm-accent-900: #f7eee8;
+    --dm-on-accent-strong: #1a1a1a;
+  }
+
+  [data-palette="blue-light"] {
+    --dm-accent-100: #1f3252;
+    --dm-accent-300: #35578d;
+    --dm-accent-500: #819fd0;
+    --dm-accent-700: #bccce6;
+    --dm-accent-900: #e9eef7;
+    --dm-on-accent-strong: #1a1a1a;
+  }
+
+  [data-palette="green-light"] {
+    --dm-accent-100: #244c33;
+    --dm-accent-300: #3f8358;
+    --dm-accent-500: #8ac7a0;
+    --dm-accent-700: #c1e1cd;
+    --dm-accent-900: #eaf5ee;
+    --dm-on-accent-strong: #1a1a1a;
+  }
+
+  [data-palette="purple-light"] {
+    --dm-accent-100: #391f52;
+    --dm-accent-300: #62358d;
+    --dm-accent-500: #aa81d0;
+    --dm-accent-700: #d2bce6;
+    --dm-accent-900: #f0e9f7;
+    --dm-on-accent-strong: #1a1a1a;
+  }
+
+  [data-palette="red-light"] {
+    --dm-accent-100: #502121;
+    --dm-accent-300: #8a3838;
+    --dm-accent-500: #cd8484;
+    --dm-accent-700: #e4bebe;
+    --dm-accent-900: #f6e9e9;
+    --dm-on-accent-strong: #1a1a1a;
+  }
+}

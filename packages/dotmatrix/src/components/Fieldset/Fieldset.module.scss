@@ -1,0 +1,23 @@
+@use "../_order";
+
+@layer dm.components {
+  // Default border/margin/padding are already zeroed by the global reset's
+  // universal selector (styles/global.scss) — this only adds what a
+  // <fieldset>/<legend> needs beyond that baseline.
+  .fieldset {
+    display: block;
+  }
+
+  .legend {
+    display: block;
+    margin-bottom: var(--dm-space-12);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-m);
+    font-weight: var(--dm-weight-medium);
+    color: var(--dm-on-background-strong);
+  }
+
+  .fieldset:disabled .legend {
+    opacity: 0.6;
+  }
+}

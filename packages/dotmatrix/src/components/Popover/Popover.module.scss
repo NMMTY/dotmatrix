@@ -1,0 +1,11 @@
+@use "../_order";
+@use "../_overlay-surface" as overlay;
+
+@layer dm.components {
+  .popover {
+    @include overlay.surface;
+    z-index: var(--dm-z-overlay);
+    min-width: 200px;
+    padding: var(--dm-space-16);
+  }
+}

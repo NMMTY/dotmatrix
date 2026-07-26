@@ -1,0 +1,39 @@
+@use "../_order";
+@use "../_button-variants" as v;
+
+@layer dm.components {
+  .base {
+    @include v.base;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .s {
+    height: var(--dm-control-height-s);
+    padding-inline: var(--dm-space-8);
+    gap: var(--dm-space-4);
+    font-size: var(--dm-font-size-2xs);
+  }
+  .m {
+    height: var(--dm-control-height-m);
+    padding-inline: var(--dm-control-padding-x);
+    gap: var(--dm-space-8);
+    font-size: var(--dm-font-size-s);
+  }
+  .l {
+    height: var(--dm-control-height-l);
+    padding-inline: var(--dm-space-24);
+    gap: var(--dm-space-8);
+    font-size: var(--dm-font-size-m);
+  }
+
+  .solid {
+    @include v.solid;
+  }
+  .outline {
+    @include v.outline;
+  }
+  .ghost {
+    @include v.ghost;
+  }
+}

@@ -1,0 +1,21 @@
+@use "mixins";
+@use "../tokens/scale";
+
+$positions: (static, relative, absolute, fixed, sticky);
+
+$inset: scale.spacing-scale(
+  (
+    "auto": auto,
+    "full": 100%,
+  )
+);
+
+@layer dm.utilities {
+  @include mixins.emit-keyword("position", "position", $positions, $responsive: true);
+  @include mixins.emit-scale("inset", "inset", $inset);
+  @include mixins.emit-scale("top", "top", $inset);
+  @include mixins.emit-scale("right", "right", $inset);
+  @include mixins.emit-scale("bottom", "bottom", $inset);
+  @include mixins.emit-scale("left", "left", $inset);
+  @include mixins.emit-scale("z", "z-index", scale.$z-index);
+}

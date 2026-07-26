@@ -1,0 +1,22 @@
+@use "../_order";
+
+// Component-specific rules live in the dm.components layer, which sits below
+// dm.utilities in the cascade (see tokens/_layers.scss) — so a prop like
+// `background="solid"` on <Line> always beats the default set here.
+@layer dm.components {
+  .line {
+    flex-shrink: 0;
+    background-color: var(--dm-border-medium);
+  }
+
+  .horizontal {
+    width: 100%;
+    height: var(--dm-border-width-1);
+  }
+
+  .vertical {
+    width: var(--dm-border-width-1);
+    height: 100%;
+    align-self: stretch;
+  }
+}

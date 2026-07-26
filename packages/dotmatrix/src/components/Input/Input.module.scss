@@ -1,0 +1,34 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+@use "../_field-icon" as field-icon;
+
+@layer dm.components {
+  .wrapper {
+    @include field-icon.wrapper;
+  }
+
+  .icon {
+    @include field-icon.leading;
+  }
+
+  .input {
+    @include surface.surface;
+  }
+
+  .s {
+    @include surface.size-s;
+  }
+  .m {
+    @include surface.size-m;
+  }
+  .l {
+    @include surface.size-l;
+  }
+
+  // Declared after .s/.m/.l: `padding-inline` there sets padding-left too,
+  // and same-specificity same-property wins go to whichever's declared
+  // later — so this order is load-bearing, not incidental.
+  .withIcon {
+    padding-left: var(--dm-space-32);
+  }
+}

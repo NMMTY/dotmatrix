@@ -1,0 +1,12 @@
+@use "../_order";
+
+// dm.components sits below dm.utilities in the cascade (tokens/_layers.scss),
+// so `display`/`direction` props always win regardless of file load order —
+// unlike a bare utility class, which would only win by accident of which
+// styles/*.scss file happened to load later.
+@layer dm.components {
+  .flex {
+    display: flex;
+    min-width: 0;
+  }
+}

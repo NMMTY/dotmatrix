@@ -1,0 +1,118 @@
+// Generic emitters the per-family files (spacing, size, flex, ...) call into.
+// Every style prop is one of: a single CSS property driven by a scale
+// (`gap="16"`), a per-side property (`padding="16"`/`paddingTop="8"`), or a
+// keyword scale (`direction`) — these mixins cover all of it, so adding a
+// new prop is a one-line job, not a new file.
+@use "sass:map";
+@use "../tokens/scale";
+
+// Breakpoints largest-first: with plain classes at equal specificity, the
+// last matching rule in source order wins, and at a narrow viewport every
+// larger max-width query matches too. Iterating the map in its declared
+// (large-to-small) order means xs is emitted last and correctly overrides
+// s/m/l/xl at the narrowest widths.
+@mixin _responsive-pass($prefix) {
+  @each $bp, $bp-max in scale.$breakpoints {
+    @media (max-width: $bp-max) {
+      @content ($bp);
+    }
+  }
+}
+
+// `.dm-{prefix}-{key} { prop: value }`, optionally repeated per breakpoint as
+// `.dm-{bp}-{prefix}-{key}`. Use for single-value props: gap, width, z-index.
+@mixin emit-scale($prefix, $property, $map, $responsive: false) {
+  @each $key, $value in $map {
+    .dm-#{$prefix}-#{$key} {
+      #{$property}: $value;
+    }
+  }
+  @if $responsive {
+    @include _responsive-pass($prefix) using ($bp) {
+      @each $key, $value in $map {
+        .dm-#{$bp}-#{$prefix}-#{$key} {
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+}
+
+// Two properties driven by two maps sharing the same keys — for a prop
+// whose value implies more than one CSS property together. `displaySize` is
+// the motivating case: font-size alone, leaving line-height ambient, looks
+// fine small but visibly overlaps the line above at larger sizes (confirmed
+// live on a Stat). `$map-a` is the source of truth for which keys exist.
+@mixin emit-scale-pair($prefix, $property-a, $map-a, $property-b, $map-b, $responsive: false) {
+  @each $key, $value in $map-a {
+    .dm-#{$prefix}-#{$key} {
+      #{$property-a}: $value;
+      #{$property-b}: map.get($map-b, $key);
+    }
+  }
+  @if $responsive {
+    @include _responsive-pass($prefix) using ($bp) {
+      @each $key, $value in $map-a {
+        .dm-#{$bp}-#{$prefix}-#{$key} {
+          #{$property-a}: $value;
+          #{$property-b}: map.get($map-b, $key);
+        }
+      }
+    }
+  }
+}
+
+// Same, but the map holds bare keywords rather than lengths: `.dm-direction-row`.
+@mixin emit-keyword($prefix, $property, $keywords, $responsive: false) {
+  @each $keyword in $keywords {
+    .dm-#{$prefix}-#{$keyword} {
+      #{$property}: $keyword;
+    }
+  }
+  @if $responsive {
+    @include _responsive-pass($prefix) using ($bp) {
+      @each $keyword in $keywords {
+        .dm-#{$bp}-#{$prefix}-#{$keyword} {
+          #{$property}: $keyword;
+        }
+      }
+    }
+  }
+}
+
+// Logical-property sides for a box-model prop (padding, margin, inset).
+// `$base` is the logical property root, e.g. "padding" -> padding-block-start
+// etc. Emits all/x/y/top/right/bottom/left; "top/right/bottom/left" map onto
+// block-start/inline-end/block-end/inline-start so the system reads correctly
+// in RTL contexts without a separate RTL stylesheet.
+@mixin emit-sides($prefix, $base, $map, $responsive: false) {
+  $side-property: (
+    "": $base,
+    "-x": "#{$base}-inline",
+    "-y": "#{$base}-block",
+    "-top": "#{$base}-block-start",
+    "-right": "#{$base}-inline-end",
+    "-bottom": "#{$base}-block-end",
+    "-left": "#{$base}-inline-start",
+  );
+
+  @each $suffix, $property in $side-property {
+    @each $key, $value in $map {
+      .dm-#{$prefix}#{$suffix}-#{$key} {
+        #{$property}: $value;
+      }
+    }
+  }
+
+  @if $responsive {
+    @include _responsive-pass($prefix) using ($bp) {
+      @each $suffix, $property in $side-property {
+        @each $key, $value in $map {
+          .dm-#{$bp}-#{$prefix}#{$suffix}-#{$key} {
+            #{$property}: $value;
+          }
+        }
+      }
+    }
+  }
+}

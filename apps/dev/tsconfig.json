@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node", "vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      // Mirrors the source alias in vite.config.ts: the sandbox type-checks
+      // and hot-reloads against @dotmatrix/core's source directly, not dist/.
+      "@dotmatrix/core": ["../../packages/core/src/index.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

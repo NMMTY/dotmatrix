@@ -1,0 +1,25 @@
+@use "mixins";
+@use "../tokens/scale";
+
+// Sizing reuses the spacing scale (pixel keys *and* t-shirt aliases, so
+// `width="m"` resolves the same way `padding="m"` does) plus a handful of
+// intrinsic keywords that have no length equivalent.
+$sizes: scale.spacing-scale(
+  (
+    "auto": auto,
+    "full": 100%,
+    "min": min-content,
+    "max": max-content,
+    "fit": fit-content,
+    "screen": 100vh,
+  )
+);
+
+@layer dm.utilities {
+  @include mixins.emit-scale("width", "width", $sizes, $responsive: true);
+  @include mixins.emit-scale("height", "height", $sizes, $responsive: true);
+  @include mixins.emit-scale("min-width", "min-width", $sizes, $responsive: true);
+  @include mixins.emit-scale("max-width", "max-width", $sizes, $responsive: true);
+  @include mixins.emit-scale("min-height", "min-height", $sizes, $responsive: true);
+  @include mixins.emit-scale("max-height", "max-height", $sizes, $responsive: true);
+}

@@ -1,0 +1,18 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+
+@layer dm.components {
+  .digit {
+    @include surface.surface;
+    width: 40px;
+    height: var(--dm-control-height-l);
+    padding: 0;
+    text-align: center;
+    font-size: var(--dm-font-size-l);
+    font-weight: var(--dm-weight-medium);
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}

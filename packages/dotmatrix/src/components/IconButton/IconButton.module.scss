@@ -1,0 +1,32 @@
+@use "../_order";
+@use "../_button-variants" as v;
+
+@layer dm.components {
+  .base {
+    @include v.base;
+    flex-shrink: 0;
+  }
+
+  .s {
+    width: var(--dm-control-height-s);
+    height: var(--dm-control-height-s);
+  }
+  .m {
+    width: var(--dm-control-height-m);
+    height: var(--dm-control-height-m);
+  }
+  .l {
+    width: var(--dm-control-height-l);
+    height: var(--dm-control-height-l);
+  }
+
+  .solid {
+    @include v.solid;
+  }
+  .outline {
+    @include v.outline;
+  }
+  .ghost {
+    @include v.ghost;
+  }
+}

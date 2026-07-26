@@ -1,0 +1,12 @@
+// Re-declares tokens/_layers.scss's order — every component .module.scss
+// must `@use` this before its own `@layer dm.components {...}` block.
+//
+// CSS layer priority is fixed by which layer NAME is mentioned FIRST in the
+// document, not by intent — and a bundler often evaluates a component's CSS
+// Module before the app's own global/tokens stylesheet. Without this
+// restatement, dm.components can register (and thus rank) before dm.global,
+// letting `body { color }` beat a button's own color. A bare `@layer
+// name-list;` is a no-op once the real order is already set, so this is free
+// when it's redundant and load-bearing when it isn't. Caught live: every
+// solid Button rendered white-on-white before this was added.
+@layer dm.tokens, dm.global, dm.components, dm.utilities;

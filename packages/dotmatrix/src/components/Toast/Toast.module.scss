@@ -1,0 +1,58 @@
+@use "../_order";
+@use "../_overlay-surface" as overlay;
+
+@layer dm.components {
+  .viewport {
+    position: fixed;
+    z-index: var(--dm-z-toast);
+    bottom: var(--dm-space-24);
+    right: var(--dm-space-24);
+    width: 320px;
+    max-width: calc(100vw - var(--dm-space-24) * 2);
+    pointer-events: none;
+  }
+
+  .toast {
+    @include overlay.surface;
+    align-items: flex-start;
+    padding: var(--dm-space-12);
+    pointer-events: auto;
+  }
+
+  // Duration here (150ms) must match EXIT_DURATION_MS in Toast.tsx — the
+  // .exiting class stays applied for exactly that long before the toast is
+  // actually removed from state, so the transition and the removal finish
+  // together instead of the DOM node vanishing mid-animation.
+  .entering,
+  .exiting {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  .visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .entering,
+  .visible,
+  .exiting {
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
+  }
+
+  // Status is carried by the left border's presence/weight, not by hue —
+  // consistent with the rest of the system's monochrome status language
+  // (Badge's dot pattern, Input's error border).
+  .error {
+    border-left-width: var(--dm-space-4);
+    border-left-color: var(--dm-status-error-fill);
+  }
+  .warning {
+    border-left-width: var(--dm-space-4);
+    border-left-color: var(--dm-status-warning-fill);
+  }
+  .success {
+    border-left-width: var(--dm-space-4);
+    border-left-color: var(--dm-status-success-fill);
+  }
+}

@@ -1,0 +1,22 @@
+@use "../_order";
+
+@layer dm.components {
+  .kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--dm-space-20);
+    height: var(--dm-space-20);
+    padding-inline: var(--dm-space-4);
+    border-radius: var(--dm-radius-4);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    background: var(--dm-surface-raised);
+    // A small hard-edged "key cap" ledge — consistent with the rest of the
+    // system's offset, non-blurred shadows (tokens/shadow.scss).
+    box-shadow: inset 0 -2px 0 0 var(--dm-border-medium);
+    font-family: var(--dm-font-pixel);
+    font-size: var(--dm-font-size-2xs);
+    color: var(--dm-on-background-strong);
+  }
+}

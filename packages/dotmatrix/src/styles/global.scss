@@ -1,0 +1,93 @@
+// Reset + base element styles. Deliberately thin: primitives style themselves
+// via utility classes, so this file only has to cover what a consumer's own
+// `as="..."` tags render as before any props are applied.
+@layer dm.global {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    // Without this, `borderWidth`/`borderColor` alone render nothing: the
+    // border shorthand's used value collapses to 0 whenever border-style is
+    // its default `none`, regardless of what width/color is specified. This
+    // mirrors Tailwind's preflight for the same reason.
+    border-style: solid;
+    border-width: 0;
+  }
+
+  html {
+    color-scheme: dark light;
+    -webkit-text-size-adjust: 100%;
+    // Reserves the scrollbar's width up front so it never comes and goes:
+    // Dialog/Drawer's scroll lock removes the scrollbar the instant an
+    // overlay opens, which otherwise widens the viewport mid-animation —
+    // confirmed live as a Drawer visibly jumping sideways on open.
+    scrollbar-gutter: stable;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--dm-page-background);
+    color: var(--dm-on-background-strong);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-m);
+    line-height: var(--dm-line-height-m);
+    letter-spacing: var(--dm-tracking-normal);
+    // The bitmap face is drawn for hinting off; smoothing blurs it back into
+    // a continuous-tone shape and defeats the whole point.
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    text-rendering: optimizeSpeed;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    // Without this, native UA chrome (button face, gray in most browsers)
+    // shows through on any button/input a component doesn't set its own
+    // `background` on — found live on Chip's remove button.
+    background-color: transparent;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--dm-shadow-focus);
+  }
+
+  ::selection {
+    background: var(--dm-on-background-strong);
+    color: var(--dm-page-background);
+  }
+}

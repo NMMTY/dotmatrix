@@ -1,0 +1,13 @@
+// All prop-driven utility classes, in the dm.utilities layer — see
+// tokens/_layers.scss for why this must load after components.
+@use "spacing";
+@use "size";
+@use "flex";
+@use "grid";
+@use "display";
+@use "position";
+@use "border";
+@use "color";
+@use "shadow";
+@use "pattern";
+@use "typography";

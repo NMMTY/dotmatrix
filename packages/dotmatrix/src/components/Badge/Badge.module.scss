@@ -1,0 +1,67 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--dm-space-4);
+    padding-inline: var(--dm-space-8);
+    height: var(--dm-control-height-s);
+    border-radius: var(--dm-radius-full);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-2xs);
+    font-weight: var(--dm-weight-medium);
+    letter-spacing: var(--dm-tracking-wide);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .neutral {
+    color: var(--dm-on-background-strong);
+  }
+  .error {
+    color: var(--dm-status-error-fill);
+  }
+  .warning {
+    color: var(--dm-status-warning-fill);
+  }
+  .success {
+    color: var(--dm-status-success-fill);
+  }
+
+  // A dot that's just `background: currentColor` is indistinguishable between
+  // statuses in the default mono scheme, since error/warning/success all
+  // resolve to the same on-background-strong fill there (see
+  // tokens/theme.scss) — density is what actually separates them. Masking
+  // the dot with each status's own --dm-status-*-pattern is what makes that
+  // real rather than aspirational.
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background-color: currentColor;
+  }
+  .dotError,
+  .dotWarning,
+  .dotSuccess {
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-size: 3px 3px;
+    mask-size: 3px 3px;
+  }
+  .dotError {
+    -webkit-mask-image: var(--dm-status-error-pattern);
+    mask-image: var(--dm-status-error-pattern);
+  }
+  .dotWarning {
+    -webkit-mask-image: var(--dm-status-warning-pattern);
+    mask-image: var(--dm-status-warning-pattern);
+  }
+  .dotSuccess {
+    -webkit-mask-image: var(--dm-status-success-pattern);
+    mask-image: var(--dm-status-success-pattern);
+  }
+}

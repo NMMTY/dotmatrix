@@ -1,0 +1,72 @@
+{
+  "name": "@nmmty/dotmatrix",
+  "version": "0.0.0",
+  "description": "Monochrome bitmap design system. Layout is built from primitives, never raw tags.",
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "files": [
+    "dist",
+    "src/tokens"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./scss": "./src/tokens/index.scss",
+    "./scss/scale": "./src/tokens/_scale.scss",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build:worker": "node scripts/build-worker.mjs",
+    "build": "node scripts/build-worker.mjs && vite build && node scripts/build-css.mjs",
+    "dev": "node scripts/build-worker.mjs && vite build --watch",
+    "typecheck": "node scripts/build-worker.mjs && tsc --noEmit",
+    "test": "node scripts/build-worker.mjs && vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "prismjs": "^1.29.0"
+  },
+  "peerDependenciesMeta": {
+    "prismjs": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@floating-ui/react": "^0.27.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.15.0",
+    "@types/prismjs": "^1.26.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "jsdom": "^26.1.0",
+    "prismjs": "^1.29.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "rollup-preserve-directives": "^1.1.3",
+    "sass": "^1.92.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.0"
+  }
+}

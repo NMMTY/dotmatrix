@@ -1,0 +1,40 @@
+@use "../_order";
+
+@layer dm.components {
+  .track {
+    display: flex;
+    min-width: 0;
+    gap: var(--dm-space-2);
+  }
+
+  .cell {
+    flex: 1 1 0%;
+    height: var(--dm-space-16);
+    min-width: 0;
+    border-radius: var(--dm-radius-2);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+  }
+
+  .filled {
+    background-color: var(--dm-on-background-strong);
+    border-color: var(--dm-on-background-strong);
+  }
+
+  // LED-bar look: unlit cells stay visible as a dim solid fill instead of a
+  // hollow border, flush against each other like real hardware segments —
+  // only a hairline gap so adjacent cells still read as distinct.
+  .led {
+    gap: var(--dm-border-width-1);
+  }
+
+  .led .cell {
+    border-width: 0;
+    border-radius: 0;
+    background-color: var(--dm-on-background-weak);
+  }
+
+  .led .filled {
+    background-color: var(--dm-on-background-strong);
+  }
+}

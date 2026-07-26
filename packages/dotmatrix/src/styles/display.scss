@@ -1,0 +1,26 @@
+@use "mixins";
+
+$displays: (block, "inline-block", inline, flex, "inline-flex", grid, contents, none);
+$overflows: (visible, hidden, scroll, auto, clip);
+
+@layer dm.utilities {
+  @include mixins.emit-keyword("display", "display", $displays, $responsive: true);
+  @include mixins.emit-keyword("overflow", "overflow", $overflows, $responsive: true);
+  @include mixins.emit-keyword("overflow-x", "overflow-x", $overflows, $responsive: true);
+  @include mixins.emit-keyword("overflow-y", "overflow-y", $overflows, $responsive: true);
+
+  .dm-hidden {
+    display: none;
+  }
+  .dm-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

@@ -1,0 +1,11 @@
+// The floating "card" look shared by Tooltip, Popover, Dropdown, ContextMenu,
+// and Dialog/Drawer content — a mixin, not a shared rendered class, for the
+// same cross-component-override reason as _button-variants.scss.
+@mixin surface {
+  background: var(--dm-surface-background);
+  border-width: var(--dm-border-width-1);
+  border-color: var(--dm-border-medium);
+  border-radius: var(--dm-radius-surface);
+  box-shadow: var(--dm-shadow-m);
+  color: var(--dm-on-background-strong);
+}

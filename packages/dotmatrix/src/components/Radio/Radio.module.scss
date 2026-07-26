@@ -1,0 +1,71 @@
+@use "../_order";
+
+@layer dm.components {
+  .row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--dm-space-8);
+    cursor: pointer;
+
+    &:has(.input:disabled) {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .control {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .input {
+    appearance: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-full);
+    background: var(--dm-surface-background);
+    cursor: pointer;
+    transition:
+      background-color 120ms ease-out,
+      border-color 120ms ease-out;
+  }
+
+  // A plain dot, not an icon glyph: a selected radio is a filled circle,
+  // nothing more — reaching for the icon set here would be reaching for a
+  // shape it doesn't have.
+  .dot {
+    position: absolute;
+    inset: 4px;
+    border-radius: var(--dm-radius-full);
+    background: var(--dm-on-action-strong);
+    opacity: 0;
+    transform: scale(0.6);
+    pointer-events: none;
+    transition:
+      opacity 120ms ease-out,
+      transform 120ms ease-out;
+  }
+
+  .input:checked {
+    background: var(--dm-action-background);
+    border-color: var(--dm-action-background);
+  }
+
+  .input:checked + .dot {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .input,
+    .dot {
+      transition: none;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@use "sass:map";
+@use "scale";
+
+@layer dm.tokens {
+  :root {
+    --dm-unit: #{scale.$unit};
+
+    @each $key, $value in scale.$spacing {
+      --dm-space-#{$key}: #{$value};
+    }
+    @each $alias, $target in scale.$spacing-aliases {
+      --dm-space-#{$alias}: var(--dm-space-#{$target});
+    }
+
+    // Density is a discrete axis, not a percentage. Fractional scaling would
+    // push spacing off the pixel grid and moire every dither surface, so the
+    // sizes below step by whole units instead.
+    --dm-control-height-s: 24px;
+    --dm-control-height-m: 32px;
+    --dm-control-height-l: 40px;
+    --dm-control-padding-x: var(--dm-space-12);
+    --dm-section-gap: var(--dm-space-40);
+
+    // Same numbers as scale.$z-index (styles/position.scss's `zIndex` prop
+    // utilities) — these two exist because overlay components (Dialog,
+    // Dropdown, Popover, ContextMenu, Toast) render through a FloatingPortal
+    // at the document body, outside the prop-driven component tree, so they
+    // reference a raw custom property directly instead of a `zIndex` prop.
+    --dm-z-overlay: #{map.get(scale.$z-index, "overlay")};
+    --dm-z-toast: #{map.get(scale.$z-index, "toast")};
+  }
+
+  :root[data-density="compact"] {
+    --dm-control-height-s: 20px;
+    --dm-control-height-m: 28px;
+    --dm-control-height-l: 32px;
+    --dm-control-padding-x: var(--dm-space-8);
+    --dm-section-gap: var(--dm-space-24);
+  }
+
+  :root[data-density="comfortable"] {
+    --dm-control-height-s: 32px;
+    --dm-control-height-m: 40px;
+    --dm-control-height-l: 48px;
+    --dm-control-padding-x: var(--dm-space-16);
+    --dm-section-gap: var(--dm-space-64);
+  }
+}

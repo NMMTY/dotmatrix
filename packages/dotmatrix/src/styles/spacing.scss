@@ -1,0 +1,14 @@
+@use "mixins";
+@use "../tokens/scale";
+
+// Every alias resolves to the same declarations as the pixel key it points
+// to, so `gap="m"` and `gap="16"` are interchangeable at the CSS layer too.
+$all-spacing: scale.spacing-scale();
+
+@layer dm.utilities {
+  @include mixins.emit-sides("padding", "padding", $all-spacing, $responsive: true);
+  @include mixins.emit-sides("margin", "margin", $all-spacing, $responsive: true);
+  @include mixins.emit-scale("gap", "gap", $all-spacing, $responsive: true);
+  @include mixins.emit-scale("gap-x", "column-gap", $all-spacing, $responsive: true);
+  @include mixins.emit-scale("gap-y", "row-gap", $all-spacing, $responsive: true);
+}

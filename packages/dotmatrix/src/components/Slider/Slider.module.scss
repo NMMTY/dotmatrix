@@ -1,0 +1,70 @@
+@use "../_order";
+
+// Range inputs have no cross-browser shared styling API — WebKit/Blink have
+// no native "filled portion" concept at all (hence the --dm-slider-fill
+// custom-property + hard-stop gradient trick below), while Firefox has a
+// real `::-moz-range-progress` pseudo-element that needs none of that. Both
+// paths are implemented so the fill actually renders correctly everywhere,
+// not just in one engine.
+@layer dm.components {
+  .slider {
+    appearance: none;
+    width: 100%;
+    height: var(--dm-control-height-m);
+    background: transparent;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: var(--dm-radius-2);
+      // A hard-stop two-tone fill, not a blended gradient: both color stops
+      // meet at the same percentage, so there's no interpolation between
+      // them — just a solid fill up to the value and a solid track after it.
+      background: linear-gradient(
+        to right,
+        var(--dm-on-background-strong) 0%,
+        var(--dm-on-background-strong) var(--dm-slider-fill, 0%),
+        var(--dm-border-medium) var(--dm-slider-fill, 0%),
+        var(--dm-border-medium) 100%
+      );
+    }
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      margin-top: -5px;
+      border-radius: var(--dm-radius-2);
+      background: var(--dm-on-background-strong);
+      border: none;
+      cursor: pointer;
+    }
+    &:disabled::-webkit-slider-thumb {
+      cursor: not-allowed;
+    }
+
+    &::-moz-range-track {
+      height: 4px;
+      border-radius: var(--dm-radius-2);
+      background: var(--dm-border-medium);
+    }
+    &::-moz-range-progress {
+      height: 4px;
+      border-radius: var(--dm-radius-2);
+      background: var(--dm-on-background-strong);
+    }
+    &::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: var(--dm-radius-2);
+      background: var(--dm-on-background-strong);
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

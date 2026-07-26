@@ -1,0 +1,15 @@
+// Every custom property the system defines. Safe to import on its own by
+// projects that want the tokens but not the components.
+//
+// `layers` must stay first: the @layer statement it emits establishes the
+// cascade order for everything that follows.
+@use "layers";
+@use "palette";
+@use "theme";
+@use "layout";
+@use "fonts";
+@use "typography";
+@use "pattern";
+@use "border";
+@use "shadow";
+@use "data";

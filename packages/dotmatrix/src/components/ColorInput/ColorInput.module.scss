@@ -1,0 +1,39 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+
+@layer dm.components {
+  .trigger {
+    @include surface.surface;
+    @include surface.size-m;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--dm-space-8);
+    cursor: pointer;
+  }
+
+  .swatch {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border-radius: var(--dm-radius-2);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+  }
+
+  .presetSwatch,
+  .hueSwatch,
+  .slCell {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: var(--dm-radius-2);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    cursor: pointer;
+  }
+
+  .selected {
+    border-width: var(--dm-border-width-2);
+    border-color: var(--dm-on-background-strong);
+  }
+}

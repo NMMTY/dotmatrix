@@ -1,0 +1,41 @@
+@use "scale";
+
+@layer dm.tokens {
+  :root {
+    @each $key, $value in scale.$radius {
+      --dm-radius-#{$key}: #{$value};
+    }
+    @each $key, $value in scale.$border-width {
+      --dm-border-width-#{$key}: #{$value};
+    }
+
+    --dm-radius-control: var(--dm-radius-4);
+    --dm-radius-surface: var(--dm-radius-8);
+
+    // Stair-stepped corner: cuts a unit off each corner instead of curving it,
+    // which is what a rounded rectangle looks like on a pixel grid.
+    --dm-corner-notch: var(--dm-unit);
+    --dm-clip-notched: polygon(
+      var(--dm-corner-notch) 0,
+      calc(100% - var(--dm-corner-notch)) 0,
+      100% var(--dm-corner-notch),
+      100% calc(100% - var(--dm-corner-notch)),
+      calc(100% - var(--dm-corner-notch)) 100%,
+      var(--dm-corner-notch) 100%,
+      0 calc(100% - var(--dm-corner-notch)),
+      0 var(--dm-corner-notch)
+    );
+  }
+
+  :root[data-border="square"] {
+    --dm-radius-control: 0;
+    --dm-radius-surface: 0;
+  }
+
+  // Radius is zeroed here because the notch is applied via clip-path instead;
+  // leaving both on would round the cut corners.
+  :root[data-border="notched"] {
+    --dm-radius-control: 0;
+    --dm-radius-surface: 0;
+  }
+}

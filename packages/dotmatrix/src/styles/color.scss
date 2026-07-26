@@ -1,0 +1,26 @@
+@use "mixins";
+
+// Only semantic slots are exposed as props — never a raw grey stop — so a
+// theme swap can't be defeated by a component that hardcoded --dm-gray-500.
+$on-background: (
+  "strong": var(--dm-on-background-strong),
+  "medium": var(--dm-on-background-medium),
+  "weak": var(--dm-on-background-weak),
+  "on-solid-strong": var(--dm-on-solid-strong),
+  "on-solid-weak": var(--dm-on-solid-weak),
+  "inherit": inherit,
+  "current": currentColor,
+);
+
+$backgrounds: (
+  "page": var(--dm-page-background),
+  "surface": var(--dm-surface-background),
+  "raised": var(--dm-surface-raised),
+  "solid": var(--dm-solid-background),
+  "transparent": transparent,
+);
+
+@layer dm.utilities {
+  @include mixins.emit-scale("color", "color", $on-background);
+  @include mixins.emit-scale("background", "background-color", $backgrounds);
+}

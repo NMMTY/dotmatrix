@@ -1,0 +1,9 @@
+@use "../_order";
+
+@layer dm.components {
+  .column {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+}

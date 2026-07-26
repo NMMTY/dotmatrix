@@ -1,0 +1,12 @@
+@use "../_order";
+
+@layer dm.components {
+  .code {
+    padding-inline: var(--dm-space-4);
+    border-radius: var(--dm-radius-4);
+    background: var(--dm-surface-raised);
+    font-family: var(--dm-font-mono);
+    font-size: 0.9em;
+    color: var(--dm-on-background-strong);
+  }
+}

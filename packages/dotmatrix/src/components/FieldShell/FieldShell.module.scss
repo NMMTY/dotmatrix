@@ -1,0 +1,34 @@
+@use "../_order";
+
+@layer dm.components {
+  .label {
+    display: block;
+  }
+
+  .labelDisabled {
+    opacity: 0.6;
+  }
+
+  .required {
+    color: var(--dm-status-error-fill);
+  }
+
+  .description {
+    color: var(--dm-on-background-weak);
+  }
+
+  // Mirrors Badge's reasoning: in the default mono scheme, error/success text
+  // resolves to the same fill as ordinary text (status is carried by density
+  // elsewhere, e.g. Badge's dot) — a hint still needs to visually stand out
+  // from a plain description, so it's bold here regardless of scheme, not
+  // relying on color alone.
+  .error {
+    color: var(--dm-status-error-fill);
+    font-weight: var(--dm-weight-medium);
+  }
+
+  .success {
+    color: var(--dm-status-success-fill);
+    font-weight: var(--dm-weight-medium);
+  }
+}

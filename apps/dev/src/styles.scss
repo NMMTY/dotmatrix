@@ -1,0 +1,9 @@
+// Source-mode equivalent of the published styles.css. Layer order is declared
+// inside tokens/index.scss, so the cascade holds regardless of the order Vite
+// injects component modules during dev.
+// Explicit (unused) namespaces — Sass derives a default namespace from the
+// filename, and both partials happen to be named index.scss, which collides
+// without this.
+@use "@dotmatrix/tokens/index.scss" as tokens;
+@use "@dotmatrix/styles/global.scss" as global;
+@use "@dotmatrix/styles/index.scss" as utilities;

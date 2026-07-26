@@ -1,0 +1,55 @@
+@use "../_order";
+
+@layer dm.components {
+  // display:flex and gap come from the <Row> this is applied to, not from
+  // here — only the border, which Row has no prop for.
+  .list {
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+  }
+
+  .tab {
+    display: inline-flex;
+    align-items: center;
+    height: var(--dm-control-height-m);
+    padding-inline: var(--dm-space-16);
+    margin-bottom: calc(var(--dm-border-width-1) * -1);
+    border-bottom-width: var(--dm-border-width-2);
+    border-bottom-color: transparent;
+    background: transparent;
+    color: var(--dm-on-background-weak);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    font-weight: var(--dm-weight-medium);
+    letter-spacing: var(--dm-tracking-wide);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      color 150ms ease-out,
+      border-bottom-color 150ms ease-out;
+
+    &:hover:not(:disabled) {
+      color: var(--dm-on-background-strong);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  .selected {
+    border-bottom-color: var(--dm-on-background-strong);
+    color: var(--dm-on-background-strong);
+  }
+
+  .panel {
+    padding-top: var(--dm-space-16);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab {
+      transition: none;
+    }
+  }
+}

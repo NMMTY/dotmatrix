@@ -1,0 +1,40 @@
+@use "../tokens/scale";
+
+// A dither pattern is a mask, not a background: it's painted in the
+// currentColor-equivalent of whatever `background-color` the element already
+// has, via `mask-image`, so one class works across themes and surfaces.
+@layer dm.utilities {
+  @each $density in scale.$dither-steps {
+    .dm-pattern-#{$density} {
+      background-color: currentColor;
+      -webkit-mask-image: var(--dm-pattern-#{$density});
+      mask-image: var(--dm-pattern-#{$density});
+      -webkit-mask-size: var(--dm-pattern-size) var(--dm-pattern-size);
+      mask-size: var(--dm-pattern-size) var(--dm-pattern-size);
+      -webkit-mask-repeat: repeat;
+      mask-repeat: repeat;
+    }
+  }
+
+  .dm-pattern-checker,
+  .dm-pattern-scanline,
+  .dm-pattern-grid {
+    background-color: currentColor;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-size: var(--dm-pattern-size) var(--dm-pattern-size);
+    mask-size: var(--dm-pattern-size) var(--dm-pattern-size);
+  }
+  .dm-pattern-checker {
+    -webkit-mask-image: var(--dm-pattern-checker);
+    mask-image: var(--dm-pattern-checker);
+  }
+  .dm-pattern-scanline {
+    -webkit-mask-image: var(--dm-pattern-scanline);
+    mask-image: var(--dm-pattern-scanline);
+  }
+  .dm-pattern-grid {
+    -webkit-mask-image: var(--dm-pattern-grid);
+    mask-image: var(--dm-pattern-grid);
+  }
+}

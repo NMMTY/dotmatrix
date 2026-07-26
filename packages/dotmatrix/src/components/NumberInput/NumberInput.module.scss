@@ -1,0 +1,52 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+@use "../_button-variants" as v;
+
+@layer dm.components {
+  .wrapper {
+    display: inline-flex;
+    width: 100%;
+  }
+
+  .input {
+    @include surface.surface;
+    @include surface.size-m;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+    border-radius: 0;
+    // Hides the native browser spin buttons — the Plus/Minus buttons
+    // flanking the input are this control's stepper, not a second one.
+    appearance: textfield;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+
+  // Plain <button>s styled via the shared button mixins, not the IconButton
+  // *component* — two components in the same dm.components layer have no
+  // reliable override order between them (see
+  // components/layering.contract.test.ts), so overriding IconButton's own
+  // rounded-corner default from here would be exactly that fragility.
+  // Sharing the mixin instead of the rendered component sidesteps it.
+  .step {
+    @include v.base;
+    @include v.outline;
+    flex-shrink: 0;
+    width: var(--dm-control-height-m);
+    height: var(--dm-control-height-m);
+    border-radius: 0;
+  }
+
+  .stepStart {
+    border-top-left-radius: var(--dm-radius-control);
+    border-bottom-left-radius: var(--dm-radius-control);
+  }
+
+  .stepEnd {
+    border-top-right-radius: var(--dm-radius-control);
+    border-bottom-right-radius: var(--dm-radius-control);
+  }
+}

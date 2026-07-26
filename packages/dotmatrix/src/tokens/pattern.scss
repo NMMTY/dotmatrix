@@ -1,0 +1,23 @@
+// The closest thing this system has to a colour palette.
+//
+// A monochrome UI cannot lean on hue to separate surfaces or encode state, so
+// it leans on dot density instead. These nine steps are the ramp; components
+// pick a step the way a colour system would pick a tint.
+@use "scale";
+
+@layer dm.tokens {
+  :root {
+    // Ordered-dither masks, 0 (empty) through 16 (solid) in nine steps.
+    @each $density in scale.$dither-steps {
+      --dm-pattern-#{$density}: #{scale.dither-mask($density)};
+    }
+
+    --dm-pattern-checker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2' shape-rendering='crispEdges' fill='black'%3E%3Crect width='1' height='1'/%3E%3Crect x='1' y='1' width='1' height='1'/%3E%3C/svg%3E");
+    --dm-pattern-scanline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 2' shape-rendering='crispEdges' fill='black'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E");
+    --dm-pattern-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' shape-rendering='crispEdges' fill='black'%3E%3Crect width='1' height='1'/%3E%3C/svg%3E");
+
+    // Masks tile at the base unit so patterns stay aligned across adjacent
+    // elements. Change this and the whole surface texture changes with it.
+    --dm-pattern-size: var(--dm-unit);
+  }
+}

@@ -1,0 +1,73 @@
+// Shared between Button.module.scss and IconButton.module.scss — a mixin
+// partial each `@include`s into its own scoped classes, not a class one
+// renders and the other overrides: same-layer components have no reliable
+// override order (components/layering.contract.test.ts).
+@mixin base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--dm-font-mono);
+  font-weight: var(--dm-weight-medium);
+  letter-spacing: var(--dm-tracking-wide);
+  border-radius: var(--dm-radius-control);
+  cursor: pointer;
+  user-select: none;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+// Bitmap press effect: the hard offset shadow (tokens/shadow.scss — solid
+// rectangles, never blur) drops out and the button translates by exactly the
+// shadow's offset on press, reading as pushed flush into the surface. No
+// transitions anywhere — an eased animation reads as smooth/modern, which
+// fights the terminal aesthetic; a hard, instant state flip fits it better.
+@mixin solid {
+  background: var(--dm-action-background);
+  color: var(--dm-on-action-strong);
+  box-shadow: var(--dm-shadow-m);
+
+  &:hover:not(:disabled) {
+    background: var(--dm-action-background-hover);
+  }
+  &:active:not(:disabled) {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+  &:disabled {
+    box-shadow: none;
+  }
+}
+
+@mixin outline {
+  background: transparent;
+  color: var(--dm-on-background-strong);
+  border-width: var(--dm-border-width-1);
+  border-color: var(--dm-border-strong);
+  box-shadow: var(--dm-shadow-s);
+
+  &:hover:not(:disabled) {
+    background: var(--dm-surface-raised);
+  }
+  &:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+  &:disabled {
+    box-shadow: none;
+  }
+}
+
+@mixin ghost {
+  background: transparent;
+  color: var(--dm-on-background-strong);
+
+  &:hover:not(:disabled) {
+    background: var(--dm-surface-background);
+  }
+  &:active:not(:disabled) {
+    background: var(--dm-surface-raised);
+  }
+}

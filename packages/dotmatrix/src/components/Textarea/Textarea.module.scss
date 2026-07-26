@@ -1,0 +1,14 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+
+@layer dm.components {
+  .textarea {
+    @include surface.surface;
+    // Height comes from `rows`, not a fixed control-height token — a
+    // textarea's whole point is holding more than one line, so the
+    // single-line height scale Input/Select share doesn't apply.
+    padding: var(--dm-space-8) var(--dm-control-padding-x);
+    resize: vertical;
+    min-height: var(--dm-control-height-l);
+  }
+}

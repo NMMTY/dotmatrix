@@ -1,0 +1,15 @@
+@use "../_order";
+
+@layer dm.components {
+  .trend {
+    line-height: 1;
+  }
+
+  .up {
+    color: var(--dm-status-success-fill);
+  }
+
+  .down {
+    color: var(--dm-status-error-fill);
+  }
+}

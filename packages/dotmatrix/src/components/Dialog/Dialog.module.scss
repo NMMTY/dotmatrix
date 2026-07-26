@@ -1,0 +1,25 @@
+@use "../_order";
+@use "../_overlay-surface" as overlay;
+
+@layer dm.components {
+  .overlay {
+    z-index: var(--dm-z-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--dm-space-24);
+    background: var(--dm-overlay-background);
+  }
+
+  .dialog {
+    @include overlay.surface;
+    display: flex;
+    flex-direction: column;
+    gap: var(--dm-space-16);
+    width: 100%;
+    max-width: 480px;
+    max-height: 100%;
+    overflow: auto;
+    padding: var(--dm-space-24);
+  }
+}

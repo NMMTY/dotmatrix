@@ -1,0 +1,40 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--dm-space-4);
+    padding-inline-start: var(--dm-space-8);
+    padding-inline-end: var(--dm-space-4);
+    height: var(--dm-control-height-s);
+    border-radius: var(--dm-radius-full);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    background: var(--dm-surface-background);
+    color: var(--dm-on-background-strong);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-2xs);
+    font-weight: var(--dm-weight-medium);
+    letter-spacing: var(--dm-tracking-wide);
+    white-space: nowrap;
+  }
+
+  // No dedicated remove-button padding: it's a plain, small square hit target
+  // sitting flush against the chip's own end padding.
+  .remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border-radius: var(--dm-radius-full);
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--dm-surface-raised);
+    }
+  }
+}

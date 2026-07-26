@@ -1,0 +1,18 @@
+@use "../_order";
+
+@layer dm.components {
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    padding: var(--dm-space-12) 0;
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
+}

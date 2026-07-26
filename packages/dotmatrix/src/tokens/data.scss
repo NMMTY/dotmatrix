@@ -1,0 +1,23 @@
+// Chart tokens. Series are separated by dither density, not by hue, so a
+// monochrome chart stays readable — and so does a colour one, since density
+// survives being printed, projected or viewed by a colour-blind reader.
+@layer dm.tokens {
+  :root {
+    --dm-series-1: var(--dm-pattern-16);
+    --dm-series-2: var(--dm-pattern-12);
+    --dm-series-3: var(--dm-pattern-8);
+    --dm-series-4: var(--dm-pattern-6);
+    --dm-series-5: var(--dm-pattern-4);
+    --dm-series-6: var(--dm-pattern-2);
+
+    --dm-series-fill: var(--dm-on-background-strong);
+    --dm-axis-color: var(--dm-border-medium);
+    --dm-grid-color: var(--dm-border-weak);
+    --dm-plot-stroke: 1px;
+
+    // Bars land on whole units so their edges align with the dither grid
+    // instead of cutting through it.
+    --dm-bar-width: var(--dm-space-4);
+    --dm-bar-gap: var(--dm-space-2);
+  }
+}

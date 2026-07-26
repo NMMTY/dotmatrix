@@ -1,0 +1,13 @@
+@use "mixins";
+
+$shadows: (
+  "none": var(--dm-shadow-none),
+  "s": var(--dm-shadow-s),
+  "m": var(--dm-shadow-m),
+  "l": var(--dm-shadow-l),
+  "inset": var(--dm-shadow-inset),
+);
+
+@layer dm.utilities {
+  @include mixins.emit-scale("shadow", "box-shadow", $shadows);
+}

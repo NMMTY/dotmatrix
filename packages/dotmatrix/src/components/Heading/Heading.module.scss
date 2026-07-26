@@ -1,0 +1,12 @@
+@use "../_order";
+
+@layer dm.components {
+  .heading {
+    display: block;
+    font-family: var(--dm-font-display);
+    font-size: var(--dm-display-size-m);
+    line-height: var(--dm-display-line-height-m);
+    letter-spacing: var(--dm-tracking-display);
+    text-transform: uppercase;
+  }
+}

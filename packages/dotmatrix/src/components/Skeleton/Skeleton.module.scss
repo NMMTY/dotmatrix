@@ -1,0 +1,46 @@
+@use "../_order";
+
+// A moving gradient shimmer is a continuous-tone effect and has no bitmap
+// equivalent (same reasoning as tokens/shadow.scss's hard offset shadows).
+// Instead, an overlay masked with the existing dither pattern scans across in
+// discrete steps — `steps(4)`, not an eased curve — reading as a scanning
+// stipple/noise sweep rather than a smooth loading bar.
+@layer dm.components {
+  .skeleton {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background-color: var(--dm-surface-raised);
+  }
+
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--dm-on-background-weak);
+    -webkit-mask-image: var(--dm-pattern-8);
+    mask-image: var(--dm-pattern-8);
+    -webkit-mask-size: 8px 8px;
+    mask-size: 8px 8px;
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    animation: dm-skeleton-scan 1s steps(4) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton::after {
+      animation: none;
+    }
+  }
+}
+
+@keyframes dm-skeleton-scan {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 32px 0;
+    mask-position: 32px 0;
+  }
+}

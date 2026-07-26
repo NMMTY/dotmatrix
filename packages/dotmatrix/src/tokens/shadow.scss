@@ -1,0 +1,16 @@
+// No blur anywhere. A blurred shadow is a continuous-tone effect and cannot be
+// represented on a dot grid — offset solid rectangles are the bitmap
+// equivalent, and they read as depth just as well.
+@layer dm.tokens {
+  :root {
+    --dm-shadow-none: none;
+    --dm-shadow-s: 2px 2px 0 var(--dm-border-strong);
+    --dm-shadow-m: 4px 4px 0 var(--dm-border-strong);
+    --dm-shadow-l: 8px 8px 0 var(--dm-border-strong);
+    --dm-shadow-inset: inset 0 0 0 1px var(--dm-border-medium);
+
+    // Focus is drawn as a doubled hard ring rather than an outline so it stays
+    // visible on both solid and patterned surfaces.
+    --dm-shadow-focus: 0 0 0 2px var(--dm-page-background), 0 0 0 4px var(--dm-focus-ring);
+  }
+}

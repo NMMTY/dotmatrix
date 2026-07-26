@@ -1,0 +1,75 @@
+@use "../_order";
+
+@layer dm.components {
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    color: var(--dm-on-background-strong);
+  }
+
+  .headerCell {
+    padding: var(--dm-space-8) var(--dm-space-12);
+    border-bottom-width: var(--dm-border-width-2);
+    border-bottom-color: var(--dm-border-medium);
+    color: var(--dm-on-background-weak);
+    font-weight: var(--dm-weight-medium);
+    font-size: var(--dm-font-size-xs);
+    letter-spacing: var(--dm-tracking-wide);
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .sortButton {
+    display: flex;
+    align-items: center;
+    gap: var(--dm-space-4);
+    width: 100%;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--dm-on-background-strong);
+    }
+  }
+
+  // Reserves the icon's width whether or not this column is the one
+  // currently sorted, so a header's label doesn't shift sideways when
+  // sorting moves between columns.
+  .sortIcon {
+    display: inline-flex;
+    width: 12px;
+    flex-shrink: 0;
+  }
+
+  .row {
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+
+    &:hover {
+      background: var(--dm-surface-raised);
+    }
+  }
+
+  // A left border accent, not just a background swap: `.zebra`'s
+  // nth-child(even) rule has higher specificity than this single class and
+  // would otherwise win the background-color property outright, making a
+  // selected even row indistinguishable from a merely-striped one.
+  .selected {
+    background: var(--dm-surface-raised);
+    box-shadow: inset var(--dm-border-width-2) 0 0 0 var(--dm-on-background-strong);
+  }
+
+  .cell {
+    padding: var(--dm-space-8) var(--dm-space-12);
+  }
+
+  .zebra tbody tr:nth-child(even) {
+    background: var(--dm-surface-raised);
+  }
+}

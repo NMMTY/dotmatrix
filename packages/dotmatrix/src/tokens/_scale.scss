@@ -1,0 +1,213 @@
+// ---------------------------------------------------------------------------
+// Raw scales. Sass maps only — this partial emits no CSS and may be @use'd
+// freely by the utility generators without duplicating output.
+// ---------------------------------------------------------------------------
+@use "sass:list";
+@use "sass:map";
+@use "sass:string";
+
+// The pixel grid everything snaps to. Half-pixels moire the dither patterns
+// and blur the bitmap typeface, so no token may sit off this grid.
+$unit: 4px;
+
+// Spacing / sizing. Keys are the pixel value, which keeps `gap="16"` literal
+// and self-documenting. 1 and 2 are sub-unit and exist only for hairlines.
+$spacing: (
+  "0": 0,
+  "1": 1px,
+  "2": 2px,
+  "4": 4px,
+  "8": 8px,
+  "12": 12px,
+  "16": 16px,
+  "20": 20px,
+  "24": 24px,
+  "32": 32px,
+  "40": 40px,
+  "48": 48px,
+  "56": 56px,
+  "64": 64px,
+  "80": 80px,
+  "96": 96px,
+  "128": 128px,
+  "160": 160px,
+);
+
+// T-shirt aliases for people who would rather not think in pixels.
+$spacing-aliases: (
+  "xs": "4",
+  "s": "8",
+  "m": "16",
+  "l": "24",
+  "xl": "40",
+);
+
+// Max-width semantics, matching Once UI: the `m` prop applies at m and below.
+// Listed largest-first because that is the order the media queries must be
+// emitted in for the smaller override to win.
+$breakpoints: (
+  "xl": 1600px,
+  "l": 1280px,
+  "m": 1024px,
+  "s": 768px,
+  "xs": 480px,
+);
+
+// Which prop families get responsive variants generated. Everything else is
+// base-only — this list is the main lever on final CSS size.
+$responsive-families: ("spacing", "size", "flex", "grid", "display", "typography");
+
+// Type. In rem so the browser's font-size preference still works; the values
+// are chosen to land on whole pixels at the default 16px root.
+$font-size: (
+  "2xs": 0.6875rem, // 11
+  "xs": 0.75rem,    // 12
+  "s": 0.8125rem,   // 13
+  "m": 0.875rem,    // 14
+  "l": 1rem,        // 16
+  "xl": 1.125rem,   // 18
+);
+
+// Display sizes are multiples of the bitmap face's 11px design size, so the
+// glyph grid stays crisp. Do not interpolate between these.
+$display-size: (
+  "xs": 1.375rem, // 22
+  "s": 2.0625rem, // 33
+  "m": 2.75rem,   // 44
+  "l": 4.125rem,  // 66
+  "xl": 5.5rem,   // 88
+);
+
+$line-height: (
+  "2xs": 1rem,     // 16
+  "xs": 1.125rem,  // 18
+  "s": 1.25rem,    // 20
+  "m": 1.25rem,    // 20
+  "l": 1.5rem,     // 24
+  "xl": 1.625rem,  // 26
+);
+
+$display-line-height: (
+  "xs": 1.5rem,   // 24
+  "s": 2.25rem,   // 36
+  "m": 3rem,      // 48
+  "l": 4.5rem,    // 72
+  "xl": 6rem,     // 96
+);
+
+$weight: (
+  "regular": 400,
+  "medium": 500,
+  "bold": 700,
+);
+
+// Neutral ramp, ascending lightness. Deliberately short: in a monochrome
+// system mid-tones come from dither density, not from more grey stops.
+$gray: (
+  "0": #000000,
+  "50": #0a0a0a,
+  "100": #141414,
+  "200": #1f1f1f,
+  "300": #2e2e2e,
+  "400": #454545,
+  "500": #6b6b6b,
+  "600": #8f8f8f,
+  "700": #b0b0b0,
+  "800": #cfcfcf,
+  "900": #e8e8e8,
+  "950": #f5f5f5,
+  "1000": #ffffff,
+);
+
+// Semantic text/background slots components may target via props.
+$on-background: ("strong", "medium", "weak");
+$surface: ("page", "surface", "raised", "solid", "transparent");
+$border-strength: ("strong", "medium", "weak");
+
+$radius: (
+  "0": 0,
+  "2": 2px,
+  "4": 4px,
+  "8": 8px,
+  "12": 12px,
+  "16": 16px,
+  "full": 9999px,
+);
+
+// Small, fixed stacking scale rather than an arbitrary integer prop — an
+// unbounded z-index is how stacking-context bugs get introduced. Shared
+// between styles/position.scss's `zIndex` prop utilities and
+// tokens/layout.scss's --dm-z-* custom properties (which components
+// rendered through a FloatingPortal — Dialog, Dropdown, Toast, ... —
+// reference directly, since they sit outside the normal prop-driven
+// component tree) so the two can't drift apart into two different numbers
+// for "the overlay layer".
+$z-index: (
+  "0": 0,
+  "10": 10,
+  "20": 20,
+  "30": 30,
+  "40": 40,
+  "overlay": 1000,
+  "toast": 1100,
+  "max": 2147483647,
+);
+
+$border-width: (
+  "0": 0,
+  "1": 1px,
+  "2": 2px,
+  "4": 4px,
+);
+
+// ---------------------------------------------------------------------------
+// Ordered dithering
+// ---------------------------------------------------------------------------
+// 4x4 Bayer threshold matrix. A cell is on when its threshold is below the
+// requested density, which is what makes the nine steps read as an even ramp
+// rather than as nine unrelated textures.
+$bayer-4: (
+  (0, 8, 2, 10),
+  (12, 4, 14, 6),
+  (3, 11, 1, 9),
+  (15, 7, 13, 5)
+);
+
+// Nine density steps mapped onto the matrix's sixteen cells.
+$dither-steps: (0, 2, 4, 6, 8, 10, 12, 14, 16);
+
+// Builds a 4x4 SVG mask for the given density.
+//
+// Emitted as a *mask*, not as a background image: masks inherit the element's
+// background-color, so one asset serves both themes and any token colour
+// instead of needing a baked-in fill per theme.
+@function dither-mask($density) {
+  $rects: "";
+  @for $y from 1 through 4 {
+    $row: list.nth($bayer-4, $y);
+    @for $x from 1 through 4 {
+      @if list.nth($row, $x) < $density {
+        $rects: $rects + "%3Crect x='#{$x - 1}' y='#{$y - 1}' width='1' height='1'/%3E";
+      }
+    }
+  }
+  @return url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' shape-rendering='crispEdges' fill='black'%3E#{$rects}%3C/svg%3E");
+}
+
+// ---------------------------------------------------------------------------
+// Helpers shared by the utility generators
+// ---------------------------------------------------------------------------
+
+// $spacing with the t-shirt aliases merged in as their own keys (so
+// `.dm-{prefix}-m` exists alongside `.dm-{prefix}-16`), plus whatever extra
+// keyword map is passed in `$extra` (e.g. "auto", "full" for size/inset
+// props). Every utility family that reuses the spacing scale must build its
+// value map through this function — building it by hand invites exactly the
+// alias omission bug this function exists to prevent.
+@function spacing-scale($extra: ()) {
+  $out: $spacing;
+  @each $alias, $target in $spacing-aliases {
+    $out: map.merge($out, ("#{$alias}": map.get($spacing, $target)));
+  }
+  @return map.merge($out, $extra);
+}

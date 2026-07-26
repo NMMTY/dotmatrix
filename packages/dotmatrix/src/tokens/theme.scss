@@ -1,0 +1,104 @@
+// Semantic roles. Components reference only these, never --dm-gray-* directly,
+// which is what makes the light/dark flip a single attribute change.
+@layer dm.tokens {
+  :root,
+  :root[data-theme="dark"] {
+    --dm-page-background: var(--dm-gray-0);
+    --dm-surface-background: var(--dm-gray-100);
+    --dm-surface-raised: var(--dm-gray-200);
+    --dm-overlay-background: rgb(0 0 0 / 0.72);
+
+    --dm-on-background-strong: var(--dm-gray-1000);
+    --dm-on-background-medium: var(--dm-gray-700);
+    --dm-on-background-weak: var(--dm-gray-500);
+
+    // "solid" is the inverted surface: white plate, black ink.
+    --dm-solid-background: var(--dm-gray-1000);
+    --dm-solid-background-hover: var(--dm-gray-900);
+    --dm-on-solid-strong: var(--dm-gray-0);
+    --dm-on-solid-weak: var(--dm-gray-400);
+
+    --dm-border-strong: var(--dm-gray-500);
+    --dm-border-medium: var(--dm-gray-300);
+    --dm-border-weak: var(--dm-gray-200);
+  }
+
+  :root[data-theme="light"] {
+    --dm-page-background: var(--dm-gray-1000);
+    --dm-surface-background: var(--dm-gray-950);
+    --dm-surface-raised: var(--dm-gray-900);
+    --dm-overlay-background: rgb(255 255 255 / 0.72);
+
+    --dm-on-background-strong: var(--dm-gray-0);
+    --dm-on-background-medium: var(--dm-gray-400);
+    --dm-on-background-weak: var(--dm-gray-500);
+
+    --dm-solid-background: var(--dm-gray-0);
+    --dm-solid-background-hover: var(--dm-gray-200);
+    --dm-on-solid-strong: var(--dm-gray-1000);
+    --dm-on-solid-weak: var(--dm-gray-700);
+
+    --dm-border-strong: var(--dm-gray-600);
+    --dm-border-medium: var(--dm-gray-800);
+    --dm-border-weak: var(--dm-gray-900);
+  }
+
+  // `:where()` zeroes these out to specificity 0 so the accent override
+  // below (a plain attribute selector, no `:root`) always wins regardless of
+  // source order — the same fix already applied to `_order.scss`'s layer
+  // ordering and the scrollbar-gutter bug, for the same reason: an override
+  // that only works because it happens to load later is one bundler change
+  // away from silently breaking.
+  :where(:root[data-theme="dark"]) {
+    --dm-focus-ring: var(--dm-gray-1000);
+  }
+  :where(:root[data-theme="light"]) {
+    --dm-focus-ring: var(--dm-gray-0);
+  }
+
+  // What Button's solid variant, and Switch/Radio/Checkbox's checked state,
+  // actually paint with — indirection, not `--dm-solid-background` itself,
+  // so the accent override below can redirect all four at once without
+  // every consuming component needing its own accent-aware branch.
+  :where(:root) {
+    --dm-action-background: var(--dm-solid-background);
+    --dm-action-background-hover: var(--dm-solid-background-hover);
+    --dm-on-action-strong: var(--dm-on-solid-strong);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Status
+  // ---------------------------------------------------------------------------
+  // Monochrome by default: status is carried by dither density and border
+  // weight, not hue. --dm-status-*-pattern is what components actually differ
+  // on, so the distinction survives greyscale, projection and colour blindness.
+  :root {
+    --dm-status-error-fill: var(--dm-on-background-strong);
+    --dm-status-error-pattern: var(--dm-pattern-12);
+    --dm-status-warning-fill: var(--dm-on-background-strong);
+    --dm-status-warning-pattern: var(--dm-pattern-8);
+    --dm-status-success-fill: var(--dm-on-background-strong);
+    --dm-status-success-pattern: var(--dm-pattern-4);
+    --dm-status-info-fill: var(--dm-on-background-medium);
+    --dm-status-info-pattern: var(--dm-pattern-2);
+  }
+
+  :root:not([data-palette="mono"]) {
+    --dm-status-error-fill: #ff4d4d;
+    --dm-status-warning-fill: #ffb020;
+    --dm-status-success-fill: #3ddc84;
+    --dm-status-info-fill: var(--dm-accent-500);
+  }
+
+  // Everything a chosen palette actually changes, in one place — global via
+  // `<html data-palette>` (ThemeProvider) or local via any element's own
+  // `palette` prop (`resolveStyleProps.ts`), since custom properties cascade
+  // through the DOM either way. No `:root` restriction, unlike the status
+  // block above: those are a deliberately global-only concept, this isn't.
+  [data-palette]:not([data-palette="mono"]) {
+    --dm-action-background: var(--dm-accent-500);
+    --dm-action-background-hover: var(--dm-accent-700);
+    --dm-on-action-strong: var(--dm-on-accent-strong);
+    --dm-focus-ring: var(--dm-accent-500);
+  }
+}

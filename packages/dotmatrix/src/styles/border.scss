@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "mixins";
+@use "../tokens/scale";
+
+$radii: map.merge(
+  scale.$radius,
+  (
+    "control": var(--dm-radius-control),
+    "surface": var(--dm-radius-surface),
+  )
+);
+
+$widths: scale.$border-width;
+
+$strengths: (
+  "strong": var(--dm-border-strong),
+  "medium": var(--dm-border-medium),
+  "weak": var(--dm-border-weak),
+  "solid": var(--dm-on-background-strong),
+  "transparent": transparent,
+);
+
+@layer dm.utilities {
+  @include mixins.emit-scale("radius", "border-radius", $radii, $responsive: true);
+  @include mixins.emit-scale("border-width", "border-width", $widths);
+  @include mixins.emit-scale("border-color", "border-color", $strengths);
+
+  .dm-border-notched {
+    clip-path: var(--dm-clip-notched);
+  }
+
+  .dm-border-style-solid {
+    border-style: solid;
+  }
+  .dm-border-style-dashed {
+    border-style: dashed;
+  }
+}

@@ -1,0 +1,37 @@
+@use "scale";
+
+@layer dm.tokens {
+  :root {
+    // Three slots, swappable independently. Both faces are self-hosted (see
+    // ./fonts.scss) rather than named on the assumption they're installed
+    // locally — almost nobody has either. The display slot is deliberately
+    // isolated: dropping in an LED dot-matrix face (Doto, Ndot) is a one-line
+    // change here and needs no component edits.
+    --dm-font-display: "Departure Mono", "Geist Mono", ui-monospace, monospace;
+    --dm-font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+    --dm-font-pixel: "Departure Mono", ui-monospace, monospace;
+
+    @each $key, $value in scale.$font-size {
+      --dm-font-size-#{$key}: #{$value};
+    }
+    @each $key, $value in scale.$display-size {
+      --dm-display-size-#{$key}: #{$value};
+    }
+    @each $key, $value in scale.$line-height {
+      --dm-line-height-#{$key}: #{$value};
+    }
+    @each $key, $value in scale.$display-line-height {
+      --dm-display-line-height-#{$key}: #{$value};
+    }
+    @each $key, $value in scale.$weight {
+      --dm-weight-#{$key}: #{$value};
+    }
+
+    // Wide tracking is what makes a monospace face read as a readout rather
+    // than as code.
+    --dm-tracking-tight: 0;
+    --dm-tracking-normal: 0.02em;
+    --dm-tracking-wide: 0.08em;
+    --dm-tracking-display: 0.06em;
+  }
+}

@@ -1,0 +1,8 @@
+@use "../_order";
+
+@layer dm.components {
+  .grid {
+    display: grid;
+    min-width: 0;
+  }
+}

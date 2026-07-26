@@ -1,0 +1,56 @@
+@use "sass:map";
+@use "mixins";
+@use "../tokens/scale";
+
+$families: (
+  "display": var(--dm-font-display),
+  "mono": var(--dm-font-mono),
+  "pixel": var(--dm-font-pixel),
+);
+
+@layer dm.utilities {
+  @include mixins.emit-scale("font", "font-family", $families);
+  @include mixins.emit-scale("font-size", "font-size", scale.$font-size, $responsive: true);
+  @include mixins.emit-scale-pair(
+    "display-size",
+    "font-size",
+    scale.$display-size,
+    "line-height",
+    scale.$display-line-height,
+    $responsive: true
+  );
+  @include mixins.emit-scale("leading", "line-height", scale.$line-height, $responsive: true);
+  @include mixins.emit-scale("weight", "font-weight", scale.$weight);
+
+  .dm-tracking-tight {
+    letter-spacing: var(--dm-tracking-tight);
+  }
+  .dm-tracking-normal {
+    letter-spacing: var(--dm-tracking-normal);
+  }
+  .dm-tracking-wide {
+    letter-spacing: var(--dm-tracking-wide);
+  }
+  .dm-tracking-display {
+    letter-spacing: var(--dm-tracking-display);
+  }
+
+  .dm-text-left {
+    text-align: left;
+  }
+  .dm-text-center {
+    text-align: center;
+  }
+  .dm-text-right {
+    text-align: right;
+  }
+
+  .dm-uppercase {
+    text-transform: uppercase;
+  }
+  .dm-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

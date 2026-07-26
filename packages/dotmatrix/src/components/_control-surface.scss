@@ -1,0 +1,50 @@
+// Shared visual "control surface" for Input/Textarea/Select/NumberInput/
+// SearchInput. A mixin, not a shared class — same reason as
+// _button-variants.scss: same-layer components have no reliable override
+// order (components/layering.contract.test.ts), so each gets its own scoped
+// classes built from these rules instead. Focus isn't handled here: the
+// global `:focus-visible` reset (styles/global.scss) already covers it.
+@mixin surface {
+  display: block;
+  width: 100%;
+  background: var(--dm-surface-background);
+  color: var(--dm-on-background-strong);
+  border-width: var(--dm-border-width-1);
+  border-color: var(--dm-border-medium);
+  border-radius: var(--dm-radius-control);
+  font-family: var(--dm-font-mono);
+  font-size: var(--dm-font-size-s);
+
+  &::placeholder {
+    color: var(--dm-on-background-weak);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--dm-border-strong);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Set directly by each control from its own `error` prop, not derived from
+  // :invalid — a required-but-empty field shouldn't look broken before the
+  // user has done anything.
+  &[aria-invalid="true"] {
+    border-color: var(--dm-status-error-fill);
+  }
+}
+
+@mixin size-s {
+  height: var(--dm-control-height-s);
+  padding-inline: var(--dm-space-8);
+}
+@mixin size-m {
+  height: var(--dm-control-height-m);
+  padding-inline: var(--dm-control-padding-x);
+}
+@mixin size-l {
+  height: var(--dm-control-height-l);
+  padding-inline: var(--dm-space-16);
+}

@@ -1,0 +1,53 @@
+@use "mixins";
+
+$directions: (row, column, "row-reverse", "column-reverse");
+$wraps: (nowrap, wrap, "wrap-reverse");
+
+// Keys are the prop-facing names (Once UI's convention: "start" / "end" /
+// "between" rather than raw CSS keywords), values are the real property value.
+$align: (
+  "start": flex-start,
+  "center": center,
+  "end": flex-end,
+  "stretch": stretch,
+  "baseline": baseline,
+);
+
+$justify: (
+  "start": flex-start,
+  "center": center,
+  "end": flex-end,
+  "between": space-between,
+  "around": space-around,
+  "evenly": space-evenly,
+);
+
+$grow: (0: 0, 1: 1);
+$shrink: (0: 0, 1: 1);
+
+// Note: `.dm-flex` / `.dm-row` / `.dm-column` themselves (the `display: flex`
+// + default direction) are NOT here — they live in each component's own
+// Flex.module.scss / Row.module.scss / Column.module.scss under the
+// dm.components layer, which sits below dm.utilities in the cascade. That
+// guarantees an explicit `display` or `direction` prop always wins regardless
+// of file order; a bare utility class here would only win by the accident of
+// this file loading before/after display.scss.
+@layer dm.utilities {
+  @include mixins.emit-keyword("direction", "flex-direction", $directions, $responsive: true);
+  @include mixins.emit-keyword("wrap", "flex-wrap", $wraps, $responsive: true);
+  @include mixins.emit-scale("align-items", "align-items", $align, $responsive: true);
+  @include mixins.emit-scale("align-self", "align-self", $align, $responsive: true);
+  @include mixins.emit-scale("justify-content", "justify-content", $justify, $responsive: true);
+  @include mixins.emit-scale("flex-grow", "flex-grow", $grow);
+  @include mixins.emit-scale("flex-shrink", "flex-shrink", $shrink);
+
+  .dm-flex-1 {
+    flex: 1 1 0%;
+  }
+  .dm-flex-auto {
+    flex: 1 1 auto;
+  }
+  .dm-flex-none {
+    flex: none;
+  }
+}

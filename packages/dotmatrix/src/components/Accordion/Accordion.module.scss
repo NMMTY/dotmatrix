@@ -1,0 +1,59 @@
+@use "../_order";
+
+@layer dm.components {
+  .item {
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+  }
+
+  .heading {
+    margin: 0;
+    font: inherit;
+    display: block;
+  }
+
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--dm-control-height-l);
+    background: transparent;
+    color: var(--dm-on-background-strong);
+    cursor: pointer;
+    text-align: left;
+
+    &:hover:not(:disabled) {
+      color: var(--dm-on-background-weak);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  // The `grid-template-rows: 0fr -> 1fr` trick: animating to `height: auto`
+  // directly isn't possible in CSS, but a grid track can transition between
+  // an explicit `0fr` and the content's natural size via `1fr`. `.panelInner`
+  // needs `overflow: hidden` and `min-height: 0` for the track to actually
+  // clip it down to zero along the way, rather than the content's own
+  // min-content size flooring how far it can collapse.
+  .panelWrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms ease-out;
+  }
+  .panelWrapper.open {
+    grid-template-rows: 1fr;
+  }
+
+  .panelInner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .panel {
+    padding-bottom: var(--dm-space-16);
+  }
+}

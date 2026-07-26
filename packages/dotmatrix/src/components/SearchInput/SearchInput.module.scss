@@ -1,0 +1,51 @@
+@use "../_order";
+@use "../_control-surface" as surface;
+@use "../_field-icon" as field-icon;
+
+@layer dm.components {
+  .wrapper {
+    @include field-icon.wrapper;
+  }
+
+  .input {
+    @include surface.surface;
+    @include surface.size-m;
+    padding-left: var(--dm-space-32);
+    padding-right: var(--dm-space-32);
+
+    // Browsers add their own clear-button/decoration to `type="search"` —
+    // removed since this component draws its own.
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration {
+      appearance: none;
+    }
+  }
+
+  .searchIcon {
+    @include field-icon.leading;
+  }
+
+  // Not `field-icon.trailing`: this is a bigger clickable target (20×20),
+  // not a plain icon, so it sits `--dm-space-4` from the edge instead of the
+  // `--dm-space-8` a leading/trailing icon uses — an intentionally
+  // different offset, not a value worth forcing into the shared mixin.
+  .clear {
+    position: absolute;
+    top: 50%;
+    right: var(--dm-space-4);
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--dm-radius-full);
+    color: var(--dm-on-background-weak);
+    cursor: pointer;
+
+    &:hover {
+      background: var(--dm-surface-raised);
+      color: var(--dm-on-background-strong);
+    }
+  }
+}

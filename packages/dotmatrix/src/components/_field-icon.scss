@@ -1,0 +1,25 @@
+// Shared by Input's own `icon` prop and SearchInput's fixed search/clear
+// icons — both need the same absolutely-positioned-inside-a-relative-wrapper
+// layout, just with different content in the slot.
+@mixin wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+@mixin leading {
+  position: absolute;
+  top: 50%;
+  left: var(--dm-space-8);
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--dm-on-background-weak);
+}
+
+@mixin trailing {
+  position: absolute;
+  top: 50%;
+  right: var(--dm-space-8);
+  transform: translateY(-50%);
+  color: var(--dm-on-background-weak);
+}

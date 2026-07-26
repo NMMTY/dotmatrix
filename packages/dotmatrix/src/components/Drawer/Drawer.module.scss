@@ -1,0 +1,52 @@
+@use "../_order";
+@use "../_overlay-surface" as overlay;
+
+// Positioning lives entirely on the overlay container (flex direction +
+// justify-content push the single drawer child to the right edge, say) —
+// the drawer's own per-side classes only set its dimensions, not its
+// position, so there's exactly one place deciding where it sits.
+@layer dm.components {
+  .overlay {
+    z-index: var(--dm-z-overlay);
+    display: flex;
+    background: var(--dm-overlay-background);
+  }
+
+  .overlayLeft {
+    justify-content: flex-start;
+  }
+  .overlayRight {
+    justify-content: flex-end;
+  }
+  .overlayTop {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .overlayBottom {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .drawer {
+    @include overlay.surface;
+    display: flex;
+    flex-direction: column;
+    gap: var(--dm-space-16);
+    padding: var(--dm-space-24);
+    overflow: auto;
+    border-radius: 0;
+  }
+
+  .left,
+  .right {
+    height: 100%;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .top,
+  .bottom {
+    width: 100%;
+    max-height: 60%;
+  }
+}

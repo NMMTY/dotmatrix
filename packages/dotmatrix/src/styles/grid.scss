@@ -1,0 +1,39 @@
+@use "sass:map";
+@use "mixins";
+
+// 1-12 column/row templates. A fixed ceiling, not an arbitrary integer prop:
+// bitmap layouts read best on a coarse grid, and an unbounded prop would
+// invite one-off column counts that fight the pixel/spacing grid elsewhere.
+@function _repeat-map($max) {
+  $out: ();
+  @for $i from 1 through $max {
+    $out: map.merge($out, ($i: "repeat(#{$i}, minmax(0, 1fr))"));
+  }
+  @return $out;
+}
+
+$columns: _repeat-map(12);
+$rows: _repeat-map(6);
+
+$justify-items: (
+  "start": start,
+  "center": center,
+  "end": end,
+  "stretch": stretch,
+);
+
+// `.dm-grid`'s `display: grid` lives in components/Grid/Grid.module.scss
+// (dm.components layer) instead of here — see the note in styles/flex.scss
+// for why a base display rule belongs below dm.utilities, not in it.
+@layer dm.utilities {
+  @include mixins.emit-scale("columns", "grid-template-columns", $columns, $responsive: true);
+  @include mixins.emit-scale("rows", "grid-template-rows", $rows, $responsive: true);
+  @include mixins.emit-scale("justify-items", "justify-items", $justify-items, $responsive: true);
+
+  .dm-col-span-full {
+    grid-column: 1 / -1;
+  }
+  .dm-row-span-full {
+    grid-row: 1 / -1;
+  }
+}
