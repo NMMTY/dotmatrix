@@ -7,7 +7,7 @@
 @function _repeat-map($max) {
   $out: ();
   @for $i from 1 through $max {
-    $out: map.merge($out, ($i: "repeat(#{$i}, minmax(0, 1fr))"));
+    $out: map.merge($out, ($i: repeat(#{$i}, minmax(0, 1fr))));
   }
   @return $out;
 }
