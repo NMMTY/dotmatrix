@@ -1,0 +1,126 @@
+@use "../_order";
+
+@layer dm.components {
+  .block {
+    min-width: 0;
+  }
+
+  .header {
+    padding-inline: var(--dm-space-8);
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-weak);
+  }
+
+  .label {
+    padding-inline: var(--dm-space-8);
+  }
+
+  .actions {
+    padding-block: var(--dm-space-4);
+  }
+
+  .preview {
+    overflow: auto;
+  }
+
+  .codeWrap {
+    position: relative;
+    overflow: auto;
+  }
+
+  .collapsed {
+    overflow: hidden;
+  }
+
+  .pre {
+    margin: 0;
+    padding: var(--dm-space-16);
+    overflow-x: auto;
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    line-height: 1.6;
+    white-space: pre;
+  }
+
+  // Prism renders its own `.token.*` spans directly into the DOM (via
+  // `dangerouslySetInnerHTML`), so CSS Modules never sees or scopes them —
+  // `:global` is required, not a style choice.
+  .pre :global(.token.comment) {
+    color: var(--dm-on-background-weak);
+    font-style: italic;
+  }
+
+  .pre :global(.token.punctuation) {
+    color: var(--dm-on-background-medium);
+  }
+
+  .pre :global(.token.keyword) {
+    color: var(--dm-on-background-strong);
+    font-weight: var(--dm-weight-bold);
+  }
+
+  .pre :global(.token.string),
+  .pre :global(.token.attr-value),
+  .pre :global(.token.char),
+  .pre :global(.token.builtin) {
+    color: var(--dm-on-background-medium);
+  }
+
+  .pre :global(.token.function),
+  .pre :global(.token.class-name),
+  .pre :global(.token.tag),
+  .pre :global(.token.property),
+  .pre :global(.token.constant),
+  .pre :global(.token.number),
+  .pre :global(.token.boolean) {
+    color: var(--dm-on-background-strong);
+    font-weight: var(--dm-weight-medium);
+  }
+
+  .pre :global(.token.operator),
+  .pre :global(.token.attr-name),
+  .pre :global(.token.selector),
+  .pre :global(.token.entity),
+  .pre :global(.token.url) {
+    color: var(--dm-on-background-medium);
+  }
+
+  // Collapsed height is set inline (depends on `maxLines`); this just adds
+  // the pinned "View code" bar under the cut — a hard edge, not a fade-to-
+  // transparent gradient, consistent with the rest of the system's tonal
+  // (dither/pattern-based) rather than continuous-tone visual language.
+  .collapseBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--dm-space-8);
+    background: var(--dm-surface-background);
+    border-top-width: var(--dm-border-width-1);
+    border-top-color: var(--dm-border-weak);
+  }
+
+  .overlay {
+    z-index: var(--dm-z-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--dm-space-24);
+    background: var(--dm-overlay-background);
+  }
+
+  .fullscreen {
+    width: 100%;
+    max-width: 960px;
+    max-height: 100%;
+    display: flex;
+  }
+
+  .fullscreen .block {
+    width: 100%;
+  }
+
+  .fullscreen .codeWrap {
+    max-height: 70vh;
+  }
+}
