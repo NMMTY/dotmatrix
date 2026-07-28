@@ -1,0 +1,29 @@
+@use "../_order";
+
+@layer dm.components {
+  .wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    line-height: 0;
+  }
+
+  .svg {
+    display: block;
+  }
+
+  // Opt-in via `forceMonochrome` — some icon sets (brand/logo packs like
+  // react-icons/si) hardcode their own fill color rather than using
+  // `currentColor`, which breaks this system's "always matches surrounding
+  // text, no continuous tone" rule for icons. Only `fill` is forced, not
+  // `stroke`: an outline-style icon's paths often have no explicit stroke at
+  // all, and SVG's default `stroke-width` is non-zero, so forcing a stroke
+  // paint would draw an unwanted outline around fill-only icons.
+  // `:global` is required — this targets markup the icon component itself
+  // renders, which CSS Modules never scopes.
+  .monochrome :global(svg),
+  .monochrome :global(svg *) {
+    fill: currentColor !important;
+  }
+}
