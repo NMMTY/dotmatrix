@@ -1,6 +1,6 @@
 {
   "name": "@nmmty/dotmatrix",
-  "version": "0.0.0",
+  "version": "0.3.0",
   "description": "Monochrome bitmap design system. Layout is built from primitives, never raw tags.",
   "license": "MIT",
   "type": "module",
