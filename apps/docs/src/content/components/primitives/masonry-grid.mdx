@@ -18,13 +18,32 @@ row, which is the standard CSS-columns masonry behavior.
 A gallery of variable-height cards — this is the layout `MasonryGrid` earns its keep on, since a
 regular `Grid` would leave uneven gaps under the shorter items in each row:
 
-```tsx
-<MasonryGrid minColumnWidth={240} gap="16">
-  {photos.map((photo) => (
-    <Media key={photo.id} src={photo.src} alt={photo.alt} />
-  ))}
-</MasonryGrid>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<MasonryGrid minColumnWidth={240} gap="16">\n  {photos.map((photo) => (\n    <Media key={photo.id} src={photo.src} alt={photo.alt} />\n  ))}\n</MasonryGrid>',
+    },
+  ]}
+  preview={
+    <MasonryGrid minColumnWidth={160} gap="16">
+      <Card gap="8" shadow="s">
+        <Text fontSize="s">Short note.</Text>
+      </Card>
+      <Card gap="8" shadow="s">
+        <Text fontSize="s">A somewhat longer note that wraps across a couple of lines.</Text>
+      </Card>
+      <Card gap="8" shadow="s">
+        <Text fontSize="s">Another note.</Text>
+      </Card>
+      <Card gap="8" shadow="s">
+        <Text fontSize="s">
+          One more, longer still, to show how the columns settle at different heights.
+        </Text>
+      </Card>
+    </MasonryGrid>
+  }
+/>
 
 Because it reads down-then-across, keep DOM order in mind for content where reading order matters
 — for a photo gallery it rarely does, but for anything a screen-reader user steps through

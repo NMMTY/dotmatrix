@@ -14,12 +14,20 @@ A labeled headline figure with an optional trend delta — a reusable form of a 
 
 `trend` is optional — a plain figure with no history to compare against just omits it:
 
-```tsx
-<Row gap="24">
-  <Stat label="Revenue" value="$12.4k" trend={{ value: "+8%", direction: "up" }} />
-  <Stat label="Active users" value="1,204" />
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="24">\n  <Stat label="Revenue" value="$12.4k" trend={{ value: "+8%", direction: "up" }} />\n  <Stat label="Active users" value="1,204" />\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="24">
+      <Stat label="Revenue" value="$12.4k" trend={{ value: "+8%", direction: "up" }} />
+      <Stat label="Active users" value="1,204" />
+    </Row>
+  }
+/>
 
 A `Grid` of `Stat`s is the common dashboard-tile layout — see
 [Grid](/components/primitives/grid) for the responsive-columns pattern.

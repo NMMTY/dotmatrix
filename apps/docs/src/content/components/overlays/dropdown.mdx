@@ -17,13 +17,21 @@ menu triggered by right-click instead of a visible trigger, see
 `trigger` plus a list of `DropdownItem`s covers the common menu case — arrow keys and typeahead
 work automatically once items are declared this way:
 
-```tsx
-<Dropdown trigger={<Button icon="more-horizontal">Actions</Button>}>
-  <DropdownItem onSelect={() => rename()}>Rename</DropdownItem>
-  <DropdownItem onSelect={() => duplicate()}>Duplicate</DropdownItem>
-  <DropdownItem onSelect={() => remove()} disabled={!canDelete}>Delete</DropdownItem>
-</Dropdown>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Dropdown trigger={<Button icon="more-horizontal">Actions</Button>}>\n  <DropdownItem onSelect={() => rename()}>Rename</DropdownItem>\n  <DropdownItem onSelect={() => duplicate()}>Duplicate</DropdownItem>\n  <DropdownItem onSelect={() => remove()} disabled={!canDelete}>Delete</DropdownItem>\n</Dropdown>',
+    },
+  ]}
+  preview={
+    <Dropdown trigger={<Button icon="more-horizontal">Actions</Button>}>
+      <DropdownItem>Rename</DropdownItem>
+      <DropdownItem>Duplicate</DropdownItem>
+      <DropdownItem disabled>Delete</DropdownItem>
+    </Dropdown>
+  }
+/>
 
 `matchTriggerWidth` is what [Select](/components/forms/select) sets internally — it makes the menu
 match the trigger's own width instead of sizing to its longest option, which is what a

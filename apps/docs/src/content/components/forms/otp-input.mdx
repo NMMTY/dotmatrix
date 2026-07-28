@@ -17,20 +17,23 @@ once.
 `onComplete` fires once, exactly when the value reaches `length` characters — the natural hook for
 auto-submitting a code without a separate "Verify" button:
 
-```tsx
-<OTPInput
-  label="Verification code"
-  length={6}
-  onComplete={(code) => verifyCode(code)}
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<OTPInput\n  label="Verification code"\n  length={6}\n  onComplete={(code) => verifyCode(code)}\n/>',
+    },
+  ]}
+  preview={<OTPInput label="Verification code" length={6} />}
 />
-```
 
 A shorter PIN just needs a smaller `length` — the box count always follows it, nothing else to
 configure:
 
-```tsx
-<OTPInput label="PIN" length={4} />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<OTPInput label="PIN" length={4} />' }]}
+  preview={<OTPInput label="PIN" length={4} />}
+/>
 
 ## Props
 

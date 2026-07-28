@@ -17,13 +17,21 @@ bitmap equivalent in this system's monochrome-first identity.
 `swatches` adds a row of quick picks above the hue/lightness grid — a natural fit for a brand's own
 accent palette rather than making every user hand-mix it:
 
-```tsx
-<ColorInput
-  label="Accent color"
-  defaultValue="#3b82f6"
-  swatches={["#3b82f6", "#22c55e", "#f97316", "#ef4444"]}
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<ColorInput\n  label="Accent color"\n  defaultValue="#3b82f6"\n  swatches={["#3b82f6", "#22c55e", "#f97316", "#ef4444"]}\n/>',
+    },
+  ]}
+  preview={
+    <ColorInput
+      label="Accent color"
+      defaultValue="#3b82f6"
+      swatches={["#3b82f6", "#22c55e", "#f97316", "#ef4444"]}
+    />
+  }
 />
-```
 
 The typed hex field beside the grid stays in sync with swatch/grid clicks in both directions — a
 user can type `#3b82f6` directly instead of hunting for it visually, and `value` is always a

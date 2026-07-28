@@ -18,14 +18,25 @@ settings panel, ...).
 `trigger` opens it on click, same as `Dialog`/`Dropdown` — but unlike a `Dialog`, the content stays
 anchored to the trigger and doesn't dim the rest of the page:
 
-```tsx
-<Popover trigger={<IconButton icon="settings" aria-label="View options" />} placement="bottom-end">
-  <Column gap="8" padding="16">
-    <Switch label="Show hidden files" />
-    <Switch label="Compact rows" />
-  </Column>
-</Popover>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Popover trigger={<IconButton icon="settings" aria-label="View options" />} placement="bottom-end">\n  <Column gap="8" padding="16">\n    <Switch label="Show hidden files" />\n    <Switch label="Compact rows" />\n  </Column>\n</Popover>',
+    },
+  ]}
+  preview={
+    <Popover
+      trigger={<IconButton icon="settings" aria-label="View options" />}
+      placement="bottom-end"
+    >
+      <Column gap="8" padding="16">
+        <Switch label="Show hidden files" />
+        <Switch label="Compact rows" />
+      </Column>
+    </Popover>
+  }
+/>
 
 `placement` is a hint, not a guarantee — floating-ui flips it to whichever side actually has room
 when the preferred one would overflow the viewport.

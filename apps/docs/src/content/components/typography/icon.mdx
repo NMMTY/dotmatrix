@@ -17,15 +17,27 @@ See the [Icons guide](/guides/icons) for the full catalog.
 Fill always comes from `currentColor`, so pairing an icon with text just means putting both inside
 the same colored wrapper — no separate `color` prop on `Icon` itself to keep in sync:
 
-```tsx
-<Text color="strong">
-  <Icon name="warning" size="s" /> Something went wrong
-</Text>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Text color="strong">\n  <Icon name="warning" size="s" /> Something went wrong\n</Text>',
+    },
+  ]}
+  preview={
+    <Text color="strong">
+      <Icon name="warning" size="s" /> Something went wrong
+    </Text>
+  }
+/>
 
 Most controls that need an icon (`Button`, `IconButton`, `Input`) take an `IconName` on their own
 `icon` prop rather than a rendered `<Icon>` child — reach for `<Icon>` directly only when there's
 no such prop to use, e.g. inline in prose or next to plain text.
+
+Need a glyph that isn't in this catalog? See
+[ExternalIcon](/components/typography/external-icon) for loading one from react-icons (or any
+similarly-shaped icon set) instead.
 
 ## Props
 

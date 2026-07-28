@@ -16,21 +16,41 @@ as `<span>` by default; pass `as="p"` / `as="label"` / etc. for the right semant
 `color` picks a semantic weight, not a literal color value — it stays legible across every theme
 and palette rather than baking in a hex value that might not contrast well in light mode:
 
-```tsx
-<Text color="strong">Primary content</Text>
-<Text color="medium">Supporting copy</Text>
-<Text color="weak">Least important, e.g. a timestamp</Text>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Text color="strong">Primary content</Text>\n<Text color="medium">Supporting copy</Text>\n<Text color="weak">Least important, e.g. a timestamp</Text>',
+    },
+  ]}
+  preview={
+    <Column gap="4">
+      <Text color="strong">Primary content</Text>
+      <Text color="medium">Supporting copy</Text>
+      <Text color="weak">Least important, e.g. a timestamp</Text>
+    </Column>
+  }
+/>
 
 `as="label"` paired with `htmlFor` connects text to a form control the same way a real `<label>`
 does — this is how every field's own label in this system is built, not a special case:
 
-```tsx
-<Text as="label" htmlFor="email" weight="medium">
-  Email
-</Text>
-<input id="email" />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Text as="label" htmlFor="email" weight="medium">\n  Email\n</Text>\n<input id="email" />',
+    },
+  ]}
+  preview={
+    <Column gap="4">
+      <Text as="label" htmlFor="email-example" weight="medium">
+        Email
+      </Text>
+      <input id="email-example" />
+    </Column>
+  }
+/>
 
 ## Props
 

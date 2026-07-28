@@ -20,9 +20,18 @@ canvas's own computed `color` at draw time, so it follows the current theme like
 trailing space (the default ramp ends in one) means "leave this cell blank." Swap in your own ramp
 to change the texture entirely:
 
-```tsx
-<AsciiArt src={photo} alt="Portrait" charset="#+. " />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<AsciiArt src={photo} alt="Portrait" charset="#+. " />' }]}
+  preview={
+    <AsciiArt
+      src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23000%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2266%22%20r%3D%2220%22%20fill%3D%22%23000%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2230%22%20r%3D%2214%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E"
+      alt="Demo gradient"
+      width={96}
+      height={96}
+      charset="#+. "
+    />
+  }
+/>
 
 A shorter charset gives fewer distinct tones (more posterized, higher contrast); a longer one gives
 a smoother gradient at the cost of needing a larger `cellSize` to stay legible.

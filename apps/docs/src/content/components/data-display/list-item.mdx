@@ -15,9 +15,21 @@ trailing content (a button, a badge) that makes sense at the end of the row.
 `title`/`description`/`action` cover the common row shape; omit all three and pass `children`
 instead for a row that doesn't fit that template:
 
-```tsx
-<ListItem title="Ada Lovelace" description="ada@example.com" action={<Button size="s">View</Button>} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<ListItem title="Ada Lovelace" description="ada@example.com" action={<Button size="s">View</Button>} />',
+    },
+  ]}
+  preview={
+    <ListItem
+      title="Ada Lovelace"
+      description="ada@example.com"
+      action={<Button size="s">View</Button>}
+    />
+  }
+/>
 
 ## Props
 

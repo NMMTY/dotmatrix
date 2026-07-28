@@ -14,11 +14,19 @@ also what a single backtick renders to in every page across this site, including
 
 For a value or command name inline in a sentence:
 
-```tsx
-<Text>
-  Set <InlineCode>strict</InlineCode> to opt into the stricter validation path.
-</Text>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Text>\n  Set <InlineCode>strict</InlineCode> to opt into the stricter validation path.\n</Text>',
+    },
+  ]}
+  preview={
+    <Text>
+      Set <InlineCode>strict</InlineCode> to opt into the stricter validation path.
+    </Text>
+  }
+/>
 
 For a whole snippet spanning multiple lines, reach for
 [CodeBlock](/components/typography/code-block) instead — `InlineCode` has no syntax highlighting

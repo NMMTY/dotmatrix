@@ -15,11 +15,24 @@ must be unique among its siblings, since that's what the accordion's open state 
 `title` is the always-visible header row; `children` is the collapsible content underneath it —
 disable an item (a section that's temporarily unavailable) without removing it from the list:
 
-```tsx
-<AccordionItem value="advanced" title="Advanced settings" disabled={!isPro}>
-  ...
-</AccordionItem>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<AccordionItem value="advanced" title="Advanced settings" disabled={!isPro}>\n  ...\n</AccordionItem>',
+    },
+  ]}
+  preview={
+    <Accordion defaultValue="basic">
+      <AccordionItem value="basic" title="Basic settings">
+        Standard options everyone can use.
+      </AccordionItem>
+      <AccordionItem value="advanced" title="Advanced settings" disabled>
+        Available on the Pro plan.
+      </AccordionItem>
+    </Accordion>
+  }
+/>
 
 ## Props
 

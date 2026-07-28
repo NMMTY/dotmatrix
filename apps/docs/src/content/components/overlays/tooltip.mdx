@@ -18,20 +18,36 @@ Wrapping an icon-only `IconButton` is the case `Tooltip` earns its keep on — t
 an `aria-label` for screen readers, and the tooltip adds the same information visually for
 sighted mouse/keyboard users:
 
-```tsx
-<Tooltip content="Delete">
-  <IconButton icon="trash" aria-label="Delete" />
-</Tooltip>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Tooltip content="Delete">\n  <IconButton icon="trash" aria-label="Delete" />\n</Tooltip>',
+    },
+  ]}
+  preview={
+    <Tooltip content="Delete">
+      <IconButton icon="trash" aria-label="Delete" />
+    </Tooltip>
+  }
+/>
 
 `delay` (ms) holds off showing it on hover — useful so a tooltip doesn't flash in for every icon a
 cursor merely passes over on its way somewhere else:
 
-```tsx
-<Tooltip content="Settings" delay={400}>
-  <IconButton icon="settings" aria-label="Settings" />
-</Tooltip>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Tooltip content="Settings" delay={400}>\n  <IconButton icon="settings" aria-label="Settings" />\n</Tooltip>',
+    },
+  ]}
+  preview={
+    <Tooltip content="Settings" delay={400}>
+      <IconButton icon="settings" aria-label="Settings" />
+    </Tooltip>
+  }
+/>
 
 ## Props
 

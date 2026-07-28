@@ -18,26 +18,47 @@ menu in this system already has.
 `options` takes plain data, not JSX — each entry's own `disabled` flag skips it during keyboard
 navigation without needing a conditionally-rendered `<DropdownItem>`:
 
-```tsx
-<Select
-  label="Country"
-  placeholder="Choose a country…"
-  options={[
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "mx", label: "Mexico", disabled: true },
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Select\n  label="Country"\n  placeholder="Choose a country…"\n  options={[\n    { value: "us", label: "United States" },\n    { value: "ca", label: "Canada" },\n    { value: "mx", label: "Mexico", disabled: true },\n  ]}\n/>',
+    },
   ]}
+  preview={
+    <Select
+      label="Country"
+      placeholder="Choose a country…"
+      options={[
+        { value: "us", label: "United States" },
+        { value: "ca", label: "Canada" },
+        { value: "mx", label: "Mexico", disabled: true },
+      ]}
+    />
+  }
 />
-```
 
 Controlled, for when the selection drives something else on the page (a shipping estimate, a
 dependent second `Select`):
 
-```tsx
-const [country, setCountry] = useState("us");
-
-<Select label="Country" value={country} onChange={setCountry} options={countries} />;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [country, setCountry] = useState("us");\n\n<Select label="Country" value={country} onChange={setCountry} options={countries} />;',
+    },
+  ]}
+  preview={
+    <Select
+      label="Country"
+      defaultValue="us"
+      options={[
+        { value: "us", label: "United States" },
+        { value: "ca", label: "Canada" },
+      ]}
+    />
+  }
+/>
 
 ## Props
 

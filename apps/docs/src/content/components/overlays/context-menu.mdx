@@ -17,18 +17,26 @@ logic.
 `children` is the single element that gets the right-click handler; `menu` is the same
 `DropdownItem` list `Dropdown` renders:
 
-```tsx
-<ContextMenu
-  menu={
-    <>
-      <DropdownItem onSelect={() => copy()}>Copy</DropdownItem>
-      <DropdownItem onSelect={() => paste()}>Paste</DropdownItem>
-    </>
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<ContextMenu\n  menu={\n    <>\n      <DropdownItem onSelect={() => copy()}>Copy</DropdownItem>\n      <DropdownItem onSelect={() => paste()}>Paste</DropdownItem>\n    </>\n  }\n>\n  <Card padding="24">Right-click anywhere in this card</Card>\n</ContextMenu>',
+    },
+  ]}
+  preview={
+    <ContextMenu
+      menu={
+        <>
+          <DropdownItem>Copy</DropdownItem>
+          <DropdownItem>Paste</DropdownItem>
+        </>
+      }
+    >
+      <Card padding="24">Right-click anywhere in this card</Card>
+    </ContextMenu>
   }
->
-  <Card padding="24">Right-click anywhere in this card</Card>
-</ContextMenu>
-```
+/>
 
 Reach for `ContextMenu` only as a supplement to a visible way of reaching the same actions (a
 toolbar button, say) — right-click has no keyboard-only or touch equivalent, so it can't be the

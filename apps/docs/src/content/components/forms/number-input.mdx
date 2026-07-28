@@ -15,22 +15,32 @@ case of nudging a small count up or down without typing.
 `min`/`max`/`step` bound and shape what the stepper buttons produce — the field won't step past
 either end:
 
-```tsx
-<NumberInput label="Quantity" min={1} max={10} defaultValue={1} />
-<NumberInput label="Price" min={0} step={0.5} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<NumberInput label="Quantity" min={1} max={10} defaultValue={1} />\n<NumberInput label="Price" min={0} step={0.5} />',
+    },
+  ]}
+  preview={
+    <Column gap="16">
+      <NumberInput label="Quantity" min={1} max={10} defaultValue={1} />
+      <NumberInput label="Price" min={0} step={0.5} />
+    </Column>
+  }
+/>
 
 Controlled, when the count needs to be read elsewhere (a running total, a cart summary):
 
-```tsx
-const [quantity, setQuantity] = useState(1);
-
-<NumberInput
-  label="Quantity"
-  value={quantity}
-  onChange={(e) => setQuantity(Number(e.target.value))}
-/>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [quantity, setQuantity] = useState(1);\n\n<NumberInput\n  label="Quantity"\n  value={quantity}\n  onChange={(e) => setQuantity(Number(e.target.value))}\n/>;',
+    },
+  ]}
+  preview={<NumberInput label="Quantity" defaultValue={1} />}
+/>
 
 ## Props
 

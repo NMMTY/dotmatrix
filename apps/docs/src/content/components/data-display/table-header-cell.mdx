@@ -17,14 +17,30 @@ click target.
 `sortDirection` mirrors `aria-sort` directly (`"ascending"`/`"descending"`/`"none"`) rather than a
 custom enum — a non-sortable column simply omits both props:
 
-```tsx
-<tr>
-  <TableHeaderCell sortDirection="ascending" onSort={() => sortBy("name")}>
-    Name
-  </TableHeaderCell>
-  <TableHeaderCell>Status</TableHeaderCell>
-</tr>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<tr>\n  <TableHeaderCell sortDirection="ascending" onSort={() => sortBy("name")}>\n    Name\n  </TableHeaderCell>\n  <TableHeaderCell>Status</TableHeaderCell>\n</tr>',
+    },
+  ]}
+  preview={
+    <Table>
+      <TableHead>
+        <tr>
+          <TableHeaderCell sortDirection="ascending">Name</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+        </tr>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Ada Lovelace</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  }
+/>
 
 ## Props
 

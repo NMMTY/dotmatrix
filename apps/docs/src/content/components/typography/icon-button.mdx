@@ -16,18 +16,27 @@ without it the button is silently unusable for anyone on a screen reader.
 Same `variant`/`size` scale as `Button`, so an icon-only action fits right alongside text buttons
 in the same toolbar:
 
-```tsx
-<Row gap="8">
-  <Button variant="ghost">Cancel</Button>
-  <IconButton icon="trash" aria-label="Delete" variant="ghost" />
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="8">\n  <Button variant="ghost">Cancel</Button>\n  <IconButton icon="trash" aria-label="Delete" variant="ghost" />\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      <Button variant="ghost">Cancel</Button>
+      <IconButton icon="trash" aria-label="Delete" variant="ghost" />
+    </Row>
+  }
+/>
 
 `aria-label` should describe the action, not restate the icon — "Delete item", not "Trash icon":
 
-```tsx
-<IconButton icon="close" aria-label="Close dialog" />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<IconButton icon="close" aria-label="Close dialog" />' }]}
+  preview={<IconButton icon="close" aria-label="Close dialog" />}
+/>
 
 ## Props
 

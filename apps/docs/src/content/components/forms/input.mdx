@@ -16,18 +16,29 @@ field. Also takes an explicit `pattern` prop and an optional leading `icon`.
 `description` sets the baseline hint text; `error` (or `success`) replaces it entirely once the
 field has something to report, rather than stacking both underneath the field at once:
 
-```tsx
-<Input label="Email" description="We'll only use this for order updates." />
-<Input label="Email" error="That doesn't look like a valid email." />
-<Input label="Email" success="Looks good." />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Input label="Email" description="We\'ll only use this for order updates." />\n<Input label="Email" error="That doesn\'t look like a valid email." />\n<Input label="Email" success="Looks good." />',
+    },
+  ]}
+  preview={
+    <Column gap="16">
+      <Input label="Email" description="We'll only use this for order updates." />
+      <Input label="Email" error="That doesn't look like a valid email." />
+      <Input label="Email" success="Looks good." />
+    </Column>
+  }
+/>
 
 A leading `icon` reads as part of the field, not a decoration bolted on top — useful for a quick
 visual hint at what kind of value is expected:
 
-```tsx
-<Input label="Email" icon="user" />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Input label="Email" icon="user" />' }]}
+  preview={<Input label="Email" icon="user" />}
+/>
 
 Uncontrolled by default, like any native `<input>` — pass `value`/`onChange` only when you need to
 read or drive the value from outside the field itself.

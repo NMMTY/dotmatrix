@@ -14,13 +14,21 @@ props that only make sense for a container.
 Between two sections of a page, sitting in the same `Column` as its siblings rather than as a
 `border` on one of them — that keeps the spacing driven entirely by the column's own `gap`:
 
-```tsx
-<Column gap="24">
-  <Section title="Account" />
-  <Line />
-  <Section title="Billing" />
-</Column>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Column gap="24">\n  <Section title="Account" />\n  <Line />\n  <Section title="Billing" />\n</Column>',
+    },
+  ]}
+  preview={
+    <Column gap="24">
+      <Heading as="h3" displaySize="xs">Account</Heading>
+      <Line />
+      <Heading as="h3" displaySize="xs">Billing</Heading>
+    </Column>
+  }
+/>
 
 ## Props
 

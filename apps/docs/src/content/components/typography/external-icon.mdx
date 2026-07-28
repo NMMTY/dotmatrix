@@ -1,0 +1,52 @@
+---
+title: "ExternalIcon"
+summary: "Adapts an icon component from react-icons (or any icon set shaped the same way) into this system."
+navIcon: "star"
+github: "components/ExternalIcon/ExternalIcon.tsx"
+---
+
+The escape hatch for a glyph that isn't in [Icon](/components/typography/icon)'s own hand-drawn
+catalog. `icon` takes an icon *component*, not a rendered element — any function shaped like
+react-icons' own icons (`size`/`color`/`className`/`style`/`title` props in, an SVG out) works,
+with no dependency on the `react-icons` package itself: the prop type is structural, matched by
+shape rather than an import, so anything built the same way (Feather, Phosphor, a hand-rolled set)
+works too.
+
+```tsx
+import { FaHeart } from "react-icons/fa";
+
+<ExternalIcon icon={FaHeart} size="m" />;
+```
+
+<Playground name="ExternalIcon" />
+
+## Icon vs. ExternalIcon
+
+`Icon`'s catalog is hand-drawn on an 8×8 pixel grid — blocky, integer-coordinate glyphs that read
+as native to this system's bitmap identity. `ExternalIcon` renders whatever vector art the source
+library draws instead: smooth curves, arbitrary paths, the normal look of a general-purpose icon
+set. That's a real visual tradeoff, not a bug — reach for `Icon` first, and only fall back to
+`ExternalIcon` for a glyph the built-in catalog genuinely doesn't have (a brand logo, a
+niche symbol).
+
+## Forcing monochrome
+
+Most react-icons sets already use `currentColor` by default, so they inherit the surrounding text
+color the same way `Icon` does with zero extra configuration. Brand/logo packs (`react-icons/si`,
+for example) are the exception — they hardcode real brand colors. `forceMonochrome` overrides
+`fill` back to `currentColor` for those cases, keeping every icon inside this system's "no
+continuous tone" rule even when the source icon wants to be colorful:
+
+```tsx
+import { SiGithub } from "react-icons/si";
+
+<ExternalIcon icon={SiGithub} title="GitHub" forceMonochrome />;
+```
+
+`forceMonochrome` only overrides `fill`, not `stroke` — an outline-style icon's paths often carry
+no explicit stroke at all, and SVG's default `stroke-width` is non-zero, so forcing a stroke paint
+too would draw an unwanted outline around icons that were never meant to have one.
+
+## Props
+
+<PropsTable name="ExternalIcon" />

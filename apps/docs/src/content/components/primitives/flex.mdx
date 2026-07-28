@@ -17,12 +17,20 @@ build time, so this component never needs a client-side breakpoint check to do i
 
 A row on wide screens that stacks to a column on mobile, without any JS media-query check:
 
-```tsx
-<Flex direction="row" s={{ direction: "column" }} gap="16">
-  <Card>Left</Card>
-  <Card>Right</Card>
-</Flex>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Flex direction="row" s={{ direction: "column" }} gap="16">\n  <Card>Left</Card>\n  <Card>Right</Card>\n</Flex>',
+    },
+  ]}
+  preview={
+    <Flex direction="row" s={{ direction: "column" }} gap="16">
+      <Card>Left</Card>
+      <Card>Right</Card>
+    </Flex>
+  }
+/>
 
 In practice, most layouts reach for [Row](/components/primitives/row) or
 [Column](/components/primitives/column) directly — they're `Flex` with `direction` already fixed,

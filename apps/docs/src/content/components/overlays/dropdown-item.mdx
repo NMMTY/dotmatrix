@@ -16,12 +16,20 @@ A single selectable row inside [Dropdown](/components/overlays/dropdown) or
 `onSelect` fires on click *and* on Enter/Space when the item has roving focus — one handler covers
 both mouse and keyboard activation:
 
-```tsx
-<Dropdown trigger={<Button>Sort by</Button>}>
-  <DropdownItem onSelect={() => setSort("name")}>Name</DropdownItem>
-  <DropdownItem onSelect={() => setSort("date")}>Date</DropdownItem>
-</Dropdown>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Dropdown trigger={<Button>Sort by</Button>}>\n  <DropdownItem onSelect={() => setSort("name")}>Name</DropdownItem>\n  <DropdownItem onSelect={() => setSort("date")}>Date</DropdownItem>\n</Dropdown>',
+    },
+  ]}
+  preview={
+    <Dropdown trigger={<Button>Sort by</Button>}>
+      <DropdownItem>Name</DropdownItem>
+      <DropdownItem>Date</DropdownItem>
+    </Dropdown>
+  }
+/>
 
 `disabled` skips the item during arrow-key navigation entirely, rather than leaving it focusable
 but inert — the same behavior a native `<select>`'s disabled `<option>` has.

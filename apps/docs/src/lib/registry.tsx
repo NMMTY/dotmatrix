@@ -19,6 +19,7 @@ import {
   Dropdown,
   DropdownItem,
   EmptyState,
+  ExternalIcon,
   Fieldset,
   Flex,
   Grid,
@@ -65,6 +66,7 @@ import {
   useToast,
 } from "@nmmty/dotmatrix";
 import type { ComponentType, ReactNode } from "react";
+import { FaHeart } from "react-icons/fa";
 
 // A tiny (16x16, base64) gradient PNG — self-contained, no network fetch, so
 // Dither/Halftone have a deterministic image to demo against.
@@ -168,19 +170,21 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Primitives",
     Component: MasonryGrid,
     props: { columns: 3, minColumnWidth: 160, gap: "16" },
-    children: (
-      <>
-        <Card gap="8" shadow="s">
-          <Text fontSize="s">Short note.</Text>
-        </Card>
-        <Card gap="8" shadow="s">
-          <Text fontSize="s">A somewhat longer note that wraps across a couple of lines.</Text>
-        </Card>
-        <Card gap="8" shadow="s">
-          <Text fontSize="s">Another note.</Text>
-        </Card>
-      </>
-    ),
+    // A plain array, not a `<>...</>` Fragment: MasonryGrid wraps each child
+    // individually via `Children.map`, which treats a Fragment passed as the
+    // whole `children` value as a single child — every card would land
+    // inside one `.item` instead of three.
+    children: [
+      <Card key="short" gap="8" shadow="s">
+        <Text fontSize="s">Short note.</Text>
+      </Card>,
+      <Card key="long" gap="8" shadow="s">
+        <Text fontSize="s">A somewhat longer note that wraps across a couple of lines.</Text>
+      </Card>,
+      <Card key="another" gap="8" shadow="s">
+        <Text fontSize="s">Another note.</Text>
+      </Card>,
+    ],
   },
 
   // Typography & Display
@@ -216,6 +220,12 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Typography & Display",
     Component: Icon,
     props: { name: "check", size: "m" },
+  },
+  {
+    name: "ExternalIcon",
+    category: "Typography & Display",
+    Component: ExternalIcon,
+    props: { icon: FaHeart, size: "m" },
   },
   {
     name: "Card",

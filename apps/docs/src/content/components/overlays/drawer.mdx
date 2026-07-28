@@ -18,11 +18,22 @@ consumer.
 `side` picks which edge it slides in from — `"left"` is the common choice for primary navigation,
 `"right"` (the default) for a details/settings panel:
 
-```tsx
-<Drawer side="left" title="Navigation" trigger={<IconButton icon="menu" aria-label="Menu" />}>
-  <NavLinks />
-</Drawer>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Drawer side="left" title="Navigation" trigger={<IconButton icon="menu" aria-label="Menu" />}>\n  <NavLinks />\n</Drawer>',
+    },
+  ]}
+  preview={
+    <Drawer side="left" title="Navigation" trigger={<IconButton icon="menu" aria-label="Menu" />}>
+      <Column gap="8">
+        <Text>Overview</Text>
+        <Text>Settings</Text>
+      </Column>
+    </Drawer>
+  }
+/>
 
 Same `trigger`/controlled-`open` split as [Dialog](/components/overlays/dialog) — reach for a
 controlled `Drawer` when something other than its own trigger button should open it.

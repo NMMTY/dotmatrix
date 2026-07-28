@@ -16,11 +16,26 @@ others stay `hidden`, not unmounted.
 `value` must match the `Tab` it corresponds to — matching values is what connects a tab button to
 the panel it shows, not DOM position or array index:
 
-```tsx
-<TabPanel value="activity">
-  <ActivityFeed />
-</TabPanel>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<TabPanel value="activity">\n  <ActivityFeed />\n</TabPanel>',
+    },
+  ]}
+  preview={
+    <Tabs defaultValue="activity">
+      <TabList aria-label="Demo tabs">
+        <Tab value="overview">Overview</Tab>
+        <Tab value="activity">Activity</Tab>
+      </TabList>
+      <TabPanel value="overview">Overview panel content.</TabPanel>
+      <TabPanel value="activity">
+        <Text>Recent activity would render here.</Text>
+      </TabPanel>
+    </Tabs>
+  }
+/>
 
 Because inactive panels stay mounted (just `hidden`), avoid putting anything expensive to run on
 every render inside one that's rarely visible — it still renders on every parent update, active

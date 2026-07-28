@@ -15,20 +15,29 @@ own `aria-busy`/live region if the loading state itself needs to be announced.
 Shape a group of skeletons to roughly match the content they stand in for — a heading-sized bar
 above a couple of narrower text-sized ones reads as "a card is loading" better than uniform blocks:
 
-```tsx
-<Column gap="8" aria-busy="true">
-  <Skeleton width="128" height="24" />
-  <Skeleton width="full" height="16" />
-  <Skeleton width="full" height="16" />
-</Column>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Column gap="8" aria-busy="true">\n  <Skeleton width="128" height="24" />\n  <Skeleton width="full" height="16" />\n  <Skeleton width="full" height="16" />\n</Column>',
+    },
+  ]}
+  preview={
+    <Column gap="8" aria-busy="true">
+      <Skeleton width="128" height="24" />
+      <Skeleton width="full" height="16" />
+      <Skeleton width="full" height="16" />
+    </Column>
+  }
+/>
 
 `circle` gives a circular skeleton sized to match an `Avatar` while its real image is still
 loading:
 
-```tsx
-<Skeleton circle width="40" height="40" />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Skeleton circle width="40" height="40" />' }]}
+  preview={<Skeleton circle width="40" height="40" />}
+/>
 
 ## Props
 

@@ -15,14 +15,22 @@ layout reason to render it as anything but a `<span>`.
 `variant` communicates status at a glance — pick the one that matches what actually happened, not
 just whichever looks best next to the surrounding content:
 
-```tsx
-<Row gap="8">
-  <Badge variant="neutral">Draft</Badge>
-  <Badge variant="success">Published</Badge>
-  <Badge variant="warning">Pending review</Badge>
-  <Badge variant="error">Failed</Badge>
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="8">\n  <Badge variant="neutral">Draft</Badge>\n  <Badge variant="success">Published</Badge>\n  <Badge variant="warning">Pending review</Badge>\n  <Badge variant="error">Failed</Badge>\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      <Badge variant="neutral">Draft</Badge>
+      <Badge variant="success">Published</Badge>
+      <Badge variant="warning">Pending review</Badge>
+      <Badge variant="error">Failed</Badge>
+    </Row>
+  }
+/>
 
 For a tag the user can remove, reach for [Chip](/components/typography/chip) instead — `Badge` has
 no `onRemove`, by design.

@@ -10,22 +10,34 @@ A native `<table>` with the design system's borders/spacing — sorting
 ([TableRow](/components/data-display/table-row)) are opt-in per-piece rather than table-wide
 flags, since a given table only needs some of them.
 
-```tsx
-<Table zebra>
-  <TableHead>
-    <tr>
-      <TableHeaderCell>Name</TableHeaderCell>
-      <TableHeaderCell>Status</TableHeaderCell>
-    </tr>
-  </TableHead>
-  <TableBody>
-    <TableRow>
-      <TableCell>Ada Lovelace</TableCell>
-      <TableCell>Active</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Table zebra>\n  <TableHead>\n    <tr>\n      <TableHeaderCell>Name</TableHeaderCell>\n      <TableHeaderCell>Status</TableHeaderCell>\n    </tr>\n  </TableHead>\n  <TableBody>\n    <TableRow>\n      <TableCell>Ada Lovelace</TableCell>\n      <TableCell>Active</TableCell>\n    </TableRow>\n  </TableBody>\n</Table>',
+    },
+  ]}
+  preview={
+    <Table zebra>
+      <TableHead>
+        <tr>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+        </tr>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Ada Lovelace</TableCell>
+          <TableCell>Active</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Grace Hopper</TableCell>
+          <TableCell>Inactive</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  }
+/>
 
 <Playground name="Table" />
 
@@ -34,23 +46,31 @@ flags, since a given table only needs some of them.
 Sorting is driven entirely by `TableHeaderCell`'s own `sortDirection`/`onSort` — `Table` itself
 doesn't know or care that any column is sortable:
 
-```tsx
-const [sort, setSort] = useState<"ascending" | "descending">("ascending");
-
-<Table>
-  <TableHead>
-    <tr>
-      <TableHeaderCell
-        sortDirection={sort}
-        onSort={() => setSort(sort === "ascending" ? "descending" : "ascending")}
-      >
-        Name
-      </TableHeaderCell>
-    </tr>
-  </TableHead>
-  <TableBody>{/* sorted rows */}</TableBody>
-</Table>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [sort, setSort] = useState<"ascending" | "descending">("ascending");\n\n<Table>\n  <TableHead>\n    <tr>\n      <TableHeaderCell\n        sortDirection={sort}\n        onSort={() => setSort(sort === "ascending" ? "descending" : "ascending")}\n      >\n        Name\n      </TableHeaderCell>\n    </tr>\n  </TableHead>\n  <TableBody>{/* sorted rows */}</TableBody>\n</Table>;',
+    },
+  ]}
+  preview={
+    <Table>
+      <TableHead>
+        <tr>
+          <TableHeaderCell sortDirection="ascending">Name</TableHeaderCell>
+        </tr>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>Ada Lovelace</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Grace Hopper</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  }
+/>
 
 For no results — a filtered table that matched nothing — reach for
 [EmptyState](/components/data-display/empty-state) inside the table body rather than rendering an

@@ -16,13 +16,21 @@ A single option within a `RadioGroup` — never used standalone, since a radio's
 Disable an individual option — a plan that's temporarily unavailable, say — without disabling the
 whole group:
 
-```tsx
-<RadioGroup label="Plan" defaultValue="free">
-  <Radio value="free" label="Free" />
-  <Radio value="pro" label="Pro" />
-  <Radio value="enterprise" label="Enterprise — contact sales" disabled />
-</RadioGroup>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<RadioGroup label="Plan" defaultValue="free">\n  <Radio value="free" label="Free" />\n  <Radio value="pro" label="Pro" />\n  <Radio value="enterprise" label="Enterprise — contact sales" disabled />\n</RadioGroup>',
+    },
+  ]}
+  preview={
+    <RadioGroup label="Plan" defaultValue="free">
+      <Radio value="free" label="Free" />
+      <Radio value="pro" label="Pro" />
+      <Radio value="enterprise" label="Enterprise — contact sales" disabled />
+    </RadioGroup>
+  }
+/>
 
 ## Props
 

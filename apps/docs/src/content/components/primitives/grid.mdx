@@ -13,24 +13,40 @@ arbitrary `grid-template-columns` string, keeping every grid in the system on th
 
 A responsive card grid — fewer columns as the viewport narrows, same `gap` throughout:
 
-```tsx
-<Grid columns="3" m={{ columns: "2" }} s={{ columns: "1" }} gap="16">
-  <Card>One</Card>
-  <Card>Two</Card>
-  <Card>Three</Card>
-</Grid>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Grid columns="3" m={{ columns: "2" }} s={{ columns: "1" }} gap="16">\n  <Card>One</Card>\n  <Card>Two</Card>\n  <Card>Three</Card>\n</Grid>',
+    },
+  ]}
+  preview={
+    <Grid columns="3" m={{ columns: "2" }} s={{ columns: "1" }} gap="16">
+      <Card>One</Card>
+      <Card>Two</Card>
+      <Card>Three</Card>
+    </Grid>
+  }
+/>
 
 `colSpan="full"`/`rowSpan="full"` on an individual child stretch it across every track in that
 axis — useful for a banner or a section heading that should break out of the grid it sits in:
 
-```tsx
-<Grid columns="3" gap="16">
-  <Card colSpan="full">Featured — spans the full width</Card>
-  <Card>Regular</Card>
-  <Card>Regular</Card>
-</Grid>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Grid columns="3" gap="16">\n  <Card colSpan="full">Featured — spans the full width</Card>\n  <Card>Regular</Card>\n  <Card>Regular</Card>\n</Grid>',
+    },
+  ]}
+  preview={
+    <Grid columns="3" gap="16">
+      <Card colSpan="full">Featured — spans the full width</Card>
+      <Card>Regular</Card>
+      <Card>Regular</Card>
+    </Grid>
+  }
+/>
 
 Reach for [Flex](/components/primitives/flex) (or `Row`/`Column`) instead when items should size
 to their own content rather than snap to a fixed number of tracks — `Grid` is for a layout that's

@@ -17,17 +17,28 @@ heading's importance and its place in the outline don't match.
 The common case where level and size agree — pick `as` for where it sits in the outline, and let
 `displaySize` follow by default:
 
-```tsx
-<Heading as="h1" displaySize="l">Page title</Heading>
-<Heading as="h2" displaySize="m">Section</Heading>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Heading as="h1" displaySize="l">Page title</Heading>\n<Heading as="h2" displaySize="m">Section</Heading>',
+    },
+  ]}
+  preview={
+    <Column gap="8">
+      <Heading as="h1" displaySize="l">Page title</Heading>
+      <Heading as="h2" displaySize="m">Section</Heading>
+    </Column>
+  }
+/>
 
 When they *don't* agree — a card's title is structurally an `h3` (nested under the page's `h1`/
 `h2`), but should read visually smaller than a full section heading:
 
-```tsx
-<Heading as="h3" displaySize="xs">Card title</Heading>
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Heading as="h3" displaySize="xs">Card title</Heading>' }]}
+  preview={<Heading as="h3" displaySize="xs">Card title</Heading>}
+/>
 
 Keep `as` honest to the actual outline even when overriding `displaySize` — screen reader users
 navigate by heading level, not by how large something looks.

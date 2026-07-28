@@ -7,12 +7,15 @@ github: "components/Column/Column.tsx"
 `Flex` fixed to `direction: column`. The default vertical layout primitive — every stacked group
 of content in this documentation site is built from it.
 
-```tsx
-<Column gap="8">
-  <Text>A</Text>
-  <Text>B</Text>
-</Column>
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Column gap="8">\n  <Text>A</Text>\n  <Text>B</Text>\n</Column>' }]}
+  preview={
+    <Column gap="8">
+      <Text>A</Text>
+      <Text>B</Text>
+    </Column>
+  }
+/>
 
 <Playground name="Column" />
 
@@ -22,13 +25,21 @@ of content in this documentation site is built from it.
 on every child instead tends to double up once something changes order or gets conditionally
 hidden:
 
-```tsx
-<Column gap="16">
-  <Heading as="h2">Title</Heading>
-  <Text>Some supporting copy.</Text>
-  <Button>Continue</Button>
-</Column>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Column gap="16">\n  <Heading as="h2">Title</Heading>\n  <Text>Some supporting copy.</Text>\n  <Button>Continue</Button>\n</Column>',
+    },
+  ]}
+  preview={
+    <Column gap="16">
+      <Heading as="h2" displaySize="s">Title</Heading>
+      <Text>Some supporting copy.</Text>
+      <Button>Continue</Button>
+    </Column>
+  }
+/>
 
 `alignItems="center"` centers children along the cross axis (horizontally, for a `Column`) — handy
 for a centered empty state or a modal's content without hand-picking margins:

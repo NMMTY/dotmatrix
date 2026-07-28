@@ -16,11 +16,26 @@ A single tab button, used inside [TabList](/components/overlays/tab-list). Arrow
 `disabled` skips a tab during arrow-key navigation entirely — for a tab that isn't available yet
 (a report that hasn't finished generating, say), rather than showing an empty panel behind it:
 
-```tsx
-<Tab value="report" disabled={!reportReady}>
-  Report
-</Tab>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Tab value="report" disabled={!reportReady}>\n  Report\n</Tab>',
+    },
+  ]}
+  preview={
+    <Tabs defaultValue="overview">
+      <TabList aria-label="Demo tabs">
+        <Tab value="overview">Overview</Tab>
+        <Tab value="report" disabled>
+          Report
+        </Tab>
+      </TabList>
+      <TabPanel value="overview">Overview panel content.</TabPanel>
+      <TabPanel value="report">Report panel content.</TabPanel>
+    </Tabs>
+  }
+/>
 
 ## Props
 

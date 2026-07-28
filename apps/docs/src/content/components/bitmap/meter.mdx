@@ -17,17 +17,28 @@ fill, butted tightly for an LED-bar look.
 `value`/`max` work like a native `<progress>` — pass the raw numbers, not a pre-computed
 percentage:
 
-```tsx
-<Meter label="Budget spent" value={720} max={1000} />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Meter label="Budget spent" value={720} max={1000} />' }]}
+  preview={<Meter label="Budget spent" value={720} max={1000} />}
+/>
 
 Fewer `segments` reads coarser and more iconic (closer to a signal-strength indicator); more reads
 closer to a continuous bar while staying on the segmented grid:
 
-```tsx
-<Meter label="Signal" value={3} max={4} segments={4} />
-<Meter label="Disk usage" value={68} max={100} segments={40} variant="led" />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Meter label="Signal" value={3} max={4} segments={4} />\n<Meter label="Disk usage" value={68} max={100} segments={40} variant="led" />',
+    },
+  ]}
+  preview={
+    <Column gap="16">
+      <Meter label="Signal" value={3} max={4} segments={4} />
+      <Meter label="Disk usage" value={68} max={100} segments={40} variant="led" />
+    </Column>
+  }
+/>
 
 `Meter` is a read-only display, not an input — for a value the user sets themselves, reach for
 [Slider](/components/forms/slider) instead.

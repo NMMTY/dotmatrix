@@ -13,18 +13,29 @@ list or a settings list.
 
 ## Examples
 
-```tsx
-<List>
-  {invoices.map((invoice) => (
-    <ListItem
-      key={invoice.id}
-      title={invoice.client}
-      description={`Due ${invoice.dueDate}`}
-      action={<Badge variant={invoice.paid ? "success" : "warning"}>{invoice.status}</Badge>}
-    />
-  ))}
-</List>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<List>\n  {invoices.map((invoice) => (\n    <ListItem\n      key={invoice.id}\n      title={invoice.client}\n      description={`Due ${invoice.dueDate}`}\n      action={<Badge variant={invoice.paid ? "success" : "warning"}>{invoice.status}</Badge>}\n    />\n  ))}\n</List>',
+    },
+  ]}
+  preview={
+    <List>
+      {[
+        { id: 1, client: "Ada Lovelace", dueDate: "Jul 1", paid: true, status: "Paid" },
+        { id: 2, client: "Grace Hopper", dueDate: "Aug 12", paid: false, status: "Due" },
+      ].map((invoice) => (
+        <ListItem
+          key={invoice.id}
+          title={invoice.client}
+          description={`Due ${invoice.dueDate}`}
+          action={<Badge variant={invoice.paid ? "success" : "warning"}>{invoice.status}</Badge>}
+        />
+      ))}
+    </List>
+  }
+/>
 
 For tabular data with more than one column of information per record, reach for
 [Table](/components/data-display/table) instead — `List` is for single-column rows, each read as

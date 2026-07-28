@@ -34,6 +34,12 @@ export type { DropdownItemOwnProps, DropdownOwnProps } from "./Dropdown/Dropdown
 export { Dropdown, DropdownItem } from "./Dropdown/Dropdown";
 export type { EmptyStateOwnProps } from "./EmptyState/EmptyState";
 export { EmptyState } from "./EmptyState/EmptyState";
+export type {
+  ExternalIconComponent,
+  ExternalIconComponentProps,
+  ExternalIconOwnProps,
+} from "./ExternalIcon/ExternalIcon";
+export { ExternalIcon } from "./ExternalIcon/ExternalIcon";
 export type { FieldsetOwnProps } from "./Fieldset/Fieldset";
 export { Fieldset } from "./Fieldset/Fieldset";
 export type { FlexOwnProps } from "./Flex/Flex";

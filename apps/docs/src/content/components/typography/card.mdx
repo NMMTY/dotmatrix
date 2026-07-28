@@ -16,23 +16,39 @@ default is a plain JS default parameter, not a class the caller's own prop has t
 Since every default is just a `Column` prop's default value, override any of them the same way you
 would on a plain `Column` — no separate "card variant" API to learn:
 
-```tsx
-<Card gap="8">
-  <Heading as="h3" displaySize="xs">Plan</Heading>
-  <Text color="medium">Everything you need to get started.</Text>
-</Card>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Card gap="8">\n  <Heading as="h3" displaySize="xs">Plan</Heading>\n  <Text color="medium">Everything you need to get started.</Text>\n</Card>',
+    },
+  ]}
+  preview={
+    <Card gap="8">
+      <Heading as="h3" displaySize="xs">Plan</Heading>
+      <Text color="medium">Everything you need to get started.</Text>
+    </Card>
+  }
+/>
 
 `href` makes the whole card a real link, same as `Button` — the prev/next cards at the bottom of
 this page are exactly this. Pass your router's own link component via `as` to get client-side
 navigation instead of a full page load:
 
-```tsx
-<Card as={Link} href="/get-started" gap="4">
-  <Text fontSize="xs" color="medium">Next</Text>
-  <Text weight="medium">Get started</Text>
-</Card>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Card as={Link} href="/get-started" gap="4">\n  <Text fontSize="xs" color="medium">Next</Text>\n  <Text weight="medium">Get started</Text>\n</Card>',
+    },
+  ]}
+  preview={
+    <Card href="/get-started" gap="4">
+      <Text fontSize="xs" color="medium">Next</Text>
+      <Text weight="medium">Get started</Text>
+    </Card>
+  }
+/>
 
 ## Props
 

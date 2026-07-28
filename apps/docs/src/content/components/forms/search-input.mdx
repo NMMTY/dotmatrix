@@ -15,16 +15,15 @@ appears once there's a value to clear.
 Controlled is the common case — a search field almost always needs to drive a filtered list or a
 query somewhere else on the page:
 
-```tsx
-const [query, setQuery] = useState("");
-
-<SearchInput
-  label="Search"
-  value={query}
-  onChange={(e) => setQuery(e.target.value)}
-  placeholder="Search components…"
-/>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [query, setQuery] = useState("");\n\n<SearchInput\n  label="Search"\n  value={query}\n  onChange={(e) => setQuery(e.target.value)}\n  placeholder="Search components…"\n/>;',
+    },
+  ]}
+  preview={<SearchInput label="Search" placeholder="Search components…" />}
+/>
 
 Clicking the clear button fires the same `onChange` with an empty value, so a single handler
 covers both typing and clearing — there's no separate `onClear` to wire up.

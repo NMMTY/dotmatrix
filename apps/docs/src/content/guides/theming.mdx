@@ -26,10 +26,20 @@ Click the button below: it cycles the *global* palette, and every solid `Button`
 
 <PaletteSwitcherDemo />
 
-```tsx
-<Button variant="solid">Reacts globally</Button>
-<Button variant="solid" palette="blue">Always blue</Button>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Button variant="solid">Reacts globally</Button>\n<Button variant="solid" palette="blue">Always blue</Button>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      <Button variant="solid">Reacts globally</Button>
+      <Button variant="solid" palette="blue">Always blue</Button>
+    </Row>
+  }
+/>
 
 ## What actually changes color
 

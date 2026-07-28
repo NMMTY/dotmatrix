@@ -15,27 +15,46 @@ oversight — it's a real extension rather than a variant of this one.
 
 A typical FAQ list — each `AccordionItem`'s `value` just needs to be unique within the group:
 
-```tsx
-<Accordion defaultValue="shipping">
-  <AccordionItem value="shipping" title="What are your shipping times?">
-    3-5 business days for standard shipping.
-  </AccordionItem>
-  <AccordionItem value="returns" title="What's your return policy?">
-    Returns are accepted within 30 days of delivery.
-  </AccordionItem>
-</Accordion>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Accordion defaultValue="shipping">\n  <AccordionItem value="shipping" title="What are your shipping times?">\n    3-5 business days for standard shipping.\n  </AccordionItem>\n  <AccordionItem value="returns" title="What\'s your return policy?">\n    Returns are accepted within 30 days of delivery.\n  </AccordionItem>\n</Accordion>',
+    },
+  ]}
+  preview={
+    <Accordion defaultValue="shipping">
+      <AccordionItem value="shipping" title="What are your shipping times?">
+        3-5 business days for standard shipping.
+      </AccordionItem>
+      <AccordionItem value="returns" title="What's your return policy?">
+        Returns are accepted within 30 days of delivery.
+      </AccordionItem>
+    </Accordion>
+  }
+/>
 
 Controlled, when something outside the accordion needs to open a specific item (a "jump to this
 question" link, say):
 
-```tsx
-const [open, setOpen] = useState<string | undefined>();
-
-<Accordion value={open} onChange={setOpen}>
-  ...
-</Accordion>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [open, setOpen] = useState<string | undefined>();\n\n<Accordion value={open} onChange={setOpen}>\n  ...\n</Accordion>;',
+    },
+  ]}
+  preview={
+    <Accordion defaultValue="shipping">
+      <AccordionItem value="shipping" title="What are your shipping times?">
+        3-5 business days for standard shipping.
+      </AccordionItem>
+      <AccordionItem value="returns" title="What's your return policy?">
+        Returns are accepted within 30 days of delivery.
+      </AccordionItem>
+    </Accordion>
+  }
+/>
 
 ## Props
 

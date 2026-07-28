@@ -16,19 +16,56 @@ so it follows the current theme like any other text.
 `cellSize` is the screen's dot pitch — smaller reads closer to a real halftone print, larger reads
 more graphic and poster-like:
 
-```tsx
-<Halftone src={photo} alt="Portrait" cellSize={4} />
-<Halftone src={photo} alt="Portrait" cellSize={12} maxRadius={0.85} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Halftone src={photo} alt="Portrait" cellSize={4} />\n<Halftone src={photo} alt="Portrait" cellSize={12} maxRadius={0.85} />',
+    },
+  ]}
+  preview={
+    <Row gap="16">
+      <Halftone
+        src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23000%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2266%22%20r%3D%2220%22%20fill%3D%22%23000%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2230%22%20r%3D%2214%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E"
+        alt="Demo gradient"
+        width={96}
+        height={96}
+        cellSize={4}
+      />
+      <Halftone
+        src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23000%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2266%22%20r%3D%2220%22%20fill%3D%22%23000%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2230%22%20r%3D%2214%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E"
+        alt="Demo gradient"
+        width={96}
+        height={96}
+        cellSize={12}
+        maxRadius={0.85}
+      />
+    </Row>
+  }
+/>
 
 Since ink color tracks the canvas's own `color`, wrapping it in a `Text`/palette scope changes the
 dots without touching the component itself:
 
-```tsx
-<div style={{ color: "var(--dm-accent-500)" }}>
-  <Halftone src={photo} alt="Portrait" cellSize={6} />
-</div>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<div style={{ color: "var(--dm-accent-500)" }}>\n  <Halftone src={photo} alt="Portrait" cellSize={6} />\n</div>',
+    },
+  ]}
+  preview={
+    <div style={{ color: "var(--dm-accent-500)" }}>
+      <Halftone
+        src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23000%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20fill%3D%22url(%23g)%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2266%22%20r%3D%2220%22%20fill%3D%22%23000%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2230%22%20r%3D%2214%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E"
+        alt="Demo gradient"
+        width={96}
+        height={96}
+        cellSize={6}
+      />
+    </div>
+  }
+/>
 
 `src` needs to be same-origin or CORS-enabled for the effect to actually apply — see [Dither's
 notes on loading external images](/components/bitmap/dither#loading-external-images).

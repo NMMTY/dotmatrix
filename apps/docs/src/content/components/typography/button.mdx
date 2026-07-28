@@ -18,26 +18,45 @@ the real `<button>` case — sets `type="button"` to avoid an accidental form su
 you actually want done), `outline` for secondary actions, and `ghost` for the lowest-emphasis case
 like a toolbar icon:
 
-```tsx
-<Row gap="8">
-  <Button variant="solid">Save</Button>
-  <Button variant="outline">Cancel</Button>
-  <Button variant="ghost">Skip</Button>
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="8">\n  <Button variant="solid">Save</Button>\n  <Button variant="outline">Cancel</Button>\n  <Button variant="ghost">Skip</Button>\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      <Button variant="solid">Save</Button>
+      <Button variant="outline">Cancel</Button>
+      <Button variant="ghost">Skip</Button>
+    </Row>
+  }
+/>
 
 `icon` takes an `IconName` and defaults to leading — set `iconPosition="end"` to trail it instead:
 
-```tsx
-<Button icon="download">Download</Button>
-<Button icon="arrow-right" iconPosition="end">Continue</Button>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Button icon="download">Download</Button>\n<Button icon="arrow-right" iconPosition="end">Continue</Button>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      <Button icon="download">Download</Button>
+      <Button icon="arrow-right" iconPosition="end">Continue</Button>
+    </Row>
+  }
+/>
 
 `href` alone (no `as="a"` needed) renders a real `<a>` for a button that navigates:
 
-```tsx
-<Button href="/get-started">Get started</Button>
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Button href="/get-started">Get started</Button>' }]}
+  preview={<Button href="/get-started">Get started</Button>}
+/>
 
 ## Props
 

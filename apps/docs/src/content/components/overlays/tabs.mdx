@@ -9,16 +9,24 @@ A set of switchable panels, each with a corresponding tab button. Composed from
 [Tab](/components/overlays/tab), [TabList](/components/overlays/tab-list), and
 [TabPanel](/components/overlays/tab-panel) — see those pages for the individual pieces.
 
-```tsx
-<Tabs defaultValue="a">
-  <TabList aria-label="Demo tabs">
-    <Tab value="a">Overview</Tab>
-    <Tab value="b">Activity</Tab>
-  </TabList>
-  <TabPanel value="a">Overview panel content.</TabPanel>
-  <TabPanel value="b">Activity panel content.</TabPanel>
-</Tabs>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Tabs defaultValue="a">\n  <TabList aria-label="Demo tabs">\n    <Tab value="a">Overview</Tab>\n    <Tab value="b">Activity</Tab>\n  </TabList>\n  <TabPanel value="a">Overview panel content.</TabPanel>\n  <TabPanel value="b">Activity panel content.</TabPanel>\n</Tabs>',
+    },
+  ]}
+  preview={
+    <Tabs defaultValue="a">
+      <TabList aria-label="Demo tabs">
+        <Tab value="a">Overview</Tab>
+        <Tab value="b">Activity</Tab>
+      </TabList>
+      <TabPanel value="a">Overview panel content.</TabPanel>
+      <TabPanel value="b">Activity panel content.</TabPanel>
+    </Tabs>
+  }
+/>
 
 <Playground name="Tabs" />
 
@@ -26,18 +34,24 @@ A set of switchable panels, each with a corresponding tab button. Composed from
 
 Controlled, for when the active tab needs to sync with something else — a URL query param, say:
 
-```tsx
-const [tab, setTab] = useState("overview");
-
-<Tabs value={tab} onChange={setTab}>
-  <TabList aria-label="Project sections">
-    <Tab value="overview">Overview</Tab>
-    <Tab value="activity">Activity</Tab>
-  </TabList>
-  <TabPanel value="overview">...</TabPanel>
-  <TabPanel value="activity">...</TabPanel>
-</Tabs>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [tab, setTab] = useState("overview");\n\n<Tabs value={tab} onChange={setTab}>\n  <TabList aria-label="Project sections">\n    <Tab value="overview">Overview</Tab>\n    <Tab value="activity">Activity</Tab>\n  </TabList>\n  <TabPanel value="overview">...</TabPanel>\n  <TabPanel value="activity">...</TabPanel>\n</Tabs>;',
+    },
+  ]}
+  preview={
+    <Tabs defaultValue="overview">
+      <TabList aria-label="Project sections">
+        <Tab value="overview">Overview</Tab>
+        <Tab value="activity">Activity</Tab>
+      </TabList>
+      <TabPanel value="overview">Overview panel content.</TabPanel>
+      <TabPanel value="activity">Activity panel content.</TabPanel>
+    </Tabs>
+  }
+/>
 
 Every `TabPanel` renders into the DOM up front (just `hidden` while inactive), so switching tabs
 never re-triggers a mount — safe for a panel that holds form state a user shouldn't lose by

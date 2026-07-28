@@ -10,14 +10,22 @@ Raw HTML tags are only used where there's no reasonable alternative (native form
 semantics). Everything else is composed from four primitives: `Flex`, `Row` (`Flex` with
 `direction="row"`), `Column` (`direction="column"`), and `Grid`.
 
-```tsx
-<Row gap="16" padding="24">
-  <Column gap="8">
-    <Text>A</Text>
-    <Text>B</Text>
-  </Column>
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="16" padding="24">\n  <Column gap="8">\n    <Text>A</Text>\n    <Text>B</Text>\n  </Column>\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="16" padding="24" background="surface" borderWidth="1" borderColor="weak">
+      <Column gap="8">
+        <Text>A</Text>
+        <Text>B</Text>
+      </Column>
+    </Row>
+  }
+/>
 
 ## Style props, not utility classes in your JSX
 
@@ -32,22 +40,44 @@ value at that breakpoint **and everything narrower** — `max-width` media queri
 so this reads desktop-first: the base props are the wide-screen layout, and each breakpoint prop is
 an override as the viewport shrinks past it.
 
-```tsx
-<Row gap="16" direction="row" m={{ direction: "column" }}>
-  <Column gap="8">...</Column>
-  <Column gap="8">...</Column>
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="16" direction="row" m={{ direction: "column" }}>\n  <Column gap="8">...</Column>\n  <Column gap="8">...</Column>\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="16" direction="row" m={{ direction: "column" }}>
+      <Column gap="8" padding="16" background="surface" borderWidth="1" borderColor="weak">
+        <Text fontSize="s" color="weak">Column A</Text>
+      </Column>
+      <Column gap="8" padding="16" background="surface" borderWidth="1" borderColor="weak">
+        <Text fontSize="s" color="weak">Column B</Text>
+      </Column>
+    </Row>
+  }
+/>
 
 That renders as a row down to the `m` breakpoint (1024px), then stacks to a column at 1024px and
 everything narrower. Stack multiple breakpoints on the same prop for more than one step — since
 they're all `max-width` and emitted largest-first, the narrower one always wins where both match:
 
-```tsx
-<Column gap="24" m={{ gap: "16" }} s={{ gap: "8" }}>
-  ...
-</Column>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Column gap="24" m={{ gap: "16" }} s={{ gap: "8" }}>\n  ...\n</Column>',
+    },
+  ]}
+  preview={
+    <Column gap="24" m={{ gap: "16" }} s={{ gap: "8" }}>
+      <Text fontSize="s" color="weak">Item A</Text>
+      <Text fontSize="s" color="weak">Item B</Text>
+      <Text fontSize="s" color="weak">Item C</Text>
+    </Column>
+  }
+/>
 
 No `useEffect`, no client-side breakpoint check — the breakpoint variants are plain generated CSS
 classes, so this works in a server component with zero client JS. See the [get

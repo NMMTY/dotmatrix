@@ -15,15 +15,21 @@ A removable tag. For a non-removable label, use [Badge](/components/typography/b
 `removeLabel` is required whenever `onRemove` is passed — it's the accessible name for the remove
 button, since "Remove" alone wouldn't say *what* it removes to someone using a screen reader:
 
-```tsx
-<Row gap="8">
-  {selectedTags.map((tag) => (
-    <Chip key={tag} onRemove={() => removeTag(tag)} removeLabel={`Remove ${tag}`}>
-      {tag}
-    </Chip>
-  ))}
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="8">\n  {selectedTags.map((tag) => (\n    <Chip key={tag} onRemove={() => removeTag(tag)} removeLabel={`Remove ${tag}`}>\n      {tag}\n    </Chip>\n  ))}\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="8">
+      {["Design", "Engineering"].map((tag) => (
+        <Chip key={tag}>{tag}</Chip>
+      ))}
+    </Row>
+  }
+/>
 
 Omit `onRemove` entirely for a tag that reads as removable-in-general (a filter list) but isn't,
 in a particular instance — TypeScript enforces `removeLabel` and `onRemove` come as a pair, so

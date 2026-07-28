@@ -15,12 +15,24 @@ The `role="tablist"` row of [Tab](/components/overlays/tab) buttons inside
 `aria-label` should name the group of *content* being switched between, not the word "tabs"
 itself — "Project sections", not "Tab list":
 
-```tsx
-<TabList aria-label="Project sections">
-  <Tab value="overview">Overview</Tab>
-  <Tab value="activity">Activity</Tab>
-</TabList>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<TabList aria-label="Project sections">\n  <Tab value="overview">Overview</Tab>\n  <Tab value="activity">Activity</Tab>\n</TabList>',
+    },
+  ]}
+  preview={
+    <Tabs defaultValue="overview">
+      <TabList aria-label="Project sections">
+        <Tab value="overview">Overview</Tab>
+        <Tab value="activity">Activity</Tab>
+      </TabList>
+      <TabPanel value="overview">Overview panel content.</TabPanel>
+      <TabPanel value="activity">Activity panel content.</TabPanel>
+    </Tabs>
+  }
+/>
 
 ## Props
 

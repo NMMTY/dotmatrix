@@ -11,15 +11,23 @@ component rendering every fenced code block and every `<Playground>` on this sit
 adapted to this system's own overlay primitives and a monochrome Prism theme instead of a color
 one.
 
-```tsx
 <CodeBlock
-  copyButton
-  fullscreenButton
   codes={[
-    { language: "tsx", label: "Example", code: '<Button variant="solid">Click me</Button>' },
+    {
+      language: "tsx",
+      code: '<CodeBlock\n  copyButton\n  fullscreenButton\n  codes={[\n    { language: "tsx", label: "Example", code: \'<Button variant="solid">Click me</Button>\' },\n  ]}\n/>',
+    },
   ]}
+  preview={
+    <CodeBlock
+      copyButton
+      fullscreenButton
+      codes={[
+        { language: "tsx", label: "Example", code: '<Button variant="solid">Click me</Button>' },
+      ]}
+    />
+  }
 />
-```
 
 <Playground name="CodeBlock" />
 
@@ -28,29 +36,62 @@ one.
 Multiple `codes` entries render as tabs — useful for showing the same example in more than one
 language or framework:
 
-```tsx
 <CodeBlock
   codes={[
-    { language: "bash", label: "npm", code: "npm install @nmmty/dotmatrix" },
-    { language: "bash", label: "pnpm", code: "pnpm add @nmmty/dotmatrix" },
+    {
+      language: "tsx",
+      code: '<CodeBlock\n  codes={[\n    { language: "bash", label: "npm", code: "npm install @nmmty/dotmatrix" },\n    { language: "bash", label: "pnpm", code: "pnpm add @nmmty/dotmatrix" },\n  ]}\n/>',
+    },
   ]}
+  preview={
+    <CodeBlock
+      codes={[
+        { language: "bash", label: "npm", code: "npm install @nmmty/dotmatrix" },
+        { language: "bash", label: "pnpm", code: "pnpm add @nmmty/dotmatrix" },
+      ]}
+    />
+  }
 />
-```
 
 `isCollapsible` with `maxLines` cuts a long snippet down to a preview, with a "View code" bar to
 expand it — useful for a full file example that would otherwise dominate the page:
 
-```tsx
-<CodeBlock codes={[{ language: "tsx", code: fullFileSource }]} isCollapsible maxLines={12} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<CodeBlock codes={[{ language: "tsx", code: fullFileSource }]} isCollapsible maxLines={12} />',
+    },
+  ]}
+  preview={
+    <CodeBlock
+      codes={[
+        {
+          language: "tsx",
+          code: 'import { Button } from "@nmmty/dotmatrix";\n\nexport function Example() {\n  return (\n    <Button variant="solid">\n      Click me\n    </Button>\n  );\n}\n\n// A few more lines to show the collapse in action.\n// And a few more.\n// And a few more still.\n// Last line.',
+        },
+      ]}
+      isCollapsible
+      maxLines={6}
+    />
+  }
+/>
 
 `syntaxTheme="color"` gives each token kind its own hue (One Dark/One Light) instead of this
 system's default monochrome tinting — for a context where the syntax colors themselves carry real
 information, not just this site's own code blocks:
 
-```tsx
-<CodeBlock codes={[{ language: "tsx", code }]} syntaxTheme="color" />
-```
+<CodeBlock
+  codes={[
+    { language: "tsx", code: '<CodeBlock codes={[{ language: "tsx", code }]} syntaxTheme="color" />' },
+  ]}
+  preview={
+    <CodeBlock
+      codes={[{ language: "tsx", code: '<Button variant="solid">Click me</Button>' }]}
+      syntaxTheme="color"
+    />
+  }
+/>
 
 ## Props
 

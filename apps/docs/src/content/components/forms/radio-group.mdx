@@ -11,12 +11,20 @@ Doesn't reuse the same label pattern `Input` does: a group's label isn't "for" a
 names the whole group, so it's connected via `aria-labelledby` on the `radiogroup` role instead of
 a real `<label htmlFor>`.
 
-```tsx
-<RadioGroup label="Plan" defaultValue="free">
-  <Radio value="free" label="Free" />
-  <Radio value="pro" label="Pro" />
-</RadioGroup>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<RadioGroup label="Plan" defaultValue="free">\n  <Radio value="free" label="Free" />\n  <Radio value="pro" label="Pro" />\n</RadioGroup>',
+    },
+  ]}
+  preview={
+    <RadioGroup label="Plan" defaultValue="free">
+      <Radio value="free" label="Free" />
+      <Radio value="pro" label="Pro" />
+    </RadioGroup>
+  }
+/>
 
 <Playground name="RadioGroup" />
 
@@ -25,23 +33,37 @@ a real `<label htmlFor>`.
 `description`/`error`/`success` describe the group as a whole, same as any other field — put
 per-option context on the individual `Radio`'s own `label` instead:
 
-```tsx
-<RadioGroup label="Shipping" description="Choose how fast you need it." defaultValue="standard">
-  <Radio value="standard" label="Standard — 5-7 days" />
-  <Radio value="express" label="Express — 2 days" />
-</RadioGroup>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<RadioGroup label="Shipping" description="Choose how fast you need it." defaultValue="standard">\n  <Radio value="standard" label="Standard — 5-7 days" />\n  <Radio value="express" label="Express — 2 days" />\n</RadioGroup>',
+    },
+  ]}
+  preview={
+    <RadioGroup label="Shipping" description="Choose how fast you need it." defaultValue="standard">
+      <Radio value="standard" label="Standard — 5-7 days" />
+      <Radio value="express" label="Express — 2 days" />
+    </RadioGroup>
+  }
+/>
 
 Controlled, for when the selection needs to drive something else on the page:
 
-```tsx
-const [plan, setPlan] = useState("free");
-
-<RadioGroup label="Plan" value={plan} onChange={setPlan}>
-  <Radio value="free" label="Free" />
-  <Radio value="pro" label="Pro" />
-</RadioGroup>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [plan, setPlan] = useState("free");\n\n<RadioGroup label="Plan" value={plan} onChange={setPlan}>\n  <Radio value="free" label="Free" />\n  <Radio value="pro" label="Pro" />\n</RadioGroup>;',
+    },
+  ]}
+  preview={
+    <RadioGroup label="Plan" defaultValue="free">
+      <Radio value="free" label="Free" />
+      <Radio value="pro" label="Pro" />
+    </RadioGroup>
+  }
+/>
 
 ## Props
 

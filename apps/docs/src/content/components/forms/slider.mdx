@@ -15,23 +15,33 @@ type="range">`, since that's what it is under the hood.
 `min`/`max`/`step` are the same native range-input attributes — set them to match the unit you're
 actually collecting:
 
-```tsx
-<Slider label="Volume" min={0} max={100} defaultValue={50} />
-<Slider label="Price range" min={0} max={500} step={10} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Slider label="Volume" min={0} max={100} defaultValue={50} />\n<Slider label="Price range" min={0} max={500} step={10} />',
+    },
+  ]}
+  preview={
+    <Column gap="16">
+      <Slider label="Volume" min={0} max={100} defaultValue={50} />
+      <Slider label="Price range" min={0} max={500} step={10} />
+    </Column>
+  }
+/>
 
 Read the live value from `onChange` to show it alongside the track — the slider itself has no
 built-in value readout:
 
-```tsx
-const [volume, setVolume] = useState(50);
-
-<Slider
-  label={`Volume — ${volume}`}
-  value={volume}
-  onChange={(e) => setVolume(Number(e.target.value))}
-/>;
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: 'const [volume, setVolume] = useState(50);\n\n<Slider\n  label={`Volume — ${volume}`}\n  value={volume}\n  onChange={(e) => setVolume(Number(e.target.value))}\n/>;',
+    },
+  ]}
+  preview={<Slider label="Volume — 50" defaultValue={50} />}
+/>
 
 ## Props
 

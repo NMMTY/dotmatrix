@@ -21,9 +21,15 @@ option actually *does*:
 - **[Checkbox](/components/forms/checkbox)** — a choice that's part of a larger form, submitted
   together with everything else ("I agree to the terms").
 
-```tsx
-<Switch label="Dark mode" checked={isDark} onChange={(e) => setIsDark(e.target.checked)} />
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Switch label="Dark mode" checked={isDark} onChange={(e) => setIsDark(e.target.checked)} />',
+    },
+  ]}
+  preview={<Switch label="Dark mode" defaultChecked />}
+/>
 
 ## Props
 

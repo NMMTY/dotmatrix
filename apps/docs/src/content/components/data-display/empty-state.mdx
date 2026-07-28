@@ -16,14 +16,22 @@ state, not an empty-result state.
 `action` is the natural next step out of the empty state — creating the first record, or clearing
 a filter that matched nothing:
 
-```tsx
-<EmptyState
-  icon="search"
-  title="No results"
-  description="Try a different search term."
-  action={<Button onClick={clearSearch}>Clear search</Button>}
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<EmptyState\n  icon="search"\n  title="No results"\n  description="Try a different search term."\n  action={<Button onClick={clearSearch}>Clear search</Button>}\n/>',
+    },
+  ]}
+  preview={
+    <EmptyState
+      icon="search"
+      title="No results"
+      description="Try a different search term."
+      action={<Button>Clear search</Button>}
+    />
+  }
 />
-```
 
 Distinguish the *reason* the state is empty in `title`/`description` — "No invoices yet" (nothing
 created) reads differently than "No invoices match your filters" (something to undo), even though

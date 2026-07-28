@@ -10,9 +10,10 @@ Every icon renders through one component, `<Icon name="..." />` — there's no p
 export. `name` is typed against `IconName`, a union of every glyph actually drawn in the catalog,
 so an invalid name is a type error, not a silent blank render.
 
-```tsx
-<Icon name="download" size="m" />
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Icon name="download" size="m" />' }]}
+  preview={<Icon name="download" size="m" />}
+/>
 
 Icons are hand-drawn on an 8×8 pixel grid rather than imported from a general icon set: ready-made
 icons have rounded strokes and non-integer coordinates that read as visually foreign next to the
@@ -24,20 +25,29 @@ pixel type system. `size` scales the fixed grid in three steps (`s`/`m`/`l`); fi
 `Icon` fills with `currentColor`, so it inherits whatever text color is already active — set
 `color` on a wrapping `Text`/`Row`, not on the icon itself, to keep an icon+label pair in sync:
 
-```tsx
-<Row gap="4" alignItems="center">
-  <Icon name="check" size="s" />
-  <Text color="strong">Verified</Text>
-</Row>
-```
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="4" alignItems="center">\n  <Icon name="check" size="s" />\n  <Text color="strong">Verified</Text>\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="4" alignItems="center">
+      <Icon name="check" size="s" />
+      <Text color="strong">Verified</Text>
+    </Row>
+  }
+/>
 
 Most components that accept an `icon` prop (`Button`, `Input`, `IconButton`) take an `IconName`
 directly rather than a rendered `<Icon>` — they own the sizing themselves so it always matches the
 rest of that control:
 
-```tsx
-<Button icon="download">Download</Button>
-```
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Button icon="download">Download</Button>' }]}
+  preview={<Button icon="download">Download</Button>}
+/>
 
 ## Full catalog
 
@@ -45,3 +55,16 @@ Read straight from `iconNames` — the same array the type `IconName` is derived
 can never drift out of sync with what's actually valid.
 
 <IconGrid />
+
+## Icons outside the catalog
+
+For a glyph the hand-drawn catalog doesn't have — a brand logo, a niche symbol —
+[ExternalIcon](/components/typography/external-icon) adapts an icon component from react-icons (or
+any similarly-shaped icon set) instead, with matching size steps and an optional monochrome
+override:
+
+```tsx
+import { FaHeart } from "react-icons/fa";
+
+<ExternalIcon icon={FaHeart} size="m" />;
+```

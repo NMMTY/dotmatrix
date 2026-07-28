@@ -7,14 +7,15 @@
     "button": 3,
     "icon-button": 4,
     "icon": 5,
-    "card": 6,
-    "badge": 7,
-    "chip": 8,
-    "avatar": 9,
-    "kbd": 10,
-    "inline-code": 11,
-    "skeleton": 12,
-    "code-block": 13,
-    "media": 14
+    "external-icon": 6,
+    "card": 7,
+    "badge": 8,
+    "chip": 9,
+    "avatar": 10,
+    "kbd": 11,
+    "inline-code": 12,
+    "skeleton": 13,
+    "code-block": 14,
+    "media": 15
   }
 }
