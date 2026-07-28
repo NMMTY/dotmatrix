@@ -1,0 +1,31 @@
+---
+title: "DropdownItem"
+summary: "A single selectable row inside Dropdown or ContextMenu."
+navIcon: "menu"
+github: "components/Dropdown/Dropdown.tsx"
+---
+
+A single selectable row inside [Dropdown](/components/overlays/dropdown) or
+[ContextMenu](/components/overlays/context-menu) — never rendered standalone, since its
+`onSelect`/keyboard-navigation behavior only exists in relation to the menu it belongs to.
+
+<Playground name="DropdownItem" />
+
+## Examples
+
+`onSelect` fires on click *and* on Enter/Space when the item has roving focus — one handler covers
+both mouse and keyboard activation:
+
+```tsx
+<Dropdown trigger={<Button>Sort by</Button>}>
+  <DropdownItem onSelect={() => setSort("name")}>Name</DropdownItem>
+  <DropdownItem onSelect={() => setSort("date")}>Date</DropdownItem>
+</Dropdown>
+```
+
+`disabled` skips the item during arrow-key navigation entirely, rather than leaving it focusable
+but inert — the same behavior a native `<select>`'s disabled `<option>` has.
+
+## Props
+
+<PropsTable name="DropdownItem" />

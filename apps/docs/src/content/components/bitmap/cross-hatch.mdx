@@ -1,0 +1,40 @@
+---
+title: "CrossHatch"
+summary: "A classic engraving cross-hatch — overlaid diagonal, vertical, and horizontal strokes standing in for tone."
+navIcon: "circle"
+github: "components/CrossHatch/CrossHatch.tsx"
+---
+
+The same per-cell luminance averaging as [Halftone](/components/bitmap/halftone), mapped to a
+*count* of overlaid hatch directions instead of a dot radius. Light cells get no strokes at all,
+progressively darker cells add one direction at a time — `\`, then `/`, then `—`, then finally `|`
+for the darkest cells — the same layering classic engravings and pen illustrations use to build up
+shadow. Ink color is read from the canvas's own computed `color` at draw time, so it follows the
+current theme.
+
+<Playground name="CrossHatch" />
+
+## Compared to Dither and Halftone
+
+All three bitmap components sample an image and reduce it to this system's monochrome language,
+but they read very differently at the same source image:
+
+- **[Dither](/components/bitmap/dither)** is per-pixel and textural — good for photographs where
+  you want the *whole* image visibly built from noise.
+- **[Halftone](/components/bitmap/halftone)** is per-cell and even — a uniform screen that reads
+  as tone from a distance, closest to a printed photograph.
+- **CrossHatch** is per-cell and directional — the strokes themselves are visible up close, giving
+  a more illustrative, hand-drawn feel than either of the other two.
+- **[AsciiArt](/components/bitmap/ascii-art)** is per-cell and typographic — density expressed as
+  characters rather than dots or strokes, the most literal "bitmap" of the four.
+
+Reach for `CrossHatch` when the image is more decorative than informational — a hero illustration
+or an avatar — where the hatching itself is part of the appeal rather than a means to preserve
+detail.
+
+`src` needs to be same-origin or CORS-enabled for the effect to actually apply — see [Dither's
+notes on loading external images](/components/bitmap/dither#loading-external-images).
+
+## Props
+
+<PropsTable name="CrossHatch" />

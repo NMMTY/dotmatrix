@@ -1,0 +1,38 @@
+---
+title: "Slider"
+summary: "A single-value range slider — controlled or uncontrolled, like a native input."
+navIcon: "minus"
+github: "components/Slider/Slider.tsx"
+---
+
+A single-value range slider. Works controlled or uncontrolled, exactly like a native `<input
+type="range">`, since that's what it is under the hood.
+
+<Playground name="Slider" />
+
+## Examples
+
+`min`/`max`/`step` are the same native range-input attributes — set them to match the unit you're
+actually collecting:
+
+```tsx
+<Slider label="Volume" min={0} max={100} defaultValue={50} />
+<Slider label="Price range" min={0} max={500} step={10} />
+```
+
+Read the live value from `onChange` to show it alongside the track — the slider itself has no
+built-in value readout:
+
+```tsx
+const [volume, setVolume] = useState(50);
+
+<Slider
+  label={`Volume — ${volume}`}
+  value={volume}
+  onChange={(e) => setVolume(Number(e.target.value))}
+/>;
+```
+
+## Props
+
+<PropsTable name="Slider" />

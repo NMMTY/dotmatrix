@@ -1,0 +1,42 @@
+---
+title: "Accordion"
+summary: "A single-open accordion — opening one item closes whatever else was open."
+navIcon: "menu"
+github: "components/Accordion/Accordion.tsx"
+---
+
+A single-open accordion — opening one item closes whatever else was open, and the open item can
+always collapse back to none. Multi-open is a deliberately unhandled case for v1, not an
+oversight — it's a real extension rather than a variant of this one.
+
+<Playground name="Accordion" />
+
+## Examples
+
+A typical FAQ list — each `AccordionItem`'s `value` just needs to be unique within the group:
+
+```tsx
+<Accordion defaultValue="shipping">
+  <AccordionItem value="shipping" title="What are your shipping times?">
+    3-5 business days for standard shipping.
+  </AccordionItem>
+  <AccordionItem value="returns" title="What's your return policy?">
+    Returns are accepted within 30 days of delivery.
+  </AccordionItem>
+</Accordion>
+```
+
+Controlled, when something outside the accordion needs to open a specific item (a "jump to this
+question" link, say):
+
+```tsx
+const [open, setOpen] = useState<string | undefined>();
+
+<Accordion value={open} onChange={setOpen}>
+  ...
+</Accordion>;
+```
+
+## Props
+
+<PropsTable name="Accordion" />

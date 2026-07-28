@@ -1,0 +1,61 @@
+---
+title: "Table"
+summary: "A native table with this system's borders/spacing — sorting, zebra, and selection are opt-in."
+navIcon: "menu"
+github: "components/Table/Table.tsx"
+---
+
+A native `<table>` with the design system's borders/spacing — sorting
+([TableHeaderCell](/components/data-display/table-header-cell)), zebra rows, and row selection
+([TableRow](/components/data-display/table-row)) are opt-in per-piece rather than table-wide
+flags, since a given table only needs some of them.
+
+```tsx
+<Table zebra>
+  <TableHead>
+    <tr>
+      <TableHeaderCell>Name</TableHeaderCell>
+      <TableHeaderCell>Status</TableHeaderCell>
+    </tr>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Ada Lovelace</TableCell>
+      <TableCell>Active</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+<Playground name="Table" />
+
+## Examples
+
+Sorting is driven entirely by `TableHeaderCell`'s own `sortDirection`/`onSort` — `Table` itself
+doesn't know or care that any column is sortable:
+
+```tsx
+const [sort, setSort] = useState<"ascending" | "descending">("ascending");
+
+<Table>
+  <TableHead>
+    <tr>
+      <TableHeaderCell
+        sortDirection={sort}
+        onSort={() => setSort(sort === "ascending" ? "descending" : "ascending")}
+      >
+        Name
+      </TableHeaderCell>
+    </tr>
+  </TableHead>
+  <TableBody>{/* sorted rows */}</TableBody>
+</Table>;
+```
+
+For no results — a filtered table that matched nothing — reach for
+[EmptyState](/components/data-display/empty-state) inside the table body rather than rendering an
+empty `<TableBody>`.
+
+## Props
+
+<PropsTable name="Table" />

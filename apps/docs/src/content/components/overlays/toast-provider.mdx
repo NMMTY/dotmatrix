@@ -1,0 +1,38 @@
+---
+title: "ToastProvider"
+summary: "Wraps your app to enable toast notifications via the useToast hook, from anywhere."
+navIcon: "menu"
+github: "components/Toast/Toast.tsx"
+---
+
+Wraps your app to enable toast notifications; call `useToast()` from any descendant component to
+show or dismiss one, without prop-drilling a toast function through the tree.
+
+```tsx
+function SaveButton() {
+  const { show } = useToast();
+  return (
+    <Button onClick={() => show({ title: "Saved", variant: "success" })}>
+      Save
+    </Button>
+  );
+}
+```
+
+<Playground name="ToastProvider" />
+
+## Examples
+
+`variant` picks the same semantic set `Badge` uses — a `success`/`error` toast should reflect what
+actually happened, not just visual preference:
+
+```tsx
+const { show } = useToast();
+
+show({ title: "Changes saved", variant: "success" });
+show({ title: "Couldn't connect", description: "Check your network and try again.", variant: "error" });
+```
+
+`variant: "error"` also switches the toast's role to `alert` instead of `status`, so assistive
+tech interrupts to announce it immediately rather than waiting for a pause — reserve it for
+failures that genuinely need that urgency, not routine confirmations.

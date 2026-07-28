@@ -1,0 +1,44 @@
+---
+title: "Button"
+summary: "A button that resolves its own honest default tag rather than going through ElementType."
+navIcon: "menu"
+github: "components/Button/Button.tsx"
+---
+
+Doesn't go through the shared `ElementType` helper the way `Flex`/`Row`/... do: those default to
+`<div>`, but a button's honest default is `<button>`, so it resolves its own tag and — only for
+the real `<button>` case — sets `type="button"` to avoid an accidental form submit. Set `as="a"`
+(or just `href`) for a button that navigates instead of acting.
+
+<Playground name="Button" />
+
+## Examples
+
+`variant` picks the emphasis, not the meaning — reach for one `solid` action per view (the thing
+you actually want done), `outline` for secondary actions, and `ghost` for the lowest-emphasis case
+like a toolbar icon:
+
+```tsx
+<Row gap="8">
+  <Button variant="solid">Save</Button>
+  <Button variant="outline">Cancel</Button>
+  <Button variant="ghost">Skip</Button>
+</Row>
+```
+
+`icon` takes an `IconName` and defaults to leading — set `iconPosition="end"` to trail it instead:
+
+```tsx
+<Button icon="download">Download</Button>
+<Button icon="arrow-right" iconPosition="end">Continue</Button>
+```
+
+`href` alone (no `as="a"` needed) renders a real `<a>` for a button that navigates:
+
+```tsx
+<Button href="/get-started">Get started</Button>
+```
+
+## Props
+
+<PropsTable name="Button" />

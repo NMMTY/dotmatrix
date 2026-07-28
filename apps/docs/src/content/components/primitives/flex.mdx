@@ -1,0 +1,34 @@
+---
+title: "Flex"
+summary: "The base layout primitive — Row and Column are Flex with a fixed direction."
+github: "components/Flex/Flex.tsx"
+---
+
+The base layout primitive. `Row` and `Column` are `Flex` with a fixed `direction`; reach for
+`Flex` directly when the direction itself needs to respond to a breakpoint
+(`m={{ direction: "column" }}`).
+
+Server-renderable: no hooks, no client-only APIs. Responsive props resolve to plain classes at
+build time, so this component never needs a client-side breakpoint check to do its job.
+
+<Playground name="Flex" />
+
+## Examples
+
+A row on wide screens that stacks to a column on mobile, without any JS media-query check:
+
+```tsx
+<Flex direction="row" s={{ direction: "column" }} gap="16">
+  <Card>Left</Card>
+  <Card>Right</Card>
+</Flex>
+```
+
+In practice, most layouts reach for [Row](/components/primitives/row) or
+[Column](/components/primitives/column) directly — they're `Flex` with `direction` already fixed,
+which reads clearer at the call site than `<Flex direction="row">` everywhere. `Flex` itself is for
+the specific case where the direction needs to *change* per breakpoint.
+
+## Props
+
+<PropsTable name="Flex" />

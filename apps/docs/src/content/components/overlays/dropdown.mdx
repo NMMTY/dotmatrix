@@ -1,0 +1,34 @@
+---
+title: "Dropdown"
+summary: "A menu of choices with roving keyboard navigation (arrow keys, typeahead, Home/End)."
+navIcon: "chevron-down"
+github: "components/Dropdown/Dropdown.tsx"
+---
+
+A menu of choices with roving keyboard navigation (arrow keys, typeahead, Home/End) — for
+arbitrary interactive content instead, use [Popover](/components/overlays/popover); for the same
+menu triggered by right-click instead of a visible trigger, see
+[ContextMenu](/components/overlays/context-menu), which shares this file's list-navigation wiring.
+
+<Playground name="Dropdown" />
+
+## Examples
+
+`trigger` plus a list of `DropdownItem`s covers the common menu case — arrow keys and typeahead
+work automatically once items are declared this way:
+
+```tsx
+<Dropdown trigger={<Button icon="more-horizontal">Actions</Button>}>
+  <DropdownItem onSelect={() => rename()}>Rename</DropdownItem>
+  <DropdownItem onSelect={() => duplicate()}>Duplicate</DropdownItem>
+  <DropdownItem onSelect={() => remove()} disabled={!canDelete}>Delete</DropdownItem>
+</Dropdown>
+```
+
+`matchTriggerWidth` is what [Select](/components/forms/select) sets internally — it makes the menu
+match the trigger's own width instead of sizing to its longest option, which is what a
+combobox-style field needs but a plain action menu usually doesn't.
+
+## Props
+
+<PropsTable name="Dropdown" />

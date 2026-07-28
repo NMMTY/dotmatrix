@@ -1,0 +1,20 @@
+{
+  "title": "Typography & Display",
+  "order": 2,
+  "pages": {
+    "text": 1,
+    "heading": 2,
+    "button": 3,
+    "icon-button": 4,
+    "icon": 5,
+    "card": 6,
+    "badge": 7,
+    "chip": 8,
+    "avatar": 9,
+    "kbd": 10,
+    "inline-code": 11,
+    "skeleton": 12,
+    "code-block": 13,
+    "media": 14
+  }
+}

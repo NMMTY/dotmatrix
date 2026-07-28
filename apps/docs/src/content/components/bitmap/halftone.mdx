@@ -1,0 +1,38 @@
+---
+title: "Halftone"
+summary: "A classic halftone screen — variable-radius dots instead of dither's on/off pattern."
+navIcon: "circle"
+github: "components/Halftone/Halftone.tsx"
+---
+
+A classic halftone screen — variable-radius dots instead of [Dither](/components/bitmap/dither)'s
+per-pixel on/off pattern. Ink color is read from the canvas's own computed `color` at draw time,
+so it follows the current theme like any other text.
+
+<Playground name="Halftone" />
+
+## Examples
+
+`cellSize` is the screen's dot pitch — smaller reads closer to a real halftone print, larger reads
+more graphic and poster-like:
+
+```tsx
+<Halftone src={photo} alt="Portrait" cellSize={4} />
+<Halftone src={photo} alt="Portrait" cellSize={12} maxRadius={0.85} />
+```
+
+Since ink color tracks the canvas's own `color`, wrapping it in a `Text`/palette scope changes the
+dots without touching the component itself:
+
+```tsx
+<div style={{ color: "var(--dm-accent-500)" }}>
+  <Halftone src={photo} alt="Portrait" cellSize={6} />
+</div>
+```
+
+`src` needs to be same-origin or CORS-enabled for the effect to actually apply — see [Dither's
+notes on loading external images](/components/bitmap/dither#loading-external-images).
+
+## Props
+
+<PropsTable name="Halftone" />

@@ -1,0 +1,26 @@
+---
+title: "Kbd"
+summary: "A single keyboard key. Always renders as a real <kbd>."
+navIcon: "menu"
+github: "components/Kbd/Kbd.tsx"
+---
+
+A single keyboard key, e.g. `<Kbd>⌘</Kbd><Kbd>K</Kbd>` for a shortcut hint. Always `<kbd>`.
+
+<Playground name="Kbd" />
+
+## Examples
+
+Each key is its own `Kbd` — a multi-key shortcut is a small `Row` of them, not one `Kbd` with a
+`+` baked into its children:
+
+```tsx
+<Row gap="4" alignItems="center">
+  <Kbd>⌘</Kbd>
+  <Kbd>K</Kbd>
+</Row>
+```
+
+## Props
+
+<PropsTable name="Kbd" />

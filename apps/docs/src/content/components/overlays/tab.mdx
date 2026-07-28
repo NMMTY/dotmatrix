@@ -1,0 +1,27 @@
+---
+title: "Tab"
+summary: "A single tab button — Arrow Left/Right and Home/End move focus and activate immediately."
+navIcon: "menu"
+github: "components/Tabs/Tabs.tsx"
+---
+
+A single tab button, used inside [TabList](/components/overlays/tab-list). Arrow Left/Right
+(wrapping) and Home/End move focus **and** activate the tab immediately — WAI-ARIA APG's
+"automatic activation" pattern, right for a tablist whose panels are cheap to show.
+
+<Playground name="Tab" />
+
+## Examples
+
+`disabled` skips a tab during arrow-key navigation entirely — for a tab that isn't available yet
+(a report that hasn't finished generating, say), rather than showing an empty panel behind it:
+
+```tsx
+<Tab value="report" disabled={!reportReady}>
+  Report
+</Tab>
+```
+
+## Props
+
+<PropsTable name="Tab" />

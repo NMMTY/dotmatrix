@@ -1,0 +1,27 @@
+---
+title: "Line"
+summary: "A hairline divider."
+github: "components/Line/Line.tsx"
+---
+
+A hairline divider. Not a `Flex` variant — dividers have no children, so `Line` skips the layout
+props that only make sense for a container.
+
+<Playground name="Line" />
+
+## Examples
+
+Between two sections of a page, sitting in the same `Column` as its siblings rather than as a
+`border` on one of them — that keeps the spacing driven entirely by the column's own `gap`:
+
+```tsx
+<Column gap="24">
+  <Section title="Account" />
+  <Line />
+  <Section title="Billing" />
+</Column>
+```
+
+## Props
+
+<PropsTable name="Line" />

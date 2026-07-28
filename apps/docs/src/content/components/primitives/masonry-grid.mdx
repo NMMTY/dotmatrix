@@ -1,0 +1,36 @@
+---
+title: "MasonryGrid"
+summary: "A Pinterest-style column layout via native CSS multi-column, not JS height measurement."
+github: "components/MasonryGrid/MasonryGrid.tsx"
+---
+
+A Pinterest-style column layout via native CSS multi-column (`column-count` + `column-width`),
+not JS height measurement — items fill down one column before wrapping to the next, and the
+browser itself drops columns as the container narrows.
+
+The tradeoff for that simplicity: items are read down each column in turn, not left-to-right by
+row, which is the standard CSS-columns masonry behavior.
+
+<Playground name="MasonryGrid" />
+
+## Examples
+
+A gallery of variable-height cards — this is the layout `MasonryGrid` earns its keep on, since a
+regular `Grid` would leave uneven gaps under the shorter items in each row:
+
+```tsx
+<MasonryGrid minColumnWidth={240} gap="16">
+  {photos.map((photo) => (
+    <Media key={photo.id} src={photo.src} alt={photo.alt} />
+  ))}
+</MasonryGrid>
+```
+
+Because it reads down-then-across, keep DOM order in mind for content where reading order matters
+— for a photo gallery it rarely does, but for anything a screen-reader user steps through
+linearly, a regular `Grid` (which preserves left-to-right, top-to-bottom order) is the safer
+default.
+
+## Props
+
+<PropsTable name="MasonryGrid" />

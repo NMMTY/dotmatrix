@@ -1,0 +1,37 @@
+---
+title: "Input"
+summary: "A labeled text input. For multi-line text, use Textarea."
+navIcon: "edit"
+github: "components/Input/Input.tsx"
+---
+
+A labeled text input — label, description, error, and success states all wired through the
+shared `useFormField` hook, so `id`/`aria-describedby`/`aria-invalid` are never hand-rolled per
+field. Also takes an explicit `pattern` prop and an optional leading `icon`.
+
+<Playground name="Input" />
+
+## Examples
+
+`description` sets the baseline hint text; `error` (or `success`) replaces it entirely once the
+field has something to report, rather than stacking both underneath the field at once:
+
+```tsx
+<Input label="Email" description="We'll only use this for order updates." />
+<Input label="Email" error="That doesn't look like a valid email." />
+<Input label="Email" success="Looks good." />
+```
+
+A leading `icon` reads as part of the field, not a decoration bolted on top — useful for a quick
+visual hint at what kind of value is expected:
+
+```tsx
+<Input label="Email" icon="user" />
+```
+
+Uncontrolled by default, like any native `<input>` — pass `value`/`onChange` only when you need to
+read or drive the value from outside the field itself.
+
+## Props
+
+<PropsTable name="Input" />

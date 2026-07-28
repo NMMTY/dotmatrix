@@ -1,0 +1,61 @@
+---
+title: "Layout"
+summary: "The primitive system: Flex/Row/Column/Grid, style props, and the as prop."
+updatedAt: "2026-07-27"
+navIcon: "menu"
+keywords: "flex, row, column, grid, primitives, responsive, as prop"
+---
+
+Raw HTML tags are only used where there's no reasonable alternative (native form controls, table
+semantics). Everything else is composed from four primitives: `Flex`, `Row` (`Flex` with
+`direction="row"`), `Column` (`direction="column"`), and `Grid`.
+
+```tsx
+<Row gap="16" padding="24">
+  <Column gap="8">
+    <Text>A</Text>
+    <Text>B</Text>
+  </Column>
+</Row>
+```
+
+## Style props, not utility classes in your JSX
+
+Every layout-relevant CSS property is a typed prop backed by a fixed scale — `gap="16"`,
+`padding="24"`, `background="surface"` — resolved to a generated class at the prop→class layer, so
+there's no arbitrary-value escape hatch to accidentally reach for.
+
+## Responsive props
+
+`xs`/`s`/`m`/`l`/`xl` props take an object shaped like the base style props, and override the base
+value at that breakpoint **and everything narrower** — `max-width` media queries, not `min-width`,
+so this reads desktop-first: the base props are the wide-screen layout, and each breakpoint prop is
+an override as the viewport shrinks past it.
+
+```tsx
+<Row gap="16" direction="row" m={{ direction: "column" }}>
+  <Column gap="8">...</Column>
+  <Column gap="8">...</Column>
+</Row>
+```
+
+That renders as a row down to the `m` breakpoint (1024px), then stacks to a column at 1024px and
+everything narrower. Stack multiple breakpoints on the same prop for more than one step — since
+they're all `max-width` and emitted largest-first, the narrower one always wins where both match:
+
+```tsx
+<Column gap="24" m={{ gap: "16" }} s={{ gap: "8" }}>
+  ...
+</Column>
+```
+
+No `useEffect`, no client-side breakpoint check — the breakpoint variants are plain generated CSS
+classes, so this works in a server component with zero client JS. See the [get
+started](/get-started) install step and the [component reference](/components/overview) for every
+primitive this applies to.
+
+## The `as` prop: layout vs. semantics
+
+Primitives express layout; `as` expresses semantics. `<Row as="ul">` is still a flex row in the
+DOM, but a real `<ul>` for the accessibility tree and any consumer relying on list semantics.
+`href` alone renders as `<a>`, since that's common enough not to spell `as="a"` every time.

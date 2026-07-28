@@ -1,0 +1,35 @@
+---
+title: "Popover"
+summary: "Click-triggered floating content that can hold real interactive elements."
+navIcon: "menu"
+github: "components/Popover/Popover.tsx"
+---
+
+Click-triggered floating content that can hold real interactive elements — unlike
+[Tooltip](/components/overlays/tooltip), focus can move into it, and it stays open until
+dismissed. For a list of choices with roving keyboard navigation, use
+[Dropdown](/components/overlays/dropdown) instead; this is for arbitrary content (a mini form, a
+settings panel, ...).
+
+<Playground name="Popover" />
+
+## Examples
+
+`trigger` opens it on click, same as `Dialog`/`Dropdown` — but unlike a `Dialog`, the content stays
+anchored to the trigger and doesn't dim the rest of the page:
+
+```tsx
+<Popover trigger={<IconButton icon="settings" aria-label="View options" />} placement="bottom-end">
+  <Column gap="8" padding="16">
+    <Switch label="Show hidden files" />
+    <Switch label="Compact rows" />
+  </Column>
+</Popover>
+```
+
+`placement` is a hint, not a guarantee — floating-ui flips it to whichever side actually has room
+when the preferred one would overflow the viewport.
+
+## Props
+
+<PropsTable name="Popover" />

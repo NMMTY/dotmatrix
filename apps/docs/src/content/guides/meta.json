@@ -1,0 +1,9 @@
+{
+  "title": "Guides",
+  "order": 1,
+  "pages": {
+    "theming": 1,
+    "layout": 2,
+    "icons": 3
+  }
+}

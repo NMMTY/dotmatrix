@@ -1,0 +1,44 @@
+---
+title: "Row"
+summary: "Flex fixed to direction: row — the default horizontal layout primitive."
+github: "components/Row/Row.tsx"
+---
+
+`Flex` fixed to `direction: row`. The default horizontal layout primitive — reach for it whenever
+children should sit side by side.
+
+```tsx
+<Row gap="16" alignItems="center">
+  <Text>A</Text>
+  <Text>B</Text>
+</Row>
+```
+
+<Playground name="Row" />
+
+## Examples
+
+`wrap="wrap"` lets children flow onto additional lines instead of overflowing or shrinking to fit
+— useful for a toolbar or tag list that shouldn't force a horizontal scrollbar on a narrow screen:
+
+```tsx
+<Row gap="8" wrap="wrap">
+  {tags.map((tag) => (
+    <Chip key={tag}>{tag}</Chip>
+  ))}
+</Row>
+```
+
+`justifyContent="between"` is the common pattern for a header-style row — one group pinned to each
+end with whatever space is left between them:
+
+```tsx
+<Row justifyContent="between" alignItems="center">
+  <Heading as="h2">Section title</Heading>
+  <Button size="s">Action</Button>
+</Row>
+```
+
+## Props
+
+<PropsTable name="Row" />

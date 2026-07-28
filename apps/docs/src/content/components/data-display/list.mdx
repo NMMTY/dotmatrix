@@ -1,0 +1,35 @@
+---
+title: "List"
+summary: "An accessible list container, role=list, for a series of ListItems."
+navIcon: "menu"
+github: "components/List/List.tsx"
+---
+
+An accessible list container (`role="list"`) for a series of
+[ListItem](/components/data-display/list-item)s — title/description/action rows, like an invoice
+list or a settings list.
+
+<Playground name="List" />
+
+## Examples
+
+```tsx
+<List>
+  {invoices.map((invoice) => (
+    <ListItem
+      key={invoice.id}
+      title={invoice.client}
+      description={`Due ${invoice.dueDate}`}
+      action={<Badge variant={invoice.paid ? "success" : "warning"}>{invoice.status}</Badge>}
+    />
+  ))}
+</List>
+```
+
+For tabular data with more than one column of information per record, reach for
+[Table](/components/data-display/table) instead — `List` is for single-column rows, each read as
+one unit.
+
+## Props
+
+<PropsTable name="List" />

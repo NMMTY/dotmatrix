@@ -1,0 +1,34 @@
+---
+title: "ColorInput"
+summary: "A fully custom color picker — not a wrapper over native input type=color."
+navIcon: "settings"
+github: "components/ColorInput/ColorInput.tsx"
+---
+
+A fully custom picker, not a wrapper over native `<input type="color">` — hue and
+saturation/lightness are each a grid of solid, individually clickable swatches (real buttons, so
+Tab/Enter already make them keyboard-operable) rather than a continuous gradient, which has no
+bitmap equivalent in this system's monochrome-first identity.
+
+<Playground name="ColorInput" />
+
+## Examples
+
+`swatches` adds a row of quick picks above the hue/lightness grid — a natural fit for a brand's own
+accent palette rather than making every user hand-mix it:
+
+```tsx
+<ColorInput
+  label="Accent color"
+  defaultValue="#3b82f6"
+  swatches={["#3b82f6", "#22c55e", "#f97316", "#ef4444"]}
+/>
+```
+
+The typed hex field beside the grid stays in sync with swatch/grid clicks in both directions — a
+user can type `#3b82f6` directly instead of hunting for it visually, and `value` is always a
+validated `#rrggbb`/`#rgb` string either way.
+
+## Props
+
+<PropsTable name="ColorInput" />

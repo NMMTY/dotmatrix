@@ -1,0 +1,57 @@
+---
+title: "CodeBlock"
+summary: "A tabbed code snippet display with an optional live preview panel."
+navIcon: "menu"
+github: "components/CodeBlock/CodeBlock.tsx"
+---
+
+A tabbed code snippet display with an optional live preview panel — this is exactly the
+component rendering every fenced code block and every `<Playground>` on this site. Modeled on
+[Once UI](https://github.com/once-ui-system/core)'s `CodeBlock` (tabs/copy/fullscreen/collapsible),
+adapted to this system's own overlay primitives and a monochrome Prism theme instead of a color
+one.
+
+```tsx
+<CodeBlock
+  copyButton
+  fullscreenButton
+  codes={[
+    { language: "tsx", label: "Example", code: '<Button variant="solid">Click me</Button>' },
+  ]}
+/>
+```
+
+<Playground name="CodeBlock" />
+
+## Examples
+
+Multiple `codes` entries render as tabs — useful for showing the same example in more than one
+language or framework:
+
+```tsx
+<CodeBlock
+  codes={[
+    { language: "bash", label: "npm", code: "npm install @nmmty/dotmatrix" },
+    { language: "bash", label: "pnpm", code: "pnpm add @nmmty/dotmatrix" },
+  ]}
+/>
+```
+
+`isCollapsible` with `maxLines` cuts a long snippet down to a preview, with a "View code" bar to
+expand it — useful for a full file example that would otherwise dominate the page:
+
+```tsx
+<CodeBlock codes={[{ language: "tsx", code: fullFileSource }]} isCollapsible maxLines={12} />
+```
+
+`syntaxTheme="color"` gives each token kind its own hue (One Dark/One Light) instead of this
+system's default monochrome tinting — for a context where the syntax colors themselves carry real
+information, not just this site's own code blocks:
+
+```tsx
+<CodeBlock codes={[{ language: "tsx", code }]} syntaxTheme="color" />
+```
+
+## Props
+
+<PropsTable name="CodeBlock" />

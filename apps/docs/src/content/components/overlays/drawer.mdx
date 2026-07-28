@@ -1,0 +1,32 @@
+---
+title: "Drawer"
+summary: "Dialog's edge-anchored sibling — docked to a side of the viewport instead of centered."
+navIcon: "menu"
+github: "components/Drawer/Drawer.tsx"
+---
+
+[Dialog](/components/overlays/dialog)'s edge-anchored sibling — same modal behavior (focus trap,
+scroll lock, Escape/backdrop dismiss), but docked to a side of the viewport instead of centered.
+Kept as its own component rather than a `Dialog` prop: the two have different enough layout needs
+that sharing one component would mean threading side-specific CSS through Dialog for every
+consumer.
+
+<Playground name="Drawer" />
+
+## Examples
+
+`side` picks which edge it slides in from — `"left"` is the common choice for primary navigation,
+`"right"` (the default) for a details/settings panel:
+
+```tsx
+<Drawer side="left" title="Navigation" trigger={<IconButton icon="menu" aria-label="Menu" />}>
+  <NavLinks />
+</Drawer>
+```
+
+Same `trigger`/controlled-`open` split as [Dialog](/components/overlays/dialog) — reach for a
+controlled `Drawer` when something other than its own trigger button should open it.
+
+## Props
+
+<PropsTable name="Drawer" />

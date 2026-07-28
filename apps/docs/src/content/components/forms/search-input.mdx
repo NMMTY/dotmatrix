@@ -1,0 +1,34 @@
+---
+title: "SearchInput"
+summary: "A text input with a search icon and a clear button, shown once there's a value."
+navIcon: "search"
+github: "components/SearchInput/SearchInput.tsx"
+---
+
+A text input with a leading search icon and a trailing clear button — the clear button only
+appears once there's a value to clear.
+
+<Playground name="SearchInput" />
+
+## Examples
+
+Controlled is the common case — a search field almost always needs to drive a filtered list or a
+query somewhere else on the page:
+
+```tsx
+const [query, setQuery] = useState("");
+
+<SearchInput
+  label="Search"
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+  placeholder="Search components…"
+/>;
+```
+
+Clicking the clear button fires the same `onChange` with an empty value, so a single handler
+covers both typing and clearing — there's no separate `onClear` to wire up.
+
+## Props
+
+<PropsTable name="SearchInput" />

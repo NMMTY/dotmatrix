@@ -1,0 +1,55 @@
+---
+title: "Dither"
+summary: "Runs an image through a dithering algorithm and paints it at a reduced pixel size."
+navIcon: "circle"
+github: "components/Dither/Dither.tsx"
+---
+
+Runs an image through a dithering algorithm (Floyd–Steinberg, Atkinson, Bayer, or a hard
+threshold) and paints it to a canvas at a deliberately reduced resolution (`pixelSize`), stretched
+back up via CSS with `image-rendering: pixelated` — that stretch, not a second manual redraw, is
+what turns the dithered result blocky.
+
+Doubles as its own SSR-safe placeholder: the real draw only happens client-side, after mount.
+
+<Playground name="Dither" />
+
+## Examples
+
+`algorithm` trades noise pattern for character — `floyd-steinberg` (the default) diffuses error
+smoothly and reads closest to a photograph; the `bayer` variants use a fixed repeating matrix
+instead, giving a more uniform, screen-like texture:
+
+```tsx
+<Dither src={photo} alt="Portrait" algorithm="atkinson" levels={2} />
+<Dither src={photo} alt="Portrait" algorithm="bayer4" levels={4} />
+```
+
+`levels` raises the output above pure black/white — useful when the source has enough tonal range
+that 2 levels loses too much:
+
+```tsx
+<Dither src={photo} alt="Landscape" levels={4} pixelSize={1} />
+```
+
+If `src` is an image your own server doesn't control, see [Loading external
+images](#loading-external-images) below — the browser needs the source to grant CORS before this
+component can read its pixels back out at all.
+
+## Loading external images
+
+Both `Dither` and `Halftone` draw the source image to an offscreen canvas and read its pixels back
+out — a browser only allows that for a cross-origin image if its server sends a CORS header
+(`Access-Control-Allow-Origin`). Without one, the canvas is "tainted" and reading pixels throws, so
+both components catch that and fall back to rendering the plain, un-dithered `<img>` instead of a
+broken canvas. Two ways to actually get the effect on an external image:
+
+- Serve it from your own origin (or any host that already sends permissive CORS headers — many
+  image CDNs do).
+- Proxy it through your own backend so the browser sees it as same-origin. This site's own
+  Playground does exactly that for the demo above — see `apps/docs/src/app/api/image-proxy` in the
+  repo for a minimal example.
+
+## Props
+
+<PropsTable name="Dither" />

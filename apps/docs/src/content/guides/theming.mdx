@@ -1,0 +1,38 @@
+---
+title: "Theming"
+summary: "Palettes, global vs. local scoping, and the four theming axes."
+updatedAt: "2026-07-27"
+navIcon: "settings"
+keywords: "theme, palette, accent, dark, light, mono"
+---
+
+Four independent axes, each a `data-*` attribute on `<html>`: `data-theme` (`dark`/`light`),
+`data-palette` (accent color), `data-border` (`rounded`/`notched`/`square`), `data-density`
+(`compact`/`normal`/`comfortable`). Switching any of them is an attribute write, not a re-render —
+no component in the tree needs to know `ThemeProvider` exists to pick up a change.
+
+## Palettes
+
+`mono` (the default) keeps every accent-driven token equal to the gray ramp. Five chromatic hues —
+`orange`, `blue`, `green`, `purple`, `red` — each come in three variations: the base vivid tone, a
+deeper `-dark`, and a pastel `-light`. 16 values in total.
+
+## Global vs. local
+
+Set a palette globally via `ThemeProvider`/`useTheme`, or scope it to one element's subtree with
+the `palette` prop any primitive accepts — the same `data-palette` mechanism, just anchored lower.
+Click the button below: it cycles the *global* palette, and every solid `Button`/`Switch`/
+`Radio`/`Checkbox` on this page reacts, except the one explicitly pinned to `palette="blue"`.
+
+<PaletteSwitcherDemo />
+
+```tsx
+<Button variant="solid">Reacts globally</Button>
+<Button variant="solid" palette="blue">Always blue</Button>
+```
+
+## What actually changes color
+
+Only key interactive states: a `solid` button's background, a checked `Switch`/`Radio`/
+`Checkbox`'s fill, and the focus ring. Everything else — text, borders, surfaces — stays
+monochrome regardless of palette, by design.

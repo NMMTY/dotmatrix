@@ -1,0 +1,26 @@
+---
+title: "AccordionItem"
+summary: "A single collapsible section inside Accordion."
+navIcon: "menu"
+github: "components/Accordion/Accordion.tsx"
+---
+
+A single collapsible section inside [Accordion](/components/overlays/accordion) — its `value`
+must be unique among its siblings, since that's what the accordion's open state tracks.
+
+<Playground name="AccordionItem" />
+
+## Examples
+
+`title` is the always-visible header row; `children` is the collapsible content underneath it —
+disable an item (a section that's temporarily unavailable) without removing it from the list:
+
+```tsx
+<AccordionItem value="advanced" title="Advanced settings" disabled={!isPro}>
+  ...
+</AccordionItem>
+```
+
+## Props
+
+<PropsTable name="AccordionItem" />

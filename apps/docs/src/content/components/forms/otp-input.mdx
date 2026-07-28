@@ -1,0 +1,37 @@
+---
+title: "OTPInput"
+summary: "A one-time-passcode field — length single-character boxes acting as one logical value."
+navIcon: "lock"
+github: "components/OTPInput/OTPInput.tsx"
+---
+
+A one-time-passcode field: `length` single-character boxes acting as one logical value, not
+`length` independent inputs — typing a digit advances to the next box, Backspace on an empty box
+deletes and refocuses the previous one, and pasting a full code splits it across every box at
+once.
+
+<Playground name="OTPInput" />
+
+## Examples
+
+`onComplete` fires once, exactly when the value reaches `length` characters — the natural hook for
+auto-submitting a code without a separate "Verify" button:
+
+```tsx
+<OTPInput
+  label="Verification code"
+  length={6}
+  onComplete={(code) => verifyCode(code)}
+/>
+```
+
+A shorter PIN just needs a smaller `length` — the box count always follows it, nothing else to
+configure:
+
+```tsx
+<OTPInput label="PIN" length={4} />
+```
+
+## Props
+
+<PropsTable name="OTPInput" />

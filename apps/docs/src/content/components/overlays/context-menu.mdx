@@ -1,0 +1,39 @@
+---
+title: "ContextMenu"
+summary: "The same menu as Dropdown, opened by right-click and positioned at the cursor."
+navIcon: "menu"
+github: "components/ContextMenu/ContextMenu.tsx"
+---
+
+The same menu (and the same `DropdownItem`s) as [Dropdown](/components/overlays/dropdown), opened
+by right-click and positioned at the cursor instead of relative to a visible trigger element.
+Shares `Dropdown`'s context/list-navigation wiring rather than duplicating the menu-item rendering
+logic.
+
+<Playground name="ContextMenu" />
+
+## Examples
+
+`children` is the single element that gets the right-click handler; `menu` is the same
+`DropdownItem` list `Dropdown` renders:
+
+```tsx
+<ContextMenu
+  menu={
+    <>
+      <DropdownItem onSelect={() => copy()}>Copy</DropdownItem>
+      <DropdownItem onSelect={() => paste()}>Paste</DropdownItem>
+    </>
+  }
+>
+  <Card padding="24">Right-click anywhere in this card</Card>
+</ContextMenu>
+```
+
+Reach for `ContextMenu` only as a supplement to a visible way of reaching the same actions (a
+toolbar button, say) — right-click has no keyboard-only or touch equivalent, so it can't be the
+*only* way to open a menu of otherwise-unreachable actions.
+
+## Props
+
+<PropsTable name="ContextMenu" />

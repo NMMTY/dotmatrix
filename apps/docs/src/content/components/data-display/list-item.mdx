@@ -1,0 +1,24 @@
+---
+title: "ListItem"
+summary: "A title/description/action row inside List."
+navIcon: "menu"
+github: "components/List/List.tsx"
+---
+
+A title/description/action row inside [List](/components/data-display/list) — `action` is any
+trailing content (a button, a badge) that makes sense at the end of the row.
+
+<Playground name="ListItem" />
+
+## Examples
+
+`title`/`description`/`action` cover the common row shape; omit all three and pass `children`
+instead for a row that doesn't fit that template:
+
+```tsx
+<ListItem title="Ada Lovelace" description="ada@example.com" action={<Button size="s">View</Button>} />
+```
+
+## Props
+
+<PropsTable name="ListItem" />

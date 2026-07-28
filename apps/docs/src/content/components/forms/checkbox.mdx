@@ -1,0 +1,41 @@
+---
+title: "Checkbox"
+summary: "A single checkbox. For a related group of radio options, use RadioGroup."
+navIcon: "check"
+github: "components/Checkbox/Checkbox.tsx"
+---
+
+A single checkbox, with the same `label`/`description`/`error` model every other form control in
+this system uses. Supports `indeterminate` as a DOM property (there's no HTML attribute for it).
+
+<Playground name="Checkbox" />
+
+## Examples
+
+For a standalone yes/no option — terms acceptance, "remember me" — pair `label` with `description`
+for the fine print:
+
+```tsx
+<Checkbox label="I agree to the terms" description="You can review them any time in Settings." />
+```
+
+`indeterminate` is a visual third state for a "select all" checkbox whose children are partially
+selected — it's set imperatively (there's no `<input indeterminate>` HTML attribute), so it's
+almost always driven from a ref or a parent's derived state rather than typed by hand:
+
+```tsx
+<Checkbox
+  label="Select all"
+  checked={allSelected}
+  indeterminate={someSelected && !allSelected}
+  onChange={toggleAll}
+/>
+```
+
+For a related set of options where exactly one can be true, reach for
+[RadioGroup](/components/forms/radio-group) instead — a group of `Checkbox`es doesn't enforce
+mutual exclusivity on its own.
+
+## Props
+
+<PropsTable name="Checkbox" />

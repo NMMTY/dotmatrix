@@ -1,0 +1,30 @@
+---
+title: "Switch"
+summary: "An on/off toggle, announced as switch rather than checkbox to assistive tech."
+navIcon: "check"
+github: "components/Switch/Switch.tsx"
+---
+
+An on/off toggle: a native `<input type="checkbox">` with `role="switch"` so assistive tech
+announces "on"/"off" instead of "checked". Overriding the role also drops the browser's native
+checked-state mapping, so `aria-checked` is maintained explicitly.
+
+<Playground name="Switch" />
+
+## Switch vs. Checkbox
+
+Both toggle a boolean, but they read differently to a user — reach for whichever matches what the
+option actually *does*:
+
+- **Switch** — an immediate setting that takes effect the moment it's flipped ("Dark mode",
+  "Push notifications"). No submit step in between.
+- **[Checkbox](/components/forms/checkbox)** — a choice that's part of a larger form, submitted
+  together with everything else ("I agree to the terms").
+
+```tsx
+<Switch label="Dark mode" checked={isDark} onChange={(e) => setIsDark(e.target.checked)} />
+```
+
+## Props
+
+<PropsTable name="Switch" />

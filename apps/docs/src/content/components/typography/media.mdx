@@ -1,0 +1,28 @@
+---
+title: "Media"
+summary: "One component for any embeddable media — image, video, or a YouTube/Vimeo URL."
+navIcon: "external-link"
+github: "components/Media/Media.tsx"
+---
+
+One component for any embeddable media — a plain image, a native `<video>`, or a YouTube/Vimeo
+URL (swapped for its embed/no-cookie iframe form automatically, from the URL alone — no separate
+`type` prop to set). Always renders into a fixed-aspect-ratio box, so surrounding content never
+reflows once the media itself loads in.
+
+Deliberately not run through [Dither](/components/bitmap/dither)/[Halftone](/components/bitmap/halftone):
+this is for content that wants to look like an ordinary photo or video (a screenshot, a demo
+recording), not this system's own bitmap aesthetic — reach for those instead when the point is
+the dithered look itself.
+
+```tsx
+<Media src="/screenshot.png" alt="A screenshot of the dashboard" aspectRatio="16 / 9" radius="m" />
+<Media src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" alt="A talk" aspectRatio="16 / 9" />
+<Media src="/demo.mp4" alt="A demo recording" controls />
+```
+
+<Playground name="Media" />
+
+## Props
+
+<PropsTable name="Media" />

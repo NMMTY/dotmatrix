@@ -1,0 +1,16 @@
+{
+  "title": "Data Display",
+  "order": 6,
+  "pages": {
+    "table": 1,
+    "table-head": 2,
+    "table-body": 3,
+    "table-row": 4,
+    "table-cell": 5,
+    "table-header-cell": 6,
+    "list": 7,
+    "list-item": 8,
+    "stat": 9,
+    "empty-state": 10
+  }
+}

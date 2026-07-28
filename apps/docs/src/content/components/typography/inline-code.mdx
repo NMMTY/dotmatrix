@@ -1,0 +1,29 @@
+---
+title: "InlineCode"
+summary: "Inline code, always rendered as a real <code>."
+navIcon: "edit"
+github: "components/InlineCode/InlineCode.tsx"
+---
+
+Inline code — e.g. run <InlineCode>pnpm build</InlineCode> to compile. Always `<code>`. This is
+also what a single backtick renders to in every page across this site, including this one.
+
+<Playground name="InlineCode" />
+
+## Examples
+
+For a value or command name inline in a sentence:
+
+```tsx
+<Text>
+  Set <InlineCode>strict</InlineCode> to opt into the stricter validation path.
+</Text>
+```
+
+For a whole snippet spanning multiple lines, reach for
+[CodeBlock](/components/typography/code-block) instead — `InlineCode` has no syntax highlighting
+and no copy button, since it's meant to sit inline in a sentence, not stand on its own.
+
+## Props
+
+<PropsTable name="InlineCode" />

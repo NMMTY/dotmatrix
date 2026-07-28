@@ -1,0 +1,35 @@
+---
+title: "AsciiArt"
+summary: "Renders an image as a grid of monospace characters — density instead of dots or dither noise."
+navIcon: "circle"
+github: "components/AsciiArt/AsciiArt.tsx"
+---
+
+The most literal reading of this system's "bitmap" identity: the same per-cell luminance averaging
+as [Halftone](/components/bitmap/halftone), but mapped to a character ramp instead of a dot
+radius. Each sampling cell picks one glyph from `charset`, darkest cells getting the densest
+character (`@` by default) and the lightest getting none at all. Ink color is read from the
+canvas's own computed `color` at draw time, so it follows the current theme like `Halftone` and
+`CrossHatch` do.
+
+<Playground name="AsciiArt" />
+
+## Choosing a charset
+
+`charset` is read densest-first — the character at index `0` renders for the darkest cells, and a
+trailing space (the default ramp ends in one) means "leave this cell blank." Swap in your own ramp
+to change the texture entirely:
+
+```tsx
+<AsciiArt src={photo} alt="Portrait" charset="#+. " />
+```
+
+A shorter charset gives fewer distinct tones (more posterized, higher contrast); a longer one gives
+a smoother gradient at the cost of needing a larger `cellSize` to stay legible.
+
+`src` needs to be same-origin or CORS-enabled for the effect to actually apply — see [Dither's
+notes on loading external images](/components/bitmap/dither#loading-external-images).
+
+## Props
+
+<PropsTable name="AsciiArt" />

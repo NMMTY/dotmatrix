@@ -1,0 +1,32 @@
+{
+  "name": "@nmmty/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-manifest": "node scripts/generate-manifest.mjs",
+    "predev": "npm run generate-manifest",
+    "prebuild": "npm run generate-manifest",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@nmmty/dotmatrix": "workspace:*",
+    "gray-matter": "^4.0.3",
+    "next": "^15.1.0",
+    "next-mdx-remote": "^5.0.0",
+    "prismjs": "^1.29.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/prismjs": "^1.26.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "react-docgen-typescript": "^2.2.2",
+    "typescript": "^5.9.2"
+  }
+}

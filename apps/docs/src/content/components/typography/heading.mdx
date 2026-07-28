@@ -1,0 +1,37 @@
+---
+title: "Heading"
+summary: "A section heading — as picks the semantic level, displaySize picks the visual size."
+navIcon: "edit"
+github: "components/Heading/Heading.tsx"
+---
+
+A section heading. `as` picks the semantic level (h1–h6, default h2) — unlike `Flex`'s `as`, it's
+constrained to heading tags only, since a heading rendering as a `<div>` would silently drop out
+of the document outline. Visual size is independent of level: override with `displaySize` when a
+heading's importance and its place in the outline don't match.
+
+<Playground name="Heading" />
+
+## Examples
+
+The common case where level and size agree — pick `as` for where it sits in the outline, and let
+`displaySize` follow by default:
+
+```tsx
+<Heading as="h1" displaySize="l">Page title</Heading>
+<Heading as="h2" displaySize="m">Section</Heading>
+```
+
+When they *don't* agree — a card's title is structurally an `h3` (nested under the page's `h1`/
+`h2`), but should read visually smaller than a full section heading:
+
+```tsx
+<Heading as="h3" displaySize="xs">Card title</Heading>
+```
+
+Keep `as` honest to the actual outline even when overriding `displaySize` — screen reader users
+navigate by heading level, not by how large something looks.
+
+## Props
+
+<PropsTable name="Heading" />

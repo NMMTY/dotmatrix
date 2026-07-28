@@ -1,0 +1,31 @@
+---
+title: "TableHeaderCell"
+summary: "A <th> that becomes a sort button once you pass it onSort."
+navIcon: "chevron-down"
+github: "components/Table/Table.tsx"
+---
+
+A `<th scope="col">` used inside [TableHead](/components/data-display/table-head).
+`onSort`'s presence, not `sortDirection`, decides whether this renders as a button — a column can
+be sortable but currently unsorted (`sortDirection` omitted or `"none"`), which still needs the
+click target.
+
+<Playground name="TableHeaderCell" />
+
+## Examples
+
+`sortDirection` mirrors `aria-sort` directly (`"ascending"`/`"descending"`/`"none"`) rather than a
+custom enum — a non-sortable column simply omits both props:
+
+```tsx
+<tr>
+  <TableHeaderCell sortDirection="ascending" onSort={() => sortBy("name")}>
+    Name
+  </TableHeaderCell>
+  <TableHeaderCell>Status</TableHeaderCell>
+</tr>
+```
+
+## Props
+
+<PropsTable name="TableHeaderCell" />

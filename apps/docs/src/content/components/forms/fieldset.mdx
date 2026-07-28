@@ -1,0 +1,39 @@
+---
+title: "Fieldset"
+summary: "Groups related fields under a shared legend — a real fieldset, not a styled Column."
+navIcon: "menu"
+github: "components/Fieldset/Fieldset.tsx"
+---
+
+Groups related fields under a shared `<legend>`. A real `<fieldset>`, not a styled `Column` with a
+heading on top — grouping semantics for assistive tech, and `disabled` cascading to every
+descendant control, are exactly what raw tags are for when a layout primitive doesn't cover them.
+
+```tsx
+<Fieldset legend="Preferences">
+  <Checkbox label="Email me about updates" />
+  <Switch label="Push notifications" />
+</Fieldset>
+```
+
+<Playground name="Fieldset" />
+
+## Examples
+
+Set `disabled` on the `Fieldset` itself to disable every field inside it at once — a native
+`<fieldset disabled>` behavior, not something this component re-implements:
+
+```tsx
+<Fieldset legend="Billing address" disabled={sameAsShipping}>
+  <Input label="Street" />
+  <Input label="City" />
+</Fieldset>
+```
+
+Reach for `Fieldset` when a group of fields shares one topic a screen reader user should hear
+before the first field (the `legend`) — not just for visual grouping, which a plain `Column` with a
+heading already does fine.
+
+## Props
+
+<PropsTable name="Fieldset" />

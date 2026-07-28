@@ -1,0 +1,27 @@
+---
+title: "TabList"
+summary: "The role=tablist row of Tab buttons inside Tabs."
+navIcon: "menu"
+github: "components/Tabs/Tabs.tsx"
+---
+
+The `role="tablist"` row of [Tab](/components/overlays/tab) buttons inside
+[Tabs](/components/overlays/tabs) — requires an `aria-label` naming the tab group.
+
+<Playground name="TabList" />
+
+## Examples
+
+`aria-label` should name the group of *content* being switched between, not the word "tabs"
+itself — "Project sections", not "Tab list":
+
+```tsx
+<TabList aria-label="Project sections">
+  <Tab value="overview">Overview</Tab>
+  <Tab value="activity">Activity</Tab>
+</TabList>
+```
+
+## Props
+
+<PropsTable name="TabList" />

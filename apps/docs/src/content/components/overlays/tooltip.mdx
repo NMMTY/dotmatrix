@@ -1,0 +1,38 @@
+---
+title: "Tooltip"
+summary: "A hover/focus-triggered label for an element that has no visible text of its own."
+navIcon: "info"
+github: "components/Tooltip/Tooltip.tsx"
+---
+
+A hover/focus-triggered label for an element that doesn't have visible text of its own (an icon
+button, say). Purely informational — nothing inside a `Tooltip` can be interacted with, so
+`content` is plain text, not arbitrary content; anything needing real interaction belongs in a
+[Popover](/components/overlays/popover).
+
+<Playground name="Tooltip" />
+
+## Examples
+
+Wrapping an icon-only `IconButton` is the case `Tooltip` earns its keep on — the button already has
+an `aria-label` for screen readers, and the tooltip adds the same information visually for
+sighted mouse/keyboard users:
+
+```tsx
+<Tooltip content="Delete">
+  <IconButton icon="trash" aria-label="Delete" />
+</Tooltip>
+```
+
+`delay` (ms) holds off showing it on hover — useful so a tooltip doesn't flash in for every icon a
+cursor merely passes over on its way somewhere else:
+
+```tsx
+<Tooltip content="Settings" delay={400}>
+  <IconButton icon="settings" aria-label="Settings" />
+</Tooltip>
+```
+
+## Props
+
+<PropsTable name="Tooltip" />

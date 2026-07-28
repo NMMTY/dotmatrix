@@ -1,0 +1,48 @@
+---
+title: "RadioGroup"
+summary: "A mutually-exclusive set of Radio options, sharing one native name."
+navIcon: "circle"
+github: "components/RadioGroup/RadioGroup.tsx"
+---
+
+A mutually-exclusive set of [Radio](/components/forms/radio) options, sharing one native `name`.
+
+Doesn't reuse the same label pattern `Input` does: a group's label isn't "for" any one radio — it
+names the whole group, so it's connected via `aria-labelledby` on the `radiogroup` role instead of
+a real `<label htmlFor>`.
+
+```tsx
+<RadioGroup label="Plan" defaultValue="free">
+  <Radio value="free" label="Free" />
+  <Radio value="pro" label="Pro" />
+</RadioGroup>
+```
+
+<Playground name="RadioGroup" />
+
+## Examples
+
+`description`/`error`/`success` describe the group as a whole, same as any other field — put
+per-option context on the individual `Radio`'s own `label` instead:
+
+```tsx
+<RadioGroup label="Shipping" description="Choose how fast you need it." defaultValue="standard">
+  <Radio value="standard" label="Standard — 5-7 days" />
+  <Radio value="express" label="Express — 2 days" />
+</RadioGroup>
+```
+
+Controlled, for when the selection needs to drive something else on the page:
+
+```tsx
+const [plan, setPlan] = useState("free");
+
+<RadioGroup label="Plan" value={plan} onChange={setPlan}>
+  <Radio value="free" label="Free" />
+  <Radio value="pro" label="Pro" />
+</RadioGroup>;
+```
+
+## Props
+
+<PropsTable name="RadioGroup" />

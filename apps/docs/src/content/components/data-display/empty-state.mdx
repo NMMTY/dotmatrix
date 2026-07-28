@@ -1,0 +1,34 @@
+---
+title: "EmptyState"
+summary: "A placeholder for an empty Table/List — not a loading state (that's Skeleton)."
+navIcon: "search"
+github: "components/EmptyState/EmptyState.tsx"
+---
+
+A placeholder for an empty [Table](/components/data-display/table)/[List](/components/data-display/list)
+— nothing to switch on, unlike [Skeleton](/components/typography/skeleton), which is a loading
+state, not an empty-result state.
+
+<Playground name="EmptyState" />
+
+## Examples
+
+`action` is the natural next step out of the empty state — creating the first record, or clearing
+a filter that matched nothing:
+
+```tsx
+<EmptyState
+  icon="search"
+  title="No results"
+  description="Try a different search term."
+  action={<Button onClick={clearSearch}>Clear search</Button>}
+/>
+```
+
+Distinguish the *reason* the state is empty in `title`/`description` — "No invoices yet" (nothing
+created) reads differently than "No invoices match your filters" (something to undo), even though
+both render the same component.
+
+## Props
+
+<PropsTable name="EmptyState" />

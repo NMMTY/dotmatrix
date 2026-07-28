@@ -1,0 +1,61 @@
+---
+title: "Get started"
+summary: "Install dotmatrix and wire up the theme provider."
+updatedAt: "2026-07-27"
+navIcon: "download"
+---
+
+`@nmmty/dotmatrix` is a monochrome bitmap design system: pixel typography, dither/halftone
+graphics, segmented indicators, and hard-edged shadows. Layout is built from primitives —
+`Flex`/`Row`/`Column`/`Grid` — never raw tags.
+
+## Install
+
+```bash
+pnpm add @nmmty/dotmatrix
+```
+
+React 19 is a peer dependency. `prismjs` is an optional peer dependency, needed only if you use
+`<CodeBlock>` yourself.
+
+## Import styles
+
+Two stylesheets — tokens (custom properties) and components/utilities — imported once, at your
+app's root.
+
+```tsx
+import "@nmmty/dotmatrix/tokens.css";
+import "@nmmty/dotmatrix/styles.css";
+```
+
+## Set up `ThemeProvider`
+
+`ThemeProvider` owns four theming axes — `theme`, `palette`, `border`, `density` — and mirrors
+them onto `<html data-*>` attributes, which is what every token actually reacts to.
+`<ThemeInitScript>` in `<head>` reads the same persisted settings before hydration, so there's no
+flash of the wrong theme on load.
+
+## A minimal page
+
+Putting the pieces together — styles imported once, `ThemeProvider` wrapping the app, and layout
+built from primitives rather than raw `div`s:
+
+```tsx
+import "@nmmty/dotmatrix/tokens.css";
+import "@nmmty/dotmatrix/styles.css";
+import { Button, Column, Heading, ThemeProvider } from "@nmmty/dotmatrix";
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Column gap="16" padding="24">
+        <Heading as="h1">Hello</Heading>
+        <Button variant="solid">Get started</Button>
+      </Column>
+    </ThemeProvider>
+  );
+}
+```
+
+From here, see the [guides](/guides/layout) for the primitive system and theming, or jump
+straight to the [component reference](/components/overview).

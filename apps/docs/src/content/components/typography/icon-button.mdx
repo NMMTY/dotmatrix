@@ -1,0 +1,34 @@
+---
+title: "IconButton"
+summary: "A square, icon-only button. See Button for the text/icon+text case."
+navIcon: "menu"
+github: "components/IconButton/IconButton.tsx"
+---
+
+A square, icon-only button. See [Button](/components/typography/button) for the text/icon+text
+case. `aria-label` is required, not optional — an icon-only control has no visible text, so
+without it the button is silently unusable for anyone on a screen reader.
+
+<Playground name="IconButton" />
+
+## Examples
+
+Same `variant`/`size` scale as `Button`, so an icon-only action fits right alongside text buttons
+in the same toolbar:
+
+```tsx
+<Row gap="8">
+  <Button variant="ghost">Cancel</Button>
+  <IconButton icon="trash" aria-label="Delete" variant="ghost" />
+</Row>
+```
+
+`aria-label` should describe the action, not restate the icon — "Delete item", not "Trash icon":
+
+```tsx
+<IconButton icon="close" aria-label="Close dialog" />
+```
+
+## Props
+
+<PropsTable name="IconButton" />

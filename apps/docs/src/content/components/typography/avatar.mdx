@@ -1,0 +1,34 @@
+---
+title: "Avatar"
+summary: "A circular image or initials fallback. Not polymorphic — always inline."
+navIcon: "user"
+github: "components/Avatar/Avatar.tsx"
+---
+
+A circular image or initials fallback. Not polymorphic — always inline, same reasoning as
+`Badge`.
+
+<Playground name="Avatar" />
+
+## Examples
+
+With an image, `alt` is required — same reasoning as everywhere else in this system an image
+carries meaning:
+
+```tsx
+<Avatar src={user.photoUrl} alt={user.name} />
+```
+
+Without an image (no photo on file, or it failed to load), pass `name` alone and the component
+derives initials from it — there's no separate `initials` prop to keep in sync with the real name:
+
+```tsx
+<Avatar name={user.name} />
+```
+
+The two forms are mutually exclusive at the type level: passing both `src` and no `alt` (or vice
+versa) is a compile error, not a runtime fallback.
+
+## Props
+
+<PropsTable name="Avatar" />

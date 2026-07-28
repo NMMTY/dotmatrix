@@ -1,0 +1,37 @@
+---
+title: "Meter"
+summary: "A segmented gauge — spend against a budget, not a task-completion indicator."
+navIcon: "menu"
+github: "components/Meter/Meter.tsx"
+---
+
+A segmented gauge — e.g. spend against a budget — renders as discrete filled/empty cells rather
+than a continuous bar: a half-filled cell has no bitmap equivalent, so the value rounds to the
+nearest whole cell. The `"led"` variant swaps the bordered/hollow empty cell for a dim solid
+fill, butted tightly for an LED-bar look.
+
+<Playground name="Meter" />
+
+## Examples
+
+`value`/`max` work like a native `<progress>` — pass the raw numbers, not a pre-computed
+percentage:
+
+```tsx
+<Meter label="Budget spent" value={720} max={1000} />
+```
+
+Fewer `segments` reads coarser and more iconic (closer to a signal-strength indicator); more reads
+closer to a continuous bar while staying on the segmented grid:
+
+```tsx
+<Meter label="Signal" value={3} max={4} segments={4} />
+<Meter label="Disk usage" value={68} max={100} segments={40} variant="led" />
+```
+
+`Meter` is a read-only display, not an input — for a value the user sets themselves, reach for
+[Slider](/components/forms/slider) instead.
+
+## Props
+
+<PropsTable name="Meter" />

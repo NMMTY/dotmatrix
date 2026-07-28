@@ -1,0 +1,48 @@
+---
+title: "Tabs"
+summary: "A set of switchable panels, each with a corresponding tab button."
+navIcon: "menu"
+github: "components/Tabs/Tabs.tsx"
+---
+
+A set of switchable panels, each with a corresponding tab button. Composed from
+[Tab](/components/overlays/tab), [TabList](/components/overlays/tab-list), and
+[TabPanel](/components/overlays/tab-panel) — see those pages for the individual pieces.
+
+```tsx
+<Tabs defaultValue="a">
+  <TabList aria-label="Demo tabs">
+    <Tab value="a">Overview</Tab>
+    <Tab value="b">Activity</Tab>
+  </TabList>
+  <TabPanel value="a">Overview panel content.</TabPanel>
+  <TabPanel value="b">Activity panel content.</TabPanel>
+</Tabs>
+```
+
+<Playground name="Tabs" />
+
+## Examples
+
+Controlled, for when the active tab needs to sync with something else — a URL query param, say:
+
+```tsx
+const [tab, setTab] = useState("overview");
+
+<Tabs value={tab} onChange={setTab}>
+  <TabList aria-label="Project sections">
+    <Tab value="overview">Overview</Tab>
+    <Tab value="activity">Activity</Tab>
+  </TabList>
+  <TabPanel value="overview">...</TabPanel>
+  <TabPanel value="activity">...</TabPanel>
+</Tabs>;
+```
+
+Every `TabPanel` renders into the DOM up front (just `hidden` while inactive), so switching tabs
+never re-triggers a mount — safe for a panel that holds form state a user shouldn't lose by
+clicking away and back.
+
+## Props
+
+<PropsTable name="Tabs" />

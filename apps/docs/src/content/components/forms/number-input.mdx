@@ -1,0 +1,37 @@
+---
+title: "NumberInput"
+summary: "A number input with +/- stepper buttons alongside the native spinner."
+navIcon: "plus"
+github: "components/NumberInput/NumberInput.tsx"
+---
+
+A number input with +/- stepper buttons alongside the native spinner controls, for the common
+case of nudging a small count up or down without typing.
+
+<Playground name="NumberInput" />
+
+## Examples
+
+`min`/`max`/`step` bound and shape what the stepper buttons produce — the field won't step past
+either end:
+
+```tsx
+<NumberInput label="Quantity" min={1} max={10} defaultValue={1} />
+<NumberInput label="Price" min={0} step={0.5} />
+```
+
+Controlled, when the count needs to be read elsewhere (a running total, a cart summary):
+
+```tsx
+const [quantity, setQuantity] = useState(1);
+
+<NumberInput
+  label="Quantity"
+  value={quantity}
+  onChange={(e) => setQuantity(Number(e.target.value))}
+/>;
+```
+
+## Props
+
+<PropsTable name="NumberInput" />

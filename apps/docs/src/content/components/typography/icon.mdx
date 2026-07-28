@@ -1,0 +1,32 @@
+---
+title: "Icon"
+summary: "Every icon in the design system renders through this one component."
+navIcon: "star"
+github: "components/Icon/Icon.tsx"
+---
+
+Every icon in the design system renders through this one component — `name` looks up the bitmap
+in the glyph catalog rather than each icon being its own component. Fixed 16×16 viewBox, size in
+three steps, fill inherited from `currentColor` so an icon always matches its surrounding text.
+See the [Icons guide](/guides/icons) for the full catalog.
+
+<Playground name="Icon" />
+
+## Examples
+
+Fill always comes from `currentColor`, so pairing an icon with text just means putting both inside
+the same colored wrapper — no separate `color` prop on `Icon` itself to keep in sync:
+
+```tsx
+<Text color="strong">
+  <Icon name="warning" size="s" /> Something went wrong
+</Text>
+```
+
+Most controls that need an icon (`Button`, `IconButton`, `Input`) take an `IconName` on their own
+`icon` prop rather than a rendered `<Icon>` child — reach for `<Icon>` directly only when there's
+no such prop to use, e.g. inline in prose or next to plain text.
+
+## Props
+
+<PropsTable name="Icon" />

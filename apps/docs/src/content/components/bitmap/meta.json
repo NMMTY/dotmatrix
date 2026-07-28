@@ -1,0 +1,11 @@
+{
+  "title": "Bitmap Graphics",
+  "order": 3,
+  "pages": {
+    "dither": 1,
+    "halftone": 2,
+    "ascii-art": 3,
+    "cross-hatch": 4,
+    "meter": 5
+  }
+}

@@ -1,0 +1,26 @@
+---
+title: "TableRow"
+summary: "A <tr> that can be highlighted and marked aria-selected via the selected prop."
+navIcon: "menu"
+github: "components/Table/Table.tsx"
+---
+
+A `<tr>` inside [TableBody](/components/data-display/table-body). Its `selected` prop highlights
+the row and marks it `aria-selected` — row selection is opt-in per table, not a table-wide flag.
+
+<Playground name="TableRow" />
+
+## Examples
+
+`selected` is the whole row-selection API — no separate checkbox column or selection context to
+wire up, just a boolean per row:
+
+```tsx
+<TableRow selected={selectedId === row.id} onClick={() => setSelectedId(row.id)}>
+  <TableCell>{row.name}</TableCell>
+</TableRow>
+```
+
+## Props
+
+<PropsTable name="TableRow" />

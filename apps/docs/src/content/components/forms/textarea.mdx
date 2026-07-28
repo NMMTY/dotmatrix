@@ -1,0 +1,32 @@
+---
+title: "Textarea"
+summary: "A labeled multi-line text input. For a single line, use Input."
+navIcon: "edit"
+github: "components/Textarea/Textarea.tsx"
+---
+
+A labeled multi-line text input — the same label/description/error/success model `Input` uses,
+just backed by a native `<textarea>`.
+
+<Playground name="Textarea" />
+
+## Examples
+
+Same hint/error/success convention as [Input](/components/forms/input) — `error` replaces
+`description` rather than appending to it:
+
+```tsx
+<Textarea label="Bio" description="Shown on your public profile." />
+<Textarea label="Bio" error="Bio must be under 280 characters." />
+```
+
+Pass native `rows` to size the field for its expected content — a short note and a long-form
+message shouldn't share the same default height:
+
+```tsx
+<Textarea label="Feedback" rows={6} />
+```
+
+## Props
+
+<PropsTable name="Textarea" />

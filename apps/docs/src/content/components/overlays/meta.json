@@ -1,0 +1,20 @@
+{
+  "title": "Overlays & Navigation",
+  "order": 5,
+  "pages": {
+    "dialog": 1,
+    "drawer": 2,
+    "dropdown": 3,
+    "dropdown-item": 4,
+    "tooltip": 5,
+    "popover": 6,
+    "context-menu": 7,
+    "tabs": 8,
+    "tab": 9,
+    "tab-list": 10,
+    "tab-panel": 11,
+    "accordion": 12,
+    "accordion-item": 13,
+    "toast-provider": 14
+  }
+}

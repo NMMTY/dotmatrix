@@ -1,0 +1,44 @@
+---
+title: "Dialog"
+summary: "A modal dialog: focus trap, scroll lock, and Escape/backdrop dismiss."
+navIcon: "menu"
+github: "components/Dialog/Dialog.tsx"
+---
+
+A modal dialog: focus is trapped inside while open, the page behind it is inert and scroll-locked,
+and Escape or a click on the backdrop closes it. Not positioned relative to its trigger the way
+[Popover](/components/overlays/popover)/[Dropdown](/components/overlays/dropdown) are — it's
+centered in the viewport.
+
+<Playground name="Dialog" />
+
+## Examples
+
+The `trigger` prop is the common case — pass any single focusable element and `Dialog` wires up
+the click handler and manages `open` state internally:
+
+```tsx
+<Dialog trigger={<Button>Delete account</Button>} title="Are you sure?">
+  <Text>This can't be undone.</Text>
+</Dialog>
+```
+
+Controlled, for when something other than clicking the trigger should open it (a keyboard
+shortcut, a result from elsewhere on the page — this is how this site's own `⌘K` search palette
+works):
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Dialog open={open} onOpenChange={setOpen} title="Search">
+  ...
+</Dialog>;
+```
+
+`title` is required, not optional — it's the dialog's accessible name (wired to
+`aria-labelledby`), so a dialog with only visual content and no `title` would announce as unlabeled
+to a screen reader.
+
+## Props
+
+<PropsTable name="Dialog" />

@@ -1,0 +1,37 @@
+---
+title: "Text"
+summary: "Inline text — deliberately not a Flex variant, so normal inline flow keeps working."
+navIcon: "edit"
+github: "components/Text/Text.tsx"
+---
+
+Inline text. Deliberately not a `Flex` variant — text needs normal inline flow (wrapping,
+`::selection`, baseline alignment inside a paragraph), which `display: flex` would break. Renders
+as `<span>` by default; pass `as="p"` / `as="label"` / etc. for the right semantics.
+
+<Playground name="Text" />
+
+## Examples
+
+`color` picks a semantic weight, not a literal color value — it stays legible across every theme
+and palette rather than baking in a hex value that might not contrast well in light mode:
+
+```tsx
+<Text color="strong">Primary content</Text>
+<Text color="medium">Supporting copy</Text>
+<Text color="weak">Least important, e.g. a timestamp</Text>
+```
+
+`as="label"` paired with `htmlFor` connects text to a form control the same way a real `<label>`
+does — this is how every field's own label in this system is built, not a special case:
+
+```tsx
+<Text as="label" htmlFor="email" weight="medium">
+  Email
+</Text>
+<input id="email" />
+```
+
+## Props
+
+<PropsTable name="Text" />

@@ -1,0 +1,31 @@
+---
+title: "TabPanel"
+summary: "The content shown for one Tab — hidden (not unmounted) while its tab isn't selected."
+navIcon: "menu"
+github: "components/Tabs/Tabs.tsx"
+---
+
+The content shown for one [Tab](/components/overlays/tab) inside
+[Tabs](/components/overlays/tabs). Only the selected panel's children actually render — the
+others stay `hidden`, not unmounted.
+
+<Playground name="TabPanel" />
+
+## Examples
+
+`value` must match the `Tab` it corresponds to — matching values is what connects a tab button to
+the panel it shows, not DOM position or array index:
+
+```tsx
+<TabPanel value="activity">
+  <ActivityFeed />
+</TabPanel>
+```
+
+Because inactive panels stay mounted (just `hidden`), avoid putting anything expensive to run on
+every render inside one that's rarely visible — it still renders on every parent update, active
+tab or not.
+
+## Props
+
+<PropsTable name="TabPanel" />

@@ -1,0 +1,29 @@
+---
+title: "Radio"
+summary: "A single option within a RadioGroup — never used standalone."
+navIcon: "circle"
+github: "components/Radio/Radio.tsx"
+---
+
+A single option within a `RadioGroup` — never used standalone, since a radio's whole behavior
+(mutual exclusivity via a shared `name`) only exists in relation to the group it belongs to. See
+[RadioGroup](/components/forms/radio-group) for the group that provides that context.
+
+<Playground name="Radio" />
+
+## Examples
+
+Disable an individual option — a plan that's temporarily unavailable, say — without disabling the
+whole group:
+
+```tsx
+<RadioGroup label="Plan" defaultValue="free">
+  <Radio value="free" label="Free" />
+  <Radio value="pro" label="Pro" />
+  <Radio value="enterprise" label="Enterprise — contact sales" disabled />
+</RadioGroup>
+```
+
+## Props
+
+<PropsTable name="Radio" />

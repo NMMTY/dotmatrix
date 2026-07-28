@@ -1,0 +1,12 @@
+{
+  "title": "Primitives",
+  "order": 1,
+  "pages": {
+    "flex": 1,
+    "row": 2,
+    "column": 3,
+    "grid": 4,
+    "line": 5,
+    "masonry-grid": 6
+  }
+}
