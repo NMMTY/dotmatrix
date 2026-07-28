@@ -1,3 +1,7 @@
+export type { AsciiCell, AsciiOptions } from "./ascii";
+export { asciiArt } from "./ascii";
+export type { CrossHatchLine, CrossHatchOptions } from "./crosshatch";
+export { crossHatch } from "./crosshatch";
 export type { DitherAlgorithm, DitherOptions, RasterImage } from "./dither";
 export { dither } from "./dither";
 export type { HalftoneDot, HalftoneOptions } from "./halftone";

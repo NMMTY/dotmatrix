@@ -140,6 +140,16 @@ export function resolveStyleProps(props: Record<string, unknown>): ResolvedStyle
       const overrides = value as Record<string, unknown>;
       for (const [ovKey, ovValue] of Object.entries(overrides)) {
         if (ovValue === undefined) continue;
+        if (ovKey in BOOLEAN_PROPS) {
+          // Only the `true` state has a class to emit — there's no "false"
+          // class for a boolean prop to restore, unlike a scale prop's
+          // per-value classes below.
+          if (ovValue === true) {
+            const suffix = BOOLEAN_PROPS[ovKey]!.replace(/^dm-/, "");
+            classes.push(`dm-${key}-${suffix}`);
+          }
+          continue;
+        }
         const scaleProp = SCALE_PROPS[ovKey];
         if (!scaleProp?.responsive) continue; // caught by props.contract.test.ts
         classes.push(`dm-${key}-${scaleProp.prefix}-${ovValue}`);

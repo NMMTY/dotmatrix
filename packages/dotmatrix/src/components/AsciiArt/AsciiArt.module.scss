@@ -1,0 +1,15 @@
+@use "../_order";
+
+@layer dm.components {
+  .canvas {
+    display: block;
+    max-width: 100%;
+    font-family: var(--dm-font-mono);
+  }
+
+  .fallback {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

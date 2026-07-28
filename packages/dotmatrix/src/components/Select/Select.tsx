@@ -74,6 +74,7 @@ function SelectImpl({
       disabled={disabled}
     >
       <Dropdown
+        matchTriggerWidth
         trigger={
           // `aria-label` overrides FieldShell's own `<label for={fieldId}>`,
           // which would otherwise win the accessible-name computation over

@@ -132,4 +132,15 @@ describe("props ↔ generated CSS contract", () => {
       });
     }
   });
+
+  // `hidden` is the one boolean prop with a responsive form (`s={{ hidden: true }}`) —
+  // resolveStyleProps.ts emits `dm-{bp}-{suffix}` for it, so a matching class must exist
+  // per breakpoint the same way a responsive scale prop's does.
+  describe("responsive hidden", () => {
+    for (const bp of P.breakpoints) {
+      it(`generates a ${bp} class`, () => {
+        expect(hasClass(`dm-${bp}-hidden`)).toBe(true);
+      });
+    }
+  });
 });

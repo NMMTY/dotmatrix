@@ -1,0 +1,17 @@
+@use "../_order";
+
+@layer dm.components {
+  .wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--dm-surface-background);
+  }
+
+  .fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+}
