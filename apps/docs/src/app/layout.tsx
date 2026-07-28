@@ -47,8 +47,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Sidebar navigation={navigation} />
               <Column
                 as="main"
-                padding="40"
-                s={{ padding: "16" }}
+                paddingX="40"
+                s={{ paddingX: "16" }}
                 flex="1"
                 minWidth="0"
                 alignItems="center"
