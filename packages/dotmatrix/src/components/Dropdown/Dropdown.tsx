@@ -9,6 +9,7 @@ import {
   offset,
   type Placement,
   shift,
+  size,
   useClick,
   useDismiss,
   useFloating,
@@ -43,6 +44,8 @@ export interface DropdownOwnProps {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Matches the menu's width to the trigger's own width — for a Select-style combobox where the menu should align with the field, rather than sizing to its longest option. @default false */
+  matchTriggerWidth?: boolean;
 }
 
 /**
@@ -58,16 +61,35 @@ export function Dropdown({
   open: controlledOpen,
   defaultOpen,
   onOpenChange,
+  matchTriggerWidth = false,
 }: DropdownOwnProps) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  // Driven by the `size` middleware's `apply`, not read from
+  // `middlewareData` directly: `apply` is the only place floating-ui hands
+  // back both the trigger's own rect (for width-matching) and the space
+  // actually left in the viewport (for the scroll cap) in one pass.
+  const [menuSize, setMenuSize] = useState<{ maxHeight?: number; width?: number }>({});
   const reducedMotion = useReducedMotion();
 
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange: setOpen,
     placement,
-    middleware: [offset(4), flip(), shift({ padding: 8 })],
+    middleware: [
+      offset(4),
+      flip(),
+      shift({ padding: 8 }),
+      size({
+        padding: 8,
+        apply({ availableHeight, rects }) {
+          setMenuSize({
+            maxHeight: availableHeight,
+            width: matchTriggerWidth ? rects.reference.width : undefined,
+          });
+        },
+      }),
+    ],
     whileElementsMounted: autoUpdate,
   });
 
@@ -137,7 +159,14 @@ export function Dropdown({
               animation is scoped to an inner one.
             */}
             <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-              <div style={transitionStyles} className={styles.menu}>
+              <div
+                style={{
+                  ...transitionStyles,
+                  maxHeight: menuSize.maxHeight,
+                  width: menuSize.width,
+                }}
+                className={styles.menu}
+              >
                 <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
                   <DropdownContext.Provider value={{ activeIndex, getItemProps, handleSelect }}>
                     {children}

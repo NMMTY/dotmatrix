@@ -9,9 +9,13 @@ $overflows: (visible, hidden, scroll, auto, clip);
   @include mixins.emit-keyword("overflow-x", "overflow-x", $overflows, $responsive: true);
   @include mixins.emit-keyword("overflow-y", "overflow-y", $overflows, $responsive: true);
 
-  .dm-hidden {
-    display: none;
-  }
+  // Responsive so a component can hide itself only below a breakpoint
+  // (`s={{ hidden: true }}`) — the "show only below a breakpoint" opposite
+  // (a mobile-only trigger, say) still goes through the `display` prop
+  // directly, since a boolean flag has no "false" class to restore a
+  // specific display value with.
+  @include mixins.emit-flag("hidden", "display", none, $responsive: true);
+
   .dm-sr-only {
     position: absolute;
     width: 1px;

@@ -51,6 +51,8 @@ export interface CodeBlockOwnProps {
   isCollapsible?: boolean;
   /** Condensed header — no tab labels/preview padding. @default false */
   compact?: boolean;
+  /** `"mono"` tints tokens by weight only (this system's default identity); `"color"` gives each token kind its own hue, for contexts where syntax colors carry real information. @default "mono" */
+  syntaxTheme?: "mono" | "color";
   className?: string;
 }
 
@@ -102,6 +104,7 @@ function CodeBlockImpl({
   maxLines,
   isCollapsible = false,
   compact = false,
+  syntaxTheme = "mono",
   className,
 }: CodeBlockOwnProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -224,7 +227,11 @@ function CodeBlockImpl({
           style={collapsed ? { maxHeight: `calc(1.6em * ${maxLines})` } : undefined}
         >
           <pre
-            className={[styles.pre, lineNumbers ? styles.lineNumbers : undefined]
+            className={[
+              styles.pre,
+              lineNumbers ? styles.lineNumbers : undefined,
+              syntaxTheme === "color" ? styles.colorSyntax : undefined,
+            ]
               .filter(Boolean)
               .join(" ")}
           >

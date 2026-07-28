@@ -73,7 +73,13 @@
   }
 
   a {
-    color: inherit;
+    color: var(--dm-accent-500);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
   }
 
   ul,

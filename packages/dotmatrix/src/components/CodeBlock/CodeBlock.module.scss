@@ -85,6 +85,79 @@
     color: var(--dm-on-background-medium);
   }
 
+  // Opt-in via `syntaxTheme="color"` — one fixed hue per token kind instead
+  // of weight-only grays. Two hand-picked palettes (not palette-driven),
+  // since highlighting needs several *simultaneous* distinct hues, which is
+  // a different job than this system's single-accent theming. Values follow
+  // the well-known One Dark / One Light editor themes.
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.comment) {
+    color: #7f848e;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.punctuation) {
+    color: #abb2bf;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.keyword) {
+    color: #c678dd;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.string),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.attr-value),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.char),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.builtin) {
+    color: #98c379;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.function),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.class-name) {
+    color: #61afef;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.tag),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.property),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.constant),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.number),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.boolean) {
+    color: #d19a66;
+  }
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.operator),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.attr-name),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.selector),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.entity),
+  :global([data-theme="dark"]) .pre.colorSyntax :global(.token.url) {
+    color: #56b6c2;
+  }
+
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.comment) {
+    color: #a0a1a7;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.punctuation) {
+    color: #383a42;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.keyword) {
+    color: #a626a4;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.string),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.attr-value),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.char),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.builtin) {
+    color: #50a14f;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.function),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.class-name) {
+    color: #4078f2;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.tag),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.property),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.constant),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.number),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.boolean) {
+    color: #986801;
+  }
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.operator),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.attr-name),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.selector),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.entity),
+  :global([data-theme="light"]) .pre.colorSyntax :global(.token.url) {
+    color: #0184bc;
+  }
+
   // Collapsed height is set inline (depends on `maxLines`); this just adds
   // the pinned "View code" bar under the cut — a hard edge, not a fade-to-
   // transparent gradient, consistent with the rest of the system's tonal

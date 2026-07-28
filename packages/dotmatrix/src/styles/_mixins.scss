@@ -80,6 +80,24 @@
   }
 }
 
+// A single fixed-value flag class with no scale of its own — e.g.
+// `.dm-hidden { display: none }`, the "hide" side of a boolean prop like
+// `hidden`. There's no false-state class to emit (a boolean prop absent or
+// `false` simply contributes nothing), so unlike the other emitters this
+// takes one literal `$value`, not a map.
+@mixin emit-flag($prefix, $property, $value, $responsive: false) {
+  .dm-#{$prefix} {
+    #{$property}: $value;
+  }
+  @if $responsive {
+    @include _responsive-pass($prefix) using ($bp) {
+      .dm-#{$bp}-#{$prefix} {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
 // Logical-property sides for a box-model prop (padding, margin, inset).
 // `$base` is the logical property root, e.g. "padding" -> padding-block-start
 // etc. Emits all/x/y/top/right/bottom/left; "top/right/bottom/left" map onto
