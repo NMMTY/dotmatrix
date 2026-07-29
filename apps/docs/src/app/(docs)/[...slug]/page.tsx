@@ -32,7 +32,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
   const sectionTitle = slug.length > 1 ? slug[0] : undefined;
 
   return (
-    <Row gap="40" maxWidth="full" minWidth="0">
+    <Row gap="40" maxWidth="full" minWidth="0" paddingY="8">
       <Column gap="24" flex="1" minWidth="0" style={{ maxWidth: layout.content.maxWidth }}>
         <Column gap="8">
           {sectionTitle && (

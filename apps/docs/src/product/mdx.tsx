@@ -109,5 +109,19 @@ const mdxComponents = {
 };
 
 export function CustomMDX(props: MDXRemoteProps) {
-  return <MDXRemote {...props} components={{ ...mdxComponents, ...(props.components ?? {}) }} />;
+  return (
+    <MDXRemote
+      {...props}
+      // next-mdx-remote v6 defaults to stripping every `{...}` JS expression
+      // in MDX (a security default for untrusted content) — this site's own
+      // content is first-party and trusted, and relies on JS expressions
+      // throughout (responsive style props, `<CodeBlock codes={[...]}
+      // preview={...} />`, etc.), so JS itself needs to stay enabled.
+      // `blockDangerousJS` stays at its default `true` for defense in depth
+      // (blocks `eval`/`Function`/`process`/etc.) even though nothing here
+      // needs them.
+      options={{ blockJS: false, ...(props.options ?? {}) }}
+      components={{ ...mdxComponents, ...(props.components ?? {}) }}
+    />
+  );
 }
