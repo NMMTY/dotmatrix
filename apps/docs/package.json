@@ -6,7 +6,6 @@
   "scripts": {
     "generate-manifest": "node scripts/generate-manifest.mjs",
     "predev": "npm run generate-manifest",
-    "prebuild": "npm run generate-manifest",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

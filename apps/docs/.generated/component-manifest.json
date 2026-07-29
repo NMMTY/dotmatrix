@@ -1,0 +1,2360 @@
+[
+  {
+    "name": "Accordion",
+    "description": "A single-open accordion — opening one item closes whatever else was open,\nand the open item can always collapse back to none. Multi-open is a\ndeliberately unhandled case for v1, not an oversight: it's a real\nextension (independent open state per item) rather than a variant of this\none, and no consumer has needed it yet.",
+    "props": [
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "AccordionItem",
+    "description": "",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "title",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "AsciiArt",
+    "description": "The most literal reading of this system's \"bitmap\" identity: runs an\nimage through {@link asciiArt} and paints the resulting character grid to\na canvas, one glyph per sampling cell. Ink color is read from the canvas's\nown computed `color` at draw time, same as `Halftone`.",
+    "props": [
+      {
+        "name": "alt",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required — the canvas this renders as has no text of its own.",
+        "kind": "text"
+      },
+      {
+        "name": "cellSize",
+        "required": false,
+        "defaultValue": 8,
+        "description": "Sampling cell size in source pixels — one character per cell.",
+        "kind": "number"
+      },
+      {
+        "name": "charset",
+        "required": false,
+        "defaultValue": "@%#*+=-:.",
+        "description": "Densest → sparsest character ramp; the first character renders for the darkest cells.",
+        "kind": "text"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "invert",
+        "required": false,
+        "defaultValue": false,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "defaultValue": null,
+        "description": "Defaults to the image's natural size once loaded.",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "Avatar",
+    "description": " A circular image or initials fallback. Not polymorphic — always inline.",
+    "props": []
+  },
+  {
+    "name": "Badge",
+    "description": " A small status/category label. Not polymorphic — a badge is always inline.",
+    "props": [
+      {
+        "name": "variant",
+        "required": false,
+        "defaultValue": "\"neutral\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "neutral",
+          "error",
+          "warning",
+          "success"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "description": "Doesn't go through the shared `ElementType` helper (unlike Flex/Row/...):\nthose default to `<div>`, but a button's honest default is `<button>`, so\nit resolves its own tag and — only for the real `<button>` case — sets\n`type=\"button\"` to avoid an accidental form submit, and forwards\n`disabled` natively. Set `as=\"a\"` (or just `href`) for a button that\nnavigates instead of acting.",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shorthand for `as=\"a\"`.",
+        "kind": "text"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "defaultValue": null,
+        "description": "Sized to match `size` automatically — manual `<Button><Icon .../>text</Button>` composition still works if you need different sizing.",
+        "kind": "select",
+        "options": [
+          "warning",
+          "menu",
+          "search",
+          "circle",
+          "filter",
+          "chevron-down",
+          "chevron-up",
+          "chevron-left",
+          "chevron-right",
+          "close",
+          "check",
+          "plus",
+          "minus",
+          "arrow-right",
+          "arrow-left",
+          "info",
+          "eye",
+          "eye-off",
+          "trash",
+          "edit",
+          "copy",
+          "download",
+          "upload",
+          "external-link",
+          "star",
+          "calendar",
+          "clock",
+          "user",
+          "settings",
+          "more-horizontal",
+          "refresh",
+          "lock",
+          "maximize",
+          "minimize"
+        ]
+      },
+      {
+        "name": "iconPosition",
+        "required": false,
+        "defaultValue": "\"start\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "start",
+          "end"
+        ]
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "defaultValue": "\"solid\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "solid",
+          "outline",
+          "ghost"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Card",
+    "description": "`Column` with a surface's worth of sensible defaults — not a new visual\nvocabulary, just spacing/border/radius/background values a caller would\notherwise repeat on every card. Every default is a plain JS default\nparameter, not a class the caller's own prop has to out-cascade: passing\n`padding=\"8\"` simply never reaches the `padding=\"24\"` default, so there's\nno ambiguity about which of two same-specificity classes wins.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shorthand for `as=\"a\"` — see system/ElementType.tsx.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Checkbox",
+    "description": " A single checkbox. For a related group of radio options, use `RadioGroup`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "indeterminate",
+        "required": false,
+        "defaultValue": null,
+        "description": "Visually distinct from checked/unchecked — e.g. a \"select all\" that's partially selected.",
+        "kind": "boolean"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Chip",
+    "description": " A removable tag. For a non-removable label, use `Badge` instead.",
+    "props": []
+  },
+  {
+    "name": "CodeBlock",
+    "description": "A tabbed code snippet display with an optional live preview panel, built\nto sit under every example in the docs site. Modeled on Once UI's\n`CodeBlock` (tabs/copy/fullscreen/collapsible), adapted to this system's\nown overlay primitives and a monochrome Prism theme instead of a color one.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "codes",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "compact",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Condensed header — no tab labels/preview padding.",
+        "kind": "boolean"
+      },
+      {
+        "name": "copyButton",
+        "required": false,
+        "defaultValue": "true",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "fullscreenButton",
+        "required": false,
+        "defaultValue": "false",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "isCollapsible",
+        "required": false,
+        "defaultValue": "false",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "lineNumbers",
+        "required": false,
+        "defaultValue": "false",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "maxLines",
+        "required": false,
+        "defaultValue": null,
+        "description": "Collapses past this many lines when `isCollapsible` is set.",
+        "kind": "number"
+      },
+      {
+        "name": "preview",
+        "required": false,
+        "defaultValue": null,
+        "description": "Rendered live above the code, in its own bordered panel.",
+        "kind": "readonly"
+      },
+      {
+        "name": "syntaxTheme",
+        "required": false,
+        "defaultValue": "\"mono\"",
+        "description": "`\"mono\"` tints tokens by weight only (this system's default identity); `\"color\"` gives each token kind its own hue, for contexts where syntax colors carry real information.",
+        "kind": "select",
+        "options": [
+          "mono",
+          "color"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ColorInput",
+    "description": "A fully custom picker, not a wrapper over native `<input type=\"color\">` —\nhue and saturation/lightness are each a grid of solid, individually\nclickable swatches (real buttons, so Tab/Enter already make them keyboard-\noperable — no bespoke arrow-key handling needed) rather than a continuous\ngradient, which has no bitmap equivalent (same reasoning as `Skeleton`'s\nstepped shimmer and `tokens/shadow.scss`'s hard offsets).",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "swatches",
+        "required": false,
+        "defaultValue": null,
+        "description": "Quick-pick hex swatches shown above the hue/lightness grid — e.g. the current accent palette's stops. Omit for none.",
+        "kind": "readonly"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "A hex color, e.g. `\"#3b82f6\"`.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Column",
+    "description": " `Flex` fixed to `direction: column`. The default vertical layout primitive.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shorthand for `as=\"a\"` — see system/ElementType.tsx.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "ContextMenu",
+    "description": "The same menu (and the same `DropdownItem`s) as `Dropdown`, opened by\nright-click and positioned at the cursor instead of relative to a visible\ntrigger element. Shares `Dropdown`'s context/list-navigation wiring rather\nthan duplicating the menu-item rendering logic — the only real difference\nbetween the two is how the menu opens and where it's anchored.",
+    "props": [
+      {
+        "name": "children",
+        "required": true,
+        "defaultValue": null,
+        "description": "The element right-clicking on opens the menu.",
+        "kind": "readonly"
+      },
+      {
+        "name": "menu",
+        "required": true,
+        "defaultValue": null,
+        "description": "`DropdownItem` elements — the same ones `Dropdown` uses.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "CrossHatch",
+    "description": "A classic engraving cross-hatch: runs an image through {@link crossHatch}\nand strokes the resulting line segments to a canvas — light cells get a\nsingle diagonal, the darkest cells get all four directions woven\ntogether. Ink color is read from the canvas's own computed `color` at\ndraw time, same as `Halftone`.",
+    "props": [
+      {
+        "name": "alt",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required — the canvas this renders as has no text of its own.",
+        "kind": "text"
+      },
+      {
+        "name": "cellSize",
+        "required": false,
+        "defaultValue": 8,
+        "description": "Grid spacing in source pixels.",
+        "kind": "number"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "invert",
+        "required": false,
+        "defaultValue": false,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "lineWidth",
+        "required": false,
+        "defaultValue": 1,
+        "description": "Stroke width in canvas pixels.",
+        "kind": "number"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "defaultValue": null,
+        "description": "Defaults to the image's natural size once loaded.",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "Dialog",
+    "description": "A modal dialog: focus is trapped inside while open, the page behind it is\ninert and scroll-locked, and Escape or a click on the backdrop closes it.\nNot positioned relative to its trigger the way Popover/Dropdown are — it's\ncentered in the viewport via `FloatingOverlay`'s own flex layout, so\n`useFloating` here is only for its dismiss/focus-management context, not\nits placement math.",
+    "props": [
+      {
+        "name": "defaultOpen",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "open",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "title",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "trigger",
+        "required": false,
+        "defaultValue": null,
+        "description": "A single focusable element that opens the dialog on click. Omit for a fully controlled dialog.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "Dither",
+    "description": "Runs an image through {@link runDither} and paints it to a canvas at a\ndeliberately reduced resolution (`pixelSize`), stretched back up via CSS\nwith `image-rendering: pixelated` — that stretch, not a second manual\nredraw, is what turns the dithered result blocky.\n\nDoubles as its own SSR-safe placeholder: server-rendered output is either\nan empty sized `<canvas>` (when `width`/`height` are given) or a\n`Skeleton` (when they're not, since the size isn't known yet) — the real\ndraw only happens client-side, after mount.",
+    "props": [
+      {
+        "name": "algorithm",
+        "required": false,
+        "defaultValue": "floyd-steinberg",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "threshold",
+          "bayer2",
+          "bayer4",
+          "bayer8",
+          "floyd-steinberg",
+          "atkinson"
+        ]
+      },
+      {
+        "name": "alt",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required — the canvas this renders as has no text of its own.",
+        "kind": "text"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "invert",
+        "required": false,
+        "defaultValue": false,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "levels",
+        "required": false,
+        "defaultValue": 2,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "pixelSize",
+        "required": false,
+        "defaultValue": 2,
+        "description": "Downsample factor before dithering — bigger is chunkier.",
+        "kind": "number"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "defaultValue": null,
+        "description": "Defaults to the image's natural size once loaded.",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "Drawer",
+    "description": "`Dialog`'s edge-anchored sibling — same modal behavior (focus trap,\nscroll lock, Escape/backdrop dismiss), but docked to a side of the\nviewport instead of centered. Kept as its own component rather than a\n`Dialog` prop: the two have different enough layout needs (a full-height\npanel vs. a centered card) that sharing one component would mean\nthreading side-specific CSS through Dialog for every consumer, not just\nthe ones using it.",
+    "props": [
+      {
+        "name": "defaultOpen",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "open",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "side",
+        "required": false,
+        "defaultValue": "right",
+        "description": "Which edge the drawer slides in from.",
+        "kind": "select",
+        "options": [
+          "top",
+          "right",
+          "bottom",
+          "left"
+        ]
+      },
+      {
+        "name": "title",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "trigger",
+        "required": false,
+        "defaultValue": null,
+        "description": "A single focusable element that opens the drawer on click. Omit for a fully controlled drawer.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "Dropdown",
+    "description": "A menu of choices with roving keyboard navigation (arrow keys, typeahead,\nHome/End) — for arbitrary interactive content instead, use `Popover`; for\nthe same menu triggered by right-click instead of a visible trigger, see\n`ContextMenu`, which shares this file's list-navigation wiring.",
+    "props": [
+      {
+        "name": "children",
+        "required": true,
+        "defaultValue": null,
+        "description": "`DropdownItem` elements.",
+        "kind": "readonly"
+      },
+      {
+        "name": "defaultOpen",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "matchTriggerWidth",
+        "required": false,
+        "defaultValue": false,
+        "description": "Matches the menu's width to the trigger's own width — for a Select-style combobox where the menu should align with the field, rather than sizing to its longest option.",
+        "kind": "boolean"
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "open",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "defaultValue": "bottom-start",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "top-start",
+          "top-end",
+          "right-start",
+          "right-end",
+          "bottom-start",
+          "bottom-end",
+          "left-start",
+          "left-end"
+        ]
+      },
+      {
+        "name": "trigger",
+        "required": true,
+        "defaultValue": null,
+        "description": "A single focusable element that opens the menu on click.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "DropdownItem",
+    "description": "",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "onSelect",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "EmptyState",
+    "description": " A placeholder for an empty `Table`/`List` — nothing to switch on, unlike `Skeleton`, which is a loading state.",
+    "props": [
+      {
+        "name": "action",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "defaultValue": null,
+        "description": "Decorative — this component isn't the one giving it an accessible name, so pass an icon without its own `title`.",
+        "kind": "readonly"
+      },
+      {
+        "name": "title",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "ExternalIcon",
+    "description": "Adapts an icon component from outside this system's own hand-drawn glyph\ncatalog — react-icons, or anything shaped the same way — so it can sit\nnext to `Icon` with matching size steps and the same accessible-name\nwiring. These render as whatever vector art the source library draws\n(smooth curves, not this system's blocky 8×8 bitmap grid): reach for\n`Icon`'s own catalog first, and use this as the escape hatch for a glyph\nit doesn't have.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "forceMonochrome",
+        "required": false,
+        "defaultValue": false,
+        "description": "Forces the icon to render in `currentColor` even if its own markup hardcodes a fill — brand/logo icon sets often do.",
+        "kind": "boolean"
+      },
+      {
+        "name": "icon",
+        "required": true,
+        "defaultValue": null,
+        "description": "An icon component from react-icons (or any icon set shaped the same way) — e.g. `FaBeer` from `\"react-icons/fa\"`.",
+        "kind": "readonly"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "m",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "style",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "defaultValue": null,
+        "description": "Accessible name. Omit for a purely decorative icon (it's hidden from AT).",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Fieldset",
+    "description": "Groups related fields under a shared `<legend>`. A real `<fieldset>`, not\na styled `Column` with a heading on top — grouping semantics for\nassistive tech and `disabled` cascading to every descendant control are\nexactly what raw tags are for when a layout primitive doesn't cover them.",
+    "props": [
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "legend",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "FieldShell",
+    "description": "The label/control/hint shell shared by Input, Textarea, Select, and\nNumberInput/SearchInput. Not exported from the package — every form\ncontrol that needs this layout renders it internally, so consumers get a\nconsistent `label`/`description`/`error`/`success` prop set on the\ncontrol itself rather than a separate wrapper component to learn.",
+    "props": [
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "fieldId",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "hintId",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "hintKind",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "required",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Flex",
+    "description": "The base layout primitive. `Row` and `Column` are `Flex` with a fixed\n`direction`; reach for `Flex` directly when the direction itself needs to\nrespond to a breakpoint (`m={{ direction: \"column\" }}`).\n\nServer-renderable: no hooks, no client-only APIs. Responsive props resolve\nto plain classes at build time (see styles/_mixins.scss), so this component\nnever needs a client-side breakpoint check to do its job.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shorthand for `as=\"a\"` — see system/ElementType.tsx.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Grid",
+    "description": " CSS Grid layout primitive. Use `columns`/`rows` (1–12 / 1–6) for templates.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Halftone",
+    "description": "A classic halftone screen — variable-radius dots instead of dither's\nper-pixel on/off pattern. Ink color is read from the canvas's own\ncomputed `color` at draw time (so it follows theme/scheme like any other\ntext), not hardcoded and not passed through canvas's `\"currentColor\"`\nfillStyle keyword — that keyword has real support in modern engines, but\nreading the resolved computed style directly doesn't depend on it working\nthe same way everywhere.",
+    "props": [
+      {
+        "name": "alt",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required — the canvas this renders as has no text of its own.",
+        "kind": "text"
+      },
+      {
+        "name": "cellSize",
+        "required": false,
+        "defaultValue": 8,
+        "description": "Dot grid spacing in source pixels.",
+        "kind": "number"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "invert",
+        "required": false,
+        "defaultValue": false,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "maxRadius",
+        "required": false,
+        "defaultValue": 0.95,
+        "description": "Largest dot radius, as a fraction of `cellSize / 2`.",
+        "kind": "number"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "width",
+        "required": false,
+        "defaultValue": null,
+        "description": "Defaults to the image's natural size once loaded.",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "Heading",
+    "description": "A section heading. `as` picks the semantic level (h1–h6, default h2) —\nunlike `Flex`'s `as`, it's constrained to heading tags only, since a\nheading rendering as a `<div>` would silently drop out of the document\noutline. Visual size is independent of level: override with `displaySize`\nwhen a heading's importance and its place in the outline don't match.",
+    "props": []
+  },
+  {
+    "name": "Icon",
+    "description": "Every icon in the design system renders through this one component —\n`name` looks up the bitmap in `icons/glyphs.ts` rather than each icon\nbeing its own component. Fixed 16×16 viewBox, size in three steps, fill\ninherited from `currentColor` so an icon always matches its surrounding\ntext without a color prop of its own.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "name",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "select",
+        "options": [
+          "warning",
+          "menu",
+          "search",
+          "circle",
+          "filter",
+          "chevron-down",
+          "chevron-up",
+          "chevron-left",
+          "chevron-right",
+          "close",
+          "check",
+          "plus",
+          "minus",
+          "arrow-right",
+          "arrow-left",
+          "info",
+          "eye",
+          "eye-off",
+          "trash",
+          "edit",
+          "copy",
+          "download",
+          "upload",
+          "external-link",
+          "star",
+          "calendar",
+          "clock",
+          "user",
+          "settings",
+          "more-horizontal",
+          "refresh",
+          "lock",
+          "maximize",
+          "minimize"
+        ]
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "style",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "defaultValue": null,
+        "description": "Accessible name. Omit for a purely decorative icon (it's hidden from AT).",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "IconButton",
+    "description": " A square, icon-only button. See Button for the text/icon+text case.",
+    "props": [
+      {
+        "name": "aria-label",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required, not optional: an icon-only control has no visible text, so\nwithout this it's silently unusable for anyone on a screen reader. See\ncomponents/Icon/Icon.tsx — `title` there is for a decorative-vs-labeled\nchoice; here there's no visible label to fall back on, so it isn't one.",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "defaultValue": null,
+        "description": "One of the built-in icons, sized to match `size` automatically. Omit in favor of `children` for a custom icon element.",
+        "kind": "select",
+        "options": [
+          "warning",
+          "menu",
+          "search",
+          "circle",
+          "filter",
+          "chevron-down",
+          "chevron-up",
+          "chevron-left",
+          "chevron-right",
+          "close",
+          "check",
+          "plus",
+          "minus",
+          "arrow-right",
+          "arrow-left",
+          "info",
+          "eye",
+          "eye-off",
+          "trash",
+          "edit",
+          "copy",
+          "download",
+          "upload",
+          "external-link",
+          "star",
+          "calendar",
+          "clock",
+          "user",
+          "settings",
+          "more-horizontal",
+          "refresh",
+          "lock",
+          "maximize",
+          "minimize"
+        ]
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "defaultValue": "\"ghost\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "solid",
+          "outline",
+          "ghost"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "InlineCode",
+    "description": "Inline code, e.g. \"run `<InlineCode>pnpm build</InlineCode>`\". Always `<code>`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Input",
+    "description": " A labeled text input. For multi-line text, use `Textarea`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "icon",
+        "required": false,
+        "defaultValue": null,
+        "description": "A leading icon inside the field, e.g. for a labeled filter/amount input.",
+        "kind": "select",
+        "options": [
+          "warning",
+          "menu",
+          "search",
+          "circle",
+          "filter",
+          "chevron-down",
+          "chevron-up",
+          "chevron-left",
+          "chevron-right",
+          "close",
+          "check",
+          "plus",
+          "minus",
+          "arrow-right",
+          "arrow-left",
+          "info",
+          "eye",
+          "eye-off",
+          "trash",
+          "edit",
+          "copy",
+          "download",
+          "upload",
+          "external-link",
+          "star",
+          "calendar",
+          "clock",
+          "user",
+          "settings",
+          "more-horizontal",
+          "refresh",
+          "lock",
+          "maximize",
+          "minimize"
+        ]
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "pattern",
+        "required": false,
+        "defaultValue": null,
+        "description": "A regular expression the native constraint-validation API checks the\nvalue against — already usable today as a plain HTML attribute (this\njust documents it as a first-class prop). Doesn't produce an error\nmessage on its own; pair it with your own `error` + `onBlur` for that.",
+        "kind": "text"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Kbd",
+    "description": "A single keyboard key, e.g. `<Kbd>⌘</Kbd><Kbd>K</Kbd>`. Always `<kbd>`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Line",
+    "description": " A hairline divider. Not a `Flex` variant — dividers have no children.",
+    "props": [
+      {
+        "name": "orientation",
+        "required": false,
+        "defaultValue": "\"horizontal\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "horizontal",
+          "vertical"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ListItem",
+    "description": "",
+    "props": []
+  },
+  {
+    "name": "MasonryGrid",
+    "description": "A Pinterest-style column layout via native CSS multi-column (`column-count`\n+ `column-width`), not JS height measurement — items fill down one column\nbefore wrapping to the next, and the browser itself drops columns as the\ncontainer narrows. The tradeoff for that simplicity: items are read down\neach column in turn, not left-to-right by row, which is the standard\nCSS-columns masonry behavior (a JS-measured true masonry would preserve\nrow-reading order, at the cost of a layout-measurement effect).",
+    "props": [
+      {
+        "name": "columns",
+        "required": false,
+        "defaultValue": "3",
+        "description": "Upper bound on column count — the browser renders fewer (down to 1)\nonce `minColumnWidth` no longer fits, which is what makes this\nresponsive with no breakpoint props of its own.",
+        "kind": "number"
+      },
+      {
+        "name": "gap",
+        "required": false,
+        "defaultValue": "\"16\"",
+        "description": "Space between columns AND between stacked items in a column — a plain\nCSS `gap` only gives the first half, since multi-column has no concept\nof vertical space between stacked items, so each item also gets this as\nits own `margin-bottom`.",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l",
+          "xl",
+          "xs",
+          "0",
+          "1",
+          "2",
+          "4",
+          "8",
+          "12",
+          "16",
+          "20",
+          "24",
+          "32",
+          "40",
+          "48",
+          "56",
+          "64",
+          "80",
+          "96",
+          "128",
+          "160"
+        ]
+      },
+      {
+        "name": "minColumnWidth",
+        "required": false,
+        "defaultValue": "240",
+        "description": "The narrowest a column may get before the browser drops one, in px.",
+        "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "Media",
+    "description": "One component for any embeddable media — a plain image, a native `<video>`,\nor a YouTube/Vimeo URL (swapped for its embed/no-cookie iframe form\nautomatically). Always renders into a fixed-aspect-ratio box, so\nsurrounding content never reflows once the media itself loads in.\n\nDeliberately not run through `Dither`/`Halftone`: this is for content that\nwants to look like an ordinary photo or video (a screenshot, a demo\nrecording), not this system's own bitmap aesthetic — reach for those\ninstead when the point is the dithered look itself.",
+    "props": [
+      {
+        "name": "alt",
+        "required": true,
+        "defaultValue": null,
+        "description": "Accessible description (image `alt`) or accessible name (video/embed `title`) — required either way.",
+        "kind": "text"
+      },
+      {
+        "name": "aspectRatio",
+        "required": false,
+        "defaultValue": "\"16 / 9\"",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "autoPlay",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "controls",
+        "required": false,
+        "defaultValue": "true",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "loop",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "muted",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "poster",
+        "required": false,
+        "defaultValue": null,
+        "description": "Poster frame shown before playback. Native `<video>` only.",
+        "kind": "text"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "An image URL, a video file URL, or a YouTube/Vimeo link — the element rendered is auto-detected from this.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Meter",
+    "description": "A segmented gauge — e.g. spend against a budget — not a task-completion\nindicator (that's a future `Progress`). Renders as discrete filled/empty\ncells rather than a continuous bar: a half-filled cell has no bitmap\nequivalent, so the value rounds to the nearest whole cell.",
+    "props": [
+      {
+        "name": "label",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required: a meter has no visible text of its own, so without this it's\nsilently unreadable on a screen reader (same reasoning as IconButton's\n`aria-label`).",
+        "kind": "text"
+      },
+      {
+        "name": "max",
+        "required": false,
+        "defaultValue": "100",
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "segments",
+        "required": false,
+        "defaultValue": "24",
+        "description": "Visual cell count — a discrete tick bar, not a continuous fill.",
+        "kind": "number"
+      },
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "variant",
+        "required": false,
+        "defaultValue": "\"outline\"",
+        "description": "`\"led\"` swaps the bordered/hollow empty cell for a dim solid fill, butted tightly — an LED-bar look.",
+        "kind": "select",
+        "options": [
+          "outline",
+          "led"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "NumberInput",
+    "description": " A number input with +/- stepper buttons alongside the native spinner controls.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "OTPInput",
+    "description": "A one-time-passcode field: `length` single-character boxes acting as one\nlogical value, not `length` independent inputs — typing a digit advances\nto the next box, Backspace on an empty box deletes and refocuses the\nprevious one, and pasting a full code splits it across every box at once.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "length",
+        "required": false,
+        "defaultValue": "6",
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onComplete",
+        "required": false,
+        "defaultValue": null,
+        "description": "Called once the value reaches `length` characters.",
+        "kind": "readonly"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "PasswordInput",
+    "description": " A text input that masks its value by default, with a trailing toggle to reveal it.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Popover",
+    "description": "Click-triggered floating content that can hold real interactive\nelements — unlike `Tooltip`, focus can move into it, and it stays open\nuntil dismissed (Escape, or a click outside). For a list of choices with\nroving keyboard navigation, use `Dropdown` instead; this is for\narbitrary content (a mini form, a settings panel, ...).",
+    "props": [
+      {
+        "name": "defaultOpen",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "open",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "defaultValue": "bottom-start",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "top-start",
+          "top-end",
+          "right-start",
+          "right-end",
+          "bottom-start",
+          "bottom-end",
+          "left-start",
+          "left-end"
+        ]
+      },
+      {
+        "name": "trigger",
+        "required": true,
+        "defaultValue": null,
+        "description": "A single focusable element that opens the popover on click.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "Radio",
+    "description": "A single option within a `RadioGroup` — never used standalone, since a\nradio's whole behavior (mutual exclusivity via a shared `name`) only\nexists in relation to the group it belongs to.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "RadioGroup",
+    "description": "A mutually-exclusive set of `Radio` options, sharing one native `name`.\n\nDoesn't reuse `FieldShell`: FieldShell's label is a real `<label\nhtmlFor>`, correct for a single control like Input, but a group's label\nisn't \"for\" any one radio — it names the whole group, so it's plain text\nconnected via `aria-labelledby` on the `radiogroup` instead.",
+    "props": [
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": false,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "name",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "RadioGroupContext",
+    "description": "Not exported from the package — internal wiring between RadioGroup and\nRadio only. A native radio group's `name` attribute is what makes the\nbrowser treat a set of inputs as one mutually-exclusive group in the\nfirst place, so `Radio` genuinely needs this context to function; it\nisn't an optional convenience the way, say, Icon's `title` is.",
+    "props": []
+  },
+  {
+    "name": "Row",
+    "description": " `Flex` fixed to `direction: row`. The default horizontal layout primitive.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shorthand for `as=\"a\"` — see system/ElementType.tsx.",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "SearchInput",
+    "description": " A text input with a search icon and a clear button, shown once there's a value.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Select",
+    "description": "A listbox-style select built on `Dropdown` — an `options` array, not\n`<option>` children, so it's no longer a native `<select>` underneath.\nThat trades the free native behavior (real `<select>`/`<option>`, \"menu\"/\n\"menuitem\" ARIA roles rather than the more semantically exact \"listbox\"/\n\"option\") for the same look, keyboard nav, and positioning every other\n`Dropdown`-based menu in this system already has — `ContextMenu` makes\nthe identical trade for the same reason.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "options",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "defaultValue": null,
+        "description": "Shown on the trigger when nothing is selected yet.",
+        "kind": "text"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Skeleton",
+    "description": "A loading placeholder. Purely decorative (`aria-hidden`) — wrap the group\nit stands in with your own `aria-busy`/live region if the loading state\nitself needs to be announced.",
+    "props": [
+      {
+        "name": "circle",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Renders fully round, for an avatar-shaped placeholder.",
+        "kind": "boolean"
+      }
+    ]
+  },
+  {
+    "name": "Slider",
+    "description": " A single-value range slider. Works controlled or uncontrolled, like a native `<input>`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Stat",
+    "description": " A labeled headline figure with an optional trend delta — a reusable form of the sandbox's own Budget widget.",
+    "props": [
+      {
+        "name": "children",
+        "required": false,
+        "defaultValue": null,
+        "description": "Optional content below the figure — a `Meter`, a helper `Text`, etc.",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "trend",
+        "required": false,
+        "defaultValue": null,
+        "description": "`\"up\"` renders in the success color and `\"down\"` in the error one — the\ncommon case (revenue, users, ...). For a metric where down is the good\ndirection (spend, errors, ...), swap which one you pass rather than\nreaching for a config flag here.",
+        "kind": "readonly"
+      },
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "The headline number/figure, already formatted by the caller (e.g. `\"$1,400\"`).",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "Switch",
+    "description": "An on/off toggle: a native `<input type=\"checkbox\">` with `role=\"switch\"`\nso AT announces \"on\"/\"off\" instead of \"checked\". Overriding the role also\ndrops the browser's native checked-state-to-AT mapping, so `aria-checked`\nis maintained explicitly — which means tracking checked state here even\nwhen uncontrolled, unlike this file set's other native-checkbox controls.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Tab",
+    "description": "Arrow Left/Right (wrapping) and Home/End move focus AND activate the tab\nimmediately — WAI-ARIA APG's \"automatic activation\" pattern, right for a\ntablist whose panels are cheap to show. Sibling tabs are found via the DOM\n(`role=\"tab\"` under the same `role=\"tablist\"`), simpler than tracking\norder in context for the same information.",
+    "props": [
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Table",
+    "description": "A native `<table>` with the design system's borders/spacing — sorting\n(`TableHeaderCell`), zebra rows, and row selection (`TableRow`) are opt-in\nper-piece rather than table-wide flags, since a given table only needs\nsome of them.",
+    "props": []
+  },
+  {
+    "name": "TabList",
+    "description": "",
+    "props": [
+      {
+        "name": "aria-label",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "TabPanel",
+    "description": "",
+    "props": [
+      {
+        "name": "value",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Tabs",
+    "description": "A set of switchable panels, each with a corresponding tab button.",
+    "props": [
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Text",
+    "description": "Inline text. Deliberately not a `Flex` variant — text needs normal inline\nflow (wrapping, `::selection`, baseline alignment inside a paragraph),\nwhich `display: flex` would break. Renders as `<span>` by default; pass\n`as=\"p\"` / `as=\"label\"` / etc. for the right semantics.",
+    "props": [
+      {
+        "name": "href",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "Textarea",
+    "description": " A labeled multi-line text input. For a single line, use `Input`.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "ToastProvider",
+    "description": "",
+    "props": []
+  },
+  {
+    "name": "Tooltip",
+    "description": "A hover/focus-triggered label for an element that doesn't have visible\ntext of its own (an icon button, say). Purely informational — nothing\ninside a Tooltip can be interacted with (it closes as soon as the pointer\nor focus leaves the trigger), so `content` is plain text, not arbitrary\n`ReactNode`; anything needing real interaction belongs in a `Popover`.",
+    "props": [
+      {
+        "name": "children",
+        "required": true,
+        "defaultValue": null,
+        "description": "A single focusable element — a Tooltip needs one thing to attach hover/focus to.",
+        "kind": "readonly"
+      },
+      {
+        "name": "content",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "delay",
+        "required": false,
+        "defaultValue": 300,
+        "description": "Hover delay before showing, in ms. Closes immediately.",
+        "kind": "number"
+      },
+      {
+        "name": "placement",
+        "required": false,
+        "defaultValue": "top",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "top",
+          "right",
+          "bottom",
+          "left",
+          "top-start",
+          "top-end",
+          "right-start",
+          "right-end",
+          "bottom-start",
+          "bottom-end",
+          "left-start",
+          "left-end"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "useToast",
+    "description": "Push and dismiss toast notifications from anywhere under a `ToastProvider`.",
+    "props": []
+  }
+]

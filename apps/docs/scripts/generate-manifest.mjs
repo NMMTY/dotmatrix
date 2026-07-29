@@ -97,7 +97,6 @@ const docs = parser.parse(files);
 const manifest = docs
   .map((doc) => ({
     name: doc.displayName,
-    filePath: doc.filePath.replace(coreRoot, "").replace(/\\/g, "/"),
     description: doc.description || extractDescription(doc.filePath, doc.displayName),
     props: Object.entries(doc.props)
       .map(([name, prop]) => ({
