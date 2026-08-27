@@ -1,0 +1,72 @@
+@use "../_order";
+
+@layer dm.components {
+  // Caps the whole widget's width so it can't grow or shrink from one month
+  // to the next — without this, an unconstrained month/year header (e.g. a
+  // locale where month names vary a lot in length, like Russian "май" vs
+  // "сентябрь") stretches its flex row wider, and since the day grid below
+  // it shares that same stretched width via `1fr` columns, every cell (and,
+  // via `aspect-ratio: 1`, every cell's height too) grows or shrinks along
+  // with whatever month happens to be showing.
+  // A hard `width`, not `max-width` — a cap alone still lets the container
+  // shrink-to-fit anywhere below it, so the header's natural content width
+  // would keep nudging the whole widget's size around between months even
+  // while staying under the cap. Fixed at `width` instead, the header is
+  // forced to truncate within it rather than ever influencing the size.
+  .calendar {
+    width: 240px;
+  }
+
+  .monthLabel {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weekday {
+    text-align: center;
+  }
+
+  .day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: var(--dm-radius-control);
+    background: transparent;
+    color: var(--dm-on-background-strong);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: var(--dm-surface-raised);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.35;
+    }
+  }
+
+  .outside {
+    color: var(--dm-on-background-weak);
+  }
+
+  // A border, not a fill — `.selected` already owns the fill, and a date can
+  // be both today and selected at once (opening the calendar on today).
+  .today {
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-strong);
+  }
+
+  .selected {
+    background: var(--dm-action-background);
+    color: var(--dm-on-action-strong);
+
+    &:hover:not(:disabled) {
+      background: var(--dm-action-background-hover);
+    }
+  }
+}

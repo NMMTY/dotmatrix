@@ -1,0 +1,92 @@
+@use "../_order";
+
+@layer dm.components {
+  .viewport {
+    overflow-y: auto;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    color: var(--dm-on-background-strong);
+  }
+
+  .head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .headerCell {
+    padding: var(--dm-space-8) var(--dm-space-12);
+    background: var(--dm-surface-background);
+    border-bottom-width: var(--dm-border-width-2);
+    border-bottom-color: var(--dm-border-medium);
+    color: var(--dm-on-background-weak);
+    font-weight: var(--dm-weight-medium);
+    font-size: var(--dm-font-size-xs);
+    letter-spacing: var(--dm-tracking-wide);
+    text-transform: uppercase;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .row {
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+
+    &:hover {
+      background: var(--dm-surface-raised);
+    }
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  // Row parity is tracked per real data index (not `:nth-child`) since a
+  // leading spacer `<tr>` for the scrolled-past slice would otherwise shift
+  // the CSS-visible parity by one and stripe the wrong rows.
+  .zebraRow {
+    background: var(--dm-surface-raised);
+  }
+
+  // Defined after `.zebraRow` so a selected+striped row's background comes
+  // from here, not the stripe.
+  .selected {
+    background: var(--dm-surface-raised);
+    box-shadow: inset var(--dm-border-width-2) 0 0 0 var(--dm-on-background-strong);
+  }
+
+  .cell {
+    padding: var(--dm-space-8) var(--dm-space-12);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .alignCenter {
+    text-align: center;
+  }
+
+  .alignEnd {
+    text-align: right;
+  }
+
+  .spacer {
+    padding: 0;
+    border: none;
+  }
+
+  .empty {
+    padding: var(--dm-space-24);
+    text-align: center;
+  }
+}

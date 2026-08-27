@@ -1,0 +1,67 @@
+---
+title: "Calendar"
+summary: "A month-grid date picker — single selection, keyboard navigable, with min/max range support."
+navIcon: "calendar"
+github: "components/Calendar/Calendar.tsx"
+---
+
+A month-grid calendar for picking a single date. The grid is always 6 weeks (42 cells), padded with
+the adjacent months' leading/trailing days so its height never jumps as you navigate — clicking a
+padding day jumps the visible month to match it. One day is keyboard-tabbable at a time (roving
+`tabIndex`, arrow keys move it), the same pattern a native `<select>`'s options get for free.
+
+<Playground name="Calendar" />
+
+## Examples
+
+Uncontrolled, with a starting month and selection:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Calendar\n  defaultMonth={new Date(2026, 7, 1)}\n  defaultValue={new Date(2026, 7, 15)}\n/>',
+    },
+  ]}
+  preview={<Calendar defaultMonth={new Date(2026, 7, 1)} defaultValue={new Date(2026, 7, 15)} />}
+/>
+
+`minDate`/`maxDate` disable dates outside the range — clicking or arrowing onto them is a no-op:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Calendar\n  defaultMonth={new Date(2026, 7, 1)}\n  minDate={new Date(2026, 7, 10)}\n  maxDate={new Date(2026, 7, 20)}\n/>',
+    },
+  ]}
+  preview={
+    <Calendar
+      defaultMonth={new Date(2026, 7, 1)}
+      minDate={new Date(2026, 7, 10)}
+      maxDate={new Date(2026, 7, 20)}
+    />
+  }
+/>
+
+`weekStartsOn` reorders the grid's columns — `1` starts the week on Monday:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Calendar defaultMonth={new Date(2026, 7, 1)} weekStartsOn={1} />',
+    },
+  ]}
+  preview={<Calendar defaultMonth={new Date(2026, 7, 1)} weekStartsOn={1} />}
+/>
+
+## Calendar vs. DatePicker
+
+Reach for `Calendar` when the grid should stay visible on the page. Use
+[DatePicker](/components/forms/date-picker) to fit date selection into a normal field-sized form row
+instead — it wraps this same component in a popover trigger.
+
+## Props
+
+<PropsTable name="Calendar" />

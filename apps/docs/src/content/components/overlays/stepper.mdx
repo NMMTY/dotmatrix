@@ -1,0 +1,79 @@
+---
+title: "Stepper"
+summary: "A linear progress indicator for multi-step flows — markers connected by a line that fills in as steps complete."
+navIcon: "check"
+github: "components/Stepper/Stepper.tsx"
+---
+
+A linear progress indicator for multi-step flows — markers connected by a line that fills in as
+steps complete. This renders the indicator (and, with `showControls`, Back/Next buttons that drive
+it) only; which content shows for the active step is your own `step`/`onStepChange`-driven render,
+the same split of responsibility as [Pagination](/components/data-display/pagination) and whatever
+list it pages through.
+
+<Playground name="Stepper" />
+
+## Examples
+
+Uncontrolled, starting on the first step — clicking a marker only ever jumps to an already-visited
+step, never ahead of where you've reached:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Stepper\n  steps={[\n    { label: "Account", description: "Create your login" },\n    { label: "Profile", description: "Tell us about you" },\n    { label: "Confirm", description: "Review and finish" },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <Stepper
+      steps={[
+        { label: "Account", description: "Create your login" },
+        { label: "Profile", description: "Tell us about you" },
+        { label: "Confirm", description: "Review and finish" },
+      ]}
+    />
+  }
+/>
+
+`showControls` adds Back/Next buttons wired to the same step state — Next becomes Finish on the last
+step:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Stepper\n  showControls\n  defaultStep={1}\n  steps={[\n    { label: "Cart" },\n    { label: "Shipping" },\n    { label: "Payment" },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <Stepper
+      showControls
+      defaultStep={1}
+      steps={[{ label: "Cart" }, { label: "Shipping" }, { label: "Payment" }]}
+    />
+  }
+/>
+
+`orientation="vertical"` stacks steps down the page instead — a better fit for a sidebar than a form
+header:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Stepper\n  orientation="vertical"\n  defaultStep={1}\n  steps={[\n    { label: "Cart" },\n    { label: "Shipping" },\n    { label: "Payment" },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <Stepper
+      orientation="vertical"
+      defaultStep={1}
+      steps={[{ label: "Cart" }, { label: "Shipping" }, { label: "Payment" }]}
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="Stepper" />

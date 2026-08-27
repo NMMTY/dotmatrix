@@ -1,0 +1,104 @@
+@use "../_order";
+
+@layer dm.components {
+  .editor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--dm-space-8);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-control);
+    padding: var(--dm-space-8);
+  }
+
+  .toolbar {
+    padding-bottom: var(--dm-space-8);
+    border-bottom-width: var(--dm-border-width-1);
+    border-bottom-color: var(--dm-border-medium);
+  }
+
+  // Deliberately not `--dm-font-mono`/`--dm-font-pixel` — per this system's
+  // own scoping decision for a rich text editor, the content area reads as
+  // plain prose, not bitmap typography: readability over aesthetic
+  // consistency once there's a paragraph of real text to read.
+  .contentEditable {
+    position: relative;
+    min-height: 160px;
+    padding: var(--dm-space-8);
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--dm-font-size-m);
+    line-height: 1.6;
+    color: var(--dm-on-background-strong);
+    outline: none;
+  }
+
+  .placeholder {
+    position: absolute;
+    top: var(--dm-space-8);
+    left: var(--dm-space-8);
+    color: var(--dm-on-background-weak);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .paragraph {
+    margin: 0 0 var(--dm-space-12);
+  }
+
+  .h1,
+  .h2,
+  .h3 {
+    margin: var(--dm-space-16) 0 var(--dm-space-8);
+    font-weight: var(--dm-weight-medium);
+    line-height: 1.3;
+  }
+
+  .h1 {
+    font-size: 1.6em;
+  }
+
+  .h2 {
+    font-size: 1.3em;
+  }
+
+  .h3 {
+    font-size: 1.1em;
+  }
+
+  .quote {
+    margin: 0 0 var(--dm-space-12);
+    padding-left: var(--dm-space-12);
+    border-left-width: var(--dm-border-width-2);
+    border-left-color: var(--dm-border-strong);
+    color: var(--dm-on-background-weak);
+    font-style: italic;
+  }
+
+  .link {
+    color: var(--dm-action-background);
+    text-decoration: underline;
+  }
+
+  .listUl,
+  .listOl {
+    margin: 0 0 var(--dm-space-12);
+    padding-left: var(--dm-space-24);
+  }
+
+  .listItem {
+    margin-bottom: var(--dm-space-4);
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+}

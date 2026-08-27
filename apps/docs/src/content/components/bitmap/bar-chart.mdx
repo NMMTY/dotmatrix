@@ -1,0 +1,90 @@
+---
+title: "BarChart"
+summary: "A single-series bar chart — segmented cells by default, or an exact continuous height."
+navIcon: "menu"
+github: "components/BarChart/BarChart.tsx"
+---
+
+A single-series bar chart, in the same two rendering modes every chart in this system will
+eventually offer: `"bitmap"` quantizes each bar into discrete filled/empty cells — the same
+segmented-gauge look as [Meter](/components/bitmap/meter), no bitmap equivalent for a sub-cell-height
+bar — and `"precise"` renders an exact, continuous height instead.
+
+Monochrome, like the rest of this system — there's no second color to distinguish a second series
+with, so this stays single-series; a grouped/stacked variant would need a non-color differentiator
+(pattern fills, most likely) to fit the palette.
+
+<Playground name="BarChart" />
+
+## Accessibility
+
+A chart's visual plot is marked `role="img"` with your `label` as its accessible name — the bars
+themselves aren't independently announced, the same reasoning `Meter` uses for its segmented track.
+The real numbers stay available as a visually-hidden `<table>` alongside it, so a screen reader user
+gets the underlying data rather than just a summary.
+
+## Examples
+
+`mode="precise"` renders an exact height instead of quantizing to whole cells:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<BarChart\n  label="Monthly signups"\n  mode="precise"\n  data={[\n    { label: "Jan", value: 12 },\n    { label: "Feb", value: 28 },\n    { label: "Mar", value: 19 },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <BarChart
+      label="Monthly signups"
+      mode="precise"
+      data={[
+        { label: "Jan", value: 12 },
+        { label: "Feb", value: 28 },
+        { label: "Mar", value: 19 },
+      ]}
+    />
+  }
+/>
+
+`max` sets what the tallest bar represents — pass it explicitly when the chart should read against a
+target rather than its own data's max:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<BarChart\n  label="Storage used per project (GB)"\n  max={100}\n  data={[\n    { label: "Alpha", value: 40 },\n    { label: "Beta", value: 85 },\n    { label: "Gamma", value: 15 },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <BarChart
+      label="Storage used per project (GB)"
+      max={100}
+      data={[
+        { label: "Alpha", value: 40 },
+        { label: "Beta", value: 85 },
+        { label: "Gamma", value: 15 },
+      ]}
+    />
+  }
+/>
+
+`valueFormatter` controls how numbers render, both in `showValues`' labels and in the hidden data
+table:
+
+```tsx
+<BarChart
+  label="Conversion rate by channel"
+  showValues
+  valueFormatter={(value) => `${value}%`}
+  data={[
+    { label: "Organic", value: 4.2 },
+    { label: "Paid", value: 2.8 },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable name="BarChart" />

@@ -75,8 +75,10 @@ console.log(
 // Raised from 180 to 220 once the Phase 2 component set (Button, Card,
 // Badge, Chip, Avatar, ...) pushed the real total to ~181kb — utilities
 // dominate the budget (~160kb) and won't shrink from here, so the room is
-// for `components`, which will keep growing through Phase 3-6.
-const BUDGET_KB = 220;
+// for `components`, which will keep growing through Phase 3-6. Raised again
+// to 230 for the low-risk expansion wave (CommandPalette, Combobox,
+// Breadcrumbs, Pagination, Calendar, DatePicker, ...).
+const BUDGET_KB = 230;
 const total =
   Buffer.byteLength(tokens) +
   Buffer.byteLength(global) +

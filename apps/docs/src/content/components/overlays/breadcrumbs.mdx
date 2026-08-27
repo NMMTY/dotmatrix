@@ -1,0 +1,67 @@
+---
+title: "Breadcrumbs"
+summary: "A navigation trail — every item but the last is a link; the last is always the current page."
+navIcon: "chevron-right"
+github: "components/Breadcrumbs/Breadcrumbs.tsx"
+---
+
+A navigation trail. Every item but the last renders as a link; the last is always plain text
+marked `aria-current="page"`, regardless of whether it was given an `href` — the current page
+shouldn't link to itself. Server-renderable: no hooks, since a breadcrumb trail is derived from the
+current route, not interactive state.
+
+<Playground name="Breadcrumbs" />
+
+## Examples
+
+`items` takes plain data — omit `href` on the last entry, or leave it in; either way it renders as
+the current page:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Breadcrumbs\n  items={[\n    { label: "Home", href: "/" },\n    { label: "Components", href: "/components" },\n    { label: "Breadcrumbs" },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <Breadcrumbs
+      items={[
+        { label: "Home", href: "/" },
+        { label: "Components", href: "/components" },
+        { label: "Breadcrumbs" },
+      ]}
+    />
+  }
+/>
+
+`as` takes your router's own link component, the same convention `Card`/`Button` use for `href` —
+applied to every non-current item at once, since a trail's links all go through the same router:
+
+```tsx
+import Link from "next/link";
+
+<Breadcrumbs as={Link} items={items} />;
+```
+
+`separator` swaps the icon between items — anything from the [Icon](/components/typography/icon)
+catalog works:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Breadcrumbs\n  separator="arrow-right"\n  items={[{ label: "Home", href: "/" }, { label: "Settings" }]}\n/>',
+    },
+  ]}
+  preview={
+    <Breadcrumbs
+      separator="arrow-right"
+      items={[{ label: "Home", href: "/" }, { label: "Settings" }]}
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="Breadcrumbs" />

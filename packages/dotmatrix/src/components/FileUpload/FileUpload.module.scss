@@ -1,0 +1,78 @@
+@use "../_order";
+
+@layer dm.components {
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--dm-space-8);
+    width: 100%;
+    padding: var(--dm-space-24);
+    background: transparent;
+    border-width: var(--dm-border-width-1);
+    border-style: dashed;
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-control);
+    color: var(--dm-on-background-weak);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      border-color: var(--dm-border-strong);
+      color: var(--dm-on-background-strong);
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .dragging {
+    border-style: solid;
+    border-color: var(--dm-action-background);
+    color: var(--dm-on-background-strong);
+    background: var(--dm-surface-raised);
+  }
+
+  .hiddenInput {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .fileRow {
+    padding: var(--dm-space-4) var(--dm-space-8);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-control);
+  }
+
+  .thumbnail,
+  .thumbnailPlaceholder {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--dm-radius-2);
+  }
+
+  .thumbnail {
+    object-fit: cover;
+  }
+
+  .thumbnailPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dm-surface-raised);
+    color: var(--dm-on-background-weak);
+  }
+
+  .fileName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

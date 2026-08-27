@@ -140,6 +140,149 @@
     ]
   },
   {
+    "name": "BarChart",
+    "description": "A single-series bar chart. Monochrome, like the rest of this system —\nthere's no second color to distinguish a second series with, so this stays\nsingle-series; a grouped/stacked variant would need a non-color\ndifferentiator (pattern fills, most likely) to fit the palette, and isn't\nbuilt yet.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "data",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": "160",
+        "description": "Chart area height in px.",
+        "kind": "number"
+      },
+      {
+        "name": "label",
+        "required": true,
+        "defaultValue": null,
+        "description": "Required: like `Meter`, a chart has no visible text of its own that\ndescribes what it shows — without this it's silently unreadable on a\nscreen reader.",
+        "kind": "text"
+      },
+      {
+        "name": "max",
+        "required": false,
+        "defaultValue": "the data's own max",
+        "description": "The tallest bar's value.",
+        "kind": "number"
+      },
+      {
+        "name": "mode",
+        "required": false,
+        "defaultValue": "\"bitmap\"",
+        "description": "`\"bitmap\"` quantizes each bar into discrete filled/empty cells, the same\nsegmented-gauge look as `Meter` — no bitmap equivalent for a\nsub-cell-height bar. `\"precise\"` renders an exact, continuous height\ninstead.",
+        "kind": "select",
+        "options": [
+          "bitmap",
+          "precise"
+        ]
+      },
+      {
+        "name": "segments",
+        "required": false,
+        "defaultValue": "10",
+        "description": "`\"bitmap\"` mode only: vertical cell count per bar.",
+        "kind": "number"
+      },
+      {
+        "name": "showValues",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Shows each bar's value above it.",
+        "kind": "boolean"
+      },
+      {
+        "name": "valueFormatter",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
+    "name": "Breadcrumbs",
+    "description": "A navigation trail. Every item but the last renders as a link; the last\nis always plain text marked `aria-current=\"page\"` — server-renderable, no\nhooks, since a breadcrumb trail is derived from the current route, not\ninteractive state.",
+    "props": [
+      {
+        "name": "as",
+        "required": false,
+        "defaultValue": null,
+        "description": "Your router's own link component, e.g. Next's `Link` — passed through to every non-current item, the same `as` convention `Card`/`Button` use for `href`.",
+        "kind": "readonly"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "items",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "separator",
+        "required": false,
+        "defaultValue": "chevron-right",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "warning",
+          "chevron-down",
+          "chevron-up",
+          "chevron-left",
+          "chevron-right",
+          "close",
+          "check",
+          "plus",
+          "minus",
+          "search",
+          "arrow-right",
+          "arrow-left",
+          "menu",
+          "info",
+          "circle",
+          "eye",
+          "eye-off",
+          "trash",
+          "edit",
+          "copy",
+          "download",
+          "upload",
+          "external-link",
+          "star",
+          "calendar",
+          "clock",
+          "user",
+          "settings",
+          "filter",
+          "more-horizontal",
+          "refresh",
+          "lock",
+          "maximize",
+          "minimize"
+        ]
+      }
+    ]
+  },
+  {
     "name": "Button",
     "description": "Doesn't go through the shared `ElementType` helper (unlike Flex/Row/...):\nthose default to `<div>`, but a button's honest default is `<button>`, so\nit resolves its own tag and — only for the real `<button>` case — sets\n`type=\"button\"` to avoid an accidental form submit, and forwards\n`disabled` natively. Set `as=\"a\"` (or just `href`) for a button that\nnavigates instead of acting.",
     "props": [
@@ -165,10 +308,6 @@
         "kind": "select",
         "options": [
           "warning",
-          "menu",
-          "search",
-          "circle",
-          "filter",
           "chevron-down",
           "chevron-up",
           "chevron-left",
@@ -177,9 +316,12 @@
           "check",
           "plus",
           "minus",
+          "search",
           "arrow-right",
           "arrow-left",
+          "menu",
           "info",
+          "circle",
           "eye",
           "eye-off",
           "trash",
@@ -193,6 +335,7 @@
           "clock",
           "user",
           "settings",
+          "filter",
           "more-horizontal",
           "refresh",
           "lock",
@@ -234,6 +377,89 @@
           "outline",
           "ghost"
         ]
+      }
+    ]
+  },
+  {
+    "name": "Calendar",
+    "description": "A month grid, always 42 cells (6 weeks), padded with the adjacent months'\nleading/trailing days so the grid's height never jumps between months —\nsee {@link getMonthGrid}. One cell is tabbable at a time (roving\n`tabIndex`, arrow keys move it) rather than all 42 in the natural tab\norder, the same pattern a native `<select>`'s options get for free.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultMonth",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "maxDate",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "minDate",
+        "required": false,
+        "defaultValue": null,
+        "description": "Dates outside this range render disabled.",
+        "kind": "readonly"
+      },
+      {
+        "name": "month",
+        "required": false,
+        "defaultValue": "`value` if given, else today",
+        "description": "The month currently shown.",
+        "kind": "readonly"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onMonthChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "The selected date, or `null`/omitted for none.",
+        "kind": "readonly"
+      },
+      {
+        "name": "weekStartsOn",
+        "required": false,
+        "defaultValue": "0 (Sunday)",
+        "description": "",
+        "kind": "readonly"
       }
     ]
   },
@@ -452,6 +678,191 @@
     ]
   },
   {
+    "name": "Combobox",
+    "description": "A filterable `Select` — same `options`/`value`/`onChange` shape, but opens\nwith a search field so a long list narrows as you type instead of\nrequiring a scroll. Positioned the same way `Dropdown` is (its own\nfloating-ui setup, not literally wrapping `Dropdown`: that component's\nroving-focus menu semantics assume `DropdownItem`s as the only children,\nnot a search input ahead of them). Options use `listbox`/`option` roles —\nreal DOM focus never leaves the search field; the active option is\ncommunicated via `aria-activedescendant`, the standard combobox pattern,\nmatching `CommandPalette`'s own filtered-list approach rather than\n`Select`'s borrowed `menu` semantics.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "emptyMessage",
+        "required": false,
+        "defaultValue": "\"No matches.\"",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "options",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "defaultValue": "\"Select…\"",
+        "description": "Shown on the trigger when nothing is selected yet.",
+        "kind": "text"
+      },
+      {
+        "name": "searchPlaceholder",
+        "required": false,
+        "defaultValue": "\"Search…\"",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "size",
+        "required": false,
+        "defaultValue": "\"m\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "s",
+          "m",
+          "l"
+        ]
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
+  },
+  {
+    "name": "CommandPalette",
+    "description": "A searchable list of actions in a hotkey-triggered overlay — built on\n`Dialog` (focus trap, Escape, backdrop dismiss come from it for free).\nGeneralized from this system's own docs-site search, which now uses this\ncomponent instead of a bespoke implementation. Items sharing a `group`\ncluster under one label; omit `group` entirely for a flat list.",
+    "props": [
+      {
+        "name": "defaultOpen",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "emptyMessage",
+        "required": false,
+        "defaultValue": "No matches.",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "hotkey",
+        "required": false,
+        "defaultValue": "k",
+        "description": "The key that, combined with Cmd/Ctrl, opens this from anywhere on the\npage, in addition to `trigger`. Pass `null` to disable the global\nlistener — e.g. for a second palette on the same page.",
+        "kind": "readonly"
+      },
+      {
+        "name": "items",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "maxResults",
+        "required": false,
+        "defaultValue": 8,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "onOpenChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "open",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "defaultValue": "Type a command…",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "title",
+        "required": false,
+        "defaultValue": "Command palette",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "trigger",
+        "required": false,
+        "defaultValue": null,
+        "description": "A single focusable element that opens the palette on click, same as `Dialog`. Omit for a fully controlled or hotkey-only palette.",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
     "name": "ContextMenu",
     "description": "The same menu (and the same `DropdownItem`s) as `Dropdown`, opened by\nright-click and positioned at the cursor instead of relative to a visible\ntrigger element. Shares `Dropdown`'s context/list-navigation wiring rather\nthan duplicating the menu-item rendering logic — the only real difference\nbetween the two is how the menu opens and where it's anchored.",
     "props": [
@@ -530,6 +941,110 @@
         "defaultValue": null,
         "description": "Defaults to the image's natural size once loaded.",
         "kind": "number"
+      }
+    ]
+  },
+  {
+    "name": "DatePicker",
+    "description": "A trigger button that opens a `Calendar` in a `Popover` — the same\nFieldShell + Popover-trigger shape as `ColorInput`. Picking a date closes\nthe popover; the button's own accessible name carries the current value\n(a `<label>`'s native association would otherwise win over a plain\nbutton's visible text, announcing just the label with no date).",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "formatDate",
+        "required": false,
+        "defaultValue": "`Intl.DateTimeFormat` with `dateStyle: \"medium\"`",
+        "description": "Overrides the trigger's date formatting.",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "maxDate",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "minDate",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "defaultValue": "\"Pick a date\"",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "weekStartsOn",
+        "required": false,
+        "defaultValue": "0 (Sunday)",
+        "description": "",
+        "kind": "readonly"
       }
     ]
   },
@@ -992,6 +1507,124 @@
     ]
   },
   {
+    "name": "FileUpload",
+    "description": "A dropzone plus file list — real, unmodified previews (no auto-dither),\nper this system's stance that a file the user is about to upload should\nlook like what it actually is. `enableImageEditing` is the one place that\nchanges: each new image is routed through `ImageEditor` first, one at a\ntime in a `Dialog`, before joining the list — Cancel keeps the file\nunedited rather than dropping it, since a cancelled *edit* isn't the same\nas a cancelled *upload*.",
+    "props": [
+      {
+        "name": "accept",
+        "required": false,
+        "defaultValue": null,
+        "description": "Passed straight through to the native file input's `accept`.",
+        "kind": "text"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "enableImageEditing",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Opens each new image in a crop/rotate/flip step (`ImageEditor`, in a `Dialog`) before it's added.",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "imageEditorFeatures",
+        "required": false,
+        "defaultValue": null,
+        "description": "Passed through to the editing step's `ImageEditor`.",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "maxFiles",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "maxSize",
+        "required": false,
+        "defaultValue": null,
+        "description": "Bytes.",
+        "kind": "number"
+      },
+      {
+        "name": "multiple",
+        "required": false,
+        "defaultValue": "false",
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onReject",
+        "required": false,
+        "defaultValue": null,
+        "description": "Files that didn't make it in — wrong type, too big, or over `maxFiles` — with why.",
+        "kind": "readonly"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "value",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
     "name": "Flex",
     "description": "The base layout primitive. `Row` and `Column` are `Flex` with a fixed\n`direction`; reach for `Flex` directly when the direction itself needs to\nrespond to a breakpoint (`m={{ direction: \"column\" }}`).\n\nServer-renderable: no hooks, no client-only APIs. Responsive props resolve\nto plain classes at build time (see styles/_mixins.scss), so this component\nnever needs a client-side breakpoint check to do its job.",
     "props": [
@@ -1003,6 +1636,11 @@
         "kind": "text"
       }
     ]
+  },
+  {
+    "name": "getPaginationRange",
+    "description": "Always includes the first and last page and `siblingCount` pages either\nside of `page`, collapsing whatever's left into one ellipsis per side —\nthe standard shape (`1 … 4 5 [6] 7 8 … 20`), not literally every page\nnumber, once the total exceeds what fits.",
+    "props": []
   },
   {
     "name": "Grid",
@@ -1103,10 +1741,6 @@
         "kind": "select",
         "options": [
           "warning",
-          "menu",
-          "search",
-          "circle",
-          "filter",
           "chevron-down",
           "chevron-up",
           "chevron-left",
@@ -1115,9 +1749,12 @@
           "check",
           "plus",
           "minus",
+          "search",
           "arrow-right",
           "arrow-left",
+          "menu",
           "info",
+          "circle",
           "eye",
           "eye-off",
           "trash",
@@ -1131,6 +1768,7 @@
           "clock",
           "user",
           "settings",
+          "filter",
           "more-horizontal",
           "refresh",
           "lock",
@@ -1199,10 +1837,6 @@
         "kind": "select",
         "options": [
           "warning",
-          "menu",
-          "search",
-          "circle",
-          "filter",
           "chevron-down",
           "chevron-up",
           "chevron-left",
@@ -1211,9 +1845,12 @@
           "check",
           "plus",
           "minus",
+          "search",
           "arrow-right",
           "arrow-left",
+          "menu",
           "info",
+          "circle",
           "eye",
           "eye-off",
           "trash",
@@ -1227,6 +1864,7 @@
           "clock",
           "user",
           "settings",
+          "filter",
           "more-horizontal",
           "refresh",
           "lock",
@@ -1257,6 +1895,68 @@
           "outline",
           "ghost"
         ]
+      }
+    ]
+  },
+  {
+    "name": "ImageEditor",
+    "description": "Crop/rotate/flip for a single image, rendered onto a canvas rather than\ntransformed with CSS — rotate and flip are baked into that canvas\nimmediately, so the crop box always operates on a plain upright image in\none consistent coordinate space, regardless of the current rotation. The\ncost is that changing rotation or flip resets the crop box (there's no\nsane way to carry a crop rect across a coordinate space it wasn't drawn\nin) — rotate/flip first, then crop, same order most simple editors expect.",
+    "props": [
+      {
+        "name": "aspectRatios",
+        "required": false,
+        "defaultValue": "Free, 1:1, 4:3, 16:9",
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "features",
+        "required": false,
+        "defaultValue": "`{ crop: true, rotate: true, flip: true }`",
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": "\"Crop area\"",
+        "description": "Accessible label for the crop region.",
+        "kind": "text"
+      },
+      {
+        "name": "onCancel",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onSave",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "outputType",
+        "required": false,
+        "defaultValue": "\"image/png\"",
+        "description": "The saved result's MIME type.",
+        "kind": "text"
+      },
+      {
+        "name": "src",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
       }
     ]
   },
@@ -1306,10 +2006,6 @@
         "kind": "select",
         "options": [
           "warning",
-          "menu",
-          "search",
-          "circle",
-          "filter",
           "chevron-down",
           "chevron-up",
           "chevron-left",
@@ -1318,9 +2014,12 @@
           "check",
           "plus",
           "minus",
+          "search",
           "arrow-right",
           "arrow-left",
+          "menu",
           "info",
+          "circle",
           "eye",
           "eye-off",
           "trash",
@@ -1334,6 +2033,7 @@
           "clock",
           "user",
           "settings",
+          "filter",
           "more-horizontal",
           "refresh",
           "lock",
@@ -1695,6 +2395,61 @@
     ]
   },
   {
+    "name": "Pagination",
+    "description": "Previous/next controls plus a collapsing range of page numbers — see\n{@link getPaginationRange} for how the range collapses. Controlled if\n`page` is given, uncontrolled otherwise, the same hybrid every other\nfield in this system uses.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultPage",
+        "required": false,
+        "defaultValue": "1",
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "page",
+        "required": false,
+        "defaultValue": null,
+        "description": "1-indexed. Omit along with `onChange` for uncontrolled use.",
+        "kind": "number"
+      },
+      {
+        "name": "siblingCount",
+        "required": false,
+        "defaultValue": 1,
+        "description": "Page numbers shown on either side of the current page, not counting the always-shown first/last.",
+        "kind": "number"
+      },
+      {
+        "name": "totalPages",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      }
+    ]
+  },
+  {
     "name": "PasswordInput",
     "description": " A text input that masks its value by default, with a trailing toggle to reveal it.",
     "props": [
@@ -1909,6 +2664,82 @@
     "name": "RadioGroupContext",
     "description": "Not exported from the package — internal wiring between RadioGroup and\nRadio only. A native radio group's `name` attribute is what makes the\nbrowser treat a set of inputs as one mutually-exclusive group in the\nfirst place, so `Radio` genuinely needs this context to function; it\nisn't an optional convenience the way, say, Icon's `title` is.",
     "props": []
+  },
+  {
+    "name": "RichTextEditor",
+    "description": "A rich text editor — the one component in this system that depends on a\nreal editing engine (Lexical) rather than hand-rolling, since hand-rolling\n`contentEditable` behavior correctly (selection, undo, paste, IME\ncomposition) is a well-known trap. The toolbar stays in this system's\nbitmap style; the content area intentionally does not — plain system\ntypography, since readability matters more than aesthetic consistency\nonce there's a paragraph of real prose to read.",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultValue",
+        "required": false,
+        "defaultValue": null,
+        "description": "Initial content, as an HTML string. Uncontrolled only, by design — a\n`contentEditable`-based editor can't be safely re-synced from an\nexternal `value` on every render without fighting the browser's own\nselection/undo state, which is why every major React rich-text wrapper\n(Lexical, Tiptap, Slate) recommends against it too.",
+        "kind": "text"
+      },
+      {
+        "name": "description",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "error",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "features",
+        "required": false,
+        "defaultValue": "all enabled",
+        "description": "Which toolbar tools show.",
+        "kind": "readonly"
+      },
+      {
+        "name": "label",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "placeholder",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "success",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      }
+    ]
   },
   {
     "name": "Row",
@@ -2148,6 +2979,107 @@
     ]
   },
   {
+    "name": "Stepper",
+    "description": "A linear progress indicator for multi-step flows — markers connected by a\nline that fills in as steps complete. This renders the indicator (and,\nwith `showControls`, Back/Next buttons that drive it) only; which content\nshows for the active step is the consumer's own `step`/`onStepChange`-\ndriven render, the same division of responsibility as `Pagination` and\nwhatever list it pages through.",
+    "props": [
+      {
+        "name": "allowNavigation",
+        "required": false,
+        "defaultValue": "true",
+        "description": "Lets clicking an already-visited step jump back to it — never forward, past what's been reached.",
+        "kind": "boolean"
+      },
+      {
+        "name": "backLabel",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "defaultStep",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "number"
+      },
+      {
+        "name": "disabled",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "boolean"
+      },
+      {
+        "name": "finishLabel",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "nextLabel",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "onFinish",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "onStepChange",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "orientation",
+        "required": false,
+        "defaultValue": "\"horizontal\"",
+        "description": "",
+        "kind": "select",
+        "options": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      {
+        "name": "showControls",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Renders Back/Next (Finish on the last step) controls below the indicator.",
+        "kind": "boolean"
+      },
+      {
+        "name": "step",
+        "required": false,
+        "defaultValue": null,
+        "description": "0-based index of the active step.",
+        "kind": "number"
+      },
+      {
+        "name": "steps",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      }
+    ]
+  },
+  {
     "name": "Switch",
     "description": "An on/off toggle: a native `<input type=\"checkbox\">` with `role=\"switch\"`\nso AT announces \"on\"/\"off\" instead of \"checked\". Overriding the role also\ndrops the browser's native checked-state-to-AT mapping, so `aria-checked`\nis maintained explicitly — which means tracking checked state here even\nwhen uncontrolled, unlike this file set's other native-checkbox controls.",
     "props": [
@@ -2356,5 +3288,88 @@
     "name": "useToast",
     "description": "Push and dismiss toast notifications from anywhere under a `ToastProvider`.",
     "props": []
+  },
+  {
+    "name": "VirtualizedTable",
+    "description": "",
+    "props": [
+      {
+        "name": "className",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "columns",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "emptyMessage",
+        "required": false,
+        "defaultValue": "\"No rows.\"",
+        "description": "",
+        "kind": "text"
+      },
+      {
+        "name": "getRowKey",
+        "required": false,
+        "defaultValue": "the row's index",
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "height",
+        "required": false,
+        "defaultValue": "400",
+        "description": "The scrollable viewport's height in px.",
+        "kind": "number"
+      },
+      {
+        "name": "onRowClick",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "overscan",
+        "required": false,
+        "defaultValue": "4",
+        "description": "Extra rows kept rendered past each edge of the viewport, to reduce blanking during a fast scroll.",
+        "kind": "number"
+      },
+      {
+        "name": "rowHeight",
+        "required": false,
+        "defaultValue": "40",
+        "description": "Every row's height in px — fixed, since windowing depends on it.",
+        "kind": "number"
+      },
+      {
+        "name": "rows",
+        "required": true,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "selectedRowKey",
+        "required": false,
+        "defaultValue": null,
+        "description": "",
+        "kind": "readonly"
+      },
+      {
+        "name": "zebra",
+        "required": false,
+        "defaultValue": "false",
+        "description": "Alternating row background from the second row on.",
+        "kind": "boolean"
+      }
+    ]
   }
 ]

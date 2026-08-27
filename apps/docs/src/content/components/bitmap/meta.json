@@ -6,6 +6,8 @@
     "halftone": 2,
     "ascii-art": 3,
     "cross-hatch": 4,
-    "meter": 5
+    "meter": 5,
+    "bar-chart": 6,
+    "image-editor": 7
   }
 }

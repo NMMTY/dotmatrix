@@ -1,0 +1,46 @@
+---
+title: "Pagination"
+summary: "Previous/next controls plus a collapsing range of page numbers."
+navIcon: "chevron-right"
+github: "components/Pagination/Pagination.tsx"
+---
+
+Previous/next controls plus a range of page numbers that collapses into an ellipsis once the total
+won't fit — always showing the first page, the last page, and a few around wherever you currently
+are (`1 … 4 5 [6] 7 8 … 20`), never the full list past a handful of pages. Controlled if `page` is
+given, uncontrolled otherwise — the same hybrid every other field in this system uses.
+
+<Playground name="Pagination" />
+
+## Examples
+
+Uncontrolled, when nothing outside the component needs to read the current page:
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Pagination defaultPage={1} totalPages={12} />' }]}
+  preview={<Pagination defaultPage={1} totalPages={12} />}
+/>
+
+Controlled, for when the page number drives something else on the page (fetching that page's
+results, syncing to a URL query param):
+
+```tsx
+const [page, setPage] = useState(1);
+
+<Pagination page={page} totalPages={results.pageCount} onChange={setPage} />;
+```
+
+`siblingCount` widens or narrows how many page numbers show around the current one before
+collapsing to an ellipsis — the default (`1`) is enough context for most lists; a data-dense table
+might want more:
+
+<CodeBlock
+  codes={[
+    { language: "tsx", code: '<Pagination defaultPage={10} totalPages={20} siblingCount={2} />' },
+  ]}
+  preview={<Pagination defaultPage={10} totalPages={20} siblingCount={2} />}
+/>
+
+## Props
+
+<PropsTable name="Pagination" />

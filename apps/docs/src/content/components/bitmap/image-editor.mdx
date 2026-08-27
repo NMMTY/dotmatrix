@@ -1,0 +1,65 @@
+---
+title: "ImageEditor"
+summary: "Crop, rotate, and flip a single image — a standalone tool, or the editing step inside FileUpload."
+navIcon: "menu"
+github: "components/ImageEditor/ImageEditor.tsx"
+---
+
+Crop, rotate, and flip a single image. Standalone here, but built to be reused as the editing step
+inside an upload flow rather than only living behind one — see
+[FileUpload](/components/forms/file-upload)'s `enableImageEditing` prop.
+
+<Playground name="ImageEditor" />
+
+## How it works
+
+Rotate and flip are baked straight into a canvas — not applied as a CSS transform — the moment
+either changes, so the crop box always operates on a plain upright image in one consistent
+coordinate space regardless of the current rotation. The cost: changing rotation or flip resets the
+crop box, since there's no sound way to carry a crop rect across a coordinate space it wasn't drawn
+in. Rotate/flip first, then crop — the order most simple editors already expect.
+
+The crop box is keyboard-operable: focus it and use the arrow keys to move it (hold Shift to move
+further per press), on top of the usual drag-to-move, drag-a-corner-to-resize interaction.
+
+## Examples
+
+`features` turns individual tools off — useful when a consumer only wants, say, rotation without
+exposing the full crop UI:
+
+```tsx
+<ImageEditor src={photoUrl} features={{ crop: false }} />
+```
+
+`aspectRatios` controls which presets the crop box can lock to — the first entry is selected by
+default, and one without a `ratio` (like `"Free"`) leaves it unconstrained:
+
+```tsx
+<ImageEditor
+  src={photoUrl}
+  aspectRatios={[
+    { label: "Square", ratio: 1 },
+    { label: "Portrait", ratio: 3 / 4 },
+    { label: "Free" },
+  ]}
+/>
+```
+
+`onSave` receives the cropped result as both a `Blob` (for uploading) and a data URL (for an
+immediate preview) — `onCancel` is only shown a Cancel button when provided, which is how the
+toolbar knows whether it's being used as a modal step or embedded inline:
+
+```tsx
+<ImageEditor
+  src={photoUrl}
+  onSave={({ blob, dataUrl }) => {
+    setPreview(dataUrl);
+    uploadFile(blob);
+  }}
+  onCancel={() => setEditing(false)}
+/>
+```
+
+## Props
+
+<PropsTable name="ImageEditor" />

@@ -8,9 +8,11 @@
     "table-row": 4,
     "table-cell": 5,
     "table-header-cell": 6,
-    "list": 7,
-    "list-item": 8,
-    "stat": 9,
-    "empty-state": 10
+    "virtualized-table": 7,
+    "list": 8,
+    "list-item": 9,
+    "stat": 10,
+    "empty-state": 11,
+    "pagination": 12
   }
 }

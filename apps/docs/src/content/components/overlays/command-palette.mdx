@@ -1,0 +1,58 @@
+---
+title: "CommandPalette"
+summary: "A searchable list of actions in a hotkey-triggered overlay."
+navIcon: "search"
+github: "components/CommandPalette/CommandPalette.tsx"
+---
+
+A searchable list of actions in a hotkey-triggered overlay — built on
+[Dialog](/components/overlays/dialog), so focus trap, Escape, and backdrop dismiss come from it
+for free. This is exactly what powers this site's own `⌘K`/`Ctrl+K` search — the docs site's
+`SearchPalette` is a thin adapter over this component, not a separate implementation.
+
+<Playground name="CommandPalette" />
+
+## Examples
+
+`items` takes plain data — each entry's own `onSelect` runs when it's picked, by click or Enter.
+Items sharing a `group` cluster under one label; omit `group` for a flat list:
+
+```tsx
+<CommandPalette
+  title="Command palette"
+  trigger={<Button icon="search">Search</Button>}
+  items={[
+    { id: "new-file", label: "New file", icon: "plus", group: "Actions", onSelect: createFile },
+    { id: "open-file", label: "Open file", icon: "download", group: "Actions", onSelect: openFile },
+    {
+      id: "settings",
+      label: "Settings",
+      description: "App preferences",
+      icon: "settings",
+      group: "Navigate",
+      onSelect: () => router.push("/settings"),
+    },
+  ]}
+/>
+```
+
+By default it also opens on `⌘K`/`Ctrl+K` from anywhere on the page, in addition to `trigger` —
+pass `hotkey={null}` to turn that off, e.g. for a second palette on the same page (this page's own
+demo above does exactly that, so it doesn't fight this site's real search for the same shortcut):
+
+```tsx
+<CommandPalette hotkey={null} trigger={<Button>Open palette</Button>} items={items} />
+```
+
+`keywords` matches against the search query without being displayed — useful for aliases a user
+might type that don't appear in the visible `label`:
+
+```tsx
+<CommandPalette
+  items={[{ id: "new-file", label: "New file", keywords: "create document", onSelect: createFile }]}
+/>
+```
+
+## Props
+
+<PropsTable name="CommandPalette" />

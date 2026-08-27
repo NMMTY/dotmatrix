@@ -6,8 +6,14 @@ export type { AvatarOwnProps } from "./Avatar/Avatar";
 export { Avatar } from "./Avatar/Avatar";
 export type { BadgeOwnProps, BadgeVariant } from "./Badge/Badge";
 export { Badge } from "./Badge/Badge";
+export type { BarChartDatum, BarChartOwnProps } from "./BarChart/BarChart";
+export { BarChart } from "./BarChart/BarChart";
+export type { BreadcrumbItem, BreadcrumbsOwnProps } from "./Breadcrumbs/Breadcrumbs";
+export { Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export type { ButtonOwnProps } from "./Button/Button";
 export { Button } from "./Button/Button";
+export type { CalendarOwnProps } from "./Calendar/Calendar";
+export { Calendar } from "./Calendar/Calendar";
 export type { CardOwnProps } from "./Card/Card";
 export { Card } from "./Card/Card";
 export type { CheckboxOwnProps } from "./Checkbox/Checkbox";
@@ -20,10 +26,16 @@ export type { ColorInputOwnProps } from "./ColorInput/ColorInput";
 export { ColorInput } from "./ColorInput/ColorInput";
 export type { ColumnOwnProps } from "./Column/Column";
 export { Column } from "./Column/Column";
+export type { ComboboxOption, ComboboxOwnProps } from "./Combobox/Combobox";
+export { Combobox } from "./Combobox/Combobox";
+export type { CommandItem, CommandPaletteOwnProps } from "./CommandPalette/CommandPalette";
+export { CommandPalette } from "./CommandPalette/CommandPalette";
 export type { ContextMenuOwnProps } from "./ContextMenu/ContextMenu";
 export { ContextMenu } from "./ContextMenu/ContextMenu";
 export type { CrossHatchOwnProps } from "./CrossHatch/CrossHatch";
 export { CrossHatch } from "./CrossHatch/CrossHatch";
+export type { DatePickerOwnProps } from "./DatePicker/DatePicker";
+export { DatePicker } from "./DatePicker/DatePicker";
 export type { DialogOwnProps } from "./Dialog/Dialog";
 export { Dialog } from "./Dialog/Dialog";
 export type { DitherOwnProps } from "./Dither/Dither";
@@ -42,6 +54,9 @@ export type {
 export { ExternalIcon } from "./ExternalIcon/ExternalIcon";
 export type { FieldsetOwnProps } from "./Fieldset/Fieldset";
 export { Fieldset } from "./Fieldset/Fieldset";
+export type { FileUploadOwnProps } from "./FileUpload/FileUpload";
+export { FileUpload } from "./FileUpload/FileUpload";
+export type { Rejection, RejectionReason } from "./FileUpload/fileValidation";
 export type { FlexOwnProps } from "./Flex/Flex";
 export { Flex } from "./Flex/Flex";
 export type { GridOwnProps } from "./Grid/Grid";
@@ -54,6 +69,13 @@ export type { IconOwnProps } from "./Icon/Icon";
 export { Icon } from "./Icon/Icon";
 export type { IconButtonOwnProps } from "./IconButton/IconButton";
 export { IconButton } from "./IconButton/IconButton";
+export type {
+  ImageEditorAspectRatio,
+  ImageEditorFeatures,
+  ImageEditorOwnProps,
+  ImageEditorResult,
+} from "./ImageEditor/ImageEditor";
+export { ImageEditor } from "./ImageEditor/ImageEditor";
 export type { InlineCodeOwnProps } from "./InlineCode/InlineCode";
 export { InlineCode } from "./InlineCode/InlineCode";
 export type { InputOwnProps } from "./Input/Input";
@@ -76,6 +98,11 @@ export type { NumberInputOwnProps } from "./NumberInput/NumberInput";
 export { NumberInput } from "./NumberInput/NumberInput";
 export type { OTPInputOwnProps } from "./OTPInput/OTPInput";
 export { OTPInput } from "./OTPInput/OTPInput";
+export type {
+  PaginationOwnProps,
+  PaginationRangeItem,
+} from "./Pagination/Pagination";
+export { getPaginationRange, Pagination } from "./Pagination/Pagination";
 export type { PasswordInputOwnProps } from "./PasswordInput/PasswordInput";
 export { PasswordInput } from "./PasswordInput/PasswordInput";
 export type { PopoverOwnProps } from "./Popover/Popover";
@@ -84,6 +111,11 @@ export type { RadioOwnProps } from "./Radio/Radio";
 export { Radio } from "./Radio/Radio";
 export type { RadioGroupOwnProps } from "./RadioGroup/RadioGroup";
 export { RadioGroup } from "./RadioGroup/RadioGroup";
+export type {
+  RichTextEditorFeatures,
+  RichTextEditorOwnProps,
+} from "./RichTextEditor/RichTextEditor";
+export { RichTextEditor } from "./RichTextEditor/RichTextEditor";
 export type { RowOwnProps } from "./Row/Row";
 export { Row } from "./Row/Row";
 export type { SearchInputOwnProps } from "./SearchInput/SearchInput";
@@ -96,6 +128,8 @@ export type { SliderOwnProps } from "./Slider/Slider";
 export { Slider } from "./Slider/Slider";
 export type { StatOwnProps, StatTrend } from "./Stat/Stat";
 export { Stat } from "./Stat/Stat";
+export type { StepperOwnProps, StepperStep } from "./Stepper/Stepper";
+export { Stepper } from "./Stepper/Stepper";
 export type { SwitchOwnProps } from "./Switch/Switch";
 export { Switch } from "./Switch/Switch";
 export type {
@@ -122,3 +156,8 @@ export type { ToastOptions, ToastVariant } from "./Toast/Toast";
 export { ToastProvider, useToast } from "./Toast/Toast";
 export type { TooltipOwnProps } from "./Tooltip/Tooltip";
 export { Tooltip } from "./Tooltip/Tooltip";
+export type {
+  VirtualizedTableColumn,
+  VirtualizedTableOwnProps,
+} from "./VirtualizedTable/VirtualizedTable";
+export { VirtualizedTable } from "./VirtualizedTable/VirtualizedTable";

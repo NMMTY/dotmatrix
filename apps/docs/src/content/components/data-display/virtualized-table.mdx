@@ -1,0 +1,78 @@
+---
+title: "VirtualizedTable"
+summary: "A table that only mounts the rows near the current scroll position — built for thousands of rows."
+navIcon: "menu"
+github: "components/VirtualizedTable/VirtualizedTable.tsx"
+---
+
+A `<table>` that only ever mounts the rows near the current scroll position. The two off-screen
+slices above and below the visible window each collapse into a single spacer row — with a real cell
+inside, so column widths stay correct — rather than every row existing in the DOM at once. This
+trades off variable row heights for simplicity: every row is the same `rowHeight`, which is what
+makes computing the visible slice from scroll position alone (no per-row measurement) correct.
+
+`aria-rowcount`/`aria-rowindex` carry the true position of whatever's currently mounted — the
+standard pattern for a windowed native table — so a screen reader can still announce "row 480 of
+10,000" even though row 1 isn't in the DOM.
+
+<Playground name="VirtualizedTable" />
+
+## When to reach for it
+
+[Table](/components/data-display/table) renders every row as-is — fine up to a few hundred rows.
+Past that, mounting every `<tr>` at once is what actually gets slow, not the data itself.
+`VirtualizedTable` fixes that by keeping the DOM small regardless of how many rows you hand it,
+at the cost of a fixed `rowHeight` and its own column/row API rather than `Table`'s
+`TableRow`/`TableCell` children.
+
+## Examples
+
+`columns` pairs a `render` function with each field — the same shape whether the table holds 50 rows
+or 50,000, since only the visible slice ever actually renders:
+
+```tsx
+interface Person {
+  id: number;
+  name: string;
+  role: string;
+}
+
+const columns: VirtualizedTableColumn<Person>[] = [
+  { key: "name", header: "Name", render: (row) => row.name },
+  { key: "role", header: "Role", render: (row) => row.role, width: 160 },
+];
+
+<VirtualizedTable
+  columns={columns}
+  rows={people}
+  getRowKey={(row) => row.id}
+  rowHeight={40}
+  height={400}
+/>;
+```
+
+`onRowClick` and `selectedRowKey` wire up row selection without re-rendering rows that aren't
+visible:
+
+```tsx
+const [selectedId, setSelectedId] = useState<number | null>(null);
+
+<VirtualizedTable
+  columns={columns}
+  rows={people}
+  getRowKey={(row) => row.id}
+  selectedRowKey={selectedId ?? undefined}
+  onRowClick={(row) => setSelectedId(row.id)}
+/>;
+```
+
+`zebra` stripes rows by their real data index — not their DOM position, which would drift once a
+spacer row starts absorbing scrolled-past rows:
+
+```tsx
+<VirtualizedTable columns={columns} rows={people} getRowKey={(row) => row.id} zebra />
+```
+
+## Props
+
+<PropsTable name="VirtualizedTable" />

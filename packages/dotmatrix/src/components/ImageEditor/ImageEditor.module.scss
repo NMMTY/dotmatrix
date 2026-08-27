@@ -1,0 +1,75 @@
+@use "../_order";
+
+@layer dm.components {
+  .stage {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    line-height: 0;
+  }
+
+  .canvas {
+    display: block;
+    max-width: 480px;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+  }
+
+  .overlay {
+    position: absolute;
+    box-shadow: 0 0 0 1000px rgb(0 0 0 / 0.4);
+    outline-width: var(--dm-border-width-2);
+    outline-color: var(--dm-on-background-strong);
+    outline-style: solid;
+    outline-offset: -1px;
+    cursor: move;
+    touch-action: none;
+
+    &:focus-visible {
+      outline-color: var(--dm-action-background);
+    }
+  }
+
+  .handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--dm-on-background-strong);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-surface-background);
+    touch-action: none;
+  }
+
+  // Inset flush with the box's own edge, never straddling it (no negative
+  // offset) — the crop box legitimately reaches the canvas edge at its
+  // default (full-image) extent, and `.stage`'s `overflow: hidden` (needed
+  // to keep the darkening mask from spilling past the image) would clip a
+  // straddling handle there, making it unclickable in the most common case.
+  .nw {
+    top: 0;
+    left: 0;
+    cursor: nwse-resize;
+  }
+
+  .ne {
+    top: 0;
+    right: 0;
+    cursor: nesw-resize;
+  }
+
+  .sw {
+    bottom: 0;
+    left: 0;
+    cursor: nesw-resize;
+  }
+
+  .se {
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+  }
+}

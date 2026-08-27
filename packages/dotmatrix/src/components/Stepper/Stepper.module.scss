@@ -1,0 +1,94 @@
+@use "../_order";
+
+@layer dm.components {
+  .track {
+    list-style: none;
+  }
+
+  .step {
+    position: relative;
+    flex: 1 1 0;
+  }
+
+  // The last step doesn't need to grow to fill trailing space.
+  .step:last-child {
+    flex: 0 0 auto;
+  }
+
+  .connector {
+    position: absolute;
+    background: var(--dm-border-medium);
+  }
+
+  .connectorComplete {
+    background: var(--dm-action-background);
+  }
+
+  .horizontal .connector {
+    top: 11px;
+    left: -50%;
+    width: 100%;
+    height: var(--dm-border-width-1);
+  }
+
+  // `top`/`height` reach back into the previous step to connect marker
+  // center to marker center — assuming uniform step heights (H) and the
+  // 16px inter-step gap the track now uses (see Stepper.tsx), spanning from
+  // the previous marker's center to this one's works out to
+  // `top: -H - gap + markerRadius` and `height: H + gap`, i.e. `-100% - 4px`
+  // and `100% + 16px` once the `H` terms are expressed as the `%` basis.
+  .vertical .connector {
+    left: 11px;
+    top: calc(-100% - 4px);
+    height: calc(100% + 16px);
+    width: var(--dm-border-width-1);
+  }
+
+  .step:first-child .connector {
+    display: none;
+  }
+
+  .marker {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--dm-radius-full);
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    background: var(--dm-surface-background);
+    color: var(--dm-on-background-weak);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .current {
+    border-color: var(--dm-border-strong);
+    color: var(--dm-on-background-strong);
+  }
+
+  .complete {
+    background: var(--dm-action-background);
+    border-color: var(--dm-action-background);
+    color: var(--dm-on-action-strong);
+  }
+
+  .labels {
+    max-width: 96px;
+    text-align: center;
+  }
+
+  .vertical .labels {
+    max-width: none;
+    text-align: left;
+  }
+}

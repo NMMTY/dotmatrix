@@ -1,0 +1,53 @@
+---
+title: "DatePicker"
+summary: "A trigger button that opens a Calendar in a popover — pick a date without a permanently visible grid."
+navIcon: "calendar"
+github: "components/DatePicker/DatePicker.tsx"
+---
+
+A trigger button that opens a [Calendar](/components/forms/calendar) in a popover. Same
+`value`/`defaultValue`/`onChange` shape as `Calendar` itself — picking a date closes the popover.
+
+<Playground name="DatePicker" />
+
+## DatePicker vs. Calendar
+
+Reach for `Calendar` when the grid should stay visible — a scheduling view, a form where the date is
+the main thing being edited. `DatePicker` fits it into a normal field-sized form row instead, the way
+`Combobox` fits a long option list into a single input.
+
+## Examples
+
+Uncontrolled, with a starting value:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<DatePicker label="Due date" defaultValue={new Date(2026, 7, 15)} />',
+    },
+  ]}
+  preview={<DatePicker label="Due date" defaultValue={new Date(2026, 7, 15)} />}
+/>
+
+`minDate`/`maxDate` pass straight through to the inner `Calendar`:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<DatePicker\n  label="Delivery date"\n  minDate={new Date(2026, 7, 1)}\n  maxDate={new Date(2026, 7, 31)}\n/>',
+    },
+  ]}
+  preview={
+    <DatePicker
+      label="Delivery date"
+      minDate={new Date(2026, 7, 1)}
+      maxDate={new Date(2026, 7, 31)}
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="DatePicker" />

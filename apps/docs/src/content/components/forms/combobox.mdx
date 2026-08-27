@@ -1,0 +1,72 @@
+---
+title: "Combobox"
+summary: "A filterable Select — same options/value/onChange shape, but opens with a search field."
+navIcon: "search"
+github: "components/Combobox/Combobox.tsx"
+---
+
+A filterable [Select](/components/forms/select) — same `options`/`value`/`onChange` shape, but
+opens with a search field so a long list narrows as you type instead of requiring a scroll. Real
+DOM focus never leaves the search field; the active option is communicated via
+`aria-activedescendant`, the standard combobox pattern.
+
+<Playground name="Combobox" />
+
+## Combobox vs. Select
+
+Reach for `Select` when the list is short enough to scan at a glance (a handful of options) —
+`Combobox` adds a search field and the extra interaction it implies, which is overhead a short list
+doesn't need. `Combobox` earns its keep once a list is long enough that scrolling to find an option
+is slower than typing a few letters of it (a country picker, a searchable list of users).
+
+## Examples
+
+Same `options` shape as `Select` — plain data, each entry's own `disabled` flag skips it:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Combobox\n  label="Country"\n  placeholder="Choose a country…"\n  options={[\n    { value: "us", label: "United States" },\n    { value: "ca", label: "Canada" },\n    { value: "mx", label: "Mexico", disabled: true },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <Combobox
+      label="Country"
+      placeholder="Choose a country…"
+      options={[
+        { value: "us", label: "United States" },
+        { value: "ca", label: "Canada" },
+        { value: "mx", label: "Mexico", disabled: true },
+      ]}
+    />
+  }
+/>
+
+`searchPlaceholder` and `emptyMessage` are independent of the trigger's own `placeholder` — the
+first is shown inside the open popup's search field, the second only when a query matches nothing:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Combobox\n  label="Assignee"\n  searchPlaceholder="Search people…"\n  emptyMessage="No one matches that name."\n  options={people}\n/>',
+    },
+  ]}
+  preview={
+    <Combobox
+      label="Assignee"
+      searchPlaceholder="Search people…"
+      emptyMessage="No one matches that name."
+      options={[
+        { value: "ada", label: "Ada Lovelace" },
+        { value: "grace", label: "Grace Hopper" },
+        { value: "alan", label: "Alan Turing" },
+      ]}
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="Combobox" />

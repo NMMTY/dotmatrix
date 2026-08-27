@@ -4,15 +4,21 @@ import {
   AsciiArt,
   Avatar,
   Badge,
+  BarChart,
+  Breadcrumbs,
   Button,
+  Calendar,
   Card,
   Checkbox,
   Chip,
   CodeBlock,
   ColorInput,
   Column,
+  Combobox,
+  CommandPalette,
   ContextMenu,
   CrossHatch,
+  DatePicker,
   Dialog,
   Dither,
   Drawer,
@@ -21,12 +27,14 @@ import {
   EmptyState,
   ExternalIcon,
   Fieldset,
+  FileUpload,
   Flex,
   Grid,
   Halftone,
   Heading,
   Icon,
   IconButton,
+  ImageEditor,
   InlineCode,
   Input,
   Kbd,
@@ -38,16 +46,19 @@ import {
   Meter,
   NumberInput,
   OTPInput,
+  Pagination,
   PasswordInput,
   Popover,
   Radio,
   RadioGroup,
+  RichTextEditor,
   Row,
   SearchInput,
   Select,
   Skeleton,
   Slider,
   Stat,
+  Stepper,
   Switch,
   Tab,
   TabList,
@@ -64,6 +75,7 @@ import {
   ToastProvider,
   Tooltip,
   useToast,
+  VirtualizedTable,
 } from "@nmmty/dotmatrix";
 import type { ComponentType, ReactNode } from "react";
 import { FaHeart } from "react-icons/fa";
@@ -331,6 +343,28 @@ export const REGISTRY: RegistryEntry[] = [
     Component: Meter,
     props: { value: 70, max: 100, label: "Budget spent" },
   },
+  {
+    name: "ImageEditor",
+    category: "Bitmap Graphics",
+    Component: ImageEditor,
+    props: { src: DEMO_IMAGE, aspectRatios: [{ label: "Free" }, { label: "1:1", ratio: 1 }] },
+  },
+  {
+    name: "BarChart",
+    category: "Bitmap Graphics",
+    Component: BarChart,
+    props: {
+      label: "Monthly signups",
+      showValues: true,
+      data: [
+        { label: "Jan", value: 12 },
+        { label: "Feb", value: 28 },
+        { label: "Mar", value: 19 },
+        { label: "Apr", value: 34 },
+        { label: "May", value: 22 },
+      ],
+    },
+  },
 
   // Forms
   {
@@ -353,6 +387,32 @@ export const REGISTRY: RegistryEntry[] = [
         { value: "jp", label: "Japan" },
       ],
     },
+  },
+  {
+    name: "Combobox",
+    category: "Forms",
+    Component: Combobox,
+    props: {
+      label: "Country",
+      defaultValue: "fr",
+      options: [
+        { value: "us", label: "United States" },
+        { value: "fr", label: "France" },
+        { value: "jp", label: "Japan" },
+      ],
+    },
+  },
+  {
+    name: "Calendar",
+    category: "Forms",
+    Component: Calendar,
+    props: { defaultMonth: new Date(2026, 7, 1), defaultValue: new Date(2026, 7, 15) },
+  },
+  {
+    name: "DatePicker",
+    category: "Forms",
+    Component: DatePicker,
+    props: { label: "Due date", defaultValue: new Date(2026, 7, 15) },
   },
   {
     name: "Checkbox",
@@ -437,8 +497,59 @@ export const REGISTRY: RegistryEntry[] = [
     Component: ColorInput,
     props: { label: "Accent color", defaultValue: "#ff6a00" },
   },
+  {
+    name: "FileUpload",
+    category: "Forms",
+    Component: FileUpload,
+    props: { label: "Attachments", multiple: true },
+  },
+  {
+    name: "RichTextEditor",
+    category: "Forms",
+    Component: RichTextEditor,
+    props: {
+      label: "Description",
+      defaultValue: "<p>Write something <strong>bold</strong>.</p>",
+    },
+  },
 
   // Overlays & Navigation
+  {
+    name: "CommandPalette",
+    category: "Overlays & Navigation",
+    Component: CommandPalette,
+    props: {
+      title: "Command palette",
+      placeholder: "Type a command…",
+      // This site's own search (in the header) is already a CommandPalette
+      // with the default hotkey — a second live listener on this same page
+      // would toggle both at once, so the demo opens via its trigger only.
+      hotkey: null,
+      trigger: (
+        <Button size="s" variant="outline">
+          Open palette
+        </Button>
+      ),
+      items: [
+        { id: "new-file", label: "New file", icon: "plus", group: "Actions", onSelect: () => {} },
+        {
+          id: "open-file",
+          label: "Open file",
+          icon: "download",
+          group: "Actions",
+          onSelect: () => {},
+        },
+        {
+          id: "settings",
+          label: "Settings",
+          description: "App preferences",
+          icon: "settings",
+          group: "Navigate",
+          onSelect: () => {},
+        },
+      ],
+    },
+  },
   {
     name: "Dialog",
     category: "Overlays & Navigation",
@@ -642,6 +753,32 @@ export const REGISTRY: RegistryEntry[] = [
     Component: ToastProvider,
     children: <ToastDemo />,
   },
+  {
+    name: "Breadcrumbs",
+    category: "Overlays & Navigation",
+    Component: Breadcrumbs,
+    props: {
+      items: [
+        { label: "Home", href: "/" },
+        { label: "Components", href: "/components" },
+        { label: "Breadcrumbs" },
+      ],
+    },
+  },
+  {
+    name: "Stepper",
+    category: "Overlays & Navigation",
+    Component: Stepper,
+    props: {
+      steps: [
+        { label: "Account", description: "Create your login" },
+        { label: "Profile", description: "Tell us about you" },
+        { label: "Confirm", description: "Review and finish" },
+      ],
+      defaultStep: 1,
+      showControls: true,
+    },
+  },
 
   // Data Display
   {
@@ -739,6 +876,22 @@ export const REGISTRY: RegistryEntry[] = [
     ),
   },
   {
+    name: "VirtualizedTable",
+    category: "Data Display",
+    Component: VirtualizedTable,
+    props: {
+      rowHeight: 32,
+      height: 200,
+      zebra: true,
+      getRowKey: (row: { id: number }) => row.id,
+      columns: [
+        { key: "id", header: "ID", render: (row: { id: number }) => row.id, width: 64 },
+        { key: "name", header: "Name", render: (row: { name: string }) => row.name },
+      ],
+      rows: Array.from({ length: 2000 }, (_, i) => ({ id: i + 1, name: `Row ${i + 1}` })),
+    },
+  },
+  {
     name: "List",
     category: "Data Display",
     Component: List,
@@ -771,6 +924,12 @@ export const REGISTRY: RegistryEntry[] = [
       description: "Try a different search term.",
       icon: <Icon name="search" size="l" />,
     },
+  },
+  {
+    name: "Pagination",
+    category: "Data Display",
+    Component: Pagination,
+    props: { defaultPage: 6, totalPages: 20 },
   },
 ];
 

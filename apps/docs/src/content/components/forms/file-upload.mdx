@@ -1,0 +1,56 @@
+---
+title: "FileUpload"
+summary: "A dropzone plus file list — real, unmodified previews, with an optional crop/rotate/flip step for images."
+navIcon: "upload"
+github: "components/FileUpload/FileUpload.tsx"
+---
+
+A dropzone plus file list. Previews are the real, unmodified file — no auto-dither or halftone —
+this system's stance that a file the user is about to upload should look like what it actually is.
+
+<Playground name="FileUpload" />
+
+## Examples
+
+Uncontrolled, with validation — `accept`/`maxSize`/`maxFiles` reject anything that doesn't fit, and
+`onReject` reports why:
+
+```tsx
+<FileUpload
+  label="Photos"
+  accept="image/*"
+  multiple
+  maxFiles={5}
+  maxSize={5 * 1024 * 1024}
+  onReject={(rejections) => {
+    for (const { file, reason } of rejections) {
+      toast.show({ title: `${file.name} rejected: ${reason}` });
+    }
+  }}
+/>
+```
+
+`enableImageEditing` routes each new image through [ImageEditor](/components/bitmap/image-editor)
+first — one at a time, in a modal — before it joins the list. Cancelling the edit step keeps the
+file as-is rather than dropping it; a cancelled *edit* isn't the same as a cancelled *upload*:
+
+```tsx
+<FileUpload
+  label="Profile photo"
+  accept="image/*"
+  enableImageEditing
+  imageEditorFeatures={{ crop: true, rotate: true, flip: false }}
+/>
+```
+
+Controlled, for when the file list drives something else on the page:
+
+```tsx
+const [files, setFiles] = useState<File[]>([]);
+
+<FileUpload label="Attachments" value={files} onChange={setFiles} />;
+```
+
+## Props
+
+<PropsTable name="FileUpload" />

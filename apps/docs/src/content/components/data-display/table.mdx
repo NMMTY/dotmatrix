@@ -76,6 +76,10 @@ For no results — a filtered table that matched nothing — reach for
 [EmptyState](/components/data-display/empty-state) inside the table body rather than rendering an
 empty `<TableBody>`.
 
+For a few hundred rows or fewer, this is the right choice — past that, reach for
+[VirtualizedTable](/components/data-display/virtualized-table), which only ever mounts the rows near
+the current scroll position.
+
 ## Props
 
 <PropsTable name="Table" />

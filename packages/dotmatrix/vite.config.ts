@@ -33,7 +33,20 @@ export default defineConfig({
       // dependency (see CodeBlock's package.json entry) — bundling it here
       // would ship it to every consumer regardless of whether they installed
       // it, defeating the whole "install it yourself if you want highlighting" story.
-      external: ["react", "react-dom", "react/jsx-runtime", /^@floating-ui\//, /^prismjs/],
+      // lexical/@lexical/* are external for a different reason: they're real
+      // (non-optional) dependencies declared in package.json, so consumers
+      // already install them — bundling would duplicate ~230kb of Lexical
+      // into every dist file that touches RichTextEditor instead of letting
+      // it resolve once, the same reasoning already applied to @floating-ui.
+      external: [
+        "react",
+        "react-dom",
+        "react/jsx-runtime",
+        /^@floating-ui\//,
+        /^prismjs/,
+        /^lexical/,
+        /^@lexical\//,
+      ],
       output: {
         // Keep the module graph intact so consumers can tree-shake and so
         // per-file "use client" boundaries survive.

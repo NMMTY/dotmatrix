@@ -1,0 +1,50 @@
+---
+title: "RichTextEditor"
+summary: "Bold, italic, underline, headings, lists, quotes, and links — a bitmap-styled toolbar over a normal-typography content area."
+navIcon: "edit"
+github: "components/RichTextEditor/RichTextEditor.tsx"
+---
+
+The one component in this system that depends on a real editing engine
+([Lexical](https://lexical.dev)) rather than hand-rolling — hand-rolling `contentEditable`
+correctly (selection, undo, paste, IME composition) is a well-known trap not worth reinventing. The
+toolbar stays in this system's bitmap style; the content area intentionally does not — plain system
+typography, since readability matters more than aesthetic consistency once there's a paragraph of
+real prose to read.
+
+<Playground name="RichTextEditor" />
+
+## Uncontrolled only
+
+Unlike most fields in this system, `RichTextEditor` doesn't accept a `value` prop — only
+`defaultValue` and `onChange`. A `contentEditable`-based editor can't be safely re-synced from an
+external `value` on every render without fighting the browser's own selection/undo state; every
+major React rich-text wrapper (Lexical, Tiptap, Slate) recommends against full control for the same
+reason. Read the current content from `onChange` and persist it yourself.
+
+## Examples
+
+`onChange` receives the content serialized to an HTML string:
+
+```tsx
+<RichTextEditor
+  label="Description"
+  defaultValue={product.descriptionHtml}
+  onChange={(html) => saveDraft(html)}
+/>
+```
+
+`features` turns individual tools off — useful for a comment box that shouldn't offer headings, or
+a caption field that's just bold/italic:
+
+```tsx
+<RichTextEditor
+  label="Comment"
+  placeholder="Add a comment…"
+  features={{ heading: false, quote: false, link: false, numberedList: false }}
+/>
+```
+
+## Props
+
+<PropsTable name="RichTextEditor" />
