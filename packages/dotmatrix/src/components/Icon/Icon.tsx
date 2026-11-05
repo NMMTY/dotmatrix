@@ -1,8 +1,10 @@
 import type { CSSProperties, Ref } from "react";
-import { Glyph } from "../../icons/Glyph";
+import { Glyph, GLYPH_VIEWBOX } from "../../icons/Glyph";
 import { GLYPHS, type IconName } from "../../icons/glyphs";
 
-const SIZE_PX = { s: 12, m: 16, l: 20 } as const;
+// Whole multiples of the 9-cell grid (1, 2 and 3 px per cell), so every cell
+// lands on a device pixel and the bitmap stays crisp instead of blurring.
+const SIZE_PX = { s: 9, m: 18, l: 27 } as const;
 
 export interface IconOwnProps {
   name: IconName;
@@ -19,7 +21,8 @@ type IconProps = IconOwnProps & { ref?: Ref<SVGSVGElement> } & Record<string, un
 /**
  * Every icon in the design system renders through this one component —
  * `name` looks up the bitmap in `icons/glyphs.ts` rather than each icon
- * being its own component. Fixed 16×16 viewBox, size in three steps, fill
+ * being its own component. Fixed 18×18 viewBox (a 9×9 bitmap at 2 units a
+ * cell), size in three steps, fill
  * inherited from `currentColor` so an icon always matches its surrounding
  * text without a color prop of its own.
  */
@@ -31,7 +34,8 @@ function IconImpl({ name, size = "m", title, ref, ...rest }: IconProps) {
       ref={ref}
       width={px}
       height={px}
-      viewBox="0 0 16 16"
+      viewBox={`0 0 ${GLYPH_VIEWBOX} ${GLYPH_VIEWBOX}`}
+      shapeRendering="crispEdges"
       fill="currentColor"
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}

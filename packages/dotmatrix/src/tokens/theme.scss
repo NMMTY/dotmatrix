@@ -84,9 +84,9 @@
   }
 
   :root:not([data-palette="mono"]) {
-    --dm-status-error-fill: #ff4d4d;
-    --dm-status-warning-fill: #ffb020;
-    --dm-status-success-fill: #3ddc84;
+    --dm-status-error-fill: var(--dm-palette-error, #ff4d4d);
+    --dm-status-warning-fill: var(--dm-palette-warning, #ffb020);
+    --dm-status-success-fill: var(--dm-palette-success, #3ddc84);
     --dm-status-info-fill: var(--dm-accent-500);
   }
 

@@ -168,4 +168,27 @@
     --dm-accent-900: #f6e9e9;
     --dm-on-accent-strong: #1a1a1a;
   }
+
+  // `custom`: one seed colour in, the whole accent ramp out. Set `--dm-custom-seed`
+  // (and `--dm-custom-on-seed`, the text/icon colour that sits on it) anywhere above
+  // — `<html>`, a theme wrapper, a single card — and every ramp step, action,
+  // hover and focus colour follows. Mirrors the `DM · Custom` collection in the
+  // design file (modes "Brand A" / "Brand B" are just two seeds).
+  //   100 = 20% seed over black      700 = seed mixed 30% toward white
+  //   300 = 55% seed over black      900 = seed mixed 70% toward white
+  //   500 = the seed itself
+  // The status hues are overridable too (`--dm-custom-error` etc.) and are
+  // consumed by theme.scss's non-mono status block via `--dm-palette-*`.
+  [data-palette="custom"] {
+    --dm-accent-seed: var(--dm-custom-seed, #7c5cff);
+    --dm-accent-100: color-mix(in srgb, var(--dm-accent-seed) 20%, #000);
+    --dm-accent-300: color-mix(in srgb, var(--dm-accent-seed) 55%, #000);
+    --dm-accent-500: var(--dm-accent-seed);
+    --dm-accent-700: color-mix(in srgb, #fff 30%, var(--dm-accent-seed));
+    --dm-accent-900: color-mix(in srgb, #fff 70%, var(--dm-accent-seed));
+    --dm-on-accent-strong: var(--dm-custom-on-seed, #fff);
+    --dm-palette-error: var(--dm-custom-error, #ff4d4d);
+    --dm-palette-warning: var(--dm-custom-warning, #ffb020);
+    --dm-palette-success: var(--dm-custom-success, #3ddc84);
+  }
 }

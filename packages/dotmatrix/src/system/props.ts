@@ -162,7 +162,8 @@ export type TextAlignValue = (typeof textAlignValues)[number];
 /**
  * `"mono"` (the default) keeps every `--dm-accent-*` reference equal to the
  * gray ramp. Each chromatic hue also has a `-dark` (deeper, muted) and
- * `-light` (pastel) variant alongside its vivid base.
+ * `-light` (pastel) variant alongside its vivid base. `"custom"` derives the
+ * whole ramp from a single `--dm-custom-seed` colour you supply.
  */
 export const paletteValues = [
   "mono",
@@ -181,6 +182,7 @@ export const paletteValues = [
   "red",
   "red-dark",
   "red-light",
+  "custom",
 ] as const;
 export type PaletteValue = (typeof paletteValues)[number];
 

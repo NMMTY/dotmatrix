@@ -1,7 +1,8 @@
 import type { CSSProperties, ReactElement } from "react";
 import styles from "./ExternalIcon.module.scss";
 
-const SIZE_PX = { s: 12, m: 16, l: 20 } as const;
+// Must stay in step with Icon's SIZE_PX so the two sit side by side.
+const SIZE_PX = { s: 9, m: 18, l: 27 } as const;
 
 /**
  * The de facto shape react-icons (and most functional-component icon sets)
