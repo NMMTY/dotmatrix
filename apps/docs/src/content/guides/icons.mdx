@@ -15,10 +15,17 @@ so an invalid name is a type error, not a silent blank render.
   preview={<Icon name="download" size="m" />}
 />
 
-Icons are hand-drawn on an 8×8 pixel grid rather than imported from a general icon set: ready-made
+Icons are hand-drawn on a 9×9 pixel grid rather than imported from a general icon set: ready-made
 icons have rounded strokes and non-integer coordinates that read as visually foreign next to the
-pixel type system. `size` scales the fixed grid in three steps (`s`/`m`/`l`); fill comes from
+pixel type system. The grid is odd on purpose — every glyph gets a true centre pixel, so a plus, a
+close or an arrow is genuinely symmetric instead of off by half a cell.
+
+`size` scales the fixed grid in three steps — `s` (9px), `m` (18px), `l` (27px) — whole multiples
+of the grid, so every cell lands on a device pixel and the bitmap stays crisp. Fill comes from
 `currentColor`, so an icon always matches its surrounding text.
+
+The catalog covers the core interface set plus dashboard and developer glyphs: git, code, hardware,
+media, status and more.
 
 ## Examples
 

@@ -6,8 +6,10 @@ github: "components/Icon/Icon.tsx"
 ---
 
 Every icon in the design system renders through this one component — `name` looks up the bitmap
-in the glyph catalog rather than each icon being its own component. Fixed 16×16 viewBox, size in
-three steps, fill inherited from `currentColor` so an icon always matches its surrounding text.
+in the glyph catalog rather than each icon being its own component. Fixed 18×18 viewBox (a 9×9
+bitmap at 2 units a cell), size in three steps — `s` 9px, `m` 18px, `l` 27px, whole multiples of
+the grid so the bitmap stays crisp — and fill inherited from `currentColor` so an icon always
+matches its surrounding text.
 See the [Icons guide](/guides/icons) for the full catalog.
 
 <Playground name="Icon" />

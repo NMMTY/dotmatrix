@@ -6,6 +6,15 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: "0.4.0",
+    date: "2026-11-05",
+    changes: [
+      "Rebuilt the glyph library on a 9×9 bitmap grid (odd, so every glyph has a true centre pixel) and grew it from 34 to 167 icons, adding dashboard and developer glyphs — git, code, hardware, media, status.",
+      "Icon now draws on an 18×18 viewBox. Size steps are whole multiples of the grid: s 12→9px, m 16→18px, l 20→27px. ExternalIcon follows so the two still sit side by side.",
+      "Added a `custom` palette: set --dm-custom-seed (and --dm-custom-on-seed) and the whole accent ramp, action, hover and focus colours are derived from it.",
+    ],
+  },
+  {
     version: "0.3.0",
     date: "2026-07-27",
     changes: [

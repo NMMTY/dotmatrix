@@ -15,7 +15,29 @@ no component in the tree needs to know `ThemeProvider` exists to pick up a chang
 
 `mono` (the default) keeps every accent-driven token equal to the gray ramp. Five chromatic hues —
 `orange`, `blue`, `green`, `purple`, `red` — each come in three variations: the base vivid tone, a
-deeper `-dark`, and a pastel `-light`. 16 values in total.
+deeper `-dark`, and a pastel `-light`. Plus `custom`, which derives its whole ramp from a single
+colour you supply — 17 values in total.
+
+## Custom palette
+
+Set one seed colour and the accent ramp follows: `100`/`300` are the seed mixed over black (20% and
+55%), `500` is the seed itself, `700`/`900` mix it toward white (30% and 70%). Action, hover and
+focus colours are derived from the same ramp. Set `--dm-custom-on-seed` to the text/icon colour that
+sits on top of it (white or a near-black, whichever keeps contrast), and optionally
+`--dm-custom-error`, `--dm-custom-warning` and `--dm-custom-success` to override the status hues.
+
+<CodeBlock
+  codes={[
+    {
+      language: "css",
+      code: ':root {\n  --dm-custom-seed: #7c5cff;\n  --dm-custom-on-seed: #ffffff;\n}',
+    },
+    {
+      language: "tsx",
+      code: '<ThemeProvider palette="custom">…</ThemeProvider>\n<Button palette="custom">Scoped</Button>',
+    },
+  ]}
+/>
 
 ## Global vs. local
 

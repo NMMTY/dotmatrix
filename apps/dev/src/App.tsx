@@ -64,6 +64,7 @@ import {
   ThemeProvider,
   ToastProvider,
   Tooltip,
+  iconNames,
   useTheme,
   useToast,
 } from "@nmmty/dotmatrix";
@@ -119,6 +120,7 @@ function ThemeControls() {
             "red",
             "red-dark",
             "red-light",
+            "custom",
           ];
           setPalette(order[(order.indexOf(palette) + 1) % order.length]!);
         }}
@@ -146,6 +148,123 @@ function ThemeControls() {
         density: {density}
       </Button>
     </Row>
+  );
+}
+
+// The two seeds from the design file's `DM · Custom` collection ("Brand A" /
+// "Brand B"). `onSeed` is the text/icon colour that sits on top of the seed.
+const BRANDS = [
+  { name: "Brand A", seed: "#7c5cff", onSeed: "#ffffff" },
+  { name: "Brand B", seed: "#14b8a6", onSeed: "#04211e" },
+] as const;
+
+/** White or near-black, whichever reads better on `hex` (WCAG relative luminance). */
+function readableOn(hex: string): string {
+  const channel = (i: number) => {
+    const v = Number.parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance = 0.2126 * channel(0) + 0.7152 * channel(1) + 0.0722 * channel(2);
+  return luminance > 0.4 ? "#04211e" : "#ffffff";
+}
+
+function CustomPaletteDemo() {
+  const { setPalette } = useTheme();
+  const [seed, setSeed] = useState<string>(BRANDS[0].seed);
+
+  const apply = (nextSeed: string, onSeed = readableOn(nextSeed)) => {
+    setSeed(nextSeed);
+    // One seed in, the whole accent ramp out — see `[data-palette="custom"]`.
+    const root = document.documentElement.style;
+    root.setProperty("--dm-custom-seed", nextSeed);
+    root.setProperty("--dm-custom-on-seed", onSeed);
+    setPalette("custom");
+  };
+
+  return (
+    <Grid columns="2" gap="24" m={{ columns: "1" }}>
+      <Column gap="12">
+        <Text fontSize="s" color="medium">
+          Pick one base colour — the 100–900 ramp, action, hover and focus colours are derived from
+          it, and the whole page above follows.
+        </Text>
+        <Row gap="8" wrap="wrap">
+          {BRANDS.map((brand) => (
+            <Button
+              key={brand.name}
+              size="s"
+              variant="outline"
+              onClick={() => apply(brand.seed, brand.onSeed)}
+            >
+              {brand.name} · {brand.seed}
+            </Button>
+          ))}
+        </Row>
+        <ColorInput label="Seed" value={seed} onChange={(value) => apply(value)} />
+      </Column>
+      <Column gap="12">
+        {/* `palette` on the wrapper scopes the accent to everything inside it. */}
+        <Row palette="custom" gap="8" wrap="wrap" alignItems="center">
+          <Button>Solid</Button>
+          <Button variant="outline">Outline</Button>
+          <Switch label="Switch" defaultChecked />
+          <Checkbox label="Checkbox" defaultChecked />
+        </Row>
+        <Row gap="4">
+          {(["100", "300", "500", "700", "900"] as const).map((step) => (
+            <Column key={step} gap="4" alignItems="center">
+              <Flex
+                width="40"
+                height="40"
+                borderWidth="1"
+                borderColor="weak"
+                style={{ background: `var(--dm-accent-${step})` }}
+              />
+              <Text fontSize="2xs" color="weak" font="mono">
+                {step}
+              </Text>
+            </Column>
+          ))}
+        </Row>
+      </Column>
+    </Grid>
+  );
+}
+
+function GlyphCatalog() {
+  return (
+    <Column gap="24">
+      <Column gap="8">
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          Size steps — whole multiples of the 9×9 grid
+        </Text>
+        <Row gap="24" alignItems="end" wrap="wrap">
+          {(["s", "m", "l"] as const).map((size) => (
+            <Column key={size} gap="4" alignItems="center">
+              <Icon name="git-branch" size={size} title={`git-branch, size ${size}`} />
+              <Text fontSize="2xs" color="weak" font="mono">
+                {size}
+              </Text>
+            </Column>
+          ))}
+        </Row>
+      </Column>
+      <Column gap="8">
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          All {iconNames.length} glyphs
+        </Text>
+        <Grid columns="8" gap="16" m={{ columns: "4" }}>
+          {iconNames.map((name) => (
+            <Column key={name} gap="4" alignItems="center">
+              <Icon name={name} size="l" title={name} />
+              <Text fontSize="2xs" color="weak" style={{ textAlign: "center" }}>
+                {name}
+              </Text>
+            </Column>
+          ))}
+        </Grid>
+      </Column>
+    </Column>
   );
 }
 
@@ -850,6 +969,14 @@ function App() {
 
           <Section title="Components">
             <ComponentsShowcase />
+          </Section>
+
+          <Section title="Glyphs">
+            <GlyphCatalog />
+          </Section>
+
+          <Section title="Custom palette">
+            <CustomPaletteDemo />
           </Section>
 
           <Section title="Code block">

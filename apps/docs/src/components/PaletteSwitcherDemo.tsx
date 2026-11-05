@@ -19,6 +19,7 @@ const PALETTES: Palette[] = [
   "red",
   "red-dark",
   "red-light",
+  "custom",
 ];
 
 /** Cycles the whole page's global palette — every solid Button/Switch/Radio/Checkbox on the page reacts, live. */
