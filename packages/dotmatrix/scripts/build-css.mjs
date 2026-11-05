@@ -78,7 +78,8 @@ console.log(
 // for `components`, which will keep growing through Phase 3-6. Raised again
 // to 230 for the low-risk expansion wave (CommandPalette, Combobox,
 // Breadcrumbs, Pagination, Calendar, DatePicker, ...).
-const BUDGET_KB = 230;
+// And to 240 for the Fx/pattern wave plus the Flex/Grid-primitive refactor.
+const BUDGET_KB = 240;
 const total =
   Buffer.byteLength(tokens) +
   Buffer.byteLength(global) +
