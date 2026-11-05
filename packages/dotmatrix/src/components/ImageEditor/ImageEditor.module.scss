@@ -2,10 +2,6 @@
 
 @layer dm.components {
   .stage {
-    position: relative;
-    display: inline-block;
-    max-width: 100%;
-    overflow: hidden;
     border-width: var(--dm-border-width-1);
     border-color: var(--dm-border-medium);
     line-height: 0;
@@ -20,7 +16,6 @@
   }
 
   .overlay {
-    position: absolute;
     box-shadow: 0 0 0 1000px rgb(0 0 0 / 0.4);
     outline-width: var(--dm-border-width-2);
     outline-color: var(--dm-on-background-strong);
@@ -35,7 +30,6 @@
   }
 
   .handle {
-    position: absolute;
     width: 12px;
     height: 12px;
     background: var(--dm-on-background-strong);

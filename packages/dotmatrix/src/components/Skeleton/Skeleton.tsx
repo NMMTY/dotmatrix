@@ -1,6 +1,6 @@
 import type { Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Flex } from "../Flex/Flex";
 import styles from "./Skeleton.module.scss";
 
 export interface SkeletonOwnProps extends StyleProps, CommonProps {
@@ -23,19 +23,19 @@ function SkeletonImpl({
   width = "full",
   ...props
 }: SkeletonProps) {
-  const { className, style, rest } = resolveStyleProps({
-    ...props,
-    height,
-    width,
-    radius: radius ?? (circle ? "full" : "control"),
-  });
   return (
-    <span
+    <Flex
+      as="span"
       ref={ref}
       aria-hidden="true"
-      className={["dm-skeleton", styles.skeleton, className].filter(Boolean).join(" ")}
-      style={style}
-      {...rest}
+      display="block"
+      position="relative"
+      overflow="hidden"
+      {...props}
+      height={height}
+      width={width}
+      radius={radius ?? (circle ? "full" : "control")}
+      className={["dm-skeleton", styles.skeleton, props.className].filter(Boolean).join(" ")}
     />
   );
 }

@@ -33,7 +33,13 @@ function BadgeImpl({ ref, variant = "neutral", children, className, ...props }: 
       className={["dm-badge", styles.base, styles[variant], className].filter(Boolean).join(" ")}
     >
       {variant !== "neutral" && (
-        <span aria-hidden className={[styles.dot, DOT_CLASS[variant]].filter(Boolean).join(" ")} />
+        <Row
+          as="span"
+          display="inline-block"
+          flexShrink="0"
+          aria-hidden
+          className={[styles.dot, DOT_CLASS[variant]].filter(Boolean).join(" ")}
+        />
       )}
       {children}
     </Row>

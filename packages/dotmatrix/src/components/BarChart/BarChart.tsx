@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { StyleProps } from "../../system/types";
 import { Column } from "../Column/Column";
 import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
@@ -9,7 +10,7 @@ export interface BarChartDatum {
   value: number;
 }
 
-export interface BarChartOwnProps {
+export interface BarChartOwnProps extends Omit<StyleProps, "height"> {
   data: BarChartDatum[];
   /**
    * `"bitmap"` quantizes each bar into discrete filled/empty cells, the same
@@ -55,21 +56,25 @@ function Bar({
 }): ReactNode {
   if (mode === "precise") {
     return (
-      <Column flexGrow="1" justifyContent="end" className={styles.barTrack}>
-        <div className={styles.barPrecise} style={{ height: `${ratio * 100}%` }} />
+      <Column flexGrow="1" justifyContent="end" width="full" className={styles.barTrack}>
+        <Column className={styles.barPrecise} style={{ height: `${ratio * 100}%` }} />
       </Column>
     );
   }
   const filledCount = Math.round(ratio * segments);
   return (
-    <Column flexGrow="1" gap="2" className={styles.barTrack}>
+    <Column flexGrow="1" gap="2" width="full" className={styles.barTrack}>
       {Array.from({ length: segments }, (_, i) => {
         // Cells are positional, never reordered independently of `segments`.
         const fromBottom = segments - 1 - i;
         return (
-          <span
+          <Row
+            as="span"
             // biome-ignore lint/suspicious/noArrayIndexKey: see comment above
             key={i}
+            flex="1"
+            width="full"
+            minHeight="0"
             className={[styles.cell, fromBottom < filledCount ? styles.filled : undefined]
               .filter(Boolean)
               .join(" ")}
@@ -97,11 +102,12 @@ function BarChartImpl({
   valueFormatter = (v) => String(v),
   showValues = false,
   className,
+  ...rest
 }: BarChartOwnProps) {
   const resolvedMax = max ?? Math.max(0, ...data.map((d) => d.value));
 
   return (
-    <Column gap="8" className={className}>
+    <Column gap="8" {...rest} className={className}>
       <Row role="img" aria-label={label} gap="8" className={styles.plot} style={{ height }}>
         {data.map((datum) => {
           const ratio = clamp01(resolvedMax === 0 ? 0 : datum.value / resolvedMax);

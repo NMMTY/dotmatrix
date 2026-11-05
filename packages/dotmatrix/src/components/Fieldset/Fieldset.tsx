@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import type { CommonProps } from "../../system/types";
 import { Column } from "../Column/Column";
 import { Text } from "../Text/Text";
@@ -24,12 +25,16 @@ export function Fieldset({
   children,
   className,
   style,
-}: FieldsetOwnProps) {
+  ...rest
+}: FieldsetOwnProps & LayoutProps) {
   return (
-    <fieldset
+    <Column
+      as="fieldset"
+      display="block"
       disabled={disabled}
       className={["dm-fieldset", styles.fieldset, className].filter(Boolean).join(" ")}
       style={style}
+      {...pickLayoutProps(rest)}
     >
       {legend && <legend className={styles.legend}>{legend}</legend>}
       <Column gap="16">
@@ -40,6 +45,6 @@ export function Fieldset({
         )}
         {children}
       </Column>
-    </fieldset>
+    </Column>
   );
 }

@@ -42,10 +42,12 @@ import {
   type TextFormatType,
 } from "lexical";
 import { useEffect, useId, useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useFormField } from "../../system/useFormField";
 import { Button } from "../Button/Button";
 import { Column } from "../Column/Column";
 import { FieldShell } from "../FieldShell/FieldShell";
+import { Flex } from "../Flex/Flex";
 import { Row } from "../Row/Row";
 import styles from "./RichTextEditor.module.scss";
 
@@ -164,7 +166,7 @@ function Toolbar({
   };
 
   return (
-    <Row gap="4" wrap="wrap" className={styles.toolbar}>
+    <Row gap="4" wrap="wrap" paddingBottom="8" className={styles.toolbar}>
       {features.bold && (
         <Button
           type="button"
@@ -335,7 +337,8 @@ function RichTextEditorImpl({
   features,
   disabled,
   className,
-}: RichTextEditorOwnProps) {
+  ...rest
+}: RichTextEditorOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const resolvedFeatures = { ...ALL_FEATURES, ...features };
   const namespaceId = useId();
@@ -358,9 +361,14 @@ function RichTextEditorImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <LexicalComposer initialConfig={initialConfig}>
-        <Column gap="8" className={[styles.editor, className].filter(Boolean).join(" ")}>
+        <Column
+          gap="8"
+          padding="8"
+          className={[styles.editor, className].filter(Boolean).join(" ")}
+        >
           <Toolbar features={resolvedFeatures} disabled={disabled} />
           <RichTextPlugin
             contentEditable={
@@ -369,7 +377,17 @@ function RichTextEditorImpl({
                 aria-invalid={!!error}
                 aria-describedby={describedBy}
                 aria-placeholder={placeholder}
-                placeholder={<div className={styles.placeholder}>{placeholder}</div>}
+                placeholder={
+                  <Flex
+                    display="block"
+                    position="absolute"
+                    top="8"
+                    left="8"
+                    className={styles.placeholder}
+                  >
+                    {placeholder}
+                  </Flex>
+                }
                 className={styles.contentEditable}
               />
             }

@@ -1,5 +1,6 @@
 "use client";
 
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { Button } from "../Button/Button";
 import { IconButton } from "../IconButton/IconButton";
@@ -51,7 +52,7 @@ export function getPaginationRange(
   return [1, "ellipsis-start", ...middleRange, "ellipsis-end", totalPages];
 }
 
-export interface PaginationOwnProps {
+export interface PaginationOwnProps extends StyleProps {
   /** 1-indexed. Omit along with `onChange` for uncontrolled use. */
   page?: number;
   /** @default 1 */
@@ -78,12 +79,20 @@ export function Pagination({
   siblingCount = 1,
   disabled,
   className,
+  ...rest
 }: PaginationOwnProps) {
   const [current, setCurrent] = useControllableState(page, defaultPage ?? 1, onChange);
   const range = getPaginationRange(current, totalPages, siblingCount);
 
   return (
-    <Row as="nav" aria-label="Pagination" gap="4" alignItems="center" className={className}>
+    <Row
+      as="nav"
+      aria-label="Pagination"
+      gap="4"
+      alignItems="center"
+      {...rest}
+      className={className}
+    >
       <IconButton
         icon="chevron-left"
         aria-label="Previous page"

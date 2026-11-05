@@ -63,9 +63,9 @@ function CommandInputImpl({
       {...rest}
     >
       <Row as="label" htmlFor={id} alignItems="center" gap="8" className={styles.field}>
-        <span aria-hidden className={styles.prompt}>
+        <Row as="span" display="inline" aria-hidden className={styles.prompt}>
           {prompt}
-        </span>
+        </Row>
         <input
           ref={ref}
           id={id}
@@ -84,8 +84,12 @@ function CommandInputImpl({
       </Row>
       {(status != null || hint != null) && (
         <Row justifyContent="between" gap="12" className={styles.footer}>
-          <span>{status}</span>
-          <span>{hint}</span>
+          <Row as="span" display="inline">
+            {status}
+          </Row>
+          <Row as="span" display="inline">
+            {hint}
+          </Row>
         </Row>
       )}
     </Column>

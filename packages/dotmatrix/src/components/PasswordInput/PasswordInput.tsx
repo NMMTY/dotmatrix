@@ -3,7 +3,9 @@
 import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { useFormField } from "../../system/useFormField";
 import { FieldShell } from "../FieldShell/FieldShell";
+import { Flex } from "../Flex/Flex";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./PasswordInput.module.scss";
 
 export interface PasswordInputOwnProps
@@ -53,7 +55,7 @@ function PasswordInputImpl({
       required={required}
       disabled={disabled}
     >
-      <span className={styles.wrapper}>
+      <Flex as="span" display="block" position="relative" width="full">
         <input
           ref={ref}
           type={revealed ? "text" : "password"}
@@ -67,7 +69,11 @@ function PasswordInputImpl({
             .join(" ")}
           {...rest}
         />
-        <button
+        <Row
+          as="button"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
           type="button"
           aria-label={revealed ? "Hide password" : "Show password"}
           aria-pressed={revealed}
@@ -76,8 +82,8 @@ function PasswordInputImpl({
           className={styles.toggle}
         >
           <Icon name={revealed ? "eye-off" : "eye"} size="s" />
-        </button>
-      </span>
+        </Row>
+      </Flex>
     </FieldShell>
   );
 }

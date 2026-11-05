@@ -1,11 +1,6 @@
 @use "../_order";
 
 @layer dm.components {
-  .grid {
-    display: block;
-    min-width: 0;
-  }
-
   // Multi-column layout needs each item to establish its own block
   // formatting context for `break-inside: avoid` to reliably keep it from
   // being split across two columns — plain `display: block` alone doesn't
@@ -14,8 +9,6 @@
   // inline per item instead of here, since it needs to be zeroed out on the
   // last one specifically.
   .item {
-    display: inline-block;
-    width: 100%;
     break-inside: avoid;
   }
 }

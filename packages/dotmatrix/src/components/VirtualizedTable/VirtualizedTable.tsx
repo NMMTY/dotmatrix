@@ -1,6 +1,8 @@
 "use client";
 
 import { type ReactNode, useMemo, useState } from "react";
+import type { StyleProps } from "../../system/types";
+import { Column } from "../Column/Column";
 import { Text } from "../Text/Text";
 import styles from "./VirtualizedTable.module.scss";
 
@@ -14,7 +16,8 @@ export interface VirtualizedTableColumn<T> {
   align?: "start" | "center" | "end";
 }
 
-export interface VirtualizedTableOwnProps<T> {
+export interface VirtualizedTableOwnProps<T>
+  extends Omit<StyleProps, "height" | "columns" | "rows"> {
   columns: VirtualizedTableColumn<T>[];
   rows: T[];
   /** @default the row's index */
@@ -62,6 +65,7 @@ function VirtualizedTableImpl<T>({
   selectedRowKey,
   emptyMessage = "No rows.",
   className,
+  ...rest
 }: VirtualizedTableOwnProps<T>) {
   const [scrollTop, setScrollTop] = useState(0);
 
@@ -80,7 +84,10 @@ function VirtualizedTableImpl<T>({
   const visibleRows = rows.slice(startIndex, endIndex);
 
   return (
-    <div
+    <Column
+      display="block"
+      overflowY="auto"
+      {...rest}
       className={[styles.viewport, className].filter(Boolean).join(" ")}
       style={{ height }}
       onScroll={(event) => setScrollTop(event.currentTarget.scrollTop)}
@@ -167,7 +174,7 @@ function VirtualizedTableImpl<T>({
           )}
         </tbody>
       </table>
-    </div>
+    </Column>
   );
 }
 VirtualizedTableImpl.displayName = "VirtualizedTable";

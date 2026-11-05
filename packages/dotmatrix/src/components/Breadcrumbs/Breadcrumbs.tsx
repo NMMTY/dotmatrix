@@ -1,5 +1,6 @@
 import type { ElementType as ReactElementType } from "react";
 import type { IconName } from "../../icons";
+import type { StyleProps } from "../../system/types";
 import { Icon } from "../Icon/Icon";
 import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
@@ -10,7 +11,7 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-export interface BreadcrumbsOwnProps {
+export interface BreadcrumbsOwnProps extends StyleProps {
   items: BreadcrumbItem[];
   /** @default "chevron-right" */
   separator?: IconName;
@@ -30,9 +31,10 @@ export function Breadcrumbs({
   separator = "chevron-right",
   as,
   className,
+  ...rest
 }: BreadcrumbsOwnProps) {
   return (
-    <Row as="nav" aria-label="Breadcrumb" className={className}>
+    <Row as="nav" aria-label="Breadcrumb" {...rest} className={className}>
       <Row as="ol" gap="4" alignItems="center" style={{ listStyle: "none" }}>
         {items.map((item, index) => {
           const isCurrent = index === items.length - 1;

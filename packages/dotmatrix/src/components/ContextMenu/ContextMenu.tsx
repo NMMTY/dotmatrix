@@ -17,10 +17,22 @@ import {
   useTransitionStyles,
   useTypeahead,
 } from "@floating-ui/react";
-import { cloneElement, type ReactElement, type ReactNode, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  cloneElement,
+  type ReactElement,
+  type ReactNode,
+  useRef,
+  useState,
+} from "react";
+import type { StyleProps } from "../../system/types";
 import { useReducedMotion } from "../../system/useReducedMotion";
+import { Column } from "../Column/Column";
 import dropdownStyles from "../Dropdown/Dropdown.module.scss";
 import { DropdownContext } from "../Dropdown/DropdownContext";
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface ContextMenuOwnProps {
   /** The element right-clicking on opens the menu. */
@@ -36,7 +48,13 @@ export interface ContextMenuOwnProps {
  * than duplicating the menu-item rendering logic — the only real difference
  * between the two is how the menu opens and where it's anchored.
  */
-export function ContextMenu({ children, menu }: ContextMenuOwnProps) {
+export function ContextMenu({
+  children,
+  menu,
+  className,
+  style,
+  ...rest
+}: ContextMenuOwnProps & PanelExtras) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   // The point the menu opens at, frozen at the moment of the right-click.
@@ -125,15 +143,24 @@ export function ContextMenu({ children, menu }: ContextMenuOwnProps) {
               Tooltip). Positioning stays on the outer element; the
               animation is scoped to an inner one.
             */}
-            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-              <div style={transitionStyles} className={dropdownStyles.menu}>
+            <Column
+              display="block"
+              ref={refs.setFloating}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
+              <Column
+                {...rest}
+                style={{ ...transitionStyles, ...style }}
+                className={[dropdownStyles.menu, className].filter(Boolean).join(" ")}
+              >
                 <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
                   <DropdownContext.Provider value={{ activeIndex, getItemProps, handleSelect }}>
                     {menu}
                   </DropdownContext.Provider>
                 </FloatingList>
-              </div>
-            </div>
+              </Column>
+            </Column>
           </FloatingFocusManager>
         </FloatingPortal>
       )}

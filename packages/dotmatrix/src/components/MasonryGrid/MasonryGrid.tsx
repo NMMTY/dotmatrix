@@ -1,8 +1,8 @@
 import { Children, type ElementType as ReactElementType, type ReactNode, type Ref } from "react";
-import { ElementType, type PolymorphicComponent } from "../../system/ElementType";
+import type { PolymorphicComponent } from "../../system/ElementType";
 import type { SpacingValue } from "../../system/props";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Flex } from "../Flex/Flex";
 import styles from "./MasonryGrid.module.scss";
 
 export interface MasonryGridOwnProps
@@ -49,32 +49,35 @@ function MasonryGridImpl({
   minColumnWidth = 240,
   gap = "16",
   children,
+  style,
   ...props
 }: MasonryGridProps) {
-  const { className, style, rest } = resolveStyleProps(props);
   const gapVar = `var(--dm-space-${gap})`;
   const count = Children.count(children);
 
   return (
-    <ElementType
+    <Flex
       as={as}
       ref={ref}
-      className={["dm-masonry-grid", styles.grid, className].filter(Boolean).join(" ")}
+      display="block"
+      {...props}
+      className={["dm-masonry-grid", props.className].filter(Boolean).join(" ")}
       style={{
         columnCount: columns,
         columnWidth: `${minColumnWidth}px`,
         columnGap: gapVar,
         ...style,
       }}
-      {...rest}
     >
       {Children.map(children, (child, i) => (
-        <div
+        <Flex
           // Index is fine here: items are positional content passed by the
           // consumer in one shot, not an independently reordered/inserted
           // list — same reasoning as Meter's segment cells.
           // biome-ignore lint/suspicious/noArrayIndexKey: see comment above
           key={i}
+          display="inline-block"
+          width="full"
           className={styles.item}
           // Only the last DOM item can be targeted this way (an equivalent
           // CSS `:last-child` rule can never fire — this inline style always
@@ -83,9 +86,9 @@ function MasonryGridImpl({
           style={{ marginBottom: i === count - 1 ? 0 : gapVar }}
         >
           {child}
-        </div>
+        </Flex>
       ))}
-    </ElementType>
+    </Flex>
   );
 }
 MasonryGridImpl.displayName = "MasonryGrid";

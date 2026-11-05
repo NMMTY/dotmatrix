@@ -1,9 +1,9 @@
 import type { ElementType as ReactElementType, ReactNode, Ref } from "react";
 import type { IconName } from "../../icons";
 import type { PolymorphicComponent } from "../../system/ElementType";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./Button.module.scss";
 
 export interface ButtonOwnProps extends StyleProps, CommonProps {
@@ -47,29 +47,30 @@ function ButtonImpl({
   children,
   ...props
 }: ButtonProps & { type?: string }) {
-  const { className, style, rest } = resolveStyleProps(props);
   const Component = (as ?? (href ? "a" : "button")) as ReactElementType;
   const isNativeButton = Component === "button";
   const iconElement = icon ? <Icon name={icon} size={size} /> : null;
 
   return (
-    <Component
-      // biome-ignore lint/suspicious/noExplicitAny: the concrete element is only known at runtime
-      ref={ref as any}
+    <Row
+      as={Component}
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      ref={ref}
       href={href}
       type={isNativeButton ? (type ?? "button") : type}
       disabled={isNativeButton ? disabled : undefined}
       aria-disabled={!isNativeButton && disabled ? true : undefined}
-      className={["dm-button", styles.base, styles[size], styles[variant], className]
+      {...props}
+      className={["dm-button", styles.base, styles[size], styles[variant], props.className]
         .filter(Boolean)
         .join(" ")}
-      style={style}
-      {...rest}
     >
       {iconPosition === "start" && iconElement}
       {children}
       {iconPosition === "end" && iconElement}
-    </Component>
+    </Row>
   );
 }
 ButtonImpl.displayName = "Button";

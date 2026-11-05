@@ -23,16 +23,8 @@
     overflow: auto;
   }
 
-  .codeWrap {
-    position: relative;
-    overflow: auto;
-  }
-
-  .collapsed {
-    overflow: hidden;
-  }
-
   .pre {
+    flex-shrink: 0;
     margin: 0;
     padding: var(--dm-space-16);
     overflow-x: auto;

@@ -1,6 +1,7 @@
 "use client";
 
 import { type DragEvent, useEffect, useRef, useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { Column } from "../Column/Column";
@@ -67,7 +68,8 @@ function FileUploadImpl({
   imageEditorFeatures,
   disabled,
   className,
-}: FileUploadOwnProps) {
+  ...rest
+}: FileUploadOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const [files, setFiles] = useControllableState(value, defaultValue ?? [], onChange);
   const [isDragging, setIsDragging] = useState(false);
@@ -143,6 +145,7 @@ function FileUploadImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <Column gap="12">
         <Column

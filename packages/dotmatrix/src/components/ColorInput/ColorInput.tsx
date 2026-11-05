@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { Column } from "../Column/Column";
@@ -51,7 +52,8 @@ function ColorInputImpl({
   swatches = [],
   disabled,
   className,
-}: ColorInputOwnProps) {
+  ...rest
+}: ColorInputOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const [current, setCurrent] = useControllableState(value, defaultValue ?? "#000000", onChange);
   const [hexDraft, setHexDraft] = useState(current);
@@ -81,6 +83,7 @@ function ColorInputImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <Popover
         trigger={
@@ -103,7 +106,14 @@ function ColorInputImpl({
             aria-label={label ? `${label}: ${current}` : current}
             className={[styles.trigger, className].filter(Boolean).join(" ")}
           >
-            <span className={styles.swatch} style={{ background: current }} aria-hidden />
+            <Row
+              as="span"
+              display="inline-block"
+              flexShrink="0"
+              className={styles.swatch}
+              style={{ background: current }}
+              aria-hidden
+            />
             <Text fontSize="s" font="mono">
               {current}
             </Text>
@@ -114,7 +124,9 @@ function ColorInputImpl({
           {swatches.length > 0 && (
             <Row gap="4" wrap="wrap">
               {swatches.map((swatch) => (
-                <button
+                <Row
+                  as="button"
+                  flexShrink="0"
                   key={swatch}
                   type="button"
                   aria-label={`Use ${swatch}`}
@@ -130,7 +142,9 @@ function ColorInputImpl({
             {Array.from({ length: HUE_STEPS }, (_, i) => {
               const hue = hueStep * i;
               return (
-                <button
+                <Row
+                  as="button"
+                  flexShrink="0"
                   // Fixed hue steps around the wheel, not a reorderable list.
                   // biome-ignore lint/suspicious/noArrayIndexKey: see comment above
                   key={i}
@@ -159,7 +173,9 @@ function ColorInputImpl({
                   const hex = hslToHex(hsl.h, saturation, lightness);
                   const selected = hsl.s === saturation && hsl.l === lightness;
                   return (
-                    <button
+                    <Row
+                      as="button"
+                      flexShrink="0"
                       key={saturation}
                       type="button"
                       aria-label={`Saturation ${saturation}%, lightness ${lightness}%`}

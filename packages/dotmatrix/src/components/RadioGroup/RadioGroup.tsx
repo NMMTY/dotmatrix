@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, type ReactNode, useId, useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useFormField } from "../../system/useFormField";
 import { Column } from "../Column/Column";
 import fieldHintStyles from "../FieldShell/FieldShell.module.scss";
@@ -60,7 +61,8 @@ export function RadioGroup({
   onChange,
   disabled = false,
   children,
-}: RadioGroupOwnProps) {
+  ...rest
+}: RadioGroupOwnProps & LayoutProps) {
   const generatedName = useId();
   const groupName = name ?? generatedName;
   const { hintKind, hintId, describedBy } = useFormField({ error, success, description });
@@ -80,7 +82,7 @@ export function RadioGroup({
     <RadioGroupContext.Provider
       value={{ name: groupName, value: currentValue, onChange: handleChange, disabled }}
     >
-      <Column gap="8">
+      <Column gap="8" {...pickLayoutProps(rest)}>
         {label && (
           <Text id={labelId} fontSize="s" weight="medium">
             {label}

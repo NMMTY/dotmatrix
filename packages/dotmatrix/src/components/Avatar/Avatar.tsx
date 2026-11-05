@@ -1,5 +1,5 @@
 import type { Ref } from "react";
-import type { CommonProps } from "../../system/types";
+import type { CommonProps, StyleProps } from "../../system/types";
 import { Row } from "../Row/Row";
 import styles from "./Avatar.module.scss";
 
@@ -10,7 +10,8 @@ function initials(name: string): string {
   return (first + last).toUpperCase();
 }
 
-type AvatarBaseProps = CommonProps & { size?: "s" | "m" | "l"; ref?: Ref<HTMLSpanElement> };
+type AvatarBaseProps = CommonProps &
+  StyleProps & { size?: "s" | "m" | "l"; ref?: Ref<HTMLSpanElement> };
 
 // Either a real image with real alt text, or a name to derive initials from —
 // never an image with no alt (a silent a11y gap) and never neither.
@@ -35,7 +36,7 @@ const layout = {
 
 /** A circular image or initials fallback. Not polymorphic — always inline. */
 function AvatarImpl(props: AvatarOwnProps) {
-  const { ref, size = "m", className, style } = props;
+  const { ref, size = "m", className, style, src: _src, alt: _alt, name: _name, ...rest } = props;
   const classes = ["dm-avatar", styles.base, styles[size], className].filter(Boolean).join(" ");
 
   // Narrows on `props` itself (not a destructured remainder of it) — matching
@@ -43,14 +44,14 @@ function AvatarImpl(props: AvatarOwnProps) {
   // not just the positive one.
   if (hasImage(props)) {
     return (
-      <Row {...layout} ref={ref} className={classes} style={style}>
+      <Row {...layout} {...rest} ref={ref} className={classes} style={style}>
         <img src={props.src} alt={props.alt} className={styles.image} />
       </Row>
     );
   }
 
   return (
-    <Row {...layout} ref={ref} className={classes} style={style} title={props.name}>
+    <Row {...layout} {...rest} ref={ref} className={classes} style={style} title={props.name}>
       {initials(props.name)}
     </Row>
   );

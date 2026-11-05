@@ -61,7 +61,7 @@ function SwitchImpl({
           className={["dm-switch", styles.input, className].filter(Boolean).join(" ")}
           {...rest}
         />
-        <span className={styles.thumb} aria-hidden />
+        <Row as="span" className={styles.thumb} aria-hidden />
       </Row>
       {label && <Text fontSize="s">{label}</Text>}
     </Row>

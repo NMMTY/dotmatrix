@@ -1,8 +1,9 @@
 "use client";
 
-import type { ReactElement } from "react";
+import type { CSSProperties, ReactElement } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { IconName } from "../../icons";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { Column } from "../Column/Column";
 import { Dialog } from "../Dialog/Dialog";
@@ -24,6 +25,9 @@ export interface CommandItem {
   group?: string;
   onSelect: () => void;
 }
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface CommandPaletteOwnProps {
   items: CommandItem[];
@@ -72,7 +76,8 @@ export function CommandPalette({
   emptyMessage = "No matches.",
   hotkey = "k",
   maxResults = 8,
-}: CommandPaletteOwnProps) {
+  ...rest
+}: CommandPaletteOwnProps & PanelExtras) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -139,7 +144,7 @@ export function CommandPalette({
   };
 
   return (
-    <Dialog trigger={trigger} open={open} onOpenChange={setOpen} title={title}>
+    <Dialog {...rest} trigger={trigger} open={open} onOpenChange={setOpen} title={title}>
       <Column gap="12">
         <Input
           ref={inputRef}

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { LayoutProps } from "../../system/layoutProps";
 import type { FieldHintKind } from "../../system/useFormField";
 import { Column } from "../Column/Column";
 import { Text } from "../Text/Text";
@@ -14,6 +15,8 @@ export interface FieldShellOwnProps {
   hintId: string | undefined;
   required?: boolean;
   disabled?: boolean;
+  /** Flex/grid style props the owning control forwards to the shell root; they override its defaults. */
+  layout?: LayoutProps;
   children: ReactNode;
 }
 
@@ -40,12 +43,13 @@ export function FieldShell({
   hintId,
   required,
   disabled,
+  layout,
   children,
 }: FieldShellOwnProps) {
   const hintText = { error, success, description }[hintKind ?? "description"];
 
   return (
-    <Column gap="4" width="full">
+    <Column gap="4" width="full" {...layout}>
       {label && (
         <Text
           as="label"

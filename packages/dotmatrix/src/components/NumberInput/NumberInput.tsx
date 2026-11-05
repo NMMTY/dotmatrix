@@ -79,7 +79,11 @@ function NumberInputImpl({
       disabled={disabled}
     >
       <Row as="span" display="inline-flex" width="full">
-        <button
+        <Row
+          as="button"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
           type="button"
           aria-label="Decrease"
           disabled={disabled}
@@ -87,7 +91,7 @@ function NumberInputImpl({
           className={[styles.step, styles.stepStart].join(" ")}
         >
           <Icon name="minus" size="s" />
-        </button>
+        </Row>
         <input
           ref={ref}
           type="number"
@@ -106,7 +110,11 @@ function NumberInputImpl({
           className={["dm-number-input", styles.input, className].filter(Boolean).join(" ")}
           {...rest}
         />
-        <button
+        <Row
+          as="button"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
           type="button"
           aria-label="Increase"
           disabled={disabled}
@@ -114,7 +122,7 @@ function NumberInputImpl({
           className={[styles.step, styles.stepEnd].join(" ")}
         >
           <Icon name="plus" size="s" />
-        </button>
+        </Row>
       </Row>
     </FieldShell>
   );

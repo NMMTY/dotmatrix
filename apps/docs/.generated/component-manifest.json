@@ -265,8 +265,8 @@
         "kind": "select",
         "options": [
           "function",
-          "warning",
           "grid",
+          "warning",
           "palette",
           "chevron-down",
           "chevron-up",
@@ -461,8 +461,8 @@
         "kind": "select",
         "options": [
           "function",
-          "warning",
           "grid",
+          "warning",
           "palette",
           "chevron-down",
           "chevron-up",
@@ -647,9 +647,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -868,8 +868,8 @@
         "description": "`\"mono\"` tints tokens by weight only (this system's default identity); `\"color\"` gives each token kind its own hue, for contexts where syntax colors carry real information.",
         "kind": "select",
         "options": [
-          "mono",
-          "color"
+          "color",
+          "mono"
         ]
       }
     ]
@@ -1051,9 +1051,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -1778,9 +1778,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -1878,6 +1878,13 @@
         "defaultValue": null,
         "description": "",
         "kind": "text"
+      },
+      {
+        "name": "layout",
+        "required": false,
+        "defaultValue": null,
+        "description": "Flex/grid style props the owning control forwards to the shell root; they override its defaults.",
+        "kind": "readonly"
       },
       {
         "name": "required",
@@ -2247,8 +2254,8 @@
         "kind": "select",
         "options": [
           "function",
-          "warning",
           "grid",
+          "warning",
           "palette",
           "chevron-down",
           "chevron-up",
@@ -2422,9 +2429,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -2476,8 +2483,8 @@
         "kind": "select",
         "options": [
           "function",
-          "warning",
           "grid",
+          "warning",
           "palette",
           "chevron-down",
           "chevron-up",
@@ -2651,9 +2658,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -2778,8 +2785,8 @@
         "kind": "select",
         "options": [
           "function",
-          "warning",
           "grid",
+          "warning",
           "palette",
           "chevron-down",
           "chevron-up",
@@ -2967,9 +2974,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -3034,10 +3041,10 @@
         "description": "Space between columns AND between stacked items in a column — a plain\nCSS `gap` only gives the first half, since multi-column has no concept\nof vertical space between stacked items, so each item also gets this as\nits own `margin-bottom`.",
         "kind": "select",
         "options": [
-          "s",
-          "m",
-          "l",
           "xl",
+          "l",
+          "m",
+          "s",
           "xs",
           "0",
           "1",
@@ -3393,9 +3400,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {
@@ -3801,9 +3808,9 @@
         "description": "",
         "kind": "select",
         "options": [
-          "s",
+          "l",
           "m",
-          "l"
+          "s"
         ]
       },
       {

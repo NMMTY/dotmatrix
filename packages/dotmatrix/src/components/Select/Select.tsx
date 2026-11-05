@@ -1,5 +1,6 @@
 "use client";
 
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { Dropdown, DropdownItem } from "../Dropdown/Dropdown";
@@ -53,7 +54,8 @@ function SelectImpl({
   placeholder = "Select…",
   disabled,
   className,
-}: SelectOwnProps) {
+  ...rest
+}: SelectOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({
     error,
     success,
@@ -72,6 +74,7 @@ function SelectImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <Dropdown
         matchTriggerWidth

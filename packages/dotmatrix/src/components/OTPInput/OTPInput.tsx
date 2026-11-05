@@ -1,6 +1,7 @@
 "use client";
 
 import { type ChangeEvent, type ClipboardEvent, type KeyboardEvent, useId, useRef } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { Column } from "../Column/Column";
@@ -51,7 +52,8 @@ function OTPInputImpl({
   onComplete,
   disabled,
   className,
-}: OTPInputOwnProps) {
+  ...rest
+}: OTPInputOwnProps & LayoutProps) {
   const { hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const [current, setCurrent] = useControllableState(value, defaultValue ?? "", onChange);
   const boxesRef = useRef<Array<HTMLInputElement | null>>([]);
@@ -106,7 +108,7 @@ function OTPInputImpl({
   };
 
   return (
-    <Column gap="8" className={className}>
+    <Column gap="8" className={className} {...pickLayoutProps(rest)}>
       {label && (
         <Text id={labelId} fontSize="s" weight="medium">
           {label}

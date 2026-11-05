@@ -2,6 +2,7 @@ import type { ReactNode, Ref } from "react";
 import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
 import { Column } from "../Column/Column";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./EmptyState.module.scss";
 
@@ -30,9 +31,9 @@ function EmptyStateImpl({ ref, icon, title, description, action, ...props }: Emp
       {...rest}
     >
       {icon && (
-        <div className={styles.icon} aria-hidden>
+        <Row className={styles.icon} aria-hidden>
           {icon}
-        </div>
+        </Row>
       )}
       <Text fontSize="s" weight="medium">
         {title}
@@ -42,7 +43,7 @@ function EmptyStateImpl({ ref, icon, title, description, action, ...props }: Emp
           {description}
         </Text>
       )}
-      {action && <div className={styles.action}>{action}</div>}
+      {action && <Row marginTop="8">{action}</Row>}
     </Column>
   );
 }

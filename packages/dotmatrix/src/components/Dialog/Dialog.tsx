@@ -12,7 +12,8 @@ import {
   useRole,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { cloneElement, type ReactElement, type ReactNode, useId } from "react";
+import { type CSSProperties, cloneElement, type ReactElement, type ReactNode, useId } from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { useReducedMotion } from "../../system/useReducedMotion";
 import { Column } from "../Column/Column";
@@ -22,6 +23,9 @@ import { IconButton } from "../IconButton/IconButton";
 import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./Dialog.module.scss";
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface DialogOwnProps {
   /** A single focusable element that opens the dialog on click. Omit for a fully controlled dialog. */
@@ -50,7 +54,10 @@ export function Dialog({
   open: controlledOpen,
   defaultOpen,
   onOpenChange,
-}: DialogOwnProps) {
+  className,
+  style,
+  ...rest
+}: DialogOwnProps & PanelExtras) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const { refs, context } = useFloating({ open, onOpenChange: setOpen });
   const reducedMotion = useReducedMotion();
@@ -93,10 +100,11 @@ export function Dialog({
               <Column
                 ref={refs.setFloating}
                 gap="16"
+                {...rest}
                 aria-labelledby={titleId}
                 aria-describedby={descriptionId}
-                className={styles.dialog}
-                style={dialogTransition}
+                className={[styles.dialog, className].filter(Boolean).join(" ")}
+                style={{ ...dialogTransition, ...style }}
                 {...getFloatingProps()}
               >
                 <Row justifyContent="between" alignItems="center" gap="16">

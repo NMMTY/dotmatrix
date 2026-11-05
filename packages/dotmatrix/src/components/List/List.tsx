@@ -32,7 +32,7 @@ function ListImpl({ ref, ...props }: ListProps) {
 ListImpl.displayName = "List";
 export const List = ListImpl;
 
-export interface ListItemOwnProps {
+export interface ListItemOwnProps extends StyleProps, CommonProps {
   /** Omit together with `description`/`action` to render fully custom `children` instead. */
   title?: ReactNode;
   description?: ReactNode;
@@ -40,9 +40,21 @@ export interface ListItemOwnProps {
   children?: ReactNode;
 }
 
-function ListItemImpl({ title, description, action, children }: ListItemOwnProps) {
+function ListItemImpl({
+  title,
+  description,
+  action,
+  children,
+  className,
+  ...rest
+}: ListItemOwnProps) {
   return (
-    <li className={styles.item}>
+    <Column
+      as="li"
+      paddingY="12"
+      {...rest}
+      className={[styles.item, className].filter(Boolean).join(" ")}
+    >
       {title !== undefined ? (
         <Row alignItems="center" justifyContent="between" gap="16">
           <Column gap="2" minWidth="0">
@@ -64,7 +76,7 @@ function ListItemImpl({ title, description, action, children }: ListItemOwnProps
       ) : (
         children
       )}
-    </li>
+    </Column>
   );
 }
 ListItemImpl.displayName = "ListItem";

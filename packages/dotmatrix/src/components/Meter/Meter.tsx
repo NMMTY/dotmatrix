@@ -57,11 +57,13 @@ function MeterImpl({
         .join(" ")}
     >
       {Array.from({ length: segments }, (_, i) => (
-        <span
+        <Row
           // Index is a legitimate key here: cells are positional and never
           // reordered, inserted, or removed independently of `segments`.
           // biome-ignore lint/suspicious/noArrayIndexKey: see comment above
           key={i}
+          flex="1"
+          minWidth="0"
           className={[styles.cell, i < filledCount ? styles.filled : undefined]
             .filter(Boolean)
             .join(" ")}

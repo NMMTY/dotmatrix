@@ -15,6 +15,7 @@ import {
   useTransitionStyles,
 } from "@floating-ui/react";
 import { type KeyboardEvent, useMemo, useRef, useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { useReducedMotion } from "../../system/useReducedMotion";
@@ -80,7 +81,8 @@ function ComboboxImpl({
   emptyMessage = "No matches.",
   disabled,
   className,
-}: ComboboxOwnProps) {
+  ...rest
+}: ComboboxOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const [current, setCurrent] = useControllableState(value, defaultValue ?? "", onChange);
   const selected = options.find((option) => option.value === current);
@@ -168,6 +170,7 @@ function ComboboxImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <Row
         as="button"
@@ -189,19 +192,26 @@ function ComboboxImpl({
           .join(" ")}
         {...getReferenceProps()}
       >
-        <span
+        <Row
+          as="span"
+          display="block"
           className={[styles.label, selected ? undefined : styles.placeholder]
             .filter(Boolean)
             .join(" ")}
         >
           {selected?.label ?? placeholder}
-        </span>
+        </Row>
         <Icon name="chevron-down" size="s" className={styles.chevron} />
       </Row>
       {isMounted && (
         <FloatingPortal>
           <FloatingFocusManager context={context} modal={false} initialFocus={inputRef}>
-            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+            <Column
+              display="block"
+              ref={refs.setFloating}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
               <Column gap="8" padding="8" style={transitionStyles} className={styles.menu}>
                 <Input
                   ref={inputRef}
@@ -252,7 +262,7 @@ function ComboboxImpl({
                   ))}
                 </Column>
               </Column>
-            </div>
+            </Column>
           </FloatingFocusManager>
         </FloatingPortal>
       )}

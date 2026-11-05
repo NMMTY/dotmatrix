@@ -92,7 +92,8 @@ function StackedBarChartImpl({
               const v = Math.max(0, s.values[c] ?? 0);
               if (v === 0) return null;
               return (
-                <span
+                <Flex
+                  as="span"
                   key={s.label}
                   data-series={i + 1}
                   className={[styles.segment, styles[`s${i + 1}`]].join(" ")}
@@ -114,7 +115,7 @@ function StackedBarChartImpl({
         </Row>
       )}
       {/* The wrapper does the hiding: a clip on the <table> itself leaves its caption showing. */}
-      <div className={styles.sr}>
+      <Column display="block" className={styles.sr}>
         <table>
           <caption>{title}</caption>
           <thead>
@@ -139,11 +140,11 @@ function StackedBarChartImpl({
             ))}
           </tbody>
         </table>
-      </div>
+      </Column>
       <Row as="ul" wrap="wrap" gap="16" className={styles.legend}>
         {series.map((s, i) => (
           <Row as="li" key={s.label} display="inline-flex" alignItems="center" gap="8">
-            <span aria-hidden className={[styles.swatch, styles[`s${i + 1}`]].join(" ")} />
+            <Row as="span" aria-hidden className={[styles.swatch, styles[`s${i + 1}`]].join(" ")} />
             {s.label}
           </Row>
         ))}

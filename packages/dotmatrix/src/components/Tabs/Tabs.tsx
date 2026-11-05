@@ -1,6 +1,14 @@
 "use client";
 
-import { createContext, type KeyboardEvent, type ReactNode, useContext, useId } from "react";
+import {
+  type CSSProperties,
+  createContext,
+  type KeyboardEvent,
+  type ReactNode,
+  useContext,
+  useId,
+} from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { Column } from "../Column/Column";
 import { Row } from "../Row/Row";
@@ -27,14 +35,22 @@ export interface TabsOwnProps {
   children: ReactNode;
 }
 
+type LayoutExtras = StyleProps & { className?: string; style?: CSSProperties };
+
 /** A set of switchable panels, each with a corresponding tab button. */
-export function Tabs({ value, defaultValue, onChange, children }: TabsOwnProps) {
+export function Tabs({
+  value,
+  defaultValue,
+  onChange,
+  children,
+  ...rest
+}: TabsOwnProps & LayoutExtras) {
   const [current, setCurrent] = useControllableState(value, defaultValue ?? "", onChange);
   const idPrefix = useId();
 
   return (
     <TabsContext.Provider value={{ value: current, setValue: setCurrent, idPrefix }}>
-      <Column>{children}</Column>
+      <Column {...rest}>{children}</Column>
     </TabsContext.Provider>
   );
 }
@@ -44,9 +60,14 @@ export interface TabListOwnProps {
   children: ReactNode;
 }
 
-export function TabList({ children, ...rest }: TabListOwnProps) {
+export function TabList({ children, className, ...rest }: TabListOwnProps & LayoutExtras) {
   return (
-    <Row role="tablist" gap="4" className={styles.list} {...rest}>
+    <Row
+      role="tablist"
+      gap="4"
+      {...rest}
+      className={[styles.list, className].filter(Boolean).join(" ")}
+    >
       {children}
     </Row>
   );
@@ -65,7 +86,7 @@ export interface TabOwnProps {
  * (`role="tab"` under the same `role="tablist"`), simpler than tracking
  * order in context for the same information.
  */
-export function Tab({ value, disabled, children }: TabOwnProps) {
+export function Tab({ value, disabled, children, className, ...rest }: TabOwnProps & LayoutExtras) {
   const { value: selectedValue, setValue, idPrefix } = useTabsContext("Tab");
   const selected = value === selectedValue;
 
@@ -98,6 +119,7 @@ export function Tab({ value, disabled, children }: TabOwnProps) {
       as="button"
       display="inline-flex"
       alignItems="center"
+      {...rest}
       type="button"
       role="tab"
       id={`${idPrefix}-tab-${value}`}
@@ -110,7 +132,9 @@ export function Tab({ value, disabled, children }: TabOwnProps) {
       disabled={disabled}
       onClick={() => setValue(value)}
       onKeyDown={handleKeyDown}
-      className={[styles.tab, selected ? styles.selected : undefined].filter(Boolean).join(" ")}
+      className={[styles.tab, selected ? styles.selected : undefined, className]
+        .filter(Boolean)
+        .join(" ")}
     >
       {children}
     </Row>
@@ -122,19 +146,21 @@ export interface TabPanelOwnProps {
   children: ReactNode;
 }
 
-export function TabPanel({ value, children }: TabPanelOwnProps) {
+export function TabPanel({ value, children, className, ...rest }: TabPanelOwnProps & LayoutExtras) {
   const { value: selectedValue, idPrefix } = useTabsContext("TabPanel");
   const selected = value === selectedValue;
 
   return (
-    <div
+    <Column
+      display="block"
+      {...rest}
       role="tabpanel"
       id={`${idPrefix}-panel-${value}`}
       aria-labelledby={`${idPrefix}-tab-${value}`}
       hidden={!selected}
-      className={styles.panel}
+      className={[styles.panel, className].filter(Boolean).join(" ")}
     >
       {selected && children}
-    </div>
+    </Column>
   );
 }

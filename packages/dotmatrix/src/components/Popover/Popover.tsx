@@ -16,10 +16,15 @@ import {
   useRole,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { cloneElement, type ReactElement, type ReactNode } from "react";
+import { type CSSProperties, cloneElement, type ReactElement, type ReactNode } from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { useReducedMotion } from "../../system/useReducedMotion";
+import { Flex } from "../Flex/Flex";
 import styles from "./Popover.module.scss";
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface PopoverOwnProps {
   /** A single focusable element that opens the popover on click. */
@@ -46,7 +51,10 @@ export function Popover({
   open: controlledOpen,
   defaultOpen,
   onOpenChange,
-}: PopoverOwnProps) {
+  className,
+  style,
+  ...rest
+}: PopoverOwnProps & PanelExtras) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const reducedMotion = useReducedMotion();
 
@@ -88,11 +96,22 @@ export function Popover({
               Tooltip). Positioning stays on the outer element; the
               animation is scoped to an inner one.
             */}
-            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-              <div style={transitionStyles} className={styles.popover}>
+            <Flex
+              display="block"
+              ref={refs.setFloating}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
+              <Flex
+                display="block"
+                padding="16"
+                {...rest}
+                style={{ ...transitionStyles, ...style }}
+                className={[styles.popover, className].filter(Boolean).join(" ")}
+              >
                 {children}
-              </div>
-            </div>
+              </Flex>
+            </Flex>
           </FloatingFocusManager>
         </FloatingPortal>
       )}

@@ -7,9 +7,6 @@
 // stipple/noise sweep rather than a smooth loading bar.
 @layer dm.components {
   .skeleton {
-    position: relative;
-    display: block;
-    overflow: hidden;
     background-color: var(--dm-surface-raised);
   }
 

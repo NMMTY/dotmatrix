@@ -28,3 +28,17 @@ describe("Radio", () => {
     spy.mockRestore();
   });
 });
+
+describe("Radio layout props", () => {
+  it("forwards flex props to its root, overriding defaults", () => {
+    const { container } = render(
+      <RadioGroup>
+        <Radio value="a" label="A" gap="24" alignItems="end" />
+      </RadioGroup>,
+    );
+    const root = container.querySelector("label");
+    expect(root?.className).toContain("dm-gap-24");
+    expect(root?.className).toContain("dm-align-items-end");
+    expect(root?.className).not.toContain("dm-gap-8");
+  });
+});

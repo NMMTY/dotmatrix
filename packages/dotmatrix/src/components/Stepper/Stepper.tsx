@@ -1,5 +1,6 @@
 "use client";
 
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { Button } from "../Button/Button";
 import { Column } from "../Column/Column";
@@ -14,7 +15,7 @@ export interface StepperStep {
   description?: string;
 }
 
-export interface StepperOwnProps {
+export interface StepperOwnProps extends StyleProps {
   steps: StepperStep[];
   /** 0-based index of the active step. */
   step?: number;
@@ -56,6 +57,7 @@ function StepperImpl({
   allowNavigation = true,
   disabled,
   className,
+  ...rest
 }: StepperOwnProps) {
   const [current, setCurrent] = useControllableState(step, defaultStep ?? 0, onStepChange);
   const lastIndex = steps.length - 1;
@@ -67,7 +69,7 @@ function StepperImpl({
   };
 
   return (
-    <Column gap="16" className={className}>
+    <Column gap="16" {...rest} className={className}>
       <Flex
         as="ol"
         aria-label="Progress"
@@ -91,7 +93,8 @@ function StepperImpl({
               gap="8"
               className={styles.step}
             >
-              <span
+              <Row
+                as="span"
                 className={[
                   styles.connector,
                   index <= current ? styles.connectorComplete : undefined,

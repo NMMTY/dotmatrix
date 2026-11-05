@@ -12,7 +12,15 @@ import {
   useRole,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { cloneElement, type ReactElement, type ReactNode, useId, useRef } from "react";
+import {
+  type CSSProperties,
+  cloneElement,
+  type ReactElement,
+  type ReactNode,
+  useId,
+  useRef,
+} from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { useReducedMotion } from "../../system/useReducedMotion";
 import { Column } from "../Column/Column";
@@ -38,6 +46,9 @@ const OFFSCREEN_TRANSFORM = {
   top: "translateY(-100%)",
   bottom: "translateY(100%)",
 };
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface DrawerOwnProps {
   /** A single focusable element that opens the drawer on click. Omit for a fully controlled drawer. */
@@ -70,7 +81,10 @@ export function Drawer({
   open: controlledOpen,
   defaultOpen,
   onOpenChange,
-}: DrawerOwnProps) {
+  className,
+  style,
+  ...rest
+}: DrawerOwnProps & PanelExtras) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const { refs, context } = useFloating({ open, onOpenChange: setOpen });
   const reducedMotion = useReducedMotion();
@@ -123,11 +137,12 @@ export function Drawer({
               <Column
                 ref={floatingRef}
                 gap="16"
+                {...rest}
                 tabIndex={-1}
                 aria-labelledby={titleId}
                 aria-describedby={descriptionId}
-                className={[styles.drawer, styles[side]].join(" ")}
-                style={panelTransition}
+                className={[styles.drawer, styles[side], className].filter(Boolean).join(" ")}
+                style={{ ...panelTransition, ...style }}
                 {...getFloatingProps()}
               >
                 <Row justifyContent="between" alignItems="center" gap="16">

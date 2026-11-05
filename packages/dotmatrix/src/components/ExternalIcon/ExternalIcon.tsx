@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactElement } from "react";
+import type { StyleProps } from "../../system/types";
 import { Row } from "../Row/Row";
 import styles from "./ExternalIcon.module.scss";
 
@@ -20,7 +21,7 @@ export interface ExternalIconComponentProps {
 }
 export type ExternalIconComponent = (props: ExternalIconComponentProps) => ReactElement | null;
 
-export interface ExternalIconOwnProps {
+export interface ExternalIconOwnProps extends StyleProps {
   /** An icon component from react-icons (or any icon set shaped the same way) — e.g. `FaBeer` from `"react-icons/fa"`. */
   icon: ExternalIconComponent;
   /** @default "m" */
@@ -49,6 +50,7 @@ export function ExternalIcon({
   title,
   className,
   style,
+  ...rest
 }: ExternalIconOwnProps) {
   const px = SIZE_PX[size];
   return (
@@ -64,6 +66,7 @@ export function ExternalIcon({
         .filter(Boolean)
         .join(" ")}
       style={style}
+      {...rest}
     >
       <IconComponent size={px} className={styles.svg} />
     </Row>

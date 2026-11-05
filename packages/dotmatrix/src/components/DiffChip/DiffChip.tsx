@@ -27,14 +27,18 @@ function DiffChipImpl({ ref, path, added, removed, className, ...props }: DiffCh
       className={["dm-diff-chip", styles.base, className].filter(Boolean).join(" ")}
     >
       <span className={styles.path}>{path}</span>
-      <span className={styles.added}>
-        <span className={styles.srOnly}>{added} added </span>
+      <Row as="span" display="inline-flex" className={styles.added}>
+        <Row as="span" className={styles.srOnly}>
+          {added} added{" "}
+        </Row>
         <span aria-hidden>+{added}</span>
-      </span>
-      <span className={styles.removed}>
-        <span className={styles.srOnly}>{removed} removed</span>
+      </Row>
+      <Row as="span" display="inline-flex" className={styles.removed}>
+        <Row as="span" className={styles.srOnly}>
+          {removed} removed
+        </Row>
         <span aria-hidden>−{removed}</span>
-      </span>
+      </Row>
     </Row>
   );
 }

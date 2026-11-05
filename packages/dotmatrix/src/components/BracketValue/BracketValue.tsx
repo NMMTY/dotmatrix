@@ -27,14 +27,20 @@ function BracketValueImpl({ ref, label, value, className, ...props }: BracketVal
       ref={ref}
       className={["dm-bracket-value", styles.base, className].filter(Boolean).join(" ")}
     >
-      <span aria-hidden className={styles.bracket}>
+      <Row as="span" aria-hidden className={styles.bracket}>
         [
-      </span>
-      {label != null && <span className={styles.label}>{label}:</span>}
-      <span className={styles.value}>{value}</span>
-      <span aria-hidden className={styles.bracket}>
+      </Row>
+      {label != null && (
+        <Row as="span" display="inline" className={styles.label}>
+          {label}:
+        </Row>
+      )}
+      <Row as="span" display="inline" className={styles.value}>
+        {value}
+      </Row>
+      <Row as="span" aria-hidden className={styles.bracket}>
         ]
-      </span>
+      </Row>
     </Row>
   );
 }

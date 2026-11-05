@@ -1,5 +1,5 @@
 import type { CSSProperties, Ref } from "react";
-import { Glyph, GLYPH_VIEWBOX } from "../../icons/Glyph";
+import { GLYPH_VIEWBOX, Glyph } from "../../icons/Glyph";
 import { GLYPHS, type IconName } from "../../icons/glyphs";
 
 // Whole multiples of the 9-cell grid (1, 2 and 3 px per cell), so every cell

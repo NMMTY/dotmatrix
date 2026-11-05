@@ -6,8 +6,9 @@
     border-bottom-color: var(--dm-border-medium);
   }
 
+
   .barTrack {
-    width: 100%;
+    min-width: 0;
   }
 
   .barPrecise {
@@ -17,9 +18,6 @@
   }
 
   .cell {
-    flex: 1 1 0%;
-    width: 100%;
-    min-height: 0;
     border-radius: var(--dm-radius-2);
     border-width: var(--dm-border-width-1);
     border-color: var(--dm-border-medium);

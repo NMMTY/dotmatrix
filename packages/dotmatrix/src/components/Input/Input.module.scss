@@ -3,10 +3,6 @@
 @use "../_field-icon" as field-icon;
 
 @layer dm.components {
-  .wrapper {
-    @include field-icon.wrapper;
-  }
-
   .icon {
     @include field-icon.leading;
   }

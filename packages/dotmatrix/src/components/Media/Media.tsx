@@ -1,6 +1,6 @@
 import type { Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Flex } from "../Flex/Flex";
 import { detectMediaKind, toEmbedUrl } from "./embedUrl";
 import styles from "./Media.module.scss";
 
@@ -43,17 +43,20 @@ function MediaImpl({
   autoPlay,
   loop,
   muted,
+  style,
   ...props
 }: MediaProps) {
-  const { className, style, rest } = resolveStyleProps(props);
   const kind = detectMediaKind(src);
 
   return (
-    <div
+    <Flex
       ref={ref}
-      className={["dm-media", styles.wrapper, className].filter(Boolean).join(" ")}
+      display="block"
+      position="relative"
+      overflow="hidden"
+      {...props}
+      className={["dm-media", styles.wrapper, props.className].filter(Boolean).join(" ")}
       style={{ aspectRatio, ...style }}
-      {...rest}
     >
       {/* Plain <img>, not next/image: this component is meant to be portable outside Next.js too. */}
       {kind === "image" && <img src={src} alt={alt} className={styles.fill} loading="lazy" />}
@@ -78,7 +81,7 @@ function MediaImpl({
           loading="lazy"
         />
       )}
-    </div>
+    </Flex>
   );
 }
 MediaImpl.displayName = "Media";

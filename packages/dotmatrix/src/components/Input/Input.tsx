@@ -5,6 +5,7 @@ import type { IconName } from "../../icons";
 import { useFormField } from "../../system/useFormField";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./Input.module.scss";
 
 export interface InputOwnProps
@@ -85,10 +86,10 @@ function InputImpl({
       disabled={disabled}
     >
       {icon ? (
-        <span className={styles.wrapper}>
+        <Row as="span" display="block" position="relative" width="full">
           <Icon name={icon} size="s" className={styles.icon} />
           {field}
-        </span>
+        </Row>
       ) : (
         field
       )}

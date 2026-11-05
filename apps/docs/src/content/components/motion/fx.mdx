@@ -174,9 +174,9 @@ Tints the content with each palette in turn; pass `palette` to choose them.
 A 4×4 cell mask lights up cell by cell; `stagger` offsets each child.
 
 <CodeBlock
-  codes={[{ language: "tsx", code: '<Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger style={{ display: "flex", gap: 8 }}>\n  <Button size="s">One</Button>\n  <Button size="s">Two</Button>\n  <Button size="s">Three</Button>\n</Fx>' }]}
+  codes={[{ language: "tsx", code: '<Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger direction="row" gap="8">\n  <Button size="s">One</Button>\n  <Button size="s">Two</Button>\n  <Button size="s">Three</Button>\n</Fx>' }]}
   preview={
-    <Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger style={{ display: "flex", gap: 8 }}>
+    <Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger direction="row" gap="8">
       <Button size="s">One</Button>
       <Button size="s">Two</Button>
       <Button size="s">Three</Button>

@@ -22,6 +22,7 @@ import {
   useTypeahead,
 } from "@floating-ui/react";
 import {
+  type CSSProperties,
   cloneElement,
   type ReactElement,
   type ReactNode,
@@ -29,12 +30,16 @@ import {
   useRef,
   useState,
 } from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { useReducedMotion } from "../../system/useReducedMotion";
 import { Column } from "../Column/Column";
 import { Row } from "../Row/Row";
 import styles from "./Dropdown.module.scss";
 import { DropdownContext } from "./DropdownContext";
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface DropdownOwnProps {
   /** A single focusable element that opens the menu on click. */
@@ -64,7 +69,10 @@ export function Dropdown({
   defaultOpen,
   onOpenChange,
   matchTriggerWidth = false,
-}: DropdownOwnProps) {
+  className,
+  style,
+  ...rest
+}: DropdownOwnProps & PanelExtras) {
   const [open, setOpen] = useControllableState(controlledOpen, defaultOpen ?? false, onOpenChange);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   // Driven by the `size` middleware's `apply`, not read from
@@ -160,16 +168,23 @@ export function Dropdown({
               Tooltip). Positioning stays on the outer element; the
               animation is scoped to an inner one.
             */}
-            <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
+            <Row
+              display="block"
+              ref={refs.setFloating}
+              style={floatingStyles}
+              {...getFloatingProps()}
+            >
               <Column
                 gap="2"
                 padding="4"
+                {...rest}
                 style={{
                   ...transitionStyles,
                   maxHeight: menuSize.maxHeight,
                   width: menuSize.width,
+                  ...style,
                 }}
-                className={styles.menu}
+                className={[styles.menu, className].filter(Boolean).join(" ")}
               >
                 <FloatingList elementsRef={elementsRef} labelsRef={labelsRef}>
                   <DropdownContext.Provider value={{ activeIndex, getItemProps, handleSelect }}>
@@ -177,7 +192,7 @@ export function Dropdown({
                   </DropdownContext.Provider>
                 </FloatingList>
               </Column>
-            </div>
+            </Row>
           </FloatingFocusManager>
         </FloatingPortal>
       )}
@@ -191,7 +206,14 @@ export interface DropdownItemOwnProps {
   children: ReactNode;
 }
 
-export function DropdownItem({ onSelect, disabled, children }: DropdownItemOwnProps) {
+export function DropdownItem({
+  onSelect,
+  disabled,
+  children,
+  className,
+  style,
+  ...rest
+}: DropdownItemOwnProps & PanelExtras) {
   const ctx = useContext(DropdownContext);
   if (!ctx) throw new Error("<DropdownItem> must be rendered inside <Dropdown> or <ContextMenu>.");
   const { activeIndex, getItemProps, handleSelect } = ctx;
@@ -203,12 +225,16 @@ export function DropdownItem({ onSelect, disabled, children }: DropdownItemOwnPr
       as="button"
       alignItems="center"
       gap="8"
+      {...rest}
+      style={style}
       ref={ref}
       role="menuitem"
       type="button"
       disabled={disabled}
       tabIndex={isActive ? 0 : -1}
-      className={[styles.item, isActive ? styles.active : undefined].filter(Boolean).join(" ")}
+      className={[styles.item, isActive ? styles.active : undefined, className]
+        .filter(Boolean)
+        .join(" ")}
       {...getItemProps({ onClick: () => handleSelect(onSelect) })}
     >
       {children}

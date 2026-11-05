@@ -9,7 +9,6 @@
   .heading {
     margin: 0;
     font: inherit;
-    display: block;
   }
 
   .trigger {
@@ -37,7 +36,6 @@
   // clip it down to zero along the way, rather than the content's own
   // min-content size flooring how far it can collapse.
   .panelWrapper {
-    display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 200ms ease-out;
   }

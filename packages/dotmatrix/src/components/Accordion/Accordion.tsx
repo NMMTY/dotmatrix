@@ -1,8 +1,10 @@
 "use client";
 
-import { createContext, type ReactNode, useContext, useId } from "react";
+import { type CSSProperties, createContext, type ReactNode, useContext, useId } from "react";
+import type { StyleProps } from "../../system/types";
 import { useControllableState } from "../../system/useControllableState";
 import { Column } from "../Column/Column";
+import { Grid } from "../Grid/Grid";
 import { Icon } from "../Icon/Icon";
 import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
@@ -29,6 +31,8 @@ export interface AccordionOwnProps {
   children: ReactNode;
 }
 
+type LayoutExtras = StyleProps & { className?: string; style?: CSSProperties };
+
 /**
  * A single-open accordion — opening one item closes whatever else was open,
  * and the open item can always collapse back to none. Multi-open is a
@@ -36,13 +40,19 @@ export interface AccordionOwnProps {
  * extension (independent open state per item) rather than a variant of this
  * one, and no consumer has needed it yet.
  */
-export function Accordion({ value, defaultValue, onChange, children }: AccordionOwnProps) {
+export function Accordion({
+  value,
+  defaultValue,
+  onChange,
+  children,
+  ...rest
+}: AccordionOwnProps & LayoutExtras) {
   const [current, setCurrent] = useControllableState(value, defaultValue ?? null, onChange);
   const idPrefix = useId();
 
   return (
     <AccordionContext.Provider value={{ value: current, setValue: setCurrent, idPrefix }}>
-      <Column>{children}</Column>
+      <Column {...rest}>{children}</Column>
     </AccordionContext.Provider>
   );
 }
@@ -54,19 +64,26 @@ export interface AccordionItemOwnProps {
   children: ReactNode;
 }
 
-export function AccordionItem({ value, title, disabled, children }: AccordionItemOwnProps) {
+export function AccordionItem({
+  value,
+  title,
+  disabled,
+  children,
+  className,
+  ...rest
+}: AccordionItemOwnProps & LayoutExtras) {
   const { value: openValue, setValue, idPrefix } = useAccordionContext();
   const open = openValue === value;
   const headerId = `${idPrefix}-header-${value}`;
   const panelId = `${idPrefix}-panel-${value}`;
 
   return (
-    <div className={styles.item}>
+    <Column {...rest} className={[styles.item, className].filter(Boolean).join(" ")}>
       {/* h3: the WAI-ARIA APG accordion pattern wraps the trigger in a
           heading so the section shows up in a screen reader's headings
           navigation, not just as a button. Not configurable in v1 — every
           accordion is assumed to sit below an h1/h2 already on the page. */}
-      <h3 className={styles.heading}>
+      <Column as="h3" className={styles.heading}>
         <Row
           as="button"
           alignItems="center"
@@ -84,7 +101,7 @@ export function AccordionItem({ value, title, disabled, children }: AccordionIte
           </Text>
           <Icon name={open ? "chevron-up" : "chevron-down"} />
         </Row>
-      </h3>
+      </Column>
       {/*
         Content stays mounted either way — the `grid-template-rows: 0fr/1fr`
         trick (Accordion.module.scss) is what animates the height, and that
@@ -96,10 +113,10 @@ export function AccordionItem({ value, title, disabled, children }: AccordionIte
         screen readers but doesn't stop a sighted keyboard user from
         tabbing into a control that's currently collapsed to zero height.
       */}
-      <div
+      <Grid
         className={[styles.panelWrapper, open ? styles.open : undefined].filter(Boolean).join(" ")}
       >
-        <div
+        <Column
           role="region"
           id={panelId}
           aria-labelledby={headerId}
@@ -107,9 +124,9 @@ export function AccordionItem({ value, title, disabled, children }: AccordionIte
           inert={!open}
           className={styles.panelInner}
         >
-          <div className={styles.panel}>{children}</div>
-        </div>
-      </div>
-    </div>
+          <Column className={styles.panel}>{children}</Column>
+        </Column>
+      </Grid>
+    </Column>
   );
 }

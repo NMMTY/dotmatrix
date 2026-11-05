@@ -16,9 +16,14 @@ import {
   useRole,
   useTransitionStyles,
 } from "@floating-ui/react";
-import { cloneElement, type ReactElement, useState } from "react";
+import { type CSSProperties, cloneElement, type ReactElement, useState } from "react";
+import type { StyleProps } from "../../system/types";
 import { useReducedMotion } from "../../system/useReducedMotion";
+import { Column } from "../Column/Column";
 import styles from "./Tooltip.module.scss";
+
+/** Layout/style props forwarded to the panel primitive. */
+type PanelExtras = StyleProps & { className?: string; style?: CSSProperties };
 
 export interface TooltipOwnProps {
   content: string;
@@ -37,7 +42,15 @@ export interface TooltipOwnProps {
  * or focus leaves the trigger), so `content` is plain text, not arbitrary
  * `ReactNode`; anything needing real interaction belongs in a `Popover`.
  */
-export function Tooltip({ content, children, placement = "top", delay = 300 }: TooltipOwnProps) {
+export function Tooltip({
+  content,
+  children,
+  placement = "top",
+  delay = 300,
+  className,
+  style,
+  ...rest
+}: TooltipOwnProps & PanelExtras) {
   const [open, setOpen] = useState(false);
   const reducedMotion = useReducedMotion();
 
@@ -81,11 +94,21 @@ export function Tooltip({ content, children, placement = "top", delay = 300 }: T
             it pinned the tooltip to the top-left corner). Positioning stays
             on the outer element; the animation is scoped to an inner one.
           */}
-          <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-            <div style={transitionStyles} className={styles.tooltip}>
+          <Column
+            display="block"
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+          >
+            <Column
+              display="block"
+              {...rest}
+              style={{ ...transitionStyles, ...style }}
+              className={[styles.tooltip, className].filter(Boolean).join(" ")}
+            >
               {content}
-            </div>
-          </div>
+            </Column>
+          </Column>
         </FloatingPortal>
       )}
     </>

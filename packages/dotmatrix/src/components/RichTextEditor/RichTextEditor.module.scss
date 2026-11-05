@@ -5,11 +5,9 @@
     border-width: var(--dm-border-width-1);
     border-color: var(--dm-border-medium);
     border-radius: var(--dm-radius-control);
-    padding: var(--dm-space-8);
   }
 
   .toolbar {
-    padding-bottom: var(--dm-space-8);
     border-bottom-width: var(--dm-border-width-1);
     border-bottom-color: var(--dm-border-medium);
   }
@@ -31,9 +29,6 @@
   }
 
   .placeholder {
-    position: absolute;
-    top: var(--dm-space-8);
-    left: var(--dm-space-8);
     color: var(--dm-on-background-weak);
     pointer-events: none;
     user-select: none;

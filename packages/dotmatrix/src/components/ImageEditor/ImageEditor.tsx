@@ -10,8 +10,10 @@ import {
   useState,
 } from "react";
 import { useLoadedImage } from "../../modules/dither/useLoadedImage";
+import type { StyleProps } from "../../system/types";
 import { Button } from "../Button/Button";
 import { Column } from "../Column/Column";
+import { Flex } from "../Flex/Flex";
 import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import { type Corner, centeredRect, moveRect, type Rect, resizeFromCorner } from "./cropMath";
@@ -36,7 +38,7 @@ export interface ImageEditorResult {
   height: number;
 }
 
-export interface ImageEditorOwnProps {
+export interface ImageEditorOwnProps extends StyleProps {
   src: string;
   /** @default `{ crop: true, rotate: true, flip: true }` */
   features?: ImageEditorFeatures;
@@ -82,6 +84,7 @@ function ImageEditorImpl({
   onCancel,
   label = "Crop area",
   className,
+  ...rest
 }: ImageEditorOwnProps) {
   const showCrop = features?.crop ?? true;
   const showRotate = features?.rotate ?? true;
@@ -236,7 +239,7 @@ function ImageEditorImpl({
   };
 
   return (
-    <Column gap="12" className={className}>
+    <Column gap="12" {...rest} className={className}>
       {showRotate || showFlip || (showCrop && aspectRatios.length > 1) ? (
         <Row gap="8" wrap="wrap">
           {showRotate && (
@@ -270,14 +273,21 @@ function ImageEditorImpl({
         </Row>
       ) : null}
 
-      <div className={styles.stage}>
+      <Flex
+        display="inline-block"
+        position="relative"
+        maxWidth="full"
+        overflow="hidden"
+        className={styles.stage}
+      >
         <canvas ref={canvasRef} className={styles.canvas} />
         {showCrop && cropRect && transformedSize && (
-          <div
+          <Flex
+            display="block"
+            position="absolute"
             ref={overlayRef}
             role="group"
             aria-label={label}
-            // biome-ignore lint/a11y/noNoninteractiveTabindex: a custom drag/resize widget — keyboard focus plus arrow-key nudging is the intended accessible interaction, and no ARIA role for "resizable region" exists to satisfy the interactive-roles allowlist this rule checks against.
             tabIndex={0}
             onKeyDown={nudge}
             onPointerDown={(event) => startDrag(event, { mode: "move" })}
@@ -290,7 +300,9 @@ function ImageEditorImpl({
             }}
           >
             {(["nw", "ne", "sw", "se"] as const).map((corner) => (
-              <span
+              <Flex
+                as="span"
+                position="absolute"
                 key={corner}
                 data-corner={corner}
                 onPointerDown={(event) => {
@@ -300,9 +312,9 @@ function ImageEditorImpl({
                 className={[styles.handle, styles[corner]].join(" ")}
               />
             ))}
-          </div>
+          </Flex>
         )}
-      </div>
+      </Flex>
 
       {(onSave || onCancel) && (
         <Row gap="8" justifyContent="end">

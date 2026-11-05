@@ -4,17 +4,8 @@
 // it flips with steps(1), never interpolates. Every other look is a state
 // Fx.tsx sets for one step and replaces on the next.
 @layer dm.components {
-  .root,
-  .layer {
-    display: block;
-  }
-
   .layer {
     position: relative;
-  }
-
-  .inline {
-    display: inline-block;
   }
 
   // Held-back part of a typed string, and the original content under the

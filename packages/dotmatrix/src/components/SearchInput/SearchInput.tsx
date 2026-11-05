@@ -3,6 +3,7 @@
 import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { useFormField } from "../../system/useFormField";
 import { FieldShell } from "../FieldShell/FieldShell";
+import { Flex } from "../Flex/Flex";
 import { Icon } from "../Icon/Icon";
 import { Row } from "../Row/Row";
 import styles from "./SearchInput.module.scss";
@@ -60,7 +61,7 @@ function SearchInputImpl({
       hintId={hintId}
       disabled={disabled}
     >
-      <span className={styles.wrapper}>
+      <Flex as="span" display="block" position="relative" width="full">
         <Icon name="search" size="s" className={styles.searchIcon} />
         <input
           ref={ref}
@@ -88,7 +89,7 @@ function SearchInputImpl({
             <Icon name="close" size="s" />
           </Row>
         )}
-      </span>
+      </Flex>
     </FieldShell>
   );
 }

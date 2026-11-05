@@ -13,8 +13,8 @@ import {
   useState,
 } from "react";
 import type { PaletteValue } from "../../system/props";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Flex } from "../Flex/Flex";
 import {
   decodeText,
   defaultFrames,
@@ -70,6 +70,10 @@ export interface FxOwnProps extends StyleProps, Omit<CommonProps, "palette"> {
   inline?: boolean;
   children?: ReactNode;
 }
+
+type FxDisplay = "block" | "inline-block" | "flex" | "inline-flex" | "grid";
+
+const FLEX_PROPS = ["direction", "gap", "gapX", "gapY", "wrap", "alignItems", "justifyContent"];
 
 type FxProps = FxOwnProps & { ref?: Ref<FxHandle> } & Record<string, unknown>;
 
@@ -154,6 +158,7 @@ function FxLayer({
   inline,
   onDone,
   children,
+    ...rest
 }: LayerProps) {
   // `null` = idle, i.e. the content's natural state; -1 = waiting out `delay`, blank.
   const [frame, setFrame] = useState<number | null>(null);
@@ -214,7 +219,8 @@ function FxLayer({
   const common = {
     "data-fx-effect": effect,
     "data-fx-frame": frame === null ? undefined : frame,
-    className: [styles.layer, inline ? styles.inline : ""].filter(Boolean).join(" "),
+    display: inline ? ("inline-block" as const) : ("block" as const),
+    className: styles.layer,
   };
 
   if (textEffects.has(effect) && typeof children === "string") {
@@ -227,7 +233,7 @@ function FxLayer({
             ? children.slice(0, typedLength(children.length, f, total))
             : decodeText(children, f, total);
     return (
-      <span {...common}>
+      <Flex as="span" {...common} {...rest}>
         <span className={styles.sr}>{children}</span>
         <span aria-hidden>
           {visible}
@@ -236,7 +242,7 @@ function FxLayer({
           )}
           {effect === "type" && cursor && <span className={styles.cursor}>▌</span>}
         </span>
-      </span>
+      </Flex>
     );
   }
 
@@ -244,8 +250,9 @@ function FxLayer({
     frame === null ? null : frame < 0 ? BLANK : frameAt(effect, frame, total);
   const hideContent = current?.outline !== undefined || current?.overlay !== undefined;
   return (
-    <div
+    <Flex
       {...common}
+      {...rest}
       className={[
         common.className,
         hideContent ? styles.hideContent : "",
@@ -258,9 +265,12 @@ function FxLayer({
       {current?.bands ? (
         <>
           {/* The original stays in the flow, unseen, so the layer keeps its size. */}
-          <div className={styles.ghost}>{children}</div>
+          <Flex display="block" className={styles.ghost}>
+            {children}
+          </Flex>
           {current.bands.map((band, i) => (
-            <div
+            <Flex
+              display="block"
               // biome-ignore lint/suspicious/noArrayIndexKey: bands are positional and fixed per frame.
               key={i}
               aria-hidden
@@ -272,23 +282,24 @@ function FxLayer({
               }}
             >
               {children}
-            </div>
+            </Flex>
           ))}
         </>
       ) : (
         children
       )}
       {current?.overlay && (
-        <span aria-hidden className={styles.overlay} data-kind={current.overlay} />
+        <Flex as="span" aria-hidden className={styles.overlay} data-kind={current.overlay} />
       )}
       {current?.tint !== undefined && (
-        <span
+        <Flex
+          as="span"
           aria-hidden
           className={styles.tint}
           data-palette={paletteAt(palettes, current.tint)}
         />
       )}
-    </div>
+    </Flex>
   );
 }
 
@@ -317,7 +328,12 @@ function FxImpl({
   children,
   ...props
 }: FxProps) {
-  const { className, style, rest } = resolveStyleProps(props);
+  // Any flex prop turns the root into a flex container (so `direction`, `gap`,
+  // `alignItems`… lay the children out); otherwise it stays a plain block.
+  const isFlexRoot = FLEX_PROPS.some((k) => props[k] !== undefined);
+  const rootDisplay =
+    (props.display as FxDisplay | undefined) ??
+    (isFlexRoot ? (inline ? "inline-flex" : "flex") : inline ? "inline-block" : "block");
   const rootRef = useRef<HTMLDivElement>(null);
   const [run, setRun] = useState(0);
   const play = useCallback(() => setRun((r) => r + 1), []);
@@ -376,14 +392,12 @@ function FxImpl({
   };
 
   return (
-    <div
+    <Flex
       ref={rootRef}
+      display={rootDisplay}
+      {...props}
       data-fx-trigger={trigger}
-      className={["dm-fx", styles.root, inline ? styles.inline : "", className]
-        .filter(Boolean)
-        .join(" ")}
-      style={style}
-      {...rest}
+      className={["dm-fx", props.className].filter(Boolean).join(" ")}
       {...events}
     >
       {staggerMs > 0 ? (
@@ -403,7 +417,7 @@ function FxImpl({
           {children}
         </FxLayer>
       )}
-    </div>
+    </Flex>
   );
 }
 FxImpl.displayName = "Fx";

@@ -66,14 +66,14 @@
 @mixin emit-keyword($prefix, $property, $keywords, $responsive: false) {
   @each $keyword in $keywords {
     .dm-#{$prefix}-#{$keyword} {
-      #{$property}: $keyword;
+      #{$property}: #{$keyword};
     }
   }
   @if $responsive {
     @include _responsive-pass($prefix) using ($bp) {
       @each $keyword in $keywords {
         .dm-#{$bp}-#{$prefix}-#{$keyword} {
-          #{$property}: $keyword;
+          #{$property}: #{$keyword};
         }
       }
     }

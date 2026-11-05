@@ -8,6 +8,7 @@ import {
   useTransitionStyles,
 } from "@floating-ui/react";
 import { type ReactNode, useEffect, useState } from "react";
+import type { StyleProps } from "../../system/types";
 import { useReducedMotion } from "../../system/useReducedMotion";
 import { Button } from "../Button/Button";
 import { Column } from "../Column/Column";
@@ -35,7 +36,7 @@ export interface CodeInstance {
   label?: string;
 }
 
-export interface CodeBlockOwnProps {
+export interface CodeBlockOwnProps extends StyleProps {
   codes: CodeInstance[];
   /** Rendered live above the code, in its own bordered panel. */
   preview?: ReactNode;
@@ -106,6 +107,7 @@ function CodeBlockImpl({
   compact = false,
   syntaxTheme = "mono",
   className,
+  ...rest
 }: CodeBlockOwnProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copied, setCopied] = useState(false);
@@ -159,6 +161,7 @@ function CodeBlockImpl({
       borderColor="weak"
       radius="surface"
       overflow="hidden"
+      {...rest}
       className={[styles.block, className].filter(Boolean).join(" ")}
     >
       {!compact && (
@@ -220,10 +223,10 @@ function CodeBlockImpl({
         </Row>
       )}
       {current && (
-        <div
-          className={[styles.codeWrap, collapsed ? styles.collapsed : undefined]
-            .filter(Boolean)
-            .join(" ")}
+        <Column
+          position="relative"
+          overflow={collapsed ? "hidden" : "auto"}
+          className={styles.codeWrap}
           style={collapsed ? { maxHeight: `calc(1.6em * ${maxLines})` } : undefined}
         >
           <pre
@@ -252,7 +255,7 @@ function CodeBlockImpl({
               </Button>
             </Row>
           )}
-        </div>
+        </Column>
       )}
     </Column>
   );

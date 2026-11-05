@@ -50,20 +50,21 @@ function SegmentHeaderImpl({
       {...a11y}
       {...rest}
     >
-      <span aria-hidden className={styles.bracket}>
+      <Row as="span" aria-hidden className={styles.bracket}>
         [
-      </span>
+      </Row>
       {Array.from({ length: total }, (_, i) => (
-        <span
+        <Row
+          as="span"
           // biome-ignore lint/suspicious/noArrayIndexKey: fixed-length, order-stable list of identical cells.
           key={i}
           data-lit={i < lit ? "" : undefined}
           className={[styles.segment, i < lit ? styles.lit : ""].filter(Boolean).join(" ")}
         />
       ))}
-      <span aria-hidden className={styles.bracket}>
+      <Row as="span" aria-hidden className={styles.bracket}>
         ]
-      </span>
+      </Row>
     </Row>
   );
 }

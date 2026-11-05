@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useFormField } from "../../system/useFormField";
 import { Calendar } from "../Calendar/Calendar";
 import { FieldShell } from "../FieldShell/FieldShell";
@@ -55,7 +56,8 @@ function DatePickerImpl({
   formatDate = defaultFormatDate,
   disabled,
   className,
-}: DatePickerOwnProps) {
+  ...rest
+}: DatePickerOwnProps & LayoutProps) {
   const { fieldId, hintKind, hintId, describedBy } = useFormField({ error, success, description });
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState<Date | null>(defaultValue);
@@ -80,6 +82,7 @@ function DatePickerImpl({
       hintKind={hintKind}
       hintId={hintId}
       disabled={disabled}
+      layout={pickLayoutProps(rest)}
     >
       <Popover
         open={open}

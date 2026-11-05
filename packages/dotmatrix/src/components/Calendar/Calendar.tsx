@@ -1,6 +1,7 @@
 "use client";
 
 import { type KeyboardEvent, useMemo, useRef, useState } from "react";
+import { type LayoutProps, pickLayoutProps } from "../../system/layoutProps";
 import { useControllableState } from "../../system/useControllableState";
 import { Column } from "../Column/Column";
 import { Grid } from "../Grid/Grid";
@@ -64,7 +65,8 @@ function CalendarImpl({
   weekStartsOn = 0,
   disabled,
   className,
-}: CalendarOwnProps) {
+  ...rest
+}: CalendarOwnProps & LayoutProps) {
   const isValueControlled = value !== undefined;
   const [internalSelected, setInternalSelected] = useState<Date | null>(defaultValue);
   const selected = isValueControlled ? value : internalSelected;
@@ -125,7 +127,11 @@ function CalendarImpl({
   };
 
   return (
-    <Column gap="8" className={[styles.calendar, className].filter(Boolean).join(" ")}>
+    <Column
+      gap="8"
+      className={[styles.calendar, className].filter(Boolean).join(" ")}
+      {...pickLayoutProps(rest)}
+    >
       <Row justifyContent="between" alignItems="center">
         <IconButton
           icon="chevron-left"

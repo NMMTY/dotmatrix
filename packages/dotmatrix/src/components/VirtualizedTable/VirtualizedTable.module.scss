@@ -2,7 +2,6 @@
 
 @layer dm.components {
   .viewport {
-    overflow-y: auto;
     border-width: var(--dm-border-width-1);
     border-color: var(--dm-border-medium);
   }

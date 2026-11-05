@@ -35,10 +35,8 @@
   // the dot with each status's own --dm-status-*-pattern is what makes that
   // real rather than aspirational.
   .dot {
-    display: inline-block;
     width: 8px;
     height: 8px;
-    flex-shrink: 0;
     background-color: currentColor;
   }
   .dotError,
