@@ -4,6 +4,7 @@ import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { useFormField } from "../../system/useFormField";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./NumberInput.module.scss";
 
 export interface NumberInputOwnProps
@@ -77,7 +78,7 @@ function NumberInputImpl({
       hintId={hintId}
       disabled={disabled}
     >
-      <span className={styles.wrapper}>
+      <Row as="span" display="inline-flex" width="full">
         <button
           type="button"
           aria-label="Decrease"
@@ -114,7 +115,7 @@ function NumberInputImpl({
         >
           <Icon name="plus" size="s" />
         </button>
-      </span>
+      </Row>
     </FieldShell>
   );
 }

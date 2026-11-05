@@ -4,6 +4,7 @@ import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { useFormField } from "../../system/useFormField";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./SearchInput.module.scss";
 
 export interface SearchInputOwnProps
@@ -74,14 +75,18 @@ function SearchInputImpl({
           {...rest}
         />
         {String(current).length > 0 && !disabled && (
-          <button
+          <Row
+            as="button"
+            display="inline-flex"
+            alignItems="center"
+            justifyContent="center"
             type="button"
             aria-label="Clear search"
             onClick={() => emitChange("")}
             className={styles.clear}
           >
             <Icon name="close" size="s" />
-          </button>
+          </Row>
         )}
       </span>
     </FieldShell>

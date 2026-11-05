@@ -1,0 +1,40 @@
+---
+title: "CommandInput"
+summary: "A terminal-style prompt row with a status and key-hint footer."
+navIcon: "menu"
+github: "components/CommandInput/CommandInput.tsx"
+---
+
+A terminal-style prompt row: a `→` caret, one text field, and a footer for session context on the
+left and key hints on the right. It is a single-line field that submits on Enter — for multi-line
+or labelled form input use [Input](/components/forms/input) or [Textarea](/components/forms/textarea).
+
+<Playground name="CommandInput" />
+
+## Accessibility
+
+There is no visible label, so `label` is required and becomes the field's accessible name. The `→`
+glyph is decorative. Enter submits; Shift+Enter and IME composition do not.
+
+## Examples
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<CommandInput\n  label="Follow-up"\n  placeholder="Add a follow-up"\n  status="amelia · 23% context used"\n  hint="/ for commands"\n  onSubmit={(text) => send(text)}\n/>',
+    },
+  ]}
+  preview={
+    <CommandInput
+      label="Follow-up"
+      placeholder="Add a follow-up"
+      status="amelia · 23% context used"
+      hint="/ for commands"
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="CommandInput" />

@@ -2,6 +2,7 @@ import type { ReactNode, Ref } from "react";
 import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import styles from "./Table.module.scss";
 
 export interface TableOwnProps extends StyleProps, CommonProps {
@@ -90,13 +91,26 @@ export function TableHeaderCell({ sortDirection, onSort, children }: TableHeader
       className={styles.headerCell}
     >
       {onSort ? (
-        <button type="button" onClick={onSort} className={styles.sortButton}>
+        <Row
+          as="button"
+          alignItems="center"
+          gap="4"
+          type="button"
+          onClick={onSort}
+          className={styles.sortButton}
+        >
           <span>{children}</span>
-          <span className={styles.sortIcon} aria-hidden>
+          <Row
+            as="span"
+            display="inline-flex"
+            flexShrink="0"
+            className={styles.sortIcon}
+            aria-hidden
+          >
             {sortDirection === "ascending" && <Icon name="chevron-up" size="s" />}
             {sortDirection === "descending" && <Icon name="chevron-down" size="s" />}
-          </span>
-        </button>
+          </Row>
+        </Row>
       ) : (
         children
       )}

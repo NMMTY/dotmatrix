@@ -1,6 +1,6 @@
 import type { ReactNode, Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Row } from "../Row/Row";
 import styles from "./Chip.module.scss";
 
 interface ChipBaseProps extends StyleProps, CommonProps {
@@ -17,18 +17,30 @@ export type ChipOwnProps = ChipBaseProps &
 type ChipProps = ChipOwnProps & { ref?: Ref<HTMLSpanElement> } & Record<string, unknown>;
 
 /** A removable tag. For a non-removable label, use `Badge` instead. */
-function ChipImpl({ ref, children, onRemove, removeLabel, ...props }: ChipProps) {
-  const { className, style, rest } = resolveStyleProps(props);
+function ChipImpl({ ref, children, onRemove, removeLabel, className, ...props }: ChipProps) {
   return (
-    <span
+    <Row
+      as="span"
+      display="inline-flex"
+      alignItems="center"
+      gap="4"
+      {...props}
       ref={ref}
       className={["dm-chip", styles.base, className].filter(Boolean).join(" ")}
-      style={style}
-      {...rest}
     >
       {children}
       {onRemove && (
-        <button type="button" onClick={onRemove} aria-label={removeLabel} className={styles.remove}>
+        <Row
+          as="button"
+          type="button"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          flexShrink="0"
+          onClick={onRemove}
+          aria-label={removeLabel}
+          className={styles.remove}
+        >
           {/* biome-ignore lint/a11y/noSvgWithoutTitle: decorative — the button's own aria-label is the accessible name. */}
           <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden>
             <path
@@ -38,9 +50,9 @@ function ChipImpl({ ref, children, onRemove, removeLabel, ...props }: ChipProps)
               strokeLinecap="square"
             />
           </svg>
-        </button>
+        </Row>
       )}
-    </span>
+    </Row>
   );
 }
 ChipImpl.displayName = "Chip";

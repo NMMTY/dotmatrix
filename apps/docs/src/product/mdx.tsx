@@ -6,6 +6,7 @@ import { IconGrid } from "../components/IconGrid";
 import { PaletteSwitcherDemo } from "../components/PaletteSwitcherDemo";
 import { Playground } from "../components/Playground";
 import { PropsTable } from "../components/PropsTable";
+import { WidgetCardOpenDemo } from "../components/WidgetCardOpenDemo";
 import { PageList } from "./PageList";
 
 // Every component `@nmmty/dotmatrix` exports (PascalCase), so any of them can
@@ -105,6 +106,7 @@ const mdxComponents = {
   Playground,
   IconGrid,
   PaletteSwitcherDemo,
+  WidgetCardOpenDemo,
   PageList,
 };
 

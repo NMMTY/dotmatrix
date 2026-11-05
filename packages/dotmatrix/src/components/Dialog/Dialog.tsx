@@ -90,9 +90,9 @@ export function Dialog({
         <FloatingPortal>
           <FloatingOverlay className={styles.overlay} style={overlayTransition} lockScroll>
             <FloatingFocusManager context={context}>
-              {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: role="dialog" is applied via the getFloatingProps() spread (useRole's default), which static analysis can't see. */}
-              <div
+              <Column
                 ref={refs.setFloating}
+                gap="16"
                 aria-labelledby={titleId}
                 aria-describedby={descriptionId}
                 className={styles.dialog}
@@ -113,7 +113,7 @@ export function Dialog({
                   </Text>
                 )}
                 {children && <Column gap="16">{children}</Column>}
-              </div>
+              </Column>
             </FloatingFocusManager>
           </FloatingOverlay>
         </FloatingPortal>

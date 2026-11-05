@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .base {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--dm-space-4);
     padding-inline-start: var(--dm-space-8);
     padding-inline-end: var(--dm-space-4);
     height: var(--dm-control-height-s);
@@ -23,12 +20,8 @@
   // No dedicated remove-button padding: it's a plain, small square hit target
   // sitting flush against the chip's own end padding.
   .remove {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 16px;
     height: 16px;
-    flex-shrink: 0;
     border-radius: var(--dm-radius-full);
     color: inherit;
     cursor: pointer;

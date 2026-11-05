@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .base {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--dm-space-4);
     padding-inline: var(--dm-space-8);
     height: var(--dm-control-height-s);
     border-radius: var(--dm-radius-full);

@@ -1,0 +1,32 @@
+---
+title: "DiffChip"
+summary: "A file path with its +added −removed line counts."
+navIcon: "menu"
+github: "components/DiffChip/DiffChip.tsx"
+---
+
+A file path followed by its `+added −removed` line counts — the per-file summary a code review or an
+agent's edit log shows. Long paths truncate with an ellipsis; the counts never do.
+
+<Playground name="DiffChip" />
+
+## Accessibility
+
+The signs are decorative: a screen reader hears "12 added" and "3 removed" instead of "plus 12,
+minus 3".
+
+## Examples
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<DiffChip path="src/app/dashboard/page.tsx" added={12} removed={3} />',
+    },
+  ]}
+  preview={<DiffChip path="src/app/dashboard/page.tsx" added={12} removed={3} />}
+/>
+
+## Props
+
+<PropsTable name="DiffChip" />

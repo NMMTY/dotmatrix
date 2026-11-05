@@ -264,9 +264,9 @@ function CodeBlockImpl({
         <FloatingPortal>
           <FloatingOverlay className={styles.overlay} style={overlayTransition} lockScroll>
             <FloatingFocusManager context={context}>
-              <div ref={refs.setFloating} className={styles.fullscreen}>
+              <Row ref={refs.setFloating} className={styles.fullscreen}>
                 {body}
-              </div>
+              </Row>
             </FloatingFocusManager>
           </FloatingOverlay>
         </FloatingPortal>

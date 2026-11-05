@@ -1,0 +1,25 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    line-height: 1;
+  }
+
+  .bracket {
+    margin-inline: var(--dm-space-4);
+    color: var(--dm-on-background-weak);
+  }
+
+  // Segments are square and on the 8px unit so they sit on the dither grid.
+  .segment {
+    width: var(--dm-space-8);
+    height: var(--dm-space-8);
+    background-color: var(--dm-on-background-weak);
+  }
+
+  .lit {
+    background-color: var(--dm-on-background-strong);
+  }
+}

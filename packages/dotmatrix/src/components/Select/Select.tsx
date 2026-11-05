@@ -82,7 +82,12 @@ function SelectImpl({
           // association beats a button's own text) — announcing just the
           // field label with no current selection at all. Same fix as
           // ColorInput's trigger, same root cause.
-          <button
+          <Row
+            as="button"
+            display="flex"
+            alignItems="center"
+            justifyContent="between"
+            gap="8"
             type="button"
             id={fieldId}
             disabled={disabled}
@@ -101,7 +106,7 @@ function SelectImpl({
               {selected?.label ?? placeholder}
             </span>
             <Icon name="chevron-down" size="s" className={styles.chevron} />
-          </button>
+          </Row>
         }
       >
         {options.map((option) => (

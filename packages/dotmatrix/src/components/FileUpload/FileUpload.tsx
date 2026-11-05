@@ -145,7 +145,11 @@ function FileUploadImpl({
       disabled={disabled}
     >
       <Column gap="12">
-        <button
+        <Column
+          as="button"
+          alignItems="center"
+          justifyContent="center"
+          gap="8"
           type="button"
           id={fieldId}
           disabled={disabled}
@@ -166,7 +170,7 @@ function FileUploadImpl({
           <Text fontSize="s">
             {isDragging ? "Drop to upload" : "Drag files here, or click to browse"}
           </Text>
-        </button>
+        </Column>
         <input
           ref={inputRef}
           type="file"
@@ -194,9 +198,15 @@ function FileUploadImpl({
                 {previewUrls[index] ? (
                   <img src={previewUrls[index]} alt="" className={styles.thumbnail} />
                 ) : (
-                  <span className={styles.thumbnailPlaceholder} aria-hidden>
+                  <Row
+                    as="span"
+                    alignItems="center"
+                    justifyContent="center"
+                    className={styles.thumbnailPlaceholder}
+                    aria-hidden
+                  >
                     <Icon name="copy" size="s" />
-                  </span>
+                  </Row>
                 )}
                 <Column gap="0" flexGrow="1" minWidth="0">
                   <Text fontSize="s" className={styles.fileName}>

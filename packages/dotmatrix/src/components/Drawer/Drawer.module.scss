@@ -29,9 +29,6 @@
 
   .drawer {
     @include overlay.surface;
-    display: flex;
-    flex-direction: column;
-    gap: var(--dm-space-16);
     padding: var(--dm-space-24);
     overflow: auto;
     border-radius: 0;

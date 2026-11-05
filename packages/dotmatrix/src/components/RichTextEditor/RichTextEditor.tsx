@@ -44,6 +44,7 @@ import {
 import { useEffect, useId, useState } from "react";
 import { useFormField } from "../../system/useFormField";
 import { Button } from "../Button/Button";
+import { Column } from "../Column/Column";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Row } from "../Row/Row";
 import styles from "./RichTextEditor.module.scss";
@@ -359,7 +360,7 @@ function RichTextEditorImpl({
       disabled={disabled}
     >
       <LexicalComposer initialConfig={initialConfig}>
-        <div className={[styles.editor, className].filter(Boolean).join(" ")}>
+        <Column gap="8" className={[styles.editor, className].filter(Boolean).join(" ")}>
           <Toolbar features={resolvedFeatures} disabled={disabled} />
           <RichTextPlugin
             contentEditable={
@@ -387,7 +388,7 @@ function RichTextEditorImpl({
               }}
             />
           )}
-        </div>
+        </Column>
       </LexicalComposer>
     </FieldShell>
   );

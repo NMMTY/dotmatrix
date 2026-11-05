@@ -18,6 +18,7 @@ import { type KeyboardEvent, useMemo, useRef, useState } from "react";
 import { useControllableState } from "../../system/useControllableState";
 import { useFormField } from "../../system/useFormField";
 import { useReducedMotion } from "../../system/useReducedMotion";
+import { Column } from "../Column/Column";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Icon } from "../Icon/Icon";
 import { Input } from "../Input/Input";
@@ -168,7 +169,12 @@ function ComboboxImpl({
       hintId={hintId}
       disabled={disabled}
     >
-      <button
+      <Row
+        as="button"
+        display="flex"
+        alignItems="center"
+        justifyContent="between"
+        gap="8"
         ref={refs.setReference}
         type="button"
         id={fieldId}
@@ -191,12 +197,12 @@ function ComboboxImpl({
           {selected?.label ?? placeholder}
         </span>
         <Icon name="chevron-down" size="s" className={styles.chevron} />
-      </button>
+      </Row>
       {isMounted && (
         <FloatingPortal>
           <FloatingFocusManager context={context} modal={false} initialFocus={inputRef}>
             <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-              <div style={transitionStyles} className={styles.menu}>
+              <Column gap="8" padding="8" style={transitionStyles} className={styles.menu}>
                 <Input
                   ref={inputRef}
                   value={query}
@@ -212,12 +218,7 @@ function ComboboxImpl({
                   aria-controls={`${fieldId}-listbox`}
                   aria-activedescendant={activeOption ? optionId(activeOption) : undefined}
                 />
-                <div
-                  id={`${fieldId}-listbox`}
-                  role="listbox"
-                  aria-label={label}
-                  className={styles.list}
-                >
+                <Column gap="2" id={`${fieldId}-listbox`} role="listbox" aria-label={label}>
                   {results.length === 0 && (
                     <Text fontSize="s" color="weak">
                       {emptyMessage}
@@ -249,8 +250,8 @@ function ComboboxImpl({
                       {option.value === current && <Icon name="check" size="s" />}
                     </Row>
                   ))}
-                </div>
-              </div>
+                </Column>
+              </Column>
             </div>
           </FloatingFocusManager>
         </FloatingPortal>

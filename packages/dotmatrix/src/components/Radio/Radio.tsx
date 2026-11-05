@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { RadioGroupContext } from "../RadioGroup/RadioGroup";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./Radio.module.scss";
 
@@ -25,8 +26,8 @@ export function Radio({ value, label, disabled, className }: RadioOwnProps) {
   const id = `${name}-${value}`;
 
   return (
-    <label className={styles.row}>
-      <span className={styles.control}>
+    <Row as="label" display="inline-flex" alignItems="center" gap="8" className={styles.row}>
+      <Row as="span" display="inline-flex" flexShrink="0" className={styles.control}>
         <input
           type="radio"
           id={id}
@@ -38,8 +39,8 @@ export function Radio({ value, label, disabled, className }: RadioOwnProps) {
           className={["dm-radio", styles.input, className].filter(Boolean).join(" ")}
         />
         <span className={styles.dot} aria-hidden />
-      </span>
+      </Row>
       {label && <Text fontSize="s">{label}</Text>}
-    </label>
+    </Row>
   );
 }

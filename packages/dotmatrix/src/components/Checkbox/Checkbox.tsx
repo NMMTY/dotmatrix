@@ -3,6 +3,7 @@
 import { type ComponentPropsWithoutRef, type Ref, useEffect, useRef } from "react";
 import { useFormField } from "../../system/useFormField";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./Checkbox.module.scss";
 
@@ -36,8 +37,8 @@ function CheckboxImpl({
   }, [indeterminate]);
 
   return (
-    <label className={styles.row}>
-      <span className={styles.control}>
+    <Row as="label" display="inline-flex" alignItems="center" gap="8" className={styles.row}>
+      <Row as="span" display="inline-flex" flexShrink="0" className={styles.control}>
         <input
           ref={(node) => {
             internalRef.current = node;
@@ -50,12 +51,18 @@ function CheckboxImpl({
           className={["dm-checkbox", styles.input, className].filter(Boolean).join(" ")}
           {...rest}
         />
-        <span className={styles.mark} aria-hidden>
+        <Row
+          as="span"
+          alignItems="center"
+          justifyContent="center"
+          className={styles.mark}
+          aria-hidden
+        >
           <Icon name={indeterminate ? "minus" : "check"} size="s" />
-        </span>
-      </span>
+        </Row>
+      </Row>
       {label && <Text fontSize="s">{label}</Text>}
-    </label>
+    </Row>
   );
 }
 CheckboxImpl.displayName = "Checkbox";

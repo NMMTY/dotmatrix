@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactElement } from "react";
+import { Row } from "../Row/Row";
 import styles from "./ExternalIcon.module.scss";
 
 // Must stay in step with Icon's SIZE_PX so the two sit side by side.
@@ -51,8 +52,11 @@ export function ExternalIcon({
 }: ExternalIconOwnProps) {
   const px = SIZE_PX[size];
   return (
-    // biome-ignore lint/a11y/useAriaPropsSupportedByRole: role and aria-label are both conditioned on the same `title`, so they're only ever paired ("img" + a name) or both absent — static analysis can't see that relationship.
-    <span
+    <Row
+      as="span"
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
       aria-label={title}
@@ -62,7 +66,7 @@ export function ExternalIcon({
       style={style}
     >
       <IconComponent size={px} className={styles.svg} />
-    </span>
+    </Row>
   );
 }
 ExternalIcon.displayName = "ExternalIcon";

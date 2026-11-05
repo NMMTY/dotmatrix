@@ -8,6 +8,8 @@ export type { BadgeOwnProps, BadgeVariant } from "./Badge/Badge";
 export { Badge } from "./Badge/Badge";
 export type { BarChartDatum, BarChartOwnProps } from "./BarChart/BarChart";
 export { BarChart } from "./BarChart/BarChart";
+export type { BracketValueOwnProps } from "./BracketValue/BracketValue";
+export { BracketValue } from "./BracketValue/BracketValue";
 export type { BreadcrumbItem, BreadcrumbsOwnProps } from "./Breadcrumbs/Breadcrumbs";
 export { Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export type { ButtonOwnProps } from "./Button/Button";
@@ -28,6 +30,8 @@ export type { ColumnOwnProps } from "./Column/Column";
 export { Column } from "./Column/Column";
 export type { ComboboxOption, ComboboxOwnProps } from "./Combobox/Combobox";
 export { Combobox } from "./Combobox/Combobox";
+export type { CommandInputOwnProps } from "./CommandInput/CommandInput";
+export { CommandInput } from "./CommandInput/CommandInput";
 export type { CommandItem, CommandPaletteOwnProps } from "./CommandPalette/CommandPalette";
 export { CommandPalette } from "./CommandPalette/CommandPalette";
 export type { ContextMenuOwnProps } from "./ContextMenu/ContextMenu";
@@ -38,6 +42,8 @@ export type { DatePickerOwnProps } from "./DatePicker/DatePicker";
 export { DatePicker } from "./DatePicker/DatePicker";
 export type { DialogOwnProps } from "./Dialog/Dialog";
 export { Dialog } from "./Dialog/Dialog";
+export type { DiffChipOwnProps } from "./DiffChip/DiffChip";
+export { DiffChip } from "./DiffChip/DiffChip";
 export type { DitherOwnProps } from "./Dither/Dither";
 export { Dither } from "./Dither/Dither";
 export type { DrawerOwnProps } from "./Drawer/Drawer";
@@ -59,6 +65,10 @@ export { FileUpload } from "./FileUpload/FileUpload";
 export type { Rejection, RejectionReason } from "./FileUpload/fileValidation";
 export type { FlexOwnProps } from "./Flex/Flex";
 export { Flex } from "./Flex/Flex";
+export type { FxEffect, FxFrame } from "./Fx/effects";
+export { fxEffects } from "./Fx/effects";
+export type { FxHandle, FxOwnProps, FxTrigger } from "./Fx/Fx";
+export { FX_FRAME_MS, Fx } from "./Fx/Fx";
 export type { GridOwnProps } from "./Grid/Grid";
 export { Grid } from "./Grid/Grid";
 export type { HalftoneOwnProps } from "./Halftone/Halftone";
@@ -120,12 +130,19 @@ export type { RowOwnProps } from "./Row/Row";
 export { Row } from "./Row/Row";
 export type { SearchInputOwnProps } from "./SearchInput/SearchInput";
 export { SearchInput } from "./SearchInput/SearchInput";
+export type { SegmentHeaderOwnProps } from "./SegmentHeader/SegmentHeader";
+export { SegmentHeader } from "./SegmentHeader/SegmentHeader";
 export type { SelectOption, SelectOwnProps } from "./Select/Select";
 export { Select } from "./Select/Select";
 export type { SkeletonOwnProps } from "./Skeleton/Skeleton";
 export { Skeleton } from "./Skeleton/Skeleton";
 export type { SliderOwnProps } from "./Slider/Slider";
 export { Slider } from "./Slider/Slider";
+export type {
+  StackedBarChartOwnProps,
+  StackedBarSeries,
+} from "./StackedBarChart/StackedBarChart";
+export { StackedBarChart, stackTotals } from "./StackedBarChart/StackedBarChart";
 export type { StatOwnProps, StatTrend } from "./Stat/Stat";
 export { Stat } from "./Stat/Stat";
 export type { StepperOwnProps, StepperStep } from "./Stepper/Stepper";
@@ -148,6 +165,8 @@ export type {
   TabsOwnProps,
 } from "./Tabs/Tabs";
 export { Tab, TabList, TabPanel, Tabs } from "./Tabs/Tabs";
+export type { TaskListItem, TaskListOwnProps, TaskStatus } from "./TaskList/TaskList";
+export { TaskList } from "./TaskList/TaskList";
 export type { TextOwnProps } from "./Text/Text";
 export { Text } from "./Text/Text";
 export type { TextareaOwnProps } from "./Textarea/Textarea";
@@ -161,3 +180,5 @@ export type {
   VirtualizedTableOwnProps,
 } from "./VirtualizedTable/VirtualizedTable";
 export { VirtualizedTable } from "./VirtualizedTable/VirtualizedTable";
+export type { WidgetCardOwnProps } from "./WidgetCard/WidgetCard";
+export { WidgetCard } from "./WidgetCard/WidgetCard";

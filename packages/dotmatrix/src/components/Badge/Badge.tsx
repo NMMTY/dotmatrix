@@ -1,6 +1,6 @@
 import type { ReactNode, Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Row } from "../Row/Row";
 import styles from "./Badge.module.scss";
 
 export type BadgeVariant = "neutral" | "error" | "warning" | "success";
@@ -21,20 +21,22 @@ const DOT_CLASS: Record<BadgeVariant, string | undefined> = {
 };
 
 /** A small status/category label. Not polymorphic — a badge is always inline. */
-function BadgeImpl({ ref, variant = "neutral", children, ...props }: BadgeProps) {
-  const { className, style, rest } = resolveStyleProps(props);
+function BadgeImpl({ ref, variant = "neutral", children, className, ...props }: BadgeProps) {
   return (
-    <span
+    <Row
+      as="span"
+      display="inline-flex"
+      alignItems="center"
+      gap="4"
+      {...props}
       ref={ref}
       className={["dm-badge", styles.base, styles[variant], className].filter(Boolean).join(" ")}
-      style={style}
-      {...rest}
     >
       {variant !== "neutral" && (
         <span aria-hidden className={[styles.dot, DOT_CLASS[variant]].filter(Boolean).join(" ")} />
       )}
       {children}
-    </span>
+    </Row>
   );
 }
 BadgeImpl.displayName = "Badge";

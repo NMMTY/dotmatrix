@@ -31,6 +31,8 @@ import {
 } from "react";
 import { useControllableState } from "../../system/useControllableState";
 import { useReducedMotion } from "../../system/useReducedMotion";
+import { Column } from "../Column/Column";
+import { Row } from "../Row/Row";
 import styles from "./Dropdown.module.scss";
 import { DropdownContext } from "./DropdownContext";
 
@@ -159,7 +161,9 @@ export function Dropdown({
               animation is scoped to an inner one.
             */}
             <div ref={refs.setFloating} style={floatingStyles} {...getFloatingProps()}>
-              <div
+              <Column
+                gap="2"
+                padding="4"
                 style={{
                   ...transitionStyles,
                   maxHeight: menuSize.maxHeight,
@@ -172,7 +176,7 @@ export function Dropdown({
                     {children}
                   </DropdownContext.Provider>
                 </FloatingList>
-              </div>
+              </Column>
             </div>
           </FloatingFocusManager>
         </FloatingPortal>
@@ -195,7 +199,10 @@ export function DropdownItem({ onSelect, disabled, children }: DropdownItemOwnPr
   const isActive = activeIndex === index;
 
   return (
-    <button
+    <Row
+      as="button"
+      alignItems="center"
+      gap="8"
       ref={ref}
       role="menuitem"
       type="button"
@@ -205,6 +212,6 @@ export function DropdownItem({ onSelect, disabled, children }: DropdownItemOwnPr
       {...getItemProps({ onClick: () => handleSelect(onSelect) })}
     >
       {children}
-    </button>
+    </Row>
   );
 }

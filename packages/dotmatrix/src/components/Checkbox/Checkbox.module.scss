@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .row {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--dm-space-8);
     cursor: pointer;
 
     &:has(.input:disabled) {
@@ -15,8 +12,6 @@
 
   .control {
     position: relative;
-    display: inline-flex;
-    flex-shrink: 0;
     width: 16px;
     height: 16px;
   }
@@ -47,16 +42,13 @@
 
   // Adjacent-sibling selector, not conditional JS rendering: the icon
   // exists in the DOM either way, toggled purely by :checked/:indeterminate
-  // on the sibling input. Centered via flex, not `inset: 0; margin: auto` —
+  // on the sibling input. Centered via Row, not `inset: 0; margin: auto` —
   // that trick needs an explicit width/height, which this sizes-to-content
   // span doesn't have (confirmed live: it left the icon flush left instead
   // of centered).
   .mark {
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: var(--dm-on-action-strong);
     opacity: 0;
     transform: scale(0.8);

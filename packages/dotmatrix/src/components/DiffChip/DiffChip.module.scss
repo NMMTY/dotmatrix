@@ -1,0 +1,40 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    max-width: 100%;
+    height: var(--dm-control-height-m);
+    padding-inline: var(--dm-space-12);
+    border-style: solid;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-control);
+    background: var(--dm-surface-background);
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-xs);
+    white-space: nowrap;
+  }
+
+  .path {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--dm-on-background-strong);
+  }
+
+  .added {
+    color: var(--dm-status-success-fill);
+  }
+
+  .removed {
+    color: var(--dm-status-error-fill);
+  }
+
+  .srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+}

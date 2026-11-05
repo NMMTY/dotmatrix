@@ -1,0 +1,11 @@
+// Motion tokens. The system has no easing: every state is a hard flip, like
+// the dither grid, so time is only ever measured in whole frames. 15 fps
+// (67 ms a frame, four frames of a 60 Hz display) is slow enough to read each
+// step and fast enough to feel like one gesture. `Fx.tsx` mirrors
+// --dm-fx-frame as FX_FRAME_MS.
+@layer dm.tokens {
+  :root {
+    --dm-fx-frame: 67ms;
+    --dm-fx-stagger: var(--dm-fx-frame);
+  }
+}

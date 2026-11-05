@@ -100,7 +100,10 @@ function StepperImpl({
                   .join(" ")}
                 aria-hidden
               />
-              <button
+              <Row
+                as="button"
+                alignItems="center"
+                justifyContent="center"
                 type="button"
                 data-index={index}
                 disabled={!reachable}
@@ -114,7 +117,7 @@ function StepperImpl({
                 ) : (
                   <span aria-hidden>{index + 1}</span>
                 )}
-              </button>
+              </Row>
               <Column
                 gap="2"
                 alignItems={isVertical ? "start" : "center"}

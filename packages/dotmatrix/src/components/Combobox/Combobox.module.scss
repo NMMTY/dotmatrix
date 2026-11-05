@@ -5,10 +5,6 @@
 @layer dm.components {
   .trigger {
     @include surface.surface;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--dm-space-8);
     cursor: pointer;
     text-align: left;
 
@@ -50,19 +46,9 @@
   .menu {
     @include overlay.surface;
     z-index: var(--dm-z-overlay);
-    display: flex;
-    flex-direction: column;
-    gap: var(--dm-space-8);
-    padding: var(--dm-space-8);
     // maxHeight comes from the `size` middleware inline (real viewport space
     // left, recalculated on every reposition) — this is what makes that cap
     // actually scroll instead of silently overflowing.
     overflow-y: auto;
-  }
-
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--dm-space-2);
   }
 }

@@ -1,0 +1,60 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    padding: var(--dm-space-24);
+    border-style: solid;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-surface);
+    background: var(--dm-surface-background);
+    color: var(--dm-on-background-strong);
+    font-family: var(--dm-font-mono);
+  }
+
+  .header {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--dm-on-background-medium);
+    font: inherit;
+    font-size: var(--dm-font-size-s);
+  }
+
+  button.header {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--dm-on-background-strong);
+    }
+  }
+
+  .value {
+    font-family: var(--dm-font-display);
+    font-size: var(--dm-display-size-l);
+    line-height: var(--dm-display-line-height-l);
+    letter-spacing: var(--dm-tracking-display);
+    font-weight: var(--dm-weight-bold);
+  }
+
+  .caption {
+    font-size: var(--dm-font-size-m);
+    color: var(--dm-on-background-medium);
+  }
+
+  .rule {
+    width: 100%;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-top-style: solid;
+    border-top-width: var(--dm-border-width-1);
+    border-top-color: var(--dm-border-weak);
+  }
+
+  .footer {
+    margin: 0;
+    font-size: var(--dm-font-size-xs);
+    color: var(--dm-on-background-weak);
+  }
+}

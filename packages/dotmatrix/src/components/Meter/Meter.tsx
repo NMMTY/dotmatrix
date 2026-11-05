@@ -1,6 +1,6 @@
 import type { Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
+import { Row } from "../Row/Row";
 import styles from "./Meter.module.scss";
 
 export interface MeterOwnProps extends StyleProps, CommonProps {
@@ -36,25 +36,25 @@ function MeterImpl({
   segments = 24,
   variant = "outline",
   label,
+  className,
   ...props
 }: MeterProps) {
-  const { className, style, rest } = resolveStyleProps(props);
   const ratio = clamp01(max === 0 ? 0 : value / max);
   const filledCount = Math.round(ratio * segments);
 
   return (
-    <div
+    <Row
+      gap={variant === "led" ? "1" : "2"}
+      {...props}
       ref={ref}
       role="meter"
       aria-valuenow={value}
       aria-valuemin={0}
       aria-valuemax={max}
       aria-label={label}
-      className={["dm-meter", styles.track, variant === "led" ? styles.led : undefined, className]
+      className={["dm-meter", variant === "led" ? styles.led : undefined, className]
         .filter(Boolean)
         .join(" ")}
-      style={style}
-      {...rest}
     >
       {Array.from({ length: segments }, (_, i) => (
         <span
@@ -67,7 +67,7 @@ function MeterImpl({
             .join(" ")}
         />
       ))}
-    </div>
+    </Row>
   );
 }
 MeterImpl.displayName = "Meter";

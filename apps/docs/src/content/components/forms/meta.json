@@ -20,6 +20,7 @@
     "otp-input": 16,
     "color-input": 17,
     "file-upload": 18,
-    "rich-text-editor": 19
+    "rich-text-editor": 19,
+    "command-input": 20
   }
 }

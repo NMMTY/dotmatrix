@@ -1,5 +1,6 @@
 import type { Ref } from "react";
 import type { CommonProps } from "../../system/types";
+import { Row } from "../Row/Row";
 import styles from "./Avatar.module.scss";
 
 function initials(name: string): string {
@@ -24,6 +25,14 @@ function hasImage(props: AvatarOwnProps): props is Extract<AvatarOwnProps, { src
   return typeof props.src === "string";
 }
 
+const layout = {
+  as: "span",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  flexShrink: "0",
+} as const;
+
 /** A circular image or initials fallback. Not polymorphic — always inline. */
 function AvatarImpl(props: AvatarOwnProps) {
   const { ref, size = "m", className, style } = props;
@@ -34,16 +43,16 @@ function AvatarImpl(props: AvatarOwnProps) {
   // not just the positive one.
   if (hasImage(props)) {
     return (
-      <span ref={ref} className={classes} style={style}>
+      <Row {...layout} ref={ref} className={classes} style={style}>
         <img src={props.src} alt={props.alt} className={styles.image} />
-      </span>
+      </Row>
     );
   }
 
   return (
-    <span ref={ref} className={classes} style={style} title={props.name}>
+    <Row {...layout} ref={ref} className={classes} style={style} title={props.name}>
       {initials(props.name)}
-    </span>
+    </Row>
   );
 }
 AvatarImpl.displayName = "Avatar";

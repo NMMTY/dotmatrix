@@ -4,6 +4,7 @@ import {
   Avatar,
   Badge,
   type BorderStyle,
+  BracketValue,
   Button,
   Card,
   Checkbox,
@@ -11,9 +12,11 @@ import {
   CodeBlock,
   ColorInput,
   Column,
+  CommandInput,
   ContextMenu,
   type Density,
   Dialog,
+  DiffChip,
   Dither,
   type DitherAlgorithm,
   Drawer,
@@ -22,6 +25,8 @@ import {
   EmptyState,
   Fieldset,
   Flex,
+  Fx,
+  type FxHandle,
   Grid,
   Halftone,
   Heading,
@@ -44,9 +49,11 @@ import {
   RadioGroup,
   Row,
   SearchInput,
+  SegmentHeader,
   Select,
   Skeleton,
   Slider,
+  StackedBarChart,
   Stat,
   Switch,
   Tab,
@@ -59,16 +66,19 @@ import {
   TableRow,
   TabPanel,
   Tabs,
+  TaskList,
   Text,
   Textarea,
   ThemeProvider,
   ToastProvider,
   Tooltip,
+  WidgetCard,
+  fxEffects,
   iconNames,
   useTheme,
   useToast,
 } from "@nmmty/dotmatrix";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // A self-contained SVG data URI (no network fetch, deterministic) used to
 // demo Dither/Halftone: a gradient background plus two solid circles, enough
@@ -895,6 +905,144 @@ function DataDisplayShowcase() {
   );
 }
 
+const GPU_HOURS = Array.from({ length: 24 }, (_, i) => String(i + 1));
+const GPU_SERIES = [
+  { label: "A100", values: GPU_HOURS.map((_, i) => 6 + ((i * 5) % 7)) },
+  { label: "H100", values: GPU_HOURS.map((_, i) => 4 + ((i * 3) % 6)) },
+  { label: "L4", values: GPU_HOURS.map((_, i) => 2 + ((i * 7) % 4)) },
+  { label: "T4", values: GPU_HOURS.map((_, i) => 1 + (i % 3)) },
+];
+
+/** The patterns ported from the design file's "Patterns (from references)" frame. */
+function PatternsShowcase() {
+  const [lastCommand, setLastCommand] = useState<string | null>(null);
+  return (
+    <Grid columns="2" gap="24" m={{ columns: "1" }}>
+      <Card>
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          BracketValue / SegmentHeader
+        </Text>
+        <Row gap="16" alignItems="center" wrap="wrap">
+          <BracketValue label="GPU's" value={24} />
+          <SegmentHeader />
+        </Row>
+        <SegmentHeader segments={10} filled={4} label="Quota used" />
+      </Card>
+
+      <Card>
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          TaskList
+        </Text>
+        <TaskList
+          title="Working on 2 to-dos"
+          items={[
+            { label: "Made new things", status: "failed" },
+            { label: "Read files", status: "done" },
+            { label: "Edit files", status: "pending" },
+            { label: "Cooking...", status: "active" },
+          ]}
+        />
+      </Card>
+
+      <Card>
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          CommandInput / DiffChip
+        </Text>
+        <CommandInput
+          label="Follow-up"
+          placeholder="Add a follow-up"
+          status="amelia · 23% context used · 2 files edited"
+          hint="/ for commands · ↓ to review edits"
+          onSubmit={setLastCommand}
+        />
+        {lastCommand && (
+          <Text fontSize="s" color="medium">
+            Submitted: <InlineCode>{lastCommand}</InlineCode>
+          </Text>
+        )}
+        <DiffChip path="src/app/dashboard/page.tsx" added={12} removed={3} />
+      </Card>
+
+      <WidgetCard
+        title="Toronto"
+        value="5°"
+        caption="overcast clouds"
+        footer="Feels like 1°. Today's low is 2° and the high is 6°."
+        onOpen={() => {}}
+        openLabel="Open Toronto forecast"
+      />
+
+      <Card>
+        <Text fontSize="xs" color="weak" uppercase tracking="wide">
+          StackedBarChart
+        </Text>
+        <StackedBarChart
+          title="GPU usage by type, last day"
+          labels={GPU_HOURS}
+          labelEvery={3}
+          series={GPU_SERIES}
+          header={<BracketValue label="Type" value="all GPUs" />}
+        />
+      </Card>
+    </Grid>
+  );
+}
+
+/** Every Fx effect on a sample block, replayable; plus a hover trigger and a manual one. */
+function FxShowcase() {
+  const [nonce, setNonce] = useState(0);
+  const manual = useRef<FxHandle>(null);
+  return (
+    <Column gap="24">
+      <Row gap="12" wrap="wrap" alignItems="center">
+        <Button variant="outline" onClick={() => setNonce((n) => n + 1)}>
+          Replay all
+        </Button>
+        <Button variant="outline" onClick={() => manual.current?.play()}>
+          Play manual
+        </Button>
+        <Fx ref={manual} effect="blinky" trigger="manual" inline>
+          <Badge variant="success">Saved</Badge>
+        </Fx>
+        <Fx effect="glitch" trigger="hover" inline>
+          <Button variant="solid">Hover: glitch</Button>
+        </Fx>
+      </Row>
+      <Grid columns="4" gap="16" m={{ columns: "2" }}>
+        {fxEffects.map((effect) => (
+          <Card key={effect} gap="8">
+            <Text fontSize="xs" color="weak">
+              {effect}
+            </Text>
+            <Flex height="48" alignItems="center">
+              {effect === "type" ? (
+                <Fx key={nonce} effect={effect} cursor>
+                  Ask me anything.
+                </Fx>
+              ) : effect === "decode" ? (
+                <Fx key={nonce} effect={effect}>
+                  be better
+                </Fx>
+              ) : (
+                <Fx key={nonce} effect={effect} palette={["red", "blue", "green", "purple"]}>
+                  <Flex
+                    width="32"
+                    height="32"
+                    background="solid"
+                    color="strong"
+                    borderWidth="1"
+                    borderColor="strong"
+                  />
+                </Fx>
+              )}
+            </Flex>
+          </Card>
+        ))}
+      </Grid>
+    </Column>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
@@ -1030,6 +1178,14 @@ function App() {
 
           <Section title="Data display">
             <DataDisplayShowcase />
+          </Section>
+
+          <Section title="Patterns">
+            <PatternsShowcase />
+          </Section>
+
+          <Section title="Motion">
+            <FxShowcase />
           </Section>
         </Column>
       </ToastProvider>

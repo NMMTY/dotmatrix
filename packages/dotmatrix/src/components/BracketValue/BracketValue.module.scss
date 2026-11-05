@@ -1,0 +1,23 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--dm-on-background-strong);
+  }
+
+  .bracket {
+    color: var(--dm-on-background-weak);
+  }
+
+  .label {
+    color: var(--dm-on-background-medium);
+  }
+
+  .value {
+    font-weight: var(--dm-weight-bold);
+  }
+}

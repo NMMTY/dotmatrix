@@ -1,0 +1,105 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-xs);
+    color: var(--dm-on-background-weak);
+  }
+
+  .header {
+    color: var(--dm-on-background-medium);
+  }
+
+  // Columns grow from the baseline; the axis line is the plot's bottom border.
+  .plot {
+    gap: var(--dm-bar-gap);
+    border-bottom-style: solid;
+    border-bottom-width: var(--dm-plot-stroke);
+    border-bottom-color: var(--dm-axis-color);
+  }
+
+  .segment {
+    flex-basis: 0;
+    min-height: 1px;
+    background-color: var(--dm-series-fill);
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+  }
+
+  // Density, not hue, tells the series apart: series 1 is the sparsest tile.
+  .s1 {
+    -webkit-mask-image: var(--dm-series-1);
+    mask-image: var(--dm-series-1);
+    -webkit-mask-size: 16px 16px;
+    mask-size: 16px 16px;
+  }
+
+  .s2 {
+    -webkit-mask-image: var(--dm-series-2);
+    mask-image: var(--dm-series-2);
+    -webkit-mask-size: 12px 12px;
+    mask-size: 12px 12px;
+  }
+
+  .s3 {
+    -webkit-mask-image: var(--dm-series-3);
+    mask-image: var(--dm-series-3);
+    -webkit-mask-size: 8px 8px;
+    mask-size: 8px 8px;
+  }
+
+  .s4 {
+    -webkit-mask-image: var(--dm-series-4);
+    mask-image: var(--dm-series-4);
+    -webkit-mask-size: 6px 6px;
+    mask-size: 6px 6px;
+  }
+
+  .s5 {
+    -webkit-mask-image: var(--dm-series-5);
+    mask-image: var(--dm-series-5);
+    -webkit-mask-size: 4px 4px;
+    mask-size: 4px 4px;
+  }
+
+  .s6 {
+    -webkit-mask-image: var(--dm-series-6);
+    mask-image: var(--dm-series-6);
+    -webkit-mask-size: 2px 2px;
+    mask-size: 2px 2px;
+  }
+
+  .axis {
+    gap: var(--dm-bar-gap);
+  }
+
+  .tick {
+    flex: 1 1 0%;
+    min-width: 0;
+    overflow: visible;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .legend {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .swatch {
+    width: var(--dm-space-16);
+    height: var(--dm-space-8);
+    background-color: var(--dm-series-fill);
+  }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

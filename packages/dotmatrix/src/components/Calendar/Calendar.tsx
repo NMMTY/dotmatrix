@@ -167,7 +167,10 @@ function CalendarImpl({
           const isToday = isSameDay(date, new Date());
           const outOfRange = isOutOfRange(date, minDate, maxDate);
           return (
-            <button
+            <Row
+              as="button"
+              alignItems="center"
+              justifyContent="center"
               key={dateKey(date)}
               type="button"
               data-date={dateKey(date)}
@@ -188,7 +191,7 @@ function CalendarImpl({
                 .join(" ")}
             >
               {date.getDate()}
-            </button>
+            </Row>
           );
         })}
       </Grid>

@@ -2,6 +2,7 @@
 
 import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { useFormField } from "../../system/useFormField";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./Switch.module.scss";
 
@@ -37,8 +38,14 @@ function SwitchImpl({
   const isChecked = isControlled ? checked : internalChecked;
 
   return (
-    <label className={styles.row}>
-      <span className={styles.track}>
+    <Row as="label" display="inline-flex" alignItems="center" gap="8" className={styles.row}>
+      <Row
+        as="span"
+        display="inline-flex"
+        alignItems="center"
+        flexShrink="0"
+        className={styles.track}
+      >
         <input
           ref={ref}
           type="checkbox"
@@ -55,9 +62,9 @@ function SwitchImpl({
           {...rest}
         />
         <span className={styles.thumb} aria-hidden />
-      </span>
+      </Row>
       {label && <Text fontSize="s">{label}</Text>}
-    </label>
+    </Row>
   );
 }
 SwitchImpl.displayName = "Switch";

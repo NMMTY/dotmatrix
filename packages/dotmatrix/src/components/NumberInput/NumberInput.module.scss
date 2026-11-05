@@ -3,11 +3,6 @@
 @use "../_button-variants" as v;
 
 @layer dm.components {
-  .wrapper {
-    display: inline-flex;
-    width: 100%;
-  }
-
   .input {
     @include surface.surface;
     @include surface.size-m;

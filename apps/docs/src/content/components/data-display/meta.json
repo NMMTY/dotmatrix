@@ -13,6 +13,11 @@
     "list-item": 9,
     "stat": 10,
     "empty-state": 11,
-    "pagination": 12
+    "pagination": 12,
+    "bracket-value": 13,
+    "segment-header": 14,
+    "task-list": 15,
+    "diff-chip": 16,
+    "widget-card": 17
   }
 }

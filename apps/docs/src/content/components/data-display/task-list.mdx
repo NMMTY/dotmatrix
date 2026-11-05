@@ -1,0 +1,42 @@
+---
+title: "TaskList"
+summary: "An agent-style checklist with a pixel marker per step."
+navIcon: "menu"
+github: "components/TaskList/TaskList.tsx"
+---
+
+An agent-style checklist: a summary line and one row per step, each with a pixel marker — a solid
+square for the step in flight, a hollow one for steps not started, a check for done and a cross for
+failed.
+
+<Playground name="TaskList" />
+
+## Accessibility
+
+Status is never colour alone: every row carries its status as visually-hidden text ("Done:",
+"In progress:", …) in front of the label, and `data-status` on the `<li>` for styling hooks.
+
+## Examples
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<TaskList\n  title="Working on 2 to-dos"\n  items={[\n    { label: "Read files", status: "done" },\n    { label: "Edit files", status: "active" },\n    { label: "Run tests", status: "pending" },\n  ]}\n/>',
+    },
+  ]}
+  preview={
+    <TaskList
+      title="Working on 2 to-dos"
+      items={[
+        { label: "Read files", status: "done" },
+        { label: "Edit files", status: "active" },
+        { label: "Run tests", status: "pending" },
+      ]}
+    />
+  }
+/>
+
+## Props
+
+<PropsTable name="TaskList" />

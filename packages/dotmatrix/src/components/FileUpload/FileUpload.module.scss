@@ -2,11 +2,6 @@
 
 @layer dm.components {
   .dropzone {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--dm-space-8);
     width: 100%;
     padding: var(--dm-space-24);
     background: transparent;
@@ -63,9 +58,6 @@
   }
 
   .thumbnailPlaceholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: var(--dm-surface-raised);
     color: var(--dm-on-background-weak);
   }

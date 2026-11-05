@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Row } from "../Row/Row";
 import styles from "./Kbd.module.scss";
 
 export interface KbdOwnProps {
@@ -9,6 +10,14 @@ export interface KbdOwnProps {
 /** A single keyboard key, e.g. `<Kbd>⌘</Kbd><Kbd>K</Kbd>`. Always `<kbd>`. */
 export function Kbd({ children, className }: KbdOwnProps) {
   return (
-    <kbd className={["dm-kbd", styles.kbd, className].filter(Boolean).join(" ")}>{children}</kbd>
+    <Row
+      as="kbd"
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      className={["dm-kbd", styles.kbd, className].filter(Boolean).join(" ")}
+    >
+      {children}
+    </Row>
   );
 }

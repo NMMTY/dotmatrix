@@ -4,6 +4,7 @@ import { createContext, type ReactNode, useContext, useId } from "react";
 import { useControllableState } from "../../system/useControllableState";
 import { Column } from "../Column/Column";
 import { Icon } from "../Icon/Icon";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./Accordion.module.scss";
 
@@ -66,7 +67,10 @@ export function AccordionItem({ value, title, disabled, children }: AccordionIte
           navigation, not just as a button. Not configurable in v1 — every
           accordion is assumed to sit below an h1/h2 already on the page. */}
       <h3 className={styles.heading}>
-        <button
+        <Row
+          as="button"
+          alignItems="center"
+          justifyContent="between"
           type="button"
           id={headerId}
           aria-expanded={open}
@@ -79,7 +83,7 @@ export function AccordionItem({ value, title, disabled, children }: AccordionIte
             {title}
           </Text>
           <Icon name={open ? "chevron-up" : "chevron-down"} />
-        </button>
+        </Row>
       </h3>
       {/*
         Content stays mounted either way — the `grid-template-rows: 0fr/1fr`

@@ -4,10 +4,6 @@
 @layer dm.components {
   .trigger {
     @include surface.surface;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--dm-space-8);
     cursor: pointer;
     text-align: left;
 

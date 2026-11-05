@@ -5,6 +5,7 @@ import {
   Avatar,
   Badge,
   BarChart,
+  BracketValue,
   Breadcrumbs,
   Button,
   Calendar,
@@ -15,11 +16,13 @@ import {
   ColorInput,
   Column,
   Combobox,
+  CommandInput,
   CommandPalette,
   ContextMenu,
   CrossHatch,
   DatePicker,
   Dialog,
+  DiffChip,
   Dither,
   Drawer,
   Dropdown,
@@ -29,6 +32,7 @@ import {
   Fieldset,
   FileUpload,
   Flex,
+  Fx,
   Grid,
   Halftone,
   Heading,
@@ -54,9 +58,11 @@ import {
   RichTextEditor,
   Row,
   SearchInput,
+  SegmentHeader,
   Select,
   Skeleton,
   Slider,
+  StackedBarChart,
   Stat,
   Stepper,
   Switch,
@@ -70,12 +76,14 @@ import {
   TableRow,
   TabPanel,
   Tabs,
+  TaskList,
   Text,
   Textarea,
   ToastProvider,
   Tooltip,
   useToast,
   VirtualizedTable,
+  WidgetCard,
 } from "@nmmty/dotmatrix";
 import type { ComponentType, ReactNode } from "react";
 import { FaHeart } from "react-icons/fa";
@@ -94,7 +102,8 @@ export type Category =
   | "Bitmap Graphics"
   | "Forms"
   | "Overlays & Navigation"
-  | "Data Display";
+  | "Data Display"
+  | "Motion";
 
 export interface RegistryEntry {
   name: string;
@@ -365,6 +374,20 @@ export const REGISTRY: RegistryEntry[] = [
       ],
     },
   },
+  {
+    name: "StackedBarChart",
+    category: "Bitmap Graphics",
+    Component: StackedBarChart,
+    props: {
+      title: "GPU usage by type",
+      labels: ["1", "2", "3", "4", "5", "6", "7", "8"],
+      series: [
+        { label: "A100", values: [6, 8, 7, 9, 10, 8, 6, 7] },
+        { label: "H100", values: [4, 5, 6, 5, 7, 6, 4, 5] },
+        { label: "L4", values: [2, 3, 2, 4, 3, 2, 2, 3] },
+      ],
+    },
+  },
 
   // Forms
   {
@@ -496,6 +519,17 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Forms",
     Component: ColorInput,
     props: { label: "Accent color", defaultValue: "#ff6a00" },
+  },
+  {
+    name: "CommandInput",
+    category: "Forms",
+    Component: CommandInput,
+    props: {
+      label: "Follow-up",
+      placeholder: "Add a follow-up",
+      status: "amelia · 23% context used",
+      hint: "/ for commands",
+    },
   },
   {
     name: "FileUpload",
@@ -916,6 +950,49 @@ export const REGISTRY: RegistryEntry[] = [
     props: { label: "Revenue", value: "$12.4k", trend: { direction: "up", value: "+8%" } },
   },
   {
+    name: "BracketValue",
+    category: "Data Display",
+    Component: BracketValue,
+    props: { label: "GPU's", value: 24 },
+  },
+  {
+    name: "SegmentHeader",
+    category: "Data Display",
+    Component: SegmentHeader,
+    props: { segments: 14, filled: 9, label: "Quota used" },
+  },
+  {
+    name: "TaskList",
+    category: "Data Display",
+    Component: TaskList,
+    props: {
+      title: "Working on 2 to-dos",
+      items: [
+        { label: "Made new things", status: "done" },
+        { label: "Read files", status: "done" },
+        { label: "Edit files", status: "pending" },
+        { label: "Cooking...", status: "active" },
+      ],
+    },
+  },
+  {
+    name: "DiffChip",
+    category: "Data Display",
+    Component: DiffChip,
+    props: { path: "src/app/dashboard/page.tsx", added: 12, removed: 3 },
+  },
+  {
+    name: "WidgetCard",
+    category: "Data Display",
+    Component: WidgetCard,
+    props: {
+      title: "Toronto",
+      value: "5°",
+      caption: "overcast clouds",
+      footer: "Feels like 1°. Today's low is 2° and the high is 6°.",
+    },
+  },
+  {
     name: "EmptyState",
     category: "Data Display",
     Component: EmptyState,
@@ -930,6 +1007,19 @@ export const REGISTRY: RegistryEntry[] = [
     category: "Data Display",
     Component: Pagination,
     props: { defaultPage: 6, totalPages: 20 },
+  },
+
+  // Motion
+  {
+    name: "Fx",
+    category: "Motion",
+    Component: Fx,
+    props: { effect: "glitch", trigger: "hover" },
+    children: (
+      <Button size="s" variant="outline">
+        Hover to glitch
+      </Button>
+    ),
   },
 ];
 

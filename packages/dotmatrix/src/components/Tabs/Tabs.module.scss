@@ -9,8 +9,6 @@
   }
 
   .tab {
-    display: inline-flex;
-    align-items: center;
     height: var(--dm-control-height-m);
     padding-inline: var(--dm-space-16);
     margin-bottom: calc(var(--dm-border-width-1) * -1);

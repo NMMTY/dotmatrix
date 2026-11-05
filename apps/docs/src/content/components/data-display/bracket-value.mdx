@@ -1,0 +1,35 @@
+---
+title: "BracketValue"
+summary: "An inline [ label: value ] readout."
+navIcon: "menu"
+github: "components/BracketValue/BracketValue.tsx"
+---
+
+An inline `[ label: value ]` readout — a terminal-style counter that sits in running text, a
+header or a status line. The brackets are decorative and hidden from assistive tech, so a screen
+reader hears just "GPU's: 24".
+
+<Playground name="BracketValue" />
+
+## Examples
+
+`label` is optional — without it you get a bare `[ value ]`:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Row gap="16">\n  <BracketValue label="GPU\'s" value={24} />\n  <BracketValue value="online" />\n</Row>',
+    },
+  ]}
+  preview={
+    <Row gap="16">
+      <BracketValue label="GPU's" value={24} />
+      <BracketValue value="online" />
+    </Row>
+  }
+/>
+
+## Props
+
+<PropsTable name="BracketValue" />

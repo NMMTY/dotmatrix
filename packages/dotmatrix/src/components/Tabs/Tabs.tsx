@@ -94,7 +94,10 @@ export function Tab({ value, disabled, children }: TabOwnProps) {
   };
 
   return (
-    <button
+    <Row
+      as="button"
+      display="inline-flex"
+      alignItems="center"
       type="button"
       role="tab"
       id={`${idPrefix}-tab-${value}`}
@@ -110,7 +113,7 @@ export function Tab({ value, disabled, children }: TabOwnProps) {
       className={[styles.tab, selected ? styles.selected : undefined].filter(Boolean).join(" ")}
     >
       {children}
-    </button>
+    </Row>
   );
 }
 

@@ -1,0 +1,62 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+    color: var(--dm-on-background-strong);
+  }
+
+  .title {
+    color: var(--dm-on-background-medium);
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .marker {
+    width: var(--dm-space-16);
+    height: var(--dm-space-16);
+  }
+
+  // Solid square = the step in flight; hollow square = not started.
+  .markerActive {
+    display: inline-block;
+    width: var(--dm-space-8);
+    height: var(--dm-space-8);
+    background-color: var(--dm-on-background-strong);
+  }
+
+  .markerPending {
+    display: inline-block;
+    width: var(--dm-space-12);
+    height: var(--dm-space-12);
+    border-style: solid;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-on-background-weak);
+  }
+
+  .is-done .label {
+    color: var(--dm-on-background-medium);
+  }
+
+  .is-failed {
+    color: var(--dm-status-error-fill);
+  }
+
+  .is-pending .label {
+    color: var(--dm-on-background-weak);
+  }
+
+  .srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

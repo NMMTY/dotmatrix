@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .editor {
-    display: flex;
-    flex-direction: column;
-    gap: var(--dm-space-8);
     border-width: var(--dm-border-width-1);
     border-color: var(--dm-border-medium);
     border-radius: var(--dm-radius-control);

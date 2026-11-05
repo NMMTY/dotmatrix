@@ -120,9 +120,9 @@ export function Drawer({
             lockScroll
           >
             <FloatingFocusManager context={context} initialFocus={panelRef}>
-              {/* biome-ignore lint/a11y/useAriaPropsSupportedByRole: role="dialog" is applied via the getFloatingProps() spread (useRole's default), which static analysis can't see. */}
-              <div
+              <Column
                 ref={floatingRef}
+                gap="16"
                 tabIndex={-1}
                 aria-labelledby={titleId}
                 aria-describedby={descriptionId}
@@ -144,7 +144,7 @@ export function Drawer({
                   </Text>
                 )}
                 {children && <Column gap="16">{children}</Column>}
-              </div>
+              </Column>
             </FloatingFocusManager>
           </FloatingOverlay>
         </FloatingPortal>

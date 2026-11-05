@@ -1,0 +1,249 @@
+---
+title: "Fx"
+summary: "Stepped, frame-based effects at 15 fps. No easing."
+navIcon: "star"
+github: "components/Fx/Fx.tsx"
+---
+
+Stepped, frame-based effects at 15 fps (`--dm-fx-frame`, 67 ms — four frames of a 60 Hz display).
+No easing: every state is a hard flip, like the dither grid. Each effect starts blank and ends as
+the finished content; the sequences are read frame by frame off the reference field guide. `Fx`
+renders its children untouched and restyles a wrapper layer (opacity, offset, scale, slices, a cell
+mask, an outline); for `type` and `decode` a plain string child is rewritten step by step. Under
+`prefers-reduced-motion` the effect is skipped and the content stays as it is.
+
+<Playground name="Fx" />
+
+## Effects
+
+- `blinky` (4 steps) — grey, gone, full, grey.
+- `glitch` (7) — the content is cut into slices that smear sideways, then a small jitter.
+- `trail` (6) — a dim, wide smear that tightens onto the box as it brightens.
+- `stroke-fill` (9) — a flickering outline, a half-tone fill, then solid.
+- `shuffle` (6) — placeholder cross, warning, hatching; two steps each.
+- `crash-blink` (5) — an oversized grey box, then on / off / on / grey.
+- `slide-blink` (7) — settles upward from below while it blinks.
+- `color-flash` (4) — tints the content with each of `palette` in turn.
+- `build-on` (14) — a 4×4 cell mask that lights up cell by cell.
+- `type` (6) — a string child typed out; `cursor` adds a block cursor.
+- `decode` (6) — a string child resolves from noise, left → right.
+
+`type` and `decode` need a string child. Any other child falls back to an untouched render.
+
+## Triggers
+
+`mount` (default), `in-view` (first time it scrolls into view), `hover`, `focus`, `exit` (when it
+scrolls back out of view), `loop` (repeats forever) and `manual` — call `play()` on the ref.
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Fx effect="build-on" trigger="in-view" stagger>\n  <Card>…</Card>\n  <Card>…</Card>\n</Fx>\n\n<Fx effect="glitch" trigger="hover">\n  <Button>Deploy</Button>\n</Fx>\n\n<Fx effect="type" trigger="mount" cursor>\n  Ask me anything.\n</Fx>\n\n<Fx effect="decode" trigger="exit">\n  be better\n</Fx>',
+    },
+    {
+      language: "tsx",
+      label: "Manual",
+      code: 'const fx = useRef<FxHandle>(null);\n\n<Fx ref={fx} effect="blinky" trigger="manual">\n  <Badge variant="success">Saved</Badge>\n</Fx>;\n\nfx.current?.play();',
+    },
+  ]}
+  preview={
+    <Row gap="16" alignItems="center">
+      <Fx effect="glitch" trigger="hover">
+        <Button size="s" variant="outline">
+          Hover to glitch
+        </Button>
+      </Fx>
+      <Fx effect="type" trigger="loop" fps={8} interval={1200} cursor>
+        Ask me anything.
+      </Fx>
+    </Row>
+  }
+/>
+
+## Examples
+
+Every effect on its own. Most loop so you can watch them; the glitch one waits for hover.
+
+### Blinky
+
+Grey, gone, full, grey — a status that just changed.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="blinky" trigger="loop" fps={8} interval={1200}>\n  <Badge variant="success">Saved</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="blinky" trigger="loop" fps={8} interval={1200}>
+      <Badge variant="success">Saved</Badge>
+    </Fx>
+  }
+/>
+
+### Glitch on hover
+
+Slices smear sideways while the pointer is over the button.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="glitch" trigger="hover">\n  <Button variant="outline">Deploy</Button>\n</Fx>' }]}
+  preview={
+    <Fx effect="glitch" trigger="hover">
+      <Button variant="outline">Deploy</Button>
+    </Fx>
+  }
+/>
+
+### Trail
+
+A dim smear tightens onto the box.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="trail" trigger="loop" fps={8} interval={1200}>\n  <Button>Continue</Button>\n</Fx>' }]}
+  preview={
+    <Fx effect="trail" trigger="loop" fps={8} interval={1200}>
+      <Button>Continue</Button>
+    </Fx>
+  }
+/>
+
+### Stroke fill
+
+A flickering outline, half-tone, then solid.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="stroke-fill" trigger="loop" fps={8} interval={1200}>\n  <Button variant="outline">Outlined</Button>\n</Fx>' }]}
+  preview={
+    <Fx effect="stroke-fill" trigger="loop" fps={8} interval={1200}>
+      <Button variant="outline">Outlined</Button>
+    </Fx>
+  }
+/>
+
+### Shuffle
+
+Placeholder cross, warning and hatching before the content lands.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="shuffle" trigger="loop" fps={8} interval={1200}>\n  <Badge>Beta</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="shuffle" trigger="loop" fps={8} interval={1200}>
+      <Badge>Beta</Badge>
+    </Fx>
+  }
+/>
+
+### Crash blink
+
+An oversized grey box that collapses onto the content.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="crash-blink" trigger="loop" fps={8} interval={1200}>\n  <Badge variant="danger">Error</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="crash-blink" trigger="loop" fps={8} interval={1200}>
+      <Badge variant="danger">Error</Badge>
+    </Fx>
+  }
+/>
+
+### Slide blink
+
+Settles upward from below while blinking.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="slide-blink" trigger="loop" fps={8} interval={1200}>\n  <Badge>New</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="slide-blink" trigger="loop" fps={8} interval={1200}>
+      <Badge>New</Badge>
+    </Fx>
+  }
+/>
+
+### Color flash
+
+Tints the content with each palette in turn; pass `palette` to choose them.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="color-flash" trigger="loop" fps={8} interval={1200} palette={["green", "blue", "purple"]}>\n  <Badge>Syncing</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="color-flash" trigger="loop" fps={8} interval={1200} palette={["green", "blue", "purple"]}>
+      <Badge>Syncing</Badge>
+    </Fx>
+  }
+/>
+
+### Build on, staggered
+
+A 4×4 cell mask lights up cell by cell; `stagger` offsets each child.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger style={{ display: "flex", gap: 8 }}>\n  <Button size="s">One</Button>\n  <Button size="s">Two</Button>\n  <Button size="s">Three</Button>\n</Fx>' }]}
+  preview={
+    <Fx effect="build-on" trigger="loop" fps={8} interval={1200} stagger style={{ display: "flex", gap: 8 }}>
+      <Button size="s">One</Button>
+      <Button size="s">Two</Button>
+      <Button size="s">Three</Button>
+    </Fx>
+  }
+/>
+
+### Type with cursor
+
+A string child typed out, with a block cursor.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="type" trigger="loop" fps={8} interval={1200} cursor>\n  Hello, world.\n</Fx>' }]}
+  preview={
+    <Fx effect="type" trigger="loop" fps={8} interval={1200} cursor>
+      Hello, world.
+    </Fx>
+  }
+/>
+
+### Decode
+
+A string child resolves from noise, left to right.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="decode" trigger="loop" fps={8} interval={1200}>\n  be better\n</Fx>' }]}
+  preview={
+    <Fx effect="decode" trigger="loop" fps={8} interval={1200}>
+      be better
+    </Fx>
+  }
+/>
+
+### Delay
+
+`delay` keeps the content blank for that many milliseconds before the first step.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="glitch" trigger="loop" fps={8} interval={1200} delay={400}>\n  <Badge>Delayed</Badge>\n</Fx>' }]}
+  preview={
+    <Fx effect="glitch" trigger="loop" fps={8} interval={1200} delay={400}>
+      <Badge>Delayed</Badge>
+    </Fx>
+  }
+/>
+
+### Faster, with more frames
+
+`fps` changes the tempo; `frames` resamples the sequence.
+
+<CodeBlock
+  codes={[{ language: "tsx", code: '<Fx effect="build-on" trigger="loop" fps={30} frames={28} interval={1200}>\n  <Button size="s">Smooth</Button>\n</Fx>' }]}
+  preview={
+    <Fx effect="build-on" trigger="loop" fps={30} frames={28} interval={1200}>
+      <Button size="s">Smooth</Button>
+    </Fx>
+  }
+/>
+
+## Timing
+
+`frames` defaults to the effect's own length (listed above); another number resamples the sequence.
+`fps` defaults to 15 (the examples above use 8 to read slower). `interval` rests on the finished content for that many milliseconds between repeats and `loop` plays. `delay` keeps the content blank for that many milliseconds before the first
+step, and `stagger` offsets each direct child by one step (or by the number of milliseconds you
+pass). `palette` is for `color-flash` and defaults to red, blue, green, purple. `repeat` takes a
+count or `"infinite"`; `onDone` fires after the last step of the last repeat.
+
+## Props
+
+<PropsTable name="Fx" />

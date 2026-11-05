@@ -90,7 +90,11 @@ function ColorInputImpl({
           // label association beats a button's own text) — announcing just
           // "Color" with no current value at all. Confirmed live via a
           // failing accessible-name query in this component's own tests.
-          <button
+          <Row
+            as="button"
+            display="inline-flex"
+            alignItems="center"
+            gap="8"
             type="button"
             id={fieldId}
             disabled={disabled}
@@ -103,7 +107,7 @@ function ColorInputImpl({
             <Text fontSize="s" font="mono">
               {current}
             </Text>
-          </button>
+          </Row>
         }
       >
         <Column gap="12" style={{ width: 216 }}>

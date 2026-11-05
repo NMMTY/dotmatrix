@@ -8,6 +8,7 @@
     "cross-hatch": 4,
     "meter": 5,
     "bar-chart": 6,
-    "image-editor": 7
+    "image-editor": 7,
+    "stacked-bar-chart": 8
   }
 }

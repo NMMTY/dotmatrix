@@ -1,0 +1,152 @@
+@use "../_order";
+
+// No easing anywhere in here: the only animated thing is the text cursor, and
+// it flips with steps(1), never interpolates. Every other look is a state
+// Fx.tsx sets for one step and replaces on the next.
+@layer dm.components {
+  .root,
+  .layer {
+    display: block;
+  }
+
+  .layer {
+    position: relative;
+  }
+
+  .inline {
+    display: inline-block;
+  }
+
+  // Held-back part of a typed string, and the original content under the
+  // slices of a glitch: reserves the box without drawing anything.
+  .ghost {
+    visibility: hidden;
+  }
+
+  // One slice of a glitch: the content again, laid over the layer and cut down
+  // to a band by an inline clip-path.
+  .band {
+    position: absolute;
+    inset: 0;
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+
+  // Stroke-fill and shuffle replace the content with a drawing of their own.
+  .hideContent {
+    color: transparent;
+  }
+
+  .hideContent > :not(.overlay) {
+    visibility: hidden;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: var(--dm-on-background-strong);
+  }
+
+  // Image placeholder: a frame with both diagonals.
+  .overlay[data-kind="x-box"] {
+    border-style: solid;
+    border-width: var(--dm-border-width-1);
+    border-color: currentColor;
+    background:
+      linear-gradient(
+        to top right,
+        transparent calc(50% - 0.5px),
+        currentColor calc(50% - 0.5px),
+        currentColor calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      ),
+      linear-gradient(
+        to top left,
+        transparent calc(50% - 0.5px),
+        currentColor calc(50% - 0.5px),
+        currentColor calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      );
+  }
+
+  // A solid block with an exclamation mark knocked out of it.
+  .overlay[data-kind="warning"] {
+    background-color: currentColor;
+  }
+
+  .overlay[data-kind="warning"]::before,
+  .overlay[data-kind="warning"]::after {
+    content: "";
+    position: absolute;
+    left: 44%;
+    width: 12%;
+    background-color: var(--dm-page-background);
+  }
+
+  .overlay[data-kind="warning"]::before {
+    top: 20%;
+    height: 42%;
+  }
+
+  .overlay[data-kind="warning"]::after {
+    top: 68%;
+    height: 12%;
+  }
+
+  // Diagonal hatching, bottom-left to top-right.
+  .overlay[data-kind="hatch"] {
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 3px,
+      currentColor 3px,
+      currentColor 4px
+    );
+  }
+
+  // Colour flash: the accent is multiplied over the content, so light
+  // content takes the colour and dark stays dark. The layer is isolated and
+  // given the page background so only its own pixels take part in the blend.
+  .tinted {
+    isolation: isolate;
+    background-color: var(--dm-page-background);
+  }
+
+  .tint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: var(--dm-accent-500);
+    mix-blend-mode: multiply;
+  }
+
+  .cursor {
+    animation: dm-fx-cursor calc(var(--dm-fx-frame) * 4) steps(1) infinite;
+  }
+
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+  }
+}
+
+// Two steps on, two steps off.
+@keyframes dm-fx-cursor {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

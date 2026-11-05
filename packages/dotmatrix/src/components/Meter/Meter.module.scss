@@ -1,12 +1,6 @@
 @use "../_order";
 
 @layer dm.components {
-  .track {
-    display: flex;
-    min-width: 0;
-    gap: var(--dm-space-2);
-  }
-
   .cell {
     flex: 1 1 0%;
     height: var(--dm-space-16);
@@ -24,10 +18,6 @@
   // LED-bar look: unlit cells stay visible as a dim solid fill instead of a
   // hollow border, flush against each other like real hardware segments —
   // only a hairline gap so adjacent cells still read as distinct.
-  .led {
-    gap: var(--dm-border-width-1);
-  }
-
   .led .cell {
     border-width: 0;
     border-radius: 0;

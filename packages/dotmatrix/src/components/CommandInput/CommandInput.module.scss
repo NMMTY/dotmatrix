@@ -1,0 +1,53 @@
+@use "../_order";
+
+@layer dm.components {
+  .base {
+    font-family: var(--dm-font-mono);
+    font-size: var(--dm-font-size-s);
+  }
+
+  .field {
+    height: var(--dm-control-height-l);
+    padding-inline: var(--dm-control-padding-x);
+    border-style: solid;
+    border-width: var(--dm-border-width-1);
+    border-color: var(--dm-border-medium);
+    border-radius: var(--dm-radius-control);
+    background: var(--dm-surface-background);
+    color: var(--dm-on-background-strong);
+    cursor: text;
+
+    &:focus-within {
+      border-color: var(--dm-focus-ring);
+    }
+  }
+
+  .prompt {
+    color: var(--dm-on-background-weak);
+  }
+
+  .input {
+    flex: 1 1 0%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    // The caret is a solid block, like a terminal cursor.
+    caret-shape: block;
+
+    &::placeholder {
+      color: var(--dm-on-background-weak);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .footer {
+    font-size: var(--dm-font-size-xs);
+    color: var(--dm-on-background-weak);
+  }
+}

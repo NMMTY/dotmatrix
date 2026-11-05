@@ -2,10 +2,6 @@
 
 @layer dm.components {
   .base {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
     overflow: hidden;
     border-radius: var(--dm-radius-full);
     border-width: var(--dm-border-width-1);

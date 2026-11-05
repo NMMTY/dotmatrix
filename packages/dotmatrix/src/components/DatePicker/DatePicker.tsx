@@ -6,6 +6,7 @@ import { Calendar } from "../Calendar/Calendar";
 import { FieldShell } from "../FieldShell/FieldShell";
 import { Icon } from "../Icon/Icon";
 import { Popover } from "../Popover/Popover";
+import { Row } from "../Row/Row";
 import { Text } from "../Text/Text";
 import styles from "./DatePicker.module.scss";
 
@@ -84,7 +85,11 @@ function DatePickerImpl({
         open={open}
         onOpenChange={setOpen}
         trigger={
-          <button
+          <Row
+            as="button"
+            display="inline-flex"
+            alignItems="center"
+            gap="8"
             type="button"
             id={fieldId}
             disabled={disabled}
@@ -97,7 +102,7 @@ function DatePickerImpl({
             <Text fontSize="s" color={current ? undefined : "weak"}>
               {display}
             </Text>
-          </button>
+          </Row>
         }
       >
         <Calendar

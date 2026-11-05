@@ -1,0 +1,39 @@
+---
+title: "SegmentHeader"
+summary: "A bracketed run of square segments — a section rule or a coarse progress readout."
+navIcon: "menu"
+github: "components/SegmentHeader/SegmentHeader.tsx"
+---
+
+A `[ ▪▪▪▪▪▪▪ ]` run of square segments. With every segment lit it is a section divider; with
+`filled` below `segments` it doubles as a coarse progress readout — the same segmented look as
+[Meter](/components/bitmap/meter), sized for a heading line instead of a gauge.
+
+<Playground name="SegmentHeader" />
+
+## Accessibility
+
+Without `label` the whole header is decorative and hidden from assistive tech. Give it a `label`
+and it becomes a `role="meter"` with `aria-valuenow`/`aria-valuemax` taken from `filled` and
+`segments`.
+
+## Examples
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<Column gap="12">\n  <SegmentHeader />\n  <SegmentHeader segments={10} filled={4} label="Quota used" />\n</Column>',
+    },
+  ]}
+  preview={
+    <Column gap="12">
+      <SegmentHeader />
+      <SegmentHeader segments={10} filled={4} label="Quota used" />
+    </Column>
+  }
+/>
+
+## Props
+
+<PropsTable name="SegmentHeader" />

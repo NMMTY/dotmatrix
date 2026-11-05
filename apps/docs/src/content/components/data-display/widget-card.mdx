@@ -1,0 +1,31 @@
+---
+title: "WidgetCard"
+summary: "A compact glanceable card — title, one big figure, a footnote."
+navIcon: "menu"
+github: "components/WidgetCard/WidgetCard.tsx"
+---
+
+A compact glanceable card: a title, one big figure with a caption beside it, and a footnote under a
+hairline rule. Weather, a single KPI, a queue depth. For several related figures use a `Grid` of
+[Stat](/components/data-display/stat)s instead.
+
+<Playground name="WidgetCard" />
+
+## Examples
+
+Pass `onOpen` (and `openLabel`, its accessible name) to turn the title into a button with a trailing
+arrow:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<WidgetCard\n  title="Toronto"\n  value="5°"\n  caption="overcast clouds"\n  footer="Feels like 1°."\n  onOpen={() => {}}\n  openLabel="Open Toronto forecast"\n/>',
+    },
+  ]}
+  preview={<WidgetCardOpenDemo />}
+/>
+
+## Props
+
+<PropsTable name="WidgetCard" />

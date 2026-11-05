@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .row {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--dm-space-8);
     cursor: pointer;
 
     &:has(.input:disabled) {
@@ -15,9 +12,6 @@
 
   .track {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
     width: 32px;
     height: 18px;
     border-radius: var(--dm-radius-full);

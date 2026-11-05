@@ -1,0 +1,35 @@
+---
+title: "StackedBarChart"
+summary: "Stacked columns whose series are told apart by dither density, not hue."
+navIcon: "menu"
+github: "components/StackedBarChart/StackedBarChart.tsx"
+---
+
+Columns of stacked segments. This is the multi-series chart [BarChart](/components/bitmap/bar-chart)
+left room for: with no second colour to tell series apart, each series gets its own dither density
+(`--dm-series-1` … `--dm-series-6`, sparsest to densest), which survives printing, projection and
+colour-blind viewing. At most six series; extras are dropped.
+
+<Playground name="StackedBarChart" />
+
+## Accessibility
+
+The plot is `role="img"` named by `title`, and the real numbers stay available as a visually-hidden
+`<table>` — one row per column, one cell per series — the same approach `BarChart` takes.
+
+## Examples
+
+`labels` names the columns and `labelEvery` thins the axis when there are many of them:
+
+<CodeBlock
+  codes={[
+    {
+      language: "tsx",
+      code: '<StackedBarChart\n  title="GPU usage by type"\n  labels={hours}\n  labelEvery={3}\n  series={[\n    { label: "A100", values: a100 },\n    { label: "H100", values: h100 },\n  ]}\n/>',
+    },
+  ]}
+/>
+
+## Props
+
+<PropsTable name="StackedBarChart" />

@@ -1,5 +1,4 @@
 import type { ReactNode, Ref } from "react";
-import { resolveStyleProps } from "../../system/resolveStyleProps";
 import type { CommonProps, StyleProps } from "../../system/types";
 import { Column } from "../Column/Column";
 import { Row } from "../Row/Row";
@@ -20,15 +19,13 @@ type ListProps = ListOwnProps & { ref?: Ref<HTMLUListElement> } & Record<string,
  * gap between "looks like a list" and "announces as one."
  */
 function ListImpl({ ref, ...props }: ListProps) {
-  const { className, style, rest } = resolveStyleProps(props);
   return (
-    <ul
+    <Column
+      as="ul"
       ref={ref}
-      // biome-ignore lint/a11y/noRedundantRoles: not redundant in practice — Safari/VoiceOver drop the implicit list role from a `list-style: none` <ul> (which the global reset applies to every <ul>), so this restores it explicitly.
       role="list"
-      className={["dm-list", styles.list, className].filter(Boolean).join(" ")}
-      style={style}
-      {...rest}
+      {...props}
+      className={["dm-list", props.className].filter(Boolean).join(" ")}
     />
   );
 }

@@ -2,9 +2,6 @@
 
 @layer dm.components {
   .kbd {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     min-width: var(--dm-space-20);
     height: var(--dm-space-20);
     padding-inline: var(--dm-space-4);
